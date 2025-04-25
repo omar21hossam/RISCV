@@ -1,0 +1,738 @@
+m255
+K4
+z2
+!s99 nomlopt
+!s11f vlog 2021.1 2021.01, Jan 19 2021
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/questasim64_2021.1/examples
+T_opt
+!s110 1712000146
+VcEf6mIMWhkVD`gU<]JC7N0
+04 12 4 work cv32e40p_top fast 0
+=1-c85b767014af-660b0c92-13e-301c
+!s124 OEM100
+o-quiet -auto_acc_if_foreign -work work +acc
+Z0 tCvgOpt 0
+n@_opt
+OL;O;2021.1;73
+vcv32e40p_aligner
+Z1 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
+Z2 !s110 1712000086
+!i10b 1
+!s100 nN7SCkmhVG_RO1C1a@b503
+Ikk0ZGZI;_:T55Tol7da@<0
+S1
+Z3 dC:/Users/oyoun/OneDrive/Desktop/RI5CY
+Z4 w1711997273
+8C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_aligner.sv
+FC:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_aligner.sv
+!i122 63
+L0 23 230
+Z5 VDg1SIo80bB@j0V0VzS_@n1
+Z6 OL;L;2021.1;73
+r1
+!s85 0
+31
+Z7 !s108 1712000086.000000
+!s107 C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_aligner.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_aligner.sv|
+!i113 0
+Z8 o-work work -sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R0
+vcv32e40p_alu
+R1
+Z9 DXx4 work 12 cv32e40p_pkg 0 22 `Ud:A;aN@EJYMVJDHZl9G0
+R2
+!i10b 1
+!s100 Nb9P]a7E4BFF8gGTVNY253
+I;gOMm]A@bbe?KUfPXd`JU0
+S1
+R3
+R4
+8C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_alu.sv
+FC:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_alu.sv
+!i122 64
+L0 28 959
+R5
+R6
+r1
+!s85 0
+31
+R7
+!s107 C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_alu.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_alu.sv|
+!i113 0
+R8
+R0
+vcv32e40p_alu_div
+R1
+R2
+!i10b 1
+!s100 DKaXCSoZ4Jh5DTTlEAQOk1
+IVI1zzO2DI:1^m8MjaQPcl1
+S1
+R3
+R4
+8C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_alu_div.sv
+FC:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_alu_div.sv
+!i122 65
+L0 26 201
+R5
+R6
+r1
+!s85 0
+31
+R7
+!s107 C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_alu_div.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_alu_div.sv|
+!i113 0
+R8
+R0
+Xcv32e40p_apu_core_pkg
+R1
+R2
+!i10b 1
+!s100 BfS6EaQkd8YdhjhSMgMk;1
+IOEnjTC=W=[EG?LReQfclh3
+S1
+R3
+R4
+8C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/package/cv32e40p_apu_core_pkg.sv
+FC:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/package/cv32e40p_apu_core_pkg.sv
+!i122 60
+L0 22 0
+VOEnjTC=W=[EG?LReQfclh3
+R6
+r1
+!s85 0
+31
+!s108 1712000085.000000
+!s107 C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/package/cv32e40p_apu_core_pkg.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/package/cv32e40p_apu_core_pkg.sv|
+!i113 0
+R8
+R0
+vcv32e40p_apu_disp
+R1
+R2
+!i10b 1
+!s100 oU_mf4bQkM=hE`M;1nUH53
+I5cFhEC?HWg3n4VeP9G@R@0
+S1
+R3
+R4
+8C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_apu_disp.sv
+FC:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_apu_disp.sv
+!i122 66
+L0 25 218
+R5
+R6
+r1
+!s85 0
+31
+R7
+!s107 C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_apu_disp.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_apu_disp.sv|
+!i113 0
+R8
+R0
+vcv32e40p_clock_gate
+R1
+Z10 !s110 1712000089
+!i10b 1
+!s100 _20hQfRmW^MMjk[<4Bh<91
+IjoSJaPYn6]7ZhZ=V;I[712
+S1
+R3
+R4
+8C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_sim_clock_gate.sv
+FC:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_sim_clock_gate.sv
+!i122 87
+L0 15 16
+R5
+R6
+r1
+!s85 0
+31
+Z11 !s108 1712000089.000000
+!s107 C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_sim_clock_gate.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_sim_clock_gate.sv|
+!i113 0
+R8
+R0
+vcv32e40p_compressed_decoder
+R1
+R9
+R2
+!i10b 1
+!s100 4Lh`V@>RUbK^5<_`e`3X?1
+IjZ`R5`EYf82Ve^^5o_^ic0
+S1
+R3
+R4
+8C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_compressed_decoder.sv
+FC:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_compressed_decoder.sv
+!i122 67
+L0 27 575
+R5
+R6
+r1
+!s85 0
+31
+R7
+!s107 C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_compressed_decoder.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_compressed_decoder.sv|
+!i113 0
+R8
+R0
+vcv32e40p_controller
+R1
+R9
+Z12 !s110 1712000087
+!i10b 1
+!s100 _jHAIU5`DHhbo^odJfK6C3
+IY=X0a6A8SNef]8VGEeGdf2
+S1
+R3
+R4
+8C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_controller.sv
+FC:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_controller.sv
+!i122 68
+L0 31 1579
+R5
+R6
+r1
+!s85 0
+31
+R7
+!s107 C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_controller.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_controller.sv|
+!i113 0
+R8
+R0
+vcv32e40p_core
+R1
+Z13 DXx4 work 21 cv32e40p_apu_core_pkg 0 22 OEnjTC=W=[EG?LReQfclh3
+R9
+R12
+!i10b 1
+!s100 `a[Y0f5B7bHQ`NMQE`9X80
+IV?BT=3hoz];c7I84]9Q?S3
+S1
+R3
+R4
+8C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_core.sv
+FC:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_core.sv
+!i122 69
+L0 31 1262
+R5
+R6
+r1
+!s85 0
+31
+Z14 !s108 1712000087.000000
+!s107 C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_core.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_core.sv|
+!i113 0
+R8
+R0
+vcv32e40p_cs_registers
+R1
+R9
+R12
+!i10b 1
+!s100 7Q:M0o3IZK2fz3`KKcFW:2
+IMMC6I>Ua@MY8[aj4dThZ21
+S1
+R3
+R4
+8C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_cs_registers.sv
+FC:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_cs_registers.sv
+!i122 70
+L0 30 1518
+R5
+R6
+r1
+!s85 0
+31
+R14
+!s107 C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_cs_registers.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_cs_registers.sv|
+!i113 0
+R8
+R0
+vcv32e40p_decoder
+R1
+R9
+R13
+Z15 DXx4 work 16 cv32e40p_fpu_pkg 0 22 >1eXZH]UO;C^8_MS3<`<l2
+R12
+!i10b 1
+!s100 kCWzJJWbIf7JYgcG7S]D:1
+INaKBI1HzE_?a:gAkNFn`n2
+S1
+R3
+R4
+8C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_decoder.sv
+FC:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_decoder.sv
+!i122 71
+L0 28 2970
+R5
+R6
+r1
+!s85 0
+31
+R14
+!s107 C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_decoder.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_decoder.sv|
+!i113 0
+R8
+R0
+vcv32e40p_ex_stage
+R1
+R9
+R13
+R12
+!i10b 1
+!s100 1VQIg7kDOL6Vc0O62enNT1
+I08g<CH=2f6zH46=E;8?Ch1
+S1
+R3
+R4
+8C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_ex_stage.sv
+FC:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_ex_stage.sv
+!i122 72
+L0 32 448
+R5
+R6
+r1
+!s85 0
+31
+R14
+!s107 C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_ex_stage.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_ex_stage.sv|
+!i113 0
+R8
+R0
+vcv32e40p_ff_one
+R1
+R12
+!i10b 1
+!s100 `dj4@Q:75UY<G:DVYR2Q:3
+I=I@eZK3J;T@l4bQZF>g_T1
+S1
+R3
+R4
+8C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_ff_one.sv
+FC:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_ff_one.sv
+!i122 73
+L0 25 75
+R5
+R6
+r1
+!s85 0
+31
+R14
+!s107 C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_ff_one.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_ff_one.sv|
+!i113 0
+R8
+R0
+vcv32e40p_fifo
+R1
+R12
+!i10b 1
+!s100 :`nD>KQ8DC9O=PHZigCLa1
+I5o6jWbmL9cgXDdRJkbG_:1
+S1
+R3
+R4
+8C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_fifo.sv
+FC:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_fifo.sv
+!i122 74
+L0 15 154
+R5
+R6
+r1
+!s85 0
+31
+R14
+!s107 C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_fifo.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_fifo.sv|
+!i113 0
+R8
+R0
+Xcv32e40p_fpu_pkg
+R1
+R2
+!i10b 1
+!s100 g0K<Iz1TXX5fWeV3QU9;K1
+I>1eXZH]UO;C^8_MS3<`<l2
+S1
+R3
+R4
+8C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/package/cv32e40p_fpu_pkg.sv
+FC:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/package/cv32e40p_fpu_pkg.sv
+!i122 61
+L0 38 0
+V>1eXZH]UO;C^8_MS3<`<l2
+R6
+r1
+!s85 0
+31
+R7
+!s107 C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/package/cv32e40p_fpu_pkg.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/package/cv32e40p_fpu_pkg.sv|
+!i113 0
+R8
+R0
+vcv32e40p_hwloop_regs
+R1
+R12
+!i10b 1
+!s100 VHg6MV0JKIThEP?DGdeo12
+I2gNVJ;bWDbokmOod4X6BW3
+S1
+R3
+R4
+8C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_hwloop_regs.sv
+FC:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_hwloop_regs.sv
+!i122 75
+L0 25 93
+R5
+R6
+r1
+!s85 0
+31
+R14
+!s107 C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_hwloop_regs.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_hwloop_regs.sv|
+!i113 0
+R8
+R0
+vcv32e40p_id_stage
+R1
+R9
+R13
+R15
+Z16 !s110 1712000088
+!i10b 1
+!s100 fVcQ4DZnUWdMUXn2h;J<G1
+I;9OglOl92AKO60_3UVVN63
+S1
+R3
+R4
+8C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_id_stage.sv
+FC:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_id_stage.sv
+!i122 76
+L0 30 1804
+R5
+R6
+r1
+!s85 0
+31
+Z17 !s108 1712000088.000000
+!s107 C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_id_stage.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_id_stage.sv|
+!i113 0
+R8
+R0
+vcv32e40p_if_stage
+R1
+R9
+R16
+!i10b 1
+!s100 cmZa:UMXXTN7SS8B6S7^32
+IjTeUe8jI7^c2>VVK`IS131
+S1
+R3
+R4
+8C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_if_stage.sv
+FC:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_if_stage.sv
+!i122 77
+L0 28 292
+R5
+R6
+r1
+!s85 0
+31
+R17
+!s107 C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_if_stage.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_if_stage.sv|
+!i113 0
+R8
+R0
+vcv32e40p_int_controller
+R1
+R9
+R16
+!i10b 1
+!s100 A2_CD4<E^C]gO_bWNEe4<0
+IOz<9QQ86dGHJb_A;QONo02
+S1
+R3
+R4
+8C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_int_controller.sv
+FC:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_int_controller.sv
+!i122 78
+L0 24 129
+R5
+R6
+r1
+!s85 0
+31
+R17
+!s107 C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_int_controller.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_int_controller.sv|
+!i113 0
+R8
+R0
+vcv32e40p_load_store_unit
+R1
+R16
+!i10b 1
+!s100 PIgBKDiH;kcH=P>0b4kZS3
+IZ6a7cRKQ[VWVJb=5C7Q4N3
+S1
+R3
+R4
+8C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_load_store_unit.sv
+FC:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_load_store_unit.sv
+!i122 79
+L0 26 524
+R5
+R6
+r1
+!s85 0
+31
+R17
+!s107 C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_load_store_unit.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_load_store_unit.sv|
+!i113 0
+R8
+R0
+vcv32e40p_mult
+R1
+R9
+R16
+!i10b 1
+!s100 RPkKBDS2S0]GQB55]<i`o1
+I`J=]A=8oQ?]LO4f?UeF?j0
+S1
+R3
+R4
+8C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_mult.sv
+FC:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_mult.sv
+!i122 80
+L0 26 362
+R5
+R6
+r1
+!s85 0
+31
+R17
+!s107 C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_mult.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_mult.sv|
+!i113 0
+R8
+R0
+vcv32e40p_obi_interface
+R1
+R16
+!i10b 1
+!s100 WLl9EbD33H8mK]VcccbRN0
+InI<gJk8@aZ4>:;7azfWZd1
+S1
+R3
+R4
+8C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_obi_interface.sv
+FC:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_obi_interface.sv
+!i122 81
+L0 38 169
+R5
+R6
+r1
+!s85 0
+31
+R17
+!s107 C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_obi_interface.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_obi_interface.sv|
+!i113 0
+R8
+R0
+Xcv32e40p_pkg
+R1
+R2
+!i10b 1
+!s100 5nGJ6cZ3TD6nCE3UDoNjY3
+I`Ud:A;aN@EJYMVJDHZl9G0
+S1
+R3
+R4
+8C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/package/cv32e40p_pkg.sv
+FC:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/package/cv32e40p_pkg.sv
+!i122 62
+L0 26 0
+V`Ud:A;aN@EJYMVJDHZl9G0
+R6
+r1
+!s85 0
+31
+R7
+!s107 C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/package/cv32e40p_pkg.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/package/cv32e40p_pkg.sv|
+!i113 0
+R8
+R0
+vcv32e40p_popcnt
+R1
+R16
+!i10b 1
+!s100 RDJ6CRdWK`RkkC6kVb_=L3
+I@<@WaSa?Dd;N6>DX9^`Oj3
+S1
+R3
+R4
+8C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_popcnt.sv
+FC:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_popcnt.sv
+!i122 82
+L0 25 38
+R5
+R6
+r1
+!s85 0
+31
+R17
+!s107 C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_popcnt.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_popcnt.sv|
+!i113 0
+R8
+R0
+vcv32e40p_prefetch_buffer
+R1
+R16
+!i10b 1
+!s100 T91=`^FR4UmfGR3PY1e[_3
+IQP83KRFZS;Ec>;X`HHFaQ1
+S1
+R3
+R4
+8C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_prefetch_buffer.sv
+FC:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_prefetch_buffer.sv
+!i122 83
+L0 27 228
+R5
+R6
+r1
+!s85 0
+31
+R17
+!s107 C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_prefetch_buffer.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_prefetch_buffer.sv|
+!i113 0
+R8
+R0
+vcv32e40p_prefetch_controller
+R1
+R9
+R10
+!i10b 1
+!s100 a^CLzNM0Jdd;a2PdQ2c3h1
+IS<DW3e^fF2<7H9c9PCoA:1
+S1
+R3
+R4
+8C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_prefetch_controller.sv
+FC:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_prefetch_controller.sv
+!i122 84
+L0 40 324
+R5
+R6
+r1
+!s85 0
+31
+R17
+!s107 C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_prefetch_controller.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_prefetch_controller.sv|
+!i113 0
+R8
+R0
+vcv32e40p_register_file
+R1
+R10
+!i10b 1
+!s100 nX7<?96D0J_7QB]Io<^;S2
+Ihj5S^_G_D3]?zOi6]=f7=3
+S1
+R3
+R4
+8C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_register_file_latch.sv
+FC:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_register_file_latch.sv
+!i122 86
+L0 32 161
+R5
+R6
+r1
+!s85 0
+31
+R11
+!s107 C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_register_file_latch.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_register_file_latch.sv|
+!i113 0
+R8
+R0
+vcv32e40p_sleep_unit
+R1
+R9
+R10
+!i10b 1
+!s100 =RD1BI0YIkAdnaSBgmI0`2
+IFCMd2F`09?`zgMhzcT0GB1
+S1
+R3
+R4
+8C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_sleep_unit.sv
+FC:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_sleep_unit.sv
+!i122 88
+L0 56 237
+R5
+R6
+r1
+!s85 0
+31
+R11
+!s107 C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_sleep_unit.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_sleep_unit.sv|
+!i113 0
+R8
+R0
+vcv32e40p_top
+R1
+R13
+R10
+!i10b 1
+!s100 G2I_Ji69RWgQCmbh=RT9d2
+IKan1kf>dRKE_0aV[a^_>c1
+S1
+R3
+R4
+8C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_top.sv
+FC:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_top.sv
+!i122 89
+L0 14 166
+R5
+R6
+r1
+!s85 0
+31
+R11
+!s107 C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_top.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/oyoun/OneDrive/Desktop/RI5CY/rtl/cv32e40p_top.sv|
+!i113 0
+R8
+R0
