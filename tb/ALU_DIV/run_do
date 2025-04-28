@@ -1,0 +1,39 @@
+# walid pathes
+set TB_path  "C:\Users\Wello\Desktop\material\SI Academy\SV Course\PROJECTS\RISCV\code\RISCV\tb\ALU_DIV\tb_files"
+set dut_path "C:\Users\Wello\Desktop\material\SI Academy\SV Course\PROJECTS\RISCV\code\RISCV\rtl"
+
+# osama pathes
+# set TB_path  "C:\Users\Wello\Desktop\material\SI Academy\SV Course\PROJECTS\RISCV\code\RISCV\tb\ALU_DIV\tb_files"
+# set dut_path "C:\Users\Wello\Desktop\material\SI Academy\SV Course\PROJECTS\RISCV\code\RISCV\rtl"
+
+# Directory to store coverage databases
+# set cov_dir "coverage_results"
+# file mkdir $cov_dir
+
+#compile the design and testbench files
+# vlog  $dut_path cv32e40p_alu.sv
+# vlog  $TB_path package_uvm.sv ALU_tb.sv  
+#run and store coverage for each scenario
+# Run all scenarios and collect coverage
+vsim  -coverage -c  +UVM_PRINT_TOP +UVM_VERBOSITY=UVM_MEDIUM +UVM_TESTNAME=alu_test  riscv_alu_top_tb  -voptargs=+acc -do "run -all;"
+
+# foreach scenario $scenarios {
+#     puts "Running scenario: $scenario"
+#     vsim  -coverage -c  +UVM_PRINT_TOP +UVM_VERBOSITY=UVM_MEDIUM +UVM_TESTNAME=$scenario work.SPI_TOP  -voptargs=+acc -do "run -all; > logs/$scenario.log coverage save -onexit $cov_dir/$scenario.ucdb;" 
+#  }
+
+# Merge all coverage databases into one
+# set merged_cov_file "$cov_dir/merged_coverage.ucdb"
+# vcover merge -out $merged_cov_file $cov_dir/*.ucdb
+# puts "Coverage merged into: $merged_cov_file"
+
+# # Generate a text report from the merged coverage database
+# set coverage_report "$cov_dir/coverage_report.txt"
+# coverage  report -details -output $coverage_report $merged_cov_file
+
+
+#vsim work.SPI_TOP -coverage +UVM_TESTNAME="SPI_clk_ratio_test" -voptargs=+acc -gui 
+
+
+
+#run -all ;coverage report -details -cvg -verbose
