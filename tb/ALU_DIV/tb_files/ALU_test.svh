@@ -29,7 +29,7 @@ class alu_test extends uvm_test;
         phase.raise_objection(this);
         seq.start(env.agent.sequencer);
         //#200ns;
-        phase.phase_done.set_drain_time(this,5us);
+        phase.phase_done.set_drain_time(this,30ns);
         phase.drop_objection(this);
     endtask:run_phase
 endclass

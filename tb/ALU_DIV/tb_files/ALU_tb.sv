@@ -30,8 +30,27 @@ ALU_interface  intf1(clk_tb);
 //==============================================================================
 //Description: DUT
 //==============================================================================
-    
-
+cv32e40p_alu alu_dut(
+.clk(intf1.core_clk),
+.rst_n(intf1.rst_n),
+.enable_i(intf1.enable_i),
+.operator_i(intf1.operator_i),
+.operand_a_i(intf1.operand_a_i),
+.operand_b_i(intf1.operand_b_i),
+.vector_mode_i(intf1.vector_mode_i),
+.operand_c_i('b0),
+.bmask_a_i('b0),
+.bmask_b_i('b0),
+.imm_vec_ext_i('b0),
+.is_clpx_i('b0),
+.is_subrot_i('b0),
+.clpx_shift_i('b0),
+//////////////////////////////////////
+.result_o(intf1.result_o),
+.comparison_result_o(intf1.comparison_result_o),
+.ready_o(intf1.ready_o),
+.ex_ready_i(intf1.ex_ready_i)
+);
 //==============================================================================
 //Description: Main block
 //==============================================================================
