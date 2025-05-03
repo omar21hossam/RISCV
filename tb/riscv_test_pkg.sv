@@ -46,7 +46,7 @@ class riscv_base_test extends uvm_test;
         super.run_phase(phase);
         phase.raise_objection(this);
          seq.start(env.fetch_agnt.sqr);  
-        phase.phase_done.set_drain_time(this, 5ns);
+        phase.phase_done.set_drain_time(this, 5000ns);
         phase.drop_objection(this);
     endtask
 endclass

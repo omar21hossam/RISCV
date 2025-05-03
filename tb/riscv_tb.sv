@@ -62,6 +62,7 @@ module riscv_top_tb(
     .reset_n           (riscv_intf_.rst_ni)
 
     );
+    bind riscv_instr_mem :  inst_mem_DUT inst_mem_intf inst_mem_intf_(.*)  ;
 //*************************************** 
     initial begin
   uvm_config_db#(virtual riscv_intf)::set(null ,"uvm_test_top", "main_intf" ,riscv_intf_); 

@@ -15,14 +15,14 @@ class riscv_seq_item extends uvm_sequence_item;
 
 //////////__signals on main intf must be driven__////
      logic    rst_ni;
-     logic [31:0] boot_addr_i;
-     logic [31:0] mtvec_addr_i;
-     logic [31:0] dm_halt_addr_i;
-     logic [31:0] hart_id_i;
-     logic [31:0] dm_exception_addr_i;
-     logic [31:0] irq_i;
-     logic debug_req_i;
-     logic fetch_enable_i;
+     logic [31:0] boot_addr_i=0;
+     logic [31:0] mtvec_addr_i=0;
+     logic [31:0] dm_halt_addr_i=0;
+     logic [31:0] hart_id_i=0;
+     logic [31:0] dm_exception_addr_i=0;
+     logic [31:0] irq_i=0;
+     logic debug_req_i=0;
+     logic fetch_enable_i=1;
 ////////__signals for int mem to write on__//////////
  bit [31:0] instruction;
  bit [31:0] addr;
@@ -51,9 +51,28 @@ instr_type dist {R_TYPE :/ 20, I_TYPE :/ 30, U_TYPE :/ 10, B_TYPE :/ 10, S_TYPE 
     }
 
    constraint valid_r_type {
-        instr_type == R_TYPE ->
+        instr_type == R_TYPE ->{
         
          opcode inside {7'b0110011};
+           // Ensure no other funct7 values are used
+    funct7 inside {7'b0000000, 7'b0100000, 7'b0000001};
+
+// // Base RV32I R-type instructions
+//             (funct7 == 7'b0000000) -> {
+//                 funct3 inside {3'b000, 3'b001, 3'b010, 3'b011, 3'b100, 3'b101, 3'b110, 3'b111}; // ADD, SLL, SLT, SLTU, XOR, SRL, OR, AND
+//             };
+//             (funct7 == 7'b0100000) -> {
+//                 funct3 inside {3'b000, 3'b101}; // SUB, SRA
+//             };
+//             // RV32M Multiply/Divide instructions
+//             (funct7 == 7'b0000001) -> {
+//                 funct3 inside {3'b000, 3'b001, 3'b010, 3'b011, 3'b100, 3'b101, 3'b110, 3'b111}; // MUL, MULH, MULHSU, MULHU, DIV, DIVU, REM, REMU
+//             };
+ 
+
+        }
+
+
     }
 
  // I-type constraints
