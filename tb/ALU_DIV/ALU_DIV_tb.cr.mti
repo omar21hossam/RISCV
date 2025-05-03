@@ -1,0 +1,75 @@
+{C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/package/cv32e40p_pkg.sv} {1 {vlog -work work -vopt -sv -stats=none {C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/package/cv32e40p_pkg.sv}
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 18 2018
+-- Compiling package cv32e40p_pkg
+
+Top level modules:
+	--none--
+
+} {} {}} {C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_ff_one.sv} {1 {vlog -work work -vopt -sv -stats=none {C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_ff_one.sv}
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 18 2018
+-- Compiling module cv32e40p_ff_one
+
+Top level modules:
+	cv32e40p_ff_one
+
+} {} {}} {C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/ALU_DIV/tb_files/ALU_interface.svh} {1 {vlog -work work -vopt -sv -stats=none {C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/ALU_DIV/tb_files/ALU_interface.svh}
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 18 2018
+-- Compiling interface ALU_interface
+-- Importing package cv32e40p_pkg
+
+Top level modules:
+	--none--
+
+} {} {}} {C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_alu.sv} {1 {vlog -work work -vopt -sv -stats=none {C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_alu.sv}
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 18 2018
+-- Compiling module cv32e40p_alu
+-- Importing package cv32e40p_pkg
+
+Top level modules:
+	cv32e40p_alu
+
+} {} {}} {C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/package/cv32e40p_apu_core_pkg.sv} {1 {vlog -work work -vopt -sv -stats=none {C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/package/cv32e40p_apu_core_pkg.sv}
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 18 2018
+-- Compiling package cv32e40p_apu_core_pkg
+
+Top level modules:
+	--none--
+
+} {} {}} {C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/ALU_DIV/tb_files/package_uvm.sv} {1 {vlog -work work -vopt -sv -stats=none {C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/ALU_DIV/tb_files/package_uvm.sv}
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 18 2018
+-- Compiling package package_uvm
+-- Importing package mtiUvm.uvm_pkg (uvm-1.1d Built-in)
+-- Importing package cv32e40p_pkg
+** Note: (vlog-2286) C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/ALU_DIV/tb_files/package_uvm.sv(56): Using implicit +incdir+C:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src from import uvm_pkg
+
+Top level modules:
+	--none--
+
+} {} {}} {C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/package/cv32e40p_fpu_pkg.sv} {1 {vlog -work work -vopt -sv -stats=none {C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/package/cv32e40p_fpu_pkg.sv}
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 18 2018
+-- Compiling package cv32e40p_fpu_pkg
+
+Top level modules:
+	--none--
+
+} {} {}} {C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_popcnt.sv} {1 {vlog -work work -vopt -sv -stats=none {C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_popcnt.sv}
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 18 2018
+-- Compiling module cv32e40p_popcnt
+
+Top level modules:
+	cv32e40p_popcnt
+
+} {} {}} {C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_alu_div.sv} {1 {vlog -work work -vopt -sv -stats=none {C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_alu_div.sv}
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 18 2018
+-- Compiling module cv32e40p_alu_div
+
+Top level modules:
+	cv32e40p_alu_div
+
+} {} {}} {C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/ALU_DIV/tb_files/riscv_pkg.sv} {1 {vlog -work work -vopt -sv -stats=none {C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/ALU_DIV/tb_files/riscv_pkg.sv}
+QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 18 2018
+
+Top level modules:
+	--none--
+
+} {} {}}
