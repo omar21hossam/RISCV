@@ -1,4 +1,4 @@
-class mul_sequencer extends uvm_sequencer #(my_sequence_item);
+class mul_sequencer extends uvm_sequencer #(mul_seq_item);
     `uvm_component_utils(mul_sequencer)
     
     // Constructor

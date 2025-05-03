@@ -5,8 +5,9 @@ compile:
 	vlog -sv -f files.f +cover
 
 sim:
-	vsim -wlf riscv.wlf -logfile sim.log -c -coverage -voptargs="+acc" work.riscv_top_tb -do  "coverage save -onexit -directive -codeAll riscv.ucdb; run -all"
-	vcd2wlf tb.vcd riscv.wlf
+	vsim -wlf mul_top.wlf -logfile sim.log -c -coverage -assertdebug -voptargs="+acc" work.mul_top -do  "coverage save -onexit -directive -codeAll mul_top.ucdb; run -all"
+	vcd2wlf mul_top.vcd mul_top.wlf
 
 coverage:
-	vcover report -html -htmldir coverage_report riscv.ucdb
+	vcover report -html -htmldir coverage_report mul_top.ucdb
+
