@@ -1,0 +1,13 @@
+../../rtl/cv32e40p_mult.sv
+mul_agent.svh
+mul_driver.svh
+mul_env.svh
+mul_interface.sv
+mul_monitor.svh
+mul_scoreboard.svh
+mul_sequence.svh
+mul_sequence_item.svh
+mul_sequencer.svh
+mul_tb.sv
+mul_test.svh
+package_uvm.sv
