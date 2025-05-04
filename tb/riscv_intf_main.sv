@@ -61,7 +61,7 @@ interface riscv_intf(input logic clk);
 
 
 
-	clocking ckb_p @(posedge clk);
+	clocking ckb_p @(negedge clk);
 		default input #1 output #1;
 
 		endclocking

@@ -26,15 +26,6 @@ module riscv_instr_mem #(
     int          response_counter;
     logic [31:0] mem_rdata;
     logic        load=1'b1;
-    // Initialize memory with NOPs (ADDI x0, x0, 0)
-    // initial begin
-    //     for (int i = 0; i < MEM_SIZE; i++) begin
-    //         mem[i] = 32'h00000013;
-    //     end
-    //     // instr_gnt_o = 0;
-        // instr_rvalid_o = 0;
-        // instr_rdata_o = '0;
- //   end
 
     // Request handling
     always_ff @(posedge clk or negedge reset_n) begin
@@ -87,7 +78,7 @@ module riscv_instr_mem #(
     // Memory write (combinational)
      always_comb begin 
         if (load) begin
-   $display("instmem ,time:%0t  : add %0b ,inst %0b" ,$time ,addr,inst);		
+  // $display("instmem ,time:%0t  : add %0b ,inst %0b" ,$time ,addr,inst);		
          mem[addr] = inst;
         end
      end
