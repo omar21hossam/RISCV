@@ -27,45 +27,46 @@ endfunction:build_phase
 //==============================================================================
 task run_phase(uvm_phase phase);
   super.run_phase(phase);
+  wait(vif.rst_n);
   forever begin
   seq_item = alu_seq_item::type_id::create("seq_item",this);
-  @(posedge vif.core_clk);
+    @(posedge vif.core_clk iff vif.enable_i);
   fork
     begin:inp_sampling
-    if($isunknown(vif.cb.operator_i ||vif.cb.operand_b_i || vif.cb.operand_a_i)) begin
+    if($isunknown(vif.operator_i ||vif.operand_b_i || vif.operand_a_i)) begin
     end
     else begin
       //for both cases, input and output, we need to sample the inputs at the posedge of the clock
       seq_item.in_out      = 1'b0; // input to ALU
-      seq_item.rst_n       = vif.cb.rst_n;
-      seq_item.enable_i    = vif.cb.enable_i;
-      seq_item.operator_i  = vif.cb.operator_i;
-      seq_item.operand_a_i = vif.cb.operand_a_i;
-      seq_item.operand_b_i = vif.cb.operand_b_i;
-      seq_item.ex_ready_i  = vif.cb.ex_ready_i;
+      seq_item.rst_n       = vif.rst_n;
+      seq_item.enable_i    = vif.enable_i;
+      seq_item.operator_i  = vif.operator_i;
+      seq_item.operand_a_i = vif.operand_a_i;
+      seq_item.operand_b_i = vif.operand_b_i;
+      seq_item.ex_ready_i  = vif.ex_ready_i;
       `uvm_info(get_type_name(), $sformatf("ALU Monitor: Sampling inputs: %s", seq_item.convert2string()), UVM_MEDIUM);
       analysis_port.write(seq_item);
-      `uvm_info(get_type_name(), $sformatf("send input transaction to scoreboard"), UVM_NONE);
+      `uvm_info(get_type_name(), $sformatf("send input transaction to scoreboard"), UVM_MEDIUM);
     end
     end
 //===============================================================================
     begin:out_sampling
-      if($isunknown(vif.cb.result_o ||vif.cb.comparison_result_o || vif.cb.ready_o))begin
+      if($isunknown(vif.result_o ||vif.comparison_result_o || vif.ready_o))begin
       end 
       else begin
-      seq_item.in_out = 1'b1; // output from ALU
-      if(vif.cb.enable_i) wait(vif.ready_o); // wait for the output to be ready
-      if (vif.ready_o) begin 
-        //***osama Alzero code***//
-      end
-      else begin
-        seq_item.result_o = vif.cb.result_o;
-        seq_item.comparison_result_o = vif.cb.comparison_result_o;
-        seq_item.ready_o = vif.cb.ready_o;
-      end
-      `uvm_info(get_type_name(), $sformatf("ALU Monitor: Sampling outputs: %s", seq_item.convert2string()), UVM_MEDIUM);
-       analysis_port.write(seq_item);
-      `uvm_info(get_type_name(), $sformatf("send output transaction to scoreboard"), UVM_NONE);
+       seq_item.in_out = 1'b1; // output from ALU
+     // if(vif.enable_i) begin 
+	   if (!vif.ready_o) begin // division operation 
+	    wait(vif.ready_o && vif.ex_ready_i); // wait for the output to be ready for division
+         @(posedge vif.core_clk);
+       end 
+       seq_item.result_o = vif.result_o;
+       seq_item.ready_o = vif.ready_o;
+       seq_item.comparison_result_o = vif.comparison_result_o;
+	 // end
+       `uvm_info(get_type_name(), $sformatf("ALU Monitor: Sampling outputs: %s", seq_item.convert2string()), UVM_MEDIUM);
+        analysis_port.write(seq_item);
+        `uvm_info(get_type_name(), $sformatf("send output transaction to scoreboard"), UVM_LOW);
       end
     end
   join
