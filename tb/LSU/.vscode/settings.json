@@ -1,7 +1,0 @@
-{
-  "files.autoSave": "onWindowChange",
-  "editor.tabSize": 2,
-  "editor.cursorStyle": "underline",
-  "editor.cursorSmoothCaretAnimation": "on",
-  "editor.cursorBlinking": "expand"
-}
