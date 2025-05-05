@@ -13,7 +13,6 @@ module riscv_top_tb(
     interface_clk interface_clk_(clk);
 	cv32e40p_top DUT (
         .clk_i(clk),   // explicitly connect clk
-   //      .*          // connects riscv_intf_.a to dut.a, riscv_intf_.b to dut.b
     .rst_ni           (riscv_intf_.rst_ni),
     .pulp_clock_en_i  (riscv_intf_.pulp_clock_en_i),
     .scan_cg_en_i     (riscv_intf_.scan_cg_en_i),
@@ -28,13 +27,13 @@ module riscv_top_tb(
     .instr_addr_o     (riscv_intf_.instr_addr_o),
     .instr_rdata_i    (riscv_intf_.instr_rdata_i),
     .data_req_o       (riscv_intf_.data_req_o),
-    .data_gnt_i       (riscv_intf_.data_gnt_i),
-    .data_rvalid_i    (riscv_intf_.data_rvalid_i),
+    .data_gnt_i       (0),
+    .data_rvalid_i    (0),
     .data_we_o        (riscv_intf_.data_we_o),
     .data_be_o        (riscv_intf_.data_be_o),
     .data_addr_o      (riscv_intf_.data_addr_o),
     .data_wdata_o     (riscv_intf_.data_wdata_o),
-    .data_rdata_i     (riscv_intf_.data_rdata_i),
+    .data_rdata_i     (0),
     .irq_i            (riscv_intf_.irq_i),
     .irq_ack_o        (riscv_intf_.irq_ack_o),
     .irq_id_o         (riscv_intf_.irq_id_o),

@@ -9,7 +9,7 @@ parameter ClkPeriod = 10;
 //==============================================================================
 // Description: Clock
 //==============================================================================
-bit           clk_tb;
+bit           clk_tb,rst_n_tb;
 //==============================================================================
 // Description: Include the packages
 //==============================================================================
@@ -24,15 +24,23 @@ forever begin
 end 
 end
 //==============================================================================
+//Description: active low reset generator
+//==============================================================================
+initial begin:reset_gen
+rst_n_tb =0;
+# ClkPeriod
+rst_n_tb =1;
+end
+//==============================================================================
 //Description: Interface
 //==============================================================================
-ALU_interface  intf1(clk_tb);
+ALU_interface  intf1(clk_tb,rst_n_tb);
 //==============================================================================
 //Description: DUT
 //==============================================================================
 cv32e40p_alu alu_dut(
 .clk(intf1.core_clk),
-.rst_n(intf1.rst_n),
+.rst_n(rst_n_tb),
 .enable_i(intf1.enable_i),
 .operator_i(intf1.operator_i),
 .operand_a_i(intf1.operand_a_i),
@@ -56,15 +64,16 @@ cv32e40p_alu alu_dut(
 //==============================================================================
 initial begin
 uvm_config_db#(virtual ALU_interface)::set(null,"uvm_test_top","top2test",intf1);
-run_test();		
+  run_test("alu_test");		
 end
 
 //==============================================================================
-// initial begin
-//     $dumpfile("riscv_top_tb.vcd");
-//     $dumpvars(0,riscv_alu_top_tb);
-//     $display("Starting simulation");
-// end
+ initial begin
+    $dumpfile("riscv_top_tb.vcd");
+   // $dumpvars(0,riscv_alu_top_tb);
+    $dumpvars;
+    $display("Starting simulation");
+ end
 
     
 endmodule
