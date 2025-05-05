@@ -3,7 +3,6 @@ class mul_scoreboard extends uvm_scoreboard;
     int passed_cases;
     int failed_cases;
     logic signed [63:0] expected_result;
-    int a_signed,b_signed;
     uvm_analysis_imp #(mul_seq_item, mul_scoreboard) sc_analysis_imp;
     
 
@@ -35,8 +34,7 @@ class mul_scoreboard extends uvm_scoreboard;
             `uvm_info(get_full_name(), $sformatf("Scoreboard: Received item with operand_a_i=%0d", t.operand_a_i), UVM_MEDIUM);
             `uvm_info(get_full_name(), $sformatf("Scoreboard: Received item with operand_b_i=%0d", t.operand_b_i), UVM_MEDIUM);
             `uvm_info(get_full_name(), $sformatf("Scoreboard: Received item with operand_c_i=%0d", t.operand_c_i), UVM_MEDIUM);
-            a_signed = signed'(t.operand_a_i);
-            b_signed = signed'(t.operand_b_i);
+            
             case (t.operator_i)
                 MUL_MAC32:  begin
                     expected_result = t.operand_a_i * t.operand_b_i + t.operand_c_i;
@@ -76,10 +74,8 @@ class mul_scoreboard extends uvm_scoreboard;
                             expected_result = expected_result[63:32]; // Truncate to 32 bits
                         end
                         2'b01: begin
-                            expected_result = a_signed * t.operand_b_i;
+                            expected_result = $signed(t.operand_a_i) * $signed({1'b0, t.operand_b_i});
                             `uvm_info(get_full_name(), $sformatf("Scoreboard: MUL_HSU operation"), UVM_MEDIUM);
-                            `uvm_info(get_full_name(), $sformatf("Scoreboard: b = %0d", t.operand_b_i), UVM_MEDIUM);
-                            `uvm_info(get_full_name(), $sformatf("Scoreboard: b_signed = %0d", b_signed), UVM_MEDIUM);
                             `uvm_info(get_full_name(), $sformatf("Scoreboard: %0h", expected_result), UVM_MEDIUM);
                             expected_result =  (expected_result[63:32]); // Truncate to 32 bits
                         end
