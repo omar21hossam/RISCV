@@ -61,11 +61,11 @@ if(!$cast(rhs_,rhs)) begin
 end
 if(rhs_.op_type)begin
   return(super.do_compare(rhs_,comparer) && $signed(result_o) == $signed(rhs_.result_o) && 
-      comparison_result_o ==rhs_.comparison_result_o && ready_o == rhs_.ready_o); //compare the input values
+         comparison_result_o ==rhs_.comparison_result_o && ready_o == rhs_.ready_o); //compare the signed values
 end
 else begin
   return(super.do_compare(rhs_,comparer) && result_o == rhs_.result_o && 
-      comparison_result_o ==rhs_.comparison_result_o && ready_o == rhs_.ready_o); //compare the output values
+         comparison_result_o ==rhs_.comparison_result_o && ready_o == rhs_.ready_o); //compare the unsigned values
 end
 
 
