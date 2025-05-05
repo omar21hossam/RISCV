@@ -38,7 +38,73 @@ class lsu_subscriber #(
     c_misaligned_access: coverpoint m_seq_item.data_misaligned_ex_i {
       bins misaligned = {1'b1}; bins aligned = {1'b0};
     }
+
+    //==================================================================================
+    // Cross Coverage: Input Interactions
+    //==================================================================================
+    cross_all_variants: cross c_memory_operations, c_access_sizes, c_extend_types, c_misaligned_access {
+      bins lb_align = binsof(c_memory_operations.load) &&
+                      binsof(c_access_sizes.byte_) &&
+                      binsof(c_extend_types.sign_ext) &&
+                      binsof(c_misaligned_access.aligned);
+
+      bins lbu_align = binsof(c_memory_operations.load) &&
+                        binsof(c_access_sizes.byte_) &&
+                        binsof(c_extend_types.zero_ext) &&
+                        binsof(c_misaligned_access.aligned);
+
+      bins lh_align = binsof(c_memory_operations.load) &&
+                      binsof(c_access_sizes.half) &&
+                      binsof(c_extend_types.sign_ext) &&
+                      binsof(c_misaligned_access.aligned);
+
+      bins lhu_align = binsof(c_memory_operations.load) &&
+                        binsof(c_access_sizes.half) &&
+                        binsof(c_extend_types.zero_ext) &&
+                        binsof(c_misaligned_access.aligned);
+
+      bins lw_align = binsof(c_memory_operations.load) &&
+                      binsof(c_access_sizes.word) &&
+                      binsof(c_misaligned_access.aligned);
+
+      bins lh_misalign = binsof(c_memory_operations.load) &&
+                          binsof(c_access_sizes.half) &&
+                          binsof(c_extend_types.sign_ext) &&
+                          binsof(c_misaligned_access.misaligned);
+
+      bins lhu_misalign =  binsof(c_memory_operations.load) &&
+                            binsof(c_access_sizes.half) &&
+                            binsof(c_extend_types.zero_ext) &&
+                            binsof(c_misaligned_access.misaligned);
+
+      bins lw_misalign = binsof(c_memory_operations.load) &&
+                          binsof(c_access_sizes.word) &&
+                          binsof(c_misaligned_access.misaligned);
+
+      bins sb_align = binsof(c_memory_operations.store) &&
+                      binsof(c_access_sizes.byte_) &&
+                      binsof(c_misaligned_access.aligned);
+
+      bins sh_align = binsof(c_memory_operations.store) &&
+                      binsof(c_access_sizes.half) &&
+                      binsof(c_misaligned_access.aligned);
+
+      bins sw_align =  binsof(c_memory_operations.store) &&
+                        binsof(c_access_sizes.word) &&
+                        binsof(c_misaligned_access.aligned);
+
+      bins sh_misalign = binsof(c_memory_operations.store) &&
+                          binsof(c_access_sizes.half) &&
+                          binsof(c_misaligned_access.misaligned);
+
+      bins sw_misalign = binsof(c_memory_operations.store) &&
+                          binsof(c_access_sizes.word) &&
+                          binsof(c_misaligned_access.misaligned);
+
+    }
   endgroup
+
+
 
   //==================================================================================
   // Covergroup: Output Transactions
