@@ -54,7 +54,7 @@ class lsu_monitor extends uvm_monitor;
   task run_phase(uvm_phase phase);
     forever begin
       // Sampling Inputs from EX Stage
-      @(posedge vif.data_req_ex_i iff vif.rst_n) #1step;
+      @(posedge vif.data_gnt_i iff vif.rst_n) #1step;
       m_seq_item.data_we_ex_i = vif.data_we_ex_i;
       m_seq_item.data_type_ex_i = vif.data_type_ex_i;
       m_seq_item.data_wdata_ex_i = vif.data_wdata_ex_i;
@@ -63,12 +63,14 @@ class lsu_monitor extends uvm_monitor;
       m_seq_item.operand_a_ex_i = vif.operand_a_ex_i;
       m_seq_item.operand_b_ex_i = vif.operand_b_ex_i;
       m_seq_item.data_misaligned_ex_i = vif.data_misaligned_ex_i;
+
       // Sampling External OBI Data Memory Interface Output Signals
       m_seq_item.data_req_o = vif.data_req_o;
       m_seq_item.data_addr_o = vif.data_addr_o;
       m_seq_item.data_we_o = vif.data_we_o;
       m_seq_item.data_be_o = vif.data_be_o;
       m_seq_item.data_wdata_o = vif.data_wdata_o;
+      m_seq_item.data_misaligned_o = vif.data_misaligned_o;
 
       // Sampling External OBI Data Memory Interface Inputs Signals
       @(posedge vif.data_rvalid_i iff vif.rst_n) #1step;
@@ -81,8 +83,6 @@ class lsu_monitor extends uvm_monitor;
       m_seq_item.lsu_ready_ex_o = vif.lsu_ready_ex_o;
       m_seq_item.lsu_ready_wb_o = vif.lsu_ready_wb_o;
       m_seq_item.busy_o = vif.busy_o;
-      m_seq_item.data_misaligned_o = vif.data_misaligned_o;
-
 
       #1step analysis_port.write(m_seq_item);
     end

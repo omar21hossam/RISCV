@@ -53,14 +53,56 @@ interface lsu_if (
   // Sequences
   //==================================================================================
 
+  // OBI handshake protocol sequence
+  sequence obi_handshake; ##[0:$] data_req_o ##[0:$] data_gnt_i ##[0:$] data_rvalid_i; endsequence
+
+  // Misaligned word-aligned address sequence
+  sequence word_misaligned;
+    (data_addr_o[1:0] != 2'b00) && (data_type_ex_i == riscv_pkg::WORD);
+  endsequence
+
+  // Misaligned halfword-aligned address sequence
+  sequence halfword_misaligned;
+    (data_addr_o[1:0] == 2'b11) && (data_type_ex_i == riscv_pkg::HALF);
+  endsequence
+
 
   //==================================================================================
   // Properties
   //==================================================================================
+  property p_obi_transaction;
+    @(posedge clk) disable iff (!rst_n) data_req_ex_i |-> obi_handshake;
+  endproperty
+
+  property p_word_misaligned;
+    @(posedge clk) disable iff (!rst_n) word_misaligned |-> ##[0:$] data_misaligned_o;
+  endproperty
+
+  property p_halfword_misaligned;
+    @(posedge clk) disable iff (!rst_n) halfword_misaligned |-> ##[0:$] data_misaligned_o;
+  endproperty
+
+  property p_misaligned_transaction;
+    @(posedge clk) disable iff (!rst_n) $fell(
+        data_misaligned_o
+    ) |-> ##0 $rose(
+        data_misaligned_ex_i
+    );
+  endproperty
 
   //==================================================================================
   // Assertions
   //==================================================================================
+  assert property (p_obi_transaction)
+  else $error("OBI transaction failed!");
 
+  assert property (p_word_misaligned)
+  else $error("Word misalignment failed!");
+
+  assert property (p_halfword_misaligned)
+  else $error("Halfword misalignment failed!");
+
+  assert property (p_misaligned_transaction)
+  else $error("Misalignment flags failed!");
 
 endinterface

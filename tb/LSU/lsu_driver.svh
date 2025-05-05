@@ -20,14 +20,6 @@ class lsu_driver #(
   bit IS_LSU_INTEGRATED;
 
   //==================================================================================
-  // Mailboxes
-  //==================================================================================
-  mailbox data_addr_mbx;
-  mailbox data_we_mbx;
-  mailbox data_be_mbx;
-  mailbox data_wdata_mbx;
-
-  //==================================================================================
   // Function: Constructor
   //==================================================================================
   function new(string name = "lsu_driver", uvm_component parent = null);
@@ -44,10 +36,6 @@ class lsu_driver #(
     // Creation
     // ---------
     m_seq_item = lsu_sequence_item::type_id::create("m_seq_item");
-    data_addr_mbx = new();
-    data_we_mbx = new();
-    data_be_mbx = new();
-    data_wdata_mbx = new();
 
     // Configuration
     // -------------
@@ -86,20 +74,20 @@ class lsu_driver #(
   //==================================================================================
   task reset();
     `uvm_info(get_name(), "Resetting LSU Driver", UVM_HIGH);
-    vif.rst_n                <= 1'b0;
-    vif.data_we_ex_i         <= riscv_pkg::LOAD;
-    vif.data_type_ex_i       <= riscv_pkg::BYTE1;
-    vif.data_wdata_ex_i      <= 'b0;
-    vif.data_sign_ext_ex_i   <= riscv_pkg::SIGN_EXT;
-    vif.data_req_ex_i        <= 'b0;
-    vif.operand_a_ex_i       <= 'b0;
-    vif.operand_b_ex_i       <= 'b0;
-    vif.data_misaligned_ex_i <= 'b0;
-    vif.data_gnt_i           <= 1'b0;
-    vif.data_rdata_i         <= 'b0;
-    vif.data_rvalid_i        <= 1'b0;
+    vif.rst_n                = 1'b0;
+    vif.data_we_ex_i         = riscv_pkg::LOAD;
+    vif.data_type_ex_i       = riscv_pkg::BYTE1;
+    vif.data_wdata_ex_i      = 'b0;
+    vif.data_sign_ext_ex_i   = riscv_pkg::SIGN_EXT;
+    vif.data_req_ex_i        = 'b0;
+    vif.operand_a_ex_i       = 'b0;
+    vif.operand_b_ex_i       = 'b0;
+    vif.data_misaligned_ex_i = 'b0;
+    vif.data_gnt_i           = 1'b0;
+    vif.data_rdata_i         = 'b0;
+    vif.data_rvalid_i        = 1'b0;
     repeat (3) @(negedge vif.clk);
-    vif.rst_n <= 1'b1;
+    vif.rst_n = 1'b1;
   endtask
 
   //==================================================================================
@@ -108,14 +96,14 @@ class lsu_driver #(
   task drv_lsu_ex();
     @(negedge vif.clk iff vif.lsu_ready_ex_o);
     `uvm_info(get_name(), "Driving LSU EX stage signals", UVM_HIGH);
-    vif.data_req_ex_i        <= 1'b1;
-    vif.data_we_ex_i         <= m_seq_item.data_we_ex_i;
-    vif.data_type_ex_i       <= m_seq_item.data_type_ex_i;
-    vif.data_wdata_ex_i      <= m_seq_item.data_wdata_ex_i;
-    vif.data_sign_ext_ex_i   <= m_seq_item.data_sign_ext_ex_i;
-    vif.operand_a_ex_i       <= m_seq_item.operand_a_ex_i;
-    vif.operand_b_ex_i       <= m_seq_item.operand_b_ex_i;
-    vif.data_misaligned_ex_i <= m_seq_item.data_misaligned_ex_i;
+    vif.data_req_ex_i        = 1'b1;
+    vif.data_we_ex_i         = m_seq_item.data_we_ex_i;
+    vif.data_type_ex_i       = m_seq_item.data_type_ex_i;
+    vif.data_wdata_ex_i      = m_seq_item.data_wdata_ex_i;
+    vif.data_sign_ext_ex_i   = m_seq_item.data_sign_ext_ex_i;
+    vif.operand_a_ex_i       = m_seq_item.operand_a_ex_i;
+    vif.operand_b_ex_i       = m_seq_item.operand_b_ex_i;
+    vif.data_misaligned_ex_i = 1'b0;
   endtask
 
   //==================================================================================
@@ -130,48 +118,74 @@ class lsu_driver #(
               vif.data_be_o,
               vif.data_wdata_o
               ), UVM_HIGH);
-  
+
     // Sample OBI response signals
-    data_addr_mbx.put(vif.data_addr_o);
-    data_we_mbx.put(vif.data_we_o);
-    data_be_mbx.put(vif.data_be_o);
-    data_wdata_mbx.put(vif.data_wdata_o);
+    m_seq_item.data_addr_o = vif.data_addr_o;
+    m_seq_item.data_we_o = vif.data_we_o;
+    m_seq_item.data_be_o = vif.data_be_o;
+    m_seq_item.data_misaligned_o = vif.data_misaligned_o;
 
     // Grant the OBI request
-    vif.data_gnt_i <= 1'b1;
-
+    vif.data_gnt_i = 1'b1;
     @(negedge vif.clk);
-    vif.data_gnt_i <= 1'b0;
-    vif.data_req_ex_i <= 1'b0;
-
-    // Retrieve the sampled OBI signals
-    data_addr_mbx.get(m_seq_item.data_addr_o);
-    data_we_mbx.get(m_seq_item.data_we_o);
-    data_be_mbx.get(m_seq_item.data_be_o);
-    data_wdata_mbx.get(m_seq_item.data_wdata_o);
+    vif.data_gnt_i = 1'b0;
+    vif.data_req_ex_i = (m_seq_item.data_misaligned_o) ? 1'b1 : 1'b0;
+    vif.data_misaligned_ex_i = (m_seq_item.data_misaligned_o) ? 1'b1 : 1'b0;
+    wait_for_response();
 
     // Response to the OBI request
     if (m_seq_item.data_we_o == riscv_pkg::LOAD) begin
       // Load the data and then validate the response
-      vif.data_rdata_i  <= m_seq_item.data_rdata_i;
-      vif.data_rvalid_i <= 1'b1;
+      vif.data_rdata_i  = m_seq_item.data_rdata_i;
+      vif.data_rvalid_i = 1'b1;
     end else if (m_seq_item.data_we_o == riscv_pkg::STORE) begin
       // Ignore the strore data and just set the valid signal
-      vif.data_rvalid_i <= 1'b1;
+      vif.data_rvalid_i = 1'b1;
     end
 
     // Deassert the valid signal after a clock cycle
     @(negedge vif.clk);
-    vif.data_rvalid_i <= 1'b0;
+    vif.data_rvalid_i = 1'b0;
+
+    // in case of misalignment
+    // -------------------------------------------------
+    @(negedge vif.clk);
+    if (m_seq_item.data_misaligned_o) begin
+      // Sample OBI response signals
+      m_seq_item.data_addr_o = vif.data_addr_o;
+      m_seq_item.data_we_o = vif.data_we_o;
+      m_seq_item.data_be_o = vif.data_be_o;
+
+      // Grant the OBI request
+      vif.data_gnt_i = 1'b1;
+      @(negedge vif.clk);
+      vif.data_gnt_i = 1'b0;
+      vif.data_req_ex_i = 1'b0;
+      vif.data_misaligned_ex_i = 1'b0;
+
+      // Response to the OBI request
+      if (m_seq_item.data_we_o == riscv_pkg::LOAD) begin
+        // Load the data and then validate the response
+        vif.data_rdata_i  = m_seq_item.data_rdata_i;
+        vif.data_rvalid_i = 1'b1;
+      end else if (m_seq_item.data_we_o == riscv_pkg::STORE) begin
+        // Ignore the strore data and just set the valid signal
+        vif.data_rvalid_i = 1'b1;
+      end
+
+      // Deassert the valid signal after a clock cycle
+      @(negedge vif.clk);
+      vif.data_rvalid_i = 1'b0;
+    end
   endtask
 
   //==================================================================================
   // Task: wait_for_response
   //==================================================================================
-  // task wait_for_response();
-  //   while (m_seq_item.latency != 0) begin
-  //     @(negedge vif.clk) m_seq_item.latency--;
-  //   end
-  //   @(negedge vif.clk);
-  // endtask
+  task wait_for_response();
+    while (m_seq_item.latency > 0) begin
+      @(negedge vif.clk) m_seq_item.latency--;
+    end
+    @(negedge vif.clk);
+  endtask
 endclass

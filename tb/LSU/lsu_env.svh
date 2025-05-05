@@ -60,7 +60,7 @@ class lsu_env extends uvm_env;
   function void connect_phase(uvm_phase phase);
     super.connect_phase(phase);
     `uvm_info(get_name(), "Connecting LSU Environment", UVM_HIGH)
-    m_agent.m_monitor.analysis_port.connect(m_scoreboard.analysis_imp);
+    m_agent.m_monitor.analysis_port.connect(m_scoreboard.analysis_fifo.analysis_export);
     m_agent.m_monitor.analysis_port.connect(m_subscriber.analysis_export);
   endfunction
 endclass
