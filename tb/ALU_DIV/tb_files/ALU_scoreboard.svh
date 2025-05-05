@@ -274,27 +274,26 @@ class alu_scoreboard extends uvm_scoreboard;
                 trans_model.ready_o = 1'b1;
                 end 
             end
-            //**Osama Alzero code**//
             ALU_DIVU:begin
-				trans_model.result_o =  trans.operand_b_i / trans.operand_a_i ;
+		trans_model.result_o =  trans.operand_b_i / trans.operand_a_i ;
                 trans_model.ready_o = 1'b1;
-				trans_model.comparison_result_o  = 1'b0;
-			end
+		trans_model.comparison_result_o  = 1'b0;
+		end
             ALU_DIV:begin
-				trans_model.result_o =  $signed(trans.operand_b_i) / $signed(trans.operand_a_i) ;
+		trans_model.result_o =  $signed(trans.operand_b_i) / $signed(trans.operand_a_i) ;
                 trans_model.ready_o = 1'b1;
-				trans_model.comparison_result_o  = 1'b0;
-            end
+		trans_model.comparison_result_o  = 1'b0;
+                end
             ALU_REMU:begin
-				trans_model.result_o =  trans.operand_b_i % trans.operand_a_i ;
+		trans_model.result_o =  trans.operand_b_i % trans.operand_a_i ;
                 trans_model.ready_o = 1'b1;
-				trans_model.comparison_result_o  = 1'b0;
-            end
+		trans_model.comparison_result_o  = 1'b0;
+                end
             ALU_REM:begin
-				trans_model.result_o = $signed(trans.operand_b_i) % $signed(trans.operand_a_i) ;
+		trans_model.result_o = $signed(trans.operand_b_i) % $signed(trans.operand_a_i) ;
                 trans_model.ready_o = 1'b1;
-				trans_model.comparison_result_o  = 1'b0;
-            end
+		trans_model.comparison_result_o  = 1'b0;
+                end
             default:begin
                 `uvm_fatal(get_type_name(), $sformatf("ALU Scoreboard: Invalid operation code:%p",trans.operator_i));
             end
