@@ -22,26 +22,43 @@ class alu_driver extends uvm_driver #(alu_seq_item);
     end
   endfunction
 //==============================================================================
+//Description:reseting inputs
+//==============================================================================
+task reset_inputs;
+	`uvm_info(get_type_name(), "Resetting input signals", UVM_LOW)
+	vif.vector_mode_i = 'b0;
+	vif.enable_i = 'b0;
+	vif.operator_i = 'b0;
+	vif.operand_a_i = 'b0;
+	vif.operand_b_i = 'b0;
+	vif.ex_ready_i = 'b0;
+endtask 
+
+//==============================================================================
 //Description:run_phase
 //==============================================================================
  task run_phase(uvm_phase phase);
+	reset_inputs();
+   @(posedge vif.rst_n)
     forever begin
-        
         // @(posedge vif.core_clk);
         // vif.cb.enable_i    <= 1'b0;
         seq_item_port.get_next_item(seq_item);
-        // Drive the inputs to the DUT
-        //wait(vif.ready_o == 1'b0);
-        @(posedge vif.core_clk);
+        // Drive the inputs to the DUT              
+      @(posedge vif.core_clk);
+      // division multicycle (stalling)
+        if (!vif.ready_o && vif.enable_i && ((vif.operator_i == ALU_DIV) || (vif.operator_i == ALU_DIVU)||(vif.operator_i == ALU_REM) || (vif.operator_i == ALU_REMU)))begin 
+         wait (vif.ready_o);
+         @(posedge vif.core_clk);
+	    end 
         `uvm_info(get_type_name(), $sformatf("ALU Driver: Driving inputs: %s", seq_item.convert2string()), UVM_MEDIUM);
-        vif.cb.rst_n       <= seq_item.rst_n;
         vif.vector_mode_i  <= seq_item.vector_mode_i;
         vif.cb.enable_i    <= seq_item.enable_i;
         vif.cb.operator_i  <= seq_item.operator_i;
         vif.cb.operand_a_i <= seq_item.operand_a_i;
         vif.cb.operand_b_i <= seq_item.operand_b_i;
         vif.cb.ex_ready_i  <= seq_item.ex_ready_i;
-        seq_item_port.item_done();
+        seq_item_port.item_done();		
         `uvm_info(get_type_name(), $sformatf("ALU Driver: Driving inputs done"), UVM_NONE);
     end
   endtask
