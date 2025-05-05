@@ -5,7 +5,7 @@ class alu_seq_item extends uvm_sequence_item;
 //============================================
   rand alu_opcode_e operator_i; // ALU operation code
   rand logic [31:0] operand_a_i,operand_b_i; //  operands
-  rand logic rst_n; // Active low reset signal
+  rand bit rst_n; // Active low reset signal
   rand logic   enable_i; // ALU enable signal
   rand logic   ex_ready_i; // EX stage ready for next result
   logic [1:0]  vector_mode_i = 2'b00; // Vector mode for 32-bit operations
@@ -16,7 +16,7 @@ class alu_seq_item extends uvm_sequence_item;
 //Declare internal signals
 //============================================
   logic in_out;   //zero input to ALU, one output from ALU [between monitor and scoreboard]
-  logic op_type;  //it is refer to the operation is signed or unsigned[signed = 1, unsigned = 0]
+  bit op_type;  //it is refer to the operation is signed or unsigned[signed = 1, unsigned = 0]
   //requested op-codes for ALU operations 
 //==========================================
 // Constructor
@@ -30,6 +30,10 @@ class alu_seq_item extends uvm_sequence_item;
 //============================================
 constraint opcode_values{
 operator_i inside {req_alu_op};
+}
+  
+constraint shifting_op{
+  operator_i ==(ALU_SRA | ALU_SRL | ALU_SLL) -> operand_b_i[31] == 0 ;
 }
 //==========================================
 //Description: extern methods
