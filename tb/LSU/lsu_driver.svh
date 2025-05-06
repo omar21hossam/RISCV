@@ -56,8 +56,10 @@ class lsu_driver #(
     forever begin
       // In case of integrated LSU, no sequence is needed
       if (IS_LSU_INTEGRATED) begin
+        seq_item_port.get_next_item(m_seq_item);
         obi_rsp_hndlr();
         #1step;
+        seq_item_port.item_done();
       end  // In case of pre-integration, sequence is needed
       else begin
         seq_item_port.get_next_item(m_seq_item);
@@ -139,7 +141,7 @@ class lsu_driver #(
       vif.data_rdata_i  = m_seq_item.data_rdata_i;
       vif.data_rvalid_i = 1'b1;
     end else if (m_seq_item.data_we_o == riscv_pkg::STORE) begin
-      // Ignore the strore data and just set the valid signal
+      // Ignore the store data and just set the valid signal
       vif.data_rvalid_i = 1'b1;
     end
 
@@ -166,7 +168,7 @@ class lsu_driver #(
       // Response to the OBI request
       if (m_seq_item.data_we_o == riscv_pkg::LOAD) begin
         // Load the data and then validate the response
-        vif.data_rdata_i  = m_seq_item.data_rdata_i;
+        vif.data_rdata_i  = m_seq_item.data_rdata_next_i;
         vif.data_rvalid_i = 1'b1;
       end else if (m_seq_item.data_we_o == riscv_pkg::STORE) begin
         // Ignore the strore data and just set the valid signal

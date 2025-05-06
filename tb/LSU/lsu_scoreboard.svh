@@ -13,6 +13,7 @@ class lsu_scoreboard extends uvm_scoreboard;
   // Classes Handles
   //==================================================================================
   lsu_sequence_item m_seq_item_actual;
+  lsu_sequence_item m_seq_item_oneOftwo;
   lsu_sequence_item m_seq_item_reference;
 
   //==================================================================================
@@ -39,6 +40,7 @@ class lsu_scoreboard extends uvm_scoreboard;
     // ---------
     m_seq_item_actual = lsu_sequence_item::type_id::create("m_seq_item_actual");
     m_seq_item_reference = lsu_sequence_item::type_id::create("m_seq_item_reference");
+    m_seq_item_oneOftwo = lsu_sequence_item::type_id::create("m_seq_item_oneOftwo");
 
     // TLM
     // -------
@@ -56,15 +58,18 @@ class lsu_scoreboard extends uvm_scoreboard;
     // ------------------------------
     forever begin
       analysis_fifo.get(m_seq_item_actual);
-      // Get Reference Transaction
-      m_seq_item_reference = get_reference(m_seq_item_actual);
+
+      // Copy the content of first aligned transaction before misalignment
+      m_seq_item_oneOftwo.copy(m_seq_item_actual);
 
       // Misaligned Case
       // ------------------------------
       if (m_seq_item_actual.data_misaligned_o) begin
-
         // Retrieve the second transaction caused by misalignment
         analysis_fifo.get(m_seq_item_actual);
+
+        // Get Reference Transaction
+        m_seq_item_reference = get_reference(m_seq_item_actual, m_seq_item_oneOftwo);
 
         if (m_seq_item_actual.data_we_ex_i == riscv_pkg::LOAD) begin
           assert (m_seq_item_actual.data_rdata_ex_o == m_seq_item_reference.data_rdata_ex_o) begin
@@ -104,6 +109,9 @@ class lsu_scoreboard extends uvm_scoreboard;
       end  // Aligned Case
            // ------------------------------
       else begin
+        // Get Reference Transaction
+        m_seq_item_reference = get_reference(m_seq_item_actual, m_seq_item_oneOftwo);
+
         if (m_seq_item_actual.data_we_ex_i == riscv_pkg::LOAD) begin
           assert (m_seq_item_actual.data_rdata_ex_o == m_seq_item_reference.data_rdata_ex_o) begin
             success_count++;
@@ -153,32 +161,33 @@ class lsu_scoreboard extends uvm_scoreboard;
   //==================================================================================
   // Function: get_reference
   //==================================================================================
-  function lsu_sequence_item get_reference(input lsu_sequence_item actual_t);
+  function lsu_sequence_item get_reference(input lsu_sequence_item latest_t,
+                                           input lsu_sequence_item earliest_t);
     // Create a new instance of the expected transaction
     lsu_sequence_item expected_t;
     expected_t = lsu_sequence_item::type_id::create("expected_t");
 
     // Load Case
     // ------------------------------------------------
-    if (actual_t.data_we_ex_i == riscv_pkg::LOAD) begin
+    if (earliest_t.data_we_ex_i == riscv_pkg::LOAD) begin
 
-      case (actual_t.data_type_ex_i)
+      case (earliest_t.data_type_ex_i)
 
         // Load Byte
         // --------------------------------------
         riscv_pkg::BYTE1, riscv_pkg::BYTE2: begin
 
           // Byte-Mask
-          case (actual_t.data_be_o)
+          case (earliest_t.data_be_o)
             // Byte 0
             4'b0001: begin
               // Zero-Extend
-              if (actual_t.data_sign_ext_ex_i == riscv_pkg::ZERO_EXT) begin
-                expected_t.data_rdata_ex_o = {24'b0, actual_t.data_rdata_i[7:0]};
+              if (latest_t.data_sign_ext_ex_i == riscv_pkg::ZERO_EXT) begin
+                expected_t.data_rdata_ex_o = {24'b0, latest_t.data_rdata_i[7:0]};
               end  // Sign-Extend
-              else if (actual_t.data_sign_ext_ex_i == riscv_pkg::SIGN_EXT) begin
+              else if (latest_t.data_sign_ext_ex_i == riscv_pkg::SIGN_EXT) begin
                 expected_t.data_rdata_ex_o = {
-                  {24{actual_t.data_rdata_i[7]}}, actual_t.data_rdata_i[7:0]
+                  {24{latest_t.data_rdata_i[7]}}, latest_t.data_rdata_i[7:0]
                 };
               end
             end
@@ -186,12 +195,12 @@ class lsu_scoreboard extends uvm_scoreboard;
             // Byte 1
             4'b0010: begin
               // Zero-Extend
-              if (actual_t.data_sign_ext_ex_i == riscv_pkg::ZERO_EXT) begin
-                expected_t.data_rdata_ex_o = {24'b0, actual_t.data_rdata_i[15:8]};
+              if (latest_t.data_sign_ext_ex_i == riscv_pkg::ZERO_EXT) begin
+                expected_t.data_rdata_ex_o = {24'b0, latest_t.data_rdata_i[15:8]};
               end // Sign-Extend
-              else if (actual_t.data_sign_ext_ex_i == riscv_pkg::SIGN_EXT) begin
+              else if (latest_t.data_sign_ext_ex_i == riscv_pkg::SIGN_EXT) begin
                 expected_t.data_rdata_ex_o = {
-                  {24{actual_t.data_rdata_i[15]}}, actual_t.data_rdata_i[15:8]
+                  {24{latest_t.data_rdata_i[15]}}, latest_t.data_rdata_i[15:8]
                 };
               end
             end
@@ -199,12 +208,12 @@ class lsu_scoreboard extends uvm_scoreboard;
             // Byte 2
             4'b0100: begin
               // Zero-Extend
-              if (actual_t.data_sign_ext_ex_i == riscv_pkg::ZERO_EXT) begin
-                expected_t.data_rdata_ex_o = {24'b0, actual_t.data_rdata_i[23:16]};
+              if (latest_t.data_sign_ext_ex_i == riscv_pkg::ZERO_EXT) begin
+                expected_t.data_rdata_ex_o = {24'b0, latest_t.data_rdata_i[23:16]};
               end // Sign-Extend
-              else if (actual_t.data_sign_ext_ex_i == riscv_pkg::SIGN_EXT) begin
+              else if (latest_t.data_sign_ext_ex_i == riscv_pkg::SIGN_EXT) begin
                 expected_t.data_rdata_ex_o = {
-                  {24{actual_t.data_rdata_i[23]}}, actual_t.data_rdata_i[23:16]
+                  {24{latest_t.data_rdata_i[23]}}, latest_t.data_rdata_i[23:16]
                 };
               end
             end
@@ -212,12 +221,12 @@ class lsu_scoreboard extends uvm_scoreboard;
             // Byte 3
             4'b1000: begin
               // Zero-Extend
-              if (actual_t.data_sign_ext_ex_i == riscv_pkg::ZERO_EXT) begin
-                expected_t.data_rdata_ex_o = {24'b0, actual_t.data_rdata_i[31:24]};
+              if (latest_t.data_sign_ext_ex_i == riscv_pkg::ZERO_EXT) begin
+                expected_t.data_rdata_ex_o = {24'b0, latest_t.data_rdata_i[31:24]};
               end // Sign-Extend
-              else if (actual_t.data_sign_ext_ex_i == riscv_pkg::SIGN_EXT) begin
+              else if (latest_t.data_sign_ext_ex_i == riscv_pkg::SIGN_EXT) begin
                 expected_t.data_rdata_ex_o = {
-                  {24{actual_t.data_rdata_i[31]}}, actual_t.data_rdata_i[31:24]
+                  {24{latest_t.data_rdata_i[31]}}, latest_t.data_rdata_i[31:24]
                 };
               end
             end
@@ -225,7 +234,7 @@ class lsu_scoreboard extends uvm_scoreboard;
             default: begin
               `uvm_fatal(
                   get_name(), $sformatf(
-                  "Unsupported byte enable for LB operation: Byte Enable[%4b]", actual_t.data_be_o))
+                  "Unsupported byte enable for LB operation: Byte Enable[%4b]", latest_t.data_be_o))
             end
           endcase
         end
@@ -235,17 +244,17 @@ class lsu_scoreboard extends uvm_scoreboard;
         riscv_pkg::HALF: begin
 
           // Byte-Mask
-          case (actual_t.data_be_o)
+          case (earliest_t.data_be_o)
 
             // EA[1:0] = 2'b00
             4'b0011: begin
               // Zero-Extend
-              if (actual_t.data_sign_ext_ex_i == riscv_pkg::ZERO_EXT) begin
-                expected_t.data_rdata_ex_o = {16'b0, actual_t.data_rdata_i[15:0]};
+              if (latest_t.data_sign_ext_ex_i == riscv_pkg::ZERO_EXT) begin
+                expected_t.data_rdata_ex_o = {16'b0, latest_t.data_rdata_i[15:0]};
               end // Sign-Extend
-              else if (actual_t.data_sign_ext_ex_i == riscv_pkg::SIGN_EXT) begin
+              else if (latest_t.data_sign_ext_ex_i == riscv_pkg::SIGN_EXT) begin
                 expected_t.data_rdata_ex_o = {
-                  {16{actual_t.data_rdata_i[15]}}, actual_t.data_rdata_i[15:0]
+                  {16{latest_t.data_rdata_i[15]}}, latest_t.data_rdata_i[15:0]
                 };
               end
             end
@@ -253,12 +262,12 @@ class lsu_scoreboard extends uvm_scoreboard;
             // EA[1:0] = 2'b01
             4'b0110: begin
               // Zero-Extend
-              if (actual_t.data_sign_ext_ex_i == riscv_pkg::ZERO_EXT) begin
-                expected_t.data_rdata_ex_o = {16'b0, actual_t.data_rdata_i[23:8]};
+              if (latest_t.data_sign_ext_ex_i == riscv_pkg::ZERO_EXT) begin
+                expected_t.data_rdata_ex_o = {16'b0, latest_t.data_rdata_i[23:8]};
               end // Sign-Extend
-              else if (actual_t.data_sign_ext_ex_i == riscv_pkg::SIGN_EXT) begin
+              else if (latest_t.data_sign_ext_ex_i == riscv_pkg::SIGN_EXT) begin
                 expected_t.data_rdata_ex_o = {
-                  {24{actual_t.data_rdata_i[23]}}, actual_t.data_rdata_i[23:8]
+                  {24{latest_t.data_rdata_i[23]}}, latest_t.data_rdata_i[23:8]
                 };
               end
             end
@@ -266,12 +275,12 @@ class lsu_scoreboard extends uvm_scoreboard;
             // EA[1:0] = 2'b10
             4'b1100: begin
               // Zero-Extend
-              if (actual_t.data_sign_ext_ex_i == riscv_pkg::ZERO_EXT) begin
-                expected_t.data_rdata_ex_o = {16'b0, actual_t.data_rdata_i[31:16]};
+              if (latest_t.data_sign_ext_ex_i == riscv_pkg::ZERO_EXT) begin
+                expected_t.data_rdata_ex_o = {16'b0, latest_t.data_rdata_i[31:16]};
               end // Sign-Extend
-              else if (actual_t.data_sign_ext_ex_i == riscv_pkg::SIGN_EXT) begin
+              else if (latest_t.data_sign_ext_ex_i == riscv_pkg::SIGN_EXT) begin
                 expected_t.data_rdata_ex_o = {
-                  {16{actual_t.data_rdata_i[31]}}, actual_t.data_rdata_i[31:16]
+                  {16{latest_t.data_rdata_i[31]}}, latest_t.data_rdata_i[31:16]
                 };
               end
             end
@@ -279,16 +288,16 @@ class lsu_scoreboard extends uvm_scoreboard;
             // EA[1:0] = 2'b11
             4'b1000: begin
               // Zero-Extend
-              if (actual_t.data_sign_ext_ex_i == riscv_pkg::ZERO_EXT) begin
+              if (latest_t.data_sign_ext_ex_i == riscv_pkg::ZERO_EXT) begin
                 expected_t.data_rdata_ex_o = {
-                  16'b0, actual_t.data_rdata_i[7:0], actual_t.data_rdata_i[31:24]
+                  16'b0, latest_t.data_rdata_i[7:0], earliest_t.data_rdata_i[31:24]
                 };
               end // Sign-Extend
-              else if (actual_t.data_sign_ext_ex_i == riscv_pkg::SIGN_EXT) begin
+              else if (latest_t.data_sign_ext_ex_i == riscv_pkg::SIGN_EXT) begin
                 expected_t.data_rdata_ex_o = {
-                  {16{actual_t.data_rdata_i[7]}},
-                  actual_t.data_rdata_i[7:0],
-                  actual_t.data_rdata_i[31:24]
+                  {16{latest_t.data_rdata_i[7]}},
+                  latest_t.data_rdata_i[7:0],
+                  earliest_t.data_rdata_i[31:24]
                 };
               end
             end
@@ -297,7 +306,7 @@ class lsu_scoreboard extends uvm_scoreboard;
             default: begin
               `uvm_fatal(get_name(), $sformatf(
                          "Unsupported byte enable for misaligned LH operation: Byte Enable[%4b]",
-                         actual_t.data_be_o
+                         latest_t.data_be_o
                          ));
             end
           endcase
@@ -307,31 +316,37 @@ class lsu_scoreboard extends uvm_scoreboard;
         // --------------------------------------
         riscv_pkg::WORD: begin
           // Byte-Mask
-          case (actual_t.data_be_o)
+          case (earliest_t.data_be_o)
             // EA[1:0] = 2'b00
             4'b1111: begin
-              expected_t.data_rdata_ex_o = actual_t.data_rdata_i;
+              expected_t.data_rdata_ex_o = latest_t.data_rdata_i;
             end
 
             // EA[1:0] = 2'b01
             4'b1110: begin
-              expected_t.data_rdata_ex_o = rotate_right(actual_t.data_rdata_i, 8);
+              expected_t.data_rdata_ex_o = {
+                latest_t.data_rdata_i[7:0], earliest_t.data_rdata_i[31:8]
+              };
             end
 
             // EA[1:0] = 2'b10
             4'b1100: begin
-              expected_t.data_rdata_ex_o = rotate_right(actual_t.data_rdata_i, 16);
+              expected_t.data_rdata_ex_o = {
+                latest_t.data_rdata_i[15:0], earliest_t.data_rdata_i[31:16]
+              };
             end
 
             // EA[1:0] = 2'b11
             4'b1000: begin
-              expected_t.data_rdata_ex_o = rotate_right(actual_t.data_rdata_i, 24);
+              expected_t.data_rdata_ex_o = {
+                latest_t.data_rdata_i[23:0], earliest_t.data_rdata_i[31:24]
+              };
             end
 
             default: begin
               `uvm_fatal(
                   get_name(), $sformatf(
-                  "Unsupported byte enable for LW operation: Byte Enable[%4b]", actual_t.data_be_o
+                  "Unsupported byte enable for LW operation: Byte Enable[%4b]", latest_t.data_be_o
                   ));
             end
           endcase
@@ -345,40 +360,40 @@ class lsu_scoreboard extends uvm_scoreboard;
       endcase
     end  // Store Case
          // -----------------------------------------------------
-    else if (actual_t.data_we_ex_i == riscv_pkg::STORE) begin
+    else if (earliest_t.data_we_ex_i == riscv_pkg::STORE) begin
 
-      case (actual_t.data_type_ex_i)
+      case (earliest_t.data_type_ex_i)
 
         // Store Byte
         // --------------------------------------
         riscv_pkg::BYTE1, riscv_pkg::BYTE2: begin
 
           // Byte-Mask
-          case (actual_t.data_be_o)
+          case (latest_t.data_be_o)
             // Byte 0
             4'b0001: begin
-              expected_t.data_wdata_o = actual_t.data_wdata_ex_i;
+              expected_t.data_wdata_o = latest_t.data_wdata_ex_i;
             end
 
             // Byte 1
             4'b0010: begin
-              expected_t.data_wdata_o = rotate_left(actual_t.data_wdata_ex_i, 8);
+              expected_t.data_wdata_o = rotate_left(latest_t.data_wdata_ex_i, 8);
             end
 
             // Byte 2
             4'b0100: begin
-              expected_t.data_wdata_o = rotate_left(actual_t.data_wdata_ex_i, 16);
+              expected_t.data_wdata_o = rotate_left(latest_t.data_wdata_ex_i, 16);
             end
 
             // Byte 3
             4'b1000: begin
-              expected_t.data_wdata_o = rotate_left(actual_t.data_wdata_ex_i, 24);
+              expected_t.data_wdata_o = rotate_left(latest_t.data_wdata_ex_i, 24);
             end
 
             default: begin
               `uvm_fatal(
                   get_name(), $sformatf(
-                  "Unsupported byte enable for SB operation: Byte Enable[%4b]", actual_t.data_be_o))
+                  "Unsupported byte enable for SB operation: Byte Enable[%4b]", latest_t.data_be_o))
             end
           endcase
         end
@@ -388,31 +403,31 @@ class lsu_scoreboard extends uvm_scoreboard;
         riscv_pkg::HALF: begin
 
           // Byte-Mask
-          case (actual_t.data_be_o)
+          case (earliest_t.data_be_o)
             // EA[1:0] = 2'b00
             4'b0011: begin
-              expected_t.data_wdata_o = actual_t.data_wdata_ex_i;
+              expected_t.data_wdata_o = latest_t.data_wdata_ex_i;
             end
 
             // EA[1:0] = 2'b01
             4'b0110: begin
-              expected_t.data_wdata_o = rotate_left(actual_t.data_wdata_ex_i, 8);
+              expected_t.data_wdata_o = rotate_left(latest_t.data_wdata_ex_i, 8);
             end
 
             // EA[1:0] = 2'b10
             4'b1100: begin
-              expected_t.data_wdata_o = rotate_right(actual_t.data_wdata_ex_i, 16);
+              expected_t.data_wdata_o = rotate_left(latest_t.data_wdata_ex_i, 16);
             end
 
             //  EA[1:0] = 2'b11
             4'b1000: begin
-              expected_t.data_wdata_o = rotate_right(actual_t.data_wdata_ex_i, 8);
+              expected_t.data_wdata_o = rotate_left(latest_t.data_wdata_ex_i, 24);
             end
 
             default: begin
               `uvm_fatal(
                   get_name(), $sformatf(
-                  "Unsupported byte enable for SH operation: Byte Enable[%4b]", actual_t.data_be_o))
+                  "Unsupported byte enable for SH operation: Byte Enable[%4b]", latest_t.data_be_o))
             end
           endcase
         end
@@ -421,32 +436,32 @@ class lsu_scoreboard extends uvm_scoreboard;
         // --------------------------------------
         riscv_pkg::WORD: begin
           // Byte-Mask
-          case (actual_t.data_be_o)
+          case (earliest_t.data_be_o)
 
             // EA[1:0] = 2'b00
             4'b1111: begin
-              expected_t.data_wdata_o = actual_t.data_wdata_ex_i;
+              expected_t.data_wdata_o = latest_t.data_wdata_ex_i;
             end
 
             // EA[1:0] = 2'b01
             4'b1110: begin
-              expected_t.data_wdata_o = rotate_left(actual_t.data_wdata_ex_i, 8);
+              expected_t.data_wdata_o = rotate_left(latest_t.data_wdata_ex_i, 8);
             end
 
             // EA[1:0] = 2'b10
             4'b1100: begin
-              expected_t.data_wdata_o = rotate_left(actual_t.data_wdata_ex_i, 16);
+              expected_t.data_wdata_o = rotate_left(latest_t.data_wdata_ex_i, 16);
             end
 
             // EA[1:0] = 2'b11
             4'b1000: begin
-              expected_t.data_wdata_o = rotate_left(actual_t.data_wdata_ex_i, 24);
+              expected_t.data_wdata_o = rotate_left(latest_t.data_wdata_ex_i, 24);
             end
 
             default: begin
               `uvm_fatal(
                   get_name(), $sformatf(
-                  "Unsupported byte enable for SW operation: Byte Enable[%4b]", actual_t.data_be_o))
+                  "Unsupported byte enable for SW operation: Byte Enable[%4b]", latest_t.data_be_o))
             end
           endcase
         end

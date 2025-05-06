@@ -34,6 +34,7 @@ class lsu_sequence_item extends uvm_sequence_item;
   // OBI External Bus Interface Signals
   // ---------------------------------------------------
   rand logic               [31:0] data_rdata_i;
+  rand logic               [31:0] data_rdata_next_i;
   logic                           data_gnt_i;
   logic                           data_rvalid_i;
   logic                           data_req_o;
@@ -122,6 +123,39 @@ class lsu_sequence_item extends uvm_sequence_item;
     printer.print_field("operand_a_ex_i", operand_a_ex_i, $bits(operand_a_ex_i), UVM_HEX);
     printer.print_field("operand_b_ex_i", operand_b_ex_i, $bits(operand_b_ex_i), UVM_HEX);
     printer.print_field("data_addr_o", data_addr_o, $bits(data_addr_o), UVM_BIN);
+  endfunction
+
+  // ==================================================================================
+  // Function: do_copy
+  // ==================================================================================
+  function void do_copy(uvm_object rhs);
+    lsu_sequence_item lsu_item;
+    super.do_copy(rhs);
+
+    if (!$cast(lsu_item, rhs)) begin
+      `uvm_fatal(get_full_name(), "Invalid object type for copy");
+    end
+    data_we_ex_i = lsu_item.data_we_ex_i;
+    data_type_ex_i = lsu_item.data_type_ex_i;
+    data_wdata_ex_i = lsu_item.data_wdata_ex_i;
+    data_sign_ext_ex_i = lsu_item.data_sign_ext_ex_i;
+    data_req_ex_i = lsu_item.data_req_ex_i;
+    operand_a_ex_i = lsu_item.operand_a_ex_i;
+    operand_b_ex_i = lsu_item.operand_b_ex_i;
+    data_misaligned_ex_i = lsu_item.data_misaligned_ex_i;
+    data_misaligned_o = lsu_item.data_misaligned_o;
+    data_rdata_ex_o = lsu_item.data_rdata_ex_o;
+    lsu_ready_ex_o = lsu_item.lsu_ready_ex_o;
+    lsu_ready_wb_o = lsu_item.lsu_ready_wb_o;
+    busy_o = lsu_item.busy_o;
+    data_rdata_i = lsu_item.data_rdata_i;
+    data_gnt_i = lsu_item.data_gnt_i;
+    data_rvalid_i = lsu_item.data_rvalid_i;
+    data_req_o = lsu_item.data_req_o;
+    data_addr_o = lsu_item.data_addr_o;
+    data_we_o = lsu_item.data_we_o;
+    data_be_o = lsu_item.data_be_o;
+    data_wdata_o = lsu_item.data_wdata_o;
   endfunction
 
 endclass
