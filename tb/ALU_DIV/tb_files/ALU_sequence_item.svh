@@ -17,6 +17,7 @@ class alu_seq_item extends uvm_sequence_item;
 //============================================
   logic in_out;   //zero input to ALU, one output from ALU [between monitor and scoreboard]
   bit op_type;  //it is refer to the operation is signed or unsigned[signed = 1, unsigned = 0]
+  realtime testing_time;	// refers to the time of monitoring O/I to help tracking test cases
   //requested op-codes for ALU operations 
 //==========================================
 // Constructor
@@ -41,8 +42,8 @@ constraint shifting_op{
 function string convert2string();
 string str;
 str = super.convert2string();
-$sformat(str,"%s-->operator_i:%s, rst_n:%0b, enable_i:%0b, ex_ready_i:%0b, operand_a_i:%0h, operand_b_i:%0h, result_o:%0h ,comparison_result_o:%0b ,ready_o:%0b",
-  str,operator_i,rst_n,enable_i,ex_ready_i,operand_a_i,operand_b_i,result_o,comparison_result_o,ready_o);
+$sformat(str,"%s-->operator_i:%s, rst_n:%0b, enable_i:%0b, ex_ready_i:%0b, operand_a_i:%0h, operand_b_i:%0h, result_o:%0h ,comparison_result_o:%0b ,ready_o:%0b ,@ %0t ps",
+  str,operator_i,rst_n,enable_i,ex_ready_i,operand_a_i,operand_b_i,result_o,comparison_result_o,ready_o,testing_time);
 return str;
 endfunction:convert2string
 //==========================================
@@ -61,11 +62,11 @@ if(!$cast(rhs_,rhs)) begin
 end
 if(rhs_.op_type)begin
   return(super.do_compare(rhs_,comparer) && $signed(result_o) == $signed(rhs_.result_o) && 
-         comparison_result_o ==rhs_.comparison_result_o && ready_o == rhs_.ready_o); //compare the signed values
+      comparison_result_o ==rhs_.comparison_result_o && ready_o == rhs_.ready_o); //compare the input values
 end
 else begin
   return(super.do_compare(rhs_,comparer) && result_o == rhs_.result_o && 
-         comparison_result_o ==rhs_.comparison_result_o && ready_o == rhs_.ready_o); //compare the unsigned values
+      comparison_result_o ==rhs_.comparison_result_o && ready_o == rhs_.ready_o); //compare the output values
 end
 
 
