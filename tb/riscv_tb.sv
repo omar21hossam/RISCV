@@ -1,9 +1,11 @@
 module riscv_top_tb(
 );
 
-     import uvm_pkg::*;
-     import  riscv_base_test_pkg ::*;
-    `include "uvm_macros.svh"
+ import uvm_pkg::*;
+import riscv_classes_pkg::*;
+  
+  
+      
 //********** clk_generation ************//    
     bit   clk= 1'b0 ;
     always #(5) clk = ~clk;
@@ -12,7 +14,7 @@ module riscv_top_tb(
   	riscv_intf    riscv_intf_ (clk);
     interface_clk interface_clk_(clk);
 	cv32e40p_top DUT (
-        .clk_i(clk),   // explicitly connect clk
+    .clk_i(clk),   // explicitly connect clk
     .rst_ni           (riscv_intf_.rst_ni),
     .pulp_clock_en_i  (riscv_intf_.pulp_clock_en_i),
     .scan_cg_en_i     (riscv_intf_.scan_cg_en_i),
@@ -67,7 +69,7 @@ module riscv_top_tb(
   uvm_config_db#(virtual riscv_intf)::set(null ,"uvm_test_top", "main_intf" ,riscv_intf_); 
 
   uvm_config_db#(virtual interface_clk)::set(null ,"uvm_test_top", "clk_" ,interface_clk_ ); 
-    `uvm_info("top ","clk,main intf were put by top " , UVM_LOW) ;        
+      
 
 
     end
