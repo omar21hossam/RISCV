@@ -26,4 +26,5 @@
 ../rtl/cv32e40p_sleep_unit.sv
 ../rtl/cv32e40p_top.sv
 riscv_classes_pkg.sv
+mul/mul_interface.sv
 riscv_tb.sv

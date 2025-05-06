@@ -30,8 +30,8 @@ class mul_seq extends uvm_sequence #(mul_seq_item);
     seq_item.short_subword_i = 1'b0;
     seq_item.short_signed_i = 2'b01;
 
-    seq_item.operand_a_i = 32'hffC73F1;
-    seq_item.operand_b_i = 32'hce1C3D21;
+    seq_item.operand_a_i = 32'd2589750257;
+    seq_item.operand_b_i = 32'd3285378231;
     seq_item.operand_c_i = 32'd0;
     seq_item.imm_i = 5'd0;
 

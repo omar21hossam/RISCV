@@ -30,11 +30,6 @@ class mul_scoreboard extends uvm_scoreboard;
         end
         else begin
             // Perform the multiplication based on the operator_i
-            `uvm_info(get_full_name(), $sformatf("Scoreboard: Received item with operator_i=%0d", t.operator_i), UVM_MEDIUM);
-            `uvm_info(get_full_name(), $sformatf("Scoreboard: Received item with operand_a_i=%0d", t.operand_a_i), UVM_MEDIUM);
-            `uvm_info(get_full_name(), $sformatf("Scoreboard: Received item with operand_b_i=%0d", t.operand_b_i), UVM_MEDIUM);
-            `uvm_info(get_full_name(), $sformatf("Scoreboard: Received item with operand_c_i=%0d", t.operand_c_i), UVM_MEDIUM);
-            
             case (t.operator_i)
                 MUL_MAC32:  begin
                     expected_result = t.operand_a_i * t.operand_b_i + t.operand_c_i;
@@ -65,6 +60,7 @@ class mul_scoreboard extends uvm_scoreboard;
                     `uvm_info(get_full_name(), $sformatf("Scoreboard: DOT16 operation"), UVM_MEDIUM);
                 end
                 // must check is it signed or unsigned
+                //mul mulh mulhsu mulhu
                 MUL_H:  begin
                     case (t.short_signed_i)
                         2'b00: begin

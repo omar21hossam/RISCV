@@ -7,6 +7,7 @@ class riscv_base_test extends uvm_test;
 
   virtual riscv_intf    riscv_intf_;
   virtual interface_clk interface_clk_;
+  virtual mul_if        mul_intf;
   function new(string name = "riscv_base_test", uvm_component parent = null);
     super.new(name, parent);
   endfunction
@@ -29,6 +30,10 @@ class riscv_base_test extends uvm_test;
 
     if (!uvm_config_db#(virtual interface_clk)::get(this, "", "clk_", cfg.interface_clk_))
       `uvm_fatal(get_full_name(), "Error in get interface in test");
+
+    if(!uvm_config_db #(virtual mul_if)::get(this, "", "mul_intf", mul_intf))
+            `uvm_fatal("NO_CONFIG", {"Config not found for ", get_full_name(), ".mul_intf"});
+    uvm_config_db #(virtual mul_if)::set(this, "env", "mul_intf", mul_intf);
 
     uvm_config_db#(virtual interface_clk)::set(this, "*", "clk_", interface_clk_);
 
