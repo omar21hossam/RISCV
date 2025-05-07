@@ -6,6 +6,7 @@ module riscv_top_tb ();
   import uvm_pkg::*;
   import riscv_classes_pkg::*;
   import riscv_pkg::*;
+  `define LSU_PATH DUT.core_i.load_store_unit
 
   //==================================================================================
   // Interface Instantiation
@@ -16,6 +17,7 @@ module riscv_top_tb ();
   // ALU-DIV interface instasntiation
   // MUL interface instantiation
   // LSU interface instantiation
+  lsu_if lsu_intf (clk);
 
   //==================================================================================
   // DUT Instantiation
@@ -80,6 +82,36 @@ module riscv_top_tb ();
   // ALU-DIV interface
   // MUL interface
   // LSU interface
+  assign lsu_intf.data_req_o = `LSU_PATH.data_req_o;
+  assign lsu_intf.data_gnt_i = `LSU_PATH.data_gnt_i;
+  assign lsu_intf.data_rvalid_i = `LSU_PATH.data_rvalid_i;
+  assign lsu_intf.data_err_i = `LSU_PATH.data_err_i;
+  assign lsu_intf.data_err_pmp_i = `LSU_PATH.data_err_pmp_i;
+  assign lsu_intf.data_addr_o = `LSU_PATH.data_addr_o;
+  assign lsu_intf.data_we_o = `LSU_PATH.data_we_o;
+  assign lsu_intf.data_be_o = `LSU_PATH.data_be_o;
+  assign lsu_intf.data_wdata_o = `LSU_PATH.data_wdata_o;
+  assign lsu_intf.data_rdata_i = `LSU_PATH.data_rdata_i;
+  assign lsu_intf.data_we_ex_i = `LSU_PATH.data_we_ex_i;
+  assign lsu_intf.data_type_ex_i = `LSU_PATH.data_type_ex_i;
+  assign lsu_intf.data_wdata_ex_i = `LSU_PATH.data_wdata_ex_i;
+  assign lsu_intf.data_reg_offset_ex_i = `LSU_PATH.data_reg_offset_ex_i;
+  assign lsu_intf.data_load_event_ex_i = `LSU_PATH.data_load_event_ex_i;
+  assign lsu_intf.data_sign_ext_ex_i = `LSU_PATH.data_sign_ext_ex_i;
+  assign lsu_intf.data_rdata_ex_o = `LSU_PATH.data_rdata_ex_o;
+  assign lsu_intf.data_req_ex_i = `LSU_PATH.data_req_ex_i;
+  assign lsu_intf.operand_a_ex_i = `LSU_PATH.operand_a_ex_i;
+  assign lsu_intf.operand_b_ex_i = `LSU_PATH.operand_b_ex_i;
+  assign lsu_intf.addr_useincr_ex_i = `LSU_PATH.addr_useincr_ex_i;
+  assign lsu_intf.data_misaligned_ex_i = `LSU_PATH.data_misaligned_ex_i;
+  assign lsu_intf.data_misaligned_o = `LSU_PATH.data_misaligned_o;
+  assign lsu_intf.data_atop_ex_i = `LSU_PATH.data_atop_ex_i;
+  assign lsu_intf.data_atop_o = `LSU_PATH.data_atop_o;
+  assign lsu_intf.p_elw_start_o = `LSU_PATH.p_elw_start_o;
+  assign lsu_intf.p_elw_finish_o = `LSU_PATH.p_elw_finish_o;
+  assign lsu_intf.lsu_ready_ex_o = `LSU_PATH.lsu_ready_ex_o;
+  assign lsu_intf.lsu_ready_wb_o = `LSU_PATH.lsu_ready_wb_o;
+  assign lsu_intf.busy_o = `LSU_PATH.busy_o;
 
 
   //==================================================================================
@@ -92,6 +124,7 @@ module riscv_top_tb ();
     // ALU-DIV configuration setup
     // MUL configuration setup
     // LSU configuration setup
+    uvm_config_db#(virtual lsu_if)::set(null, "uvm_test_top", "lsu_intf", lsu_intf);
 
     // Run the testbench with the specified test
     run_test("riscv_base_test");

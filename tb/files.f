@@ -25,5 +25,7 @@
 ../rtl/cv32e40p_sim_clock_gate.sv
 ../rtl/cv32e40p_sleep_unit.sv
 ../rtl/cv32e40p_top.sv
+riscv_pkg.sv
+lsu/lsu_if.sv
 riscv_classes_pkg.sv
 riscv_tb.sv

@@ -12,4 +12,16 @@ package riscv_classes_pkg;
     `include "riscv_subscriber.svh"
     `include "riscv_env.svh"
     `include "riscv_test.svh"
+
+  //==================================================================================
+  // LSU classes inclusion
+  //==================================================================================
+  `include "lsu/lsu_sequence_item.svh";
+  `include "lsu/lsu_sequence.svh";
+  `include "lsu/lsu_sequencer.svh";
+  `include "lsu/lsu_subscriber.svh";
+  `include "lsu/lsu_scoreboard.svh";
+  `include "lsu/lsu_driver.svh";
+  `include "lsu/lsu_monitor.svh";
+  `include "lsu/lsu_agent.svh";
 endpackage : riscv_classes_pkg
