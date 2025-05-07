@@ -1,3 +1,4 @@
+`include "riscv_interfaces.svh"
 module riscv_top_tb ();
 
   //==================================================================================
@@ -6,6 +7,15 @@ module riscv_top_tb ();
   import uvm_pkg::*;
   import riscv_classes_pkg::*;
   import riscv_pkg::*;
+
+
+  //==================================================================================
+  // Clock Generation Block
+  //==================================================================================
+  bit clk = 1'b0;
+  initial begin
+    forever #(CLK_FREQ / 2) clk = ~clk;
+  end
 
   //==================================================================================
   // Interface Instantiation
@@ -74,30 +84,30 @@ module riscv_top_tb ();
   //==================================================================================
   // `defines
   //==================================================================================
-  `define alu_signals_path        cv32e40p_top.cv32e40p_core.cv32e40p_ex_stage.cv32e40p_alu 
-  `define alu_rst_n               `alu_signals_path.rst_n 
-  `define alu_enable_i            `alu_signals_path.enable_i
-  `define alu_operator_i          `alu_signals_path.operator_i
-  `define alu_operand_a_i         `alu_signals_path.operand_a_i
-  `define alu_operand_b_i         `alu_signals_path.operand_b_i
-  `define alu_ex_ready_i          `alu_signals_path.ex_ready_i
-  `define alu_result_o            `alu_signals_path.result_o
-  `define alu_ready_o             `alu_signals_path.ready_o
-  `define alu_comparison_result_o `alu_signals_path.comparison_result_o
-  `define alu_vector_mode_i       `alu_signals_path.vector_mode_i
+  `define alu_signals_path           DUT.core_i.ex_stage_i.alu_i 
+  // `define alu_rst_n               `alu_signals_path.rst_n 
+  // `define alu_enable_i            `alu_signals_path.enable_i
+  // `define alu_operator_i          `alu_signals_path.operator_i
+  // `define alu_operand_a_i         `alu_signals_path.operand_a_i
+  // `define alu_operand_b_i         `alu_signals_path.operand_b_i
+  // `define alu_ex_ready_i          `alu_signals_path.ex_ready_i
+  // `define alu_result_o            `alu_signals_path.result_o
+  // `define alu_ready_o             `alu_signals_path.ready_o
+  // `define alu_comparison_result_o `alu_signals_path.comparison_result_o
+  // `define alu_vector_mode_i       `alu_signals_path.vector_mode_i
   //==================================================================================
   // connect alu modules ports to the ALU interface
   //==================================================================================
-  assign alu_intf_.rst_n = `alu_rst_n;
-  assign alu_intf_.enable_i = `alu_enable_i;
-  assign alu_intf_.operator_i = `alu_operator_i;
-  assign alu_intf_.operand_a_i = `alu_operand_a_i;
-  assign alu_intf_.operand_b_i = `alu_operand_b_i;
-  assign alu_intf_.ex_ready_i = `alu_ex_ready_i;
-  assign alu_intf_.result_o = `alu_result_o;
-  assign alu_intf_.ready_o = `alu_ready_o;
-  assign alu_intf_.comparison_result_o = `alu_comparison_result_o;
-  assign alu_intf_.vector_mode_i = `alu_vector_mode_i;
+  assign alu_intf_.rst_n = `alu_signals_path.rst_n;
+  assign alu_intf_.enable_i = `alu_signals_path.enable_i;
+  assign alu_intf_.operator_i = `alu_signals_path.operator_i;
+  assign alu_intf_.operand_a_i = `alu_signals_path.operand_a_i;
+  assign alu_intf_.operand_b_i = `alu_signals_path.operand_b_i;
+  assign alu_intf_.ex_ready_i = `alu_signals_path.ex_ready_i;
+  assign alu_intf_.result_o = `alu_signals_path.result_o;
+  assign alu_intf_.ready_o = `alu_signals_path.ready_o;
+  assign alu_intf_.comparison_result_o = `alu_signals_path.comparison_result_o;
+  assign alu_intf_.vector_mode_i = `alu_signals_path.vector_mode_i;
 
   // =====================================================================
   // Connecting the interface to the DUT
@@ -119,7 +129,7 @@ module riscv_top_tb ();
     uvm_config_db#(virtual interface_clk)::set(null, "uvm_test_top", "clk_", interface_clk_);
     // Prefetch configuration setup
     // ALU-DIV configuration setup
-    uvm_config_db#(virtual ALU_interface)::set(null, "uvm_test_top", "alu_intf_top2test", alu_intf_);
+    uvm_config_db#(virtual ALU_interface)::set(null, "uvm_test_top", "alu_intf_top2test",alu_intf_);
     // MUL configuration setup
     // LSU configuration setup
 
@@ -134,12 +144,6 @@ module riscv_top_tb ();
   end
 
 
-  //==================================================================================
-  // Clock Generation Block
-  //==================================================================================
-  bit clk = 1'b0;
-  initial begin
-    forever #(CLK_FREQ / 2) clk = ~clk;
-  end
+
 
 endmodule

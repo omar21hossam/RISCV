@@ -25,5 +25,9 @@
 ../rtl/cv32e40p_sim_clock_gate.sv
 ../rtl/cv32e40p_sleep_unit.sv
 ../rtl/cv32e40p_top.sv
+//===================================================
+//interfaces
+ALU_DIV/tb_files/ALU_interface.svh
+//====================================================
 riscv_classes_pkg.sv
 riscv_tb.sv
