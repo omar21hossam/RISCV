@@ -16,7 +16,7 @@ class lsu_agent extends uvm_agent;
   // Configurations
   //==================================================================================
   virtual lsu_if config_vif;
-  bit IS_LSU_INTEGRATED;
+
 
   //==================================================================================
   // Function: Constructor
@@ -46,11 +46,6 @@ class lsu_agent extends uvm_agent;
       uvm_config_db#(virtual lsu_if)::set(this, "m_monitor", "vif", config_vif);
     end
 
-    if (!uvm_config_db#(bit)::get(this, "", "IS_LSU_INTEGRATED", IS_LSU_INTEGRATED)) begin
-      `uvm_fatal(get_name(), "Failed to get configuration for IS_LSU_INTEGRATED");
-    end else begin
-      uvm_config_db#(bit)::set(this, "m_driver", "IS_LSU_INTEGRATED", IS_LSU_INTEGRATED);
-    end
   endfunction
 
   //==================================================================================

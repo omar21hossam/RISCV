@@ -1,12 +1,12 @@
-class lsu_driver #(
+class lsu_active_driver #(
     type REQ = lsu_sequence_item,
     type RSP = REQ
-) extends uvm_driver #(lsu_sequence_item);
+) extends lsu_driver #(lsu_sequence_item);
 
   //==================================================================================
   // Registeration
   //==================================================================================
-  `uvm_component_utils(lsu_driver)
+  `uvm_component_utils(lsu_active_driver)
 
   //==================================================================================
   // Classes Handles
@@ -47,12 +47,51 @@ class lsu_driver #(
   // Task: Run Phase
   //==================================================================================
   task run_phase(uvm_phase phase);
+    reset();
     forever begin
       seq_item_port.get_next_item(m_seq_item);
+      drv_lsu_ex();
       obi_rsp_hndlr();
       #1step;
       seq_item_port.item_done();
     end
+  endtask
+
+  //==================================================================================
+  // Task: reset
+  //==================================================================================
+  task reset();
+    `uvm_info(get_name(), "Resetting LSU Driver", UVM_HIGH);
+    vif.rst_n                = 1'b0;
+    vif.data_we_ex_i         = riscv_pkg::LOAD;
+    vif.data_type_ex_i       = riscv_pkg::BYTE1;
+    vif.data_wdata_ex_i      = 'b0;
+    vif.data_sign_ext_ex_i   = riscv_pkg::SIGN_EXT;
+    vif.data_req_ex_i        = 'b0;
+    vif.operand_a_ex_i       = 'b0;
+    vif.operand_b_ex_i       = 'b0;
+    vif.data_misaligned_ex_i = 'b0;
+    vif.data_gnt_i           = 1'b0;
+    vif.data_rdata_i         = 'b0;
+    vif.data_rvalid_i        = 1'b0;
+    repeat (3) @(negedge vif.clk);
+    vif.rst_n = 1'b1;
+  endtask
+
+  //==================================================================================
+  // Task: drive LSU signals at EX stage
+  //==================================================================================
+  task drv_lsu_ex();
+    @(negedge vif.clk iff vif.lsu_ready_ex_o);
+    `uvm_info(get_name(), "Driving LSU EX stage signals", UVM_HIGH);
+    vif.data_req_ex_i        = 1'b1;
+    vif.data_we_ex_i         = m_seq_item.data_we_ex_i;
+    vif.data_type_ex_i       = m_seq_item.data_type_ex_i;
+    vif.data_wdata_ex_i      = m_seq_item.data_wdata_ex_i;
+    vif.data_sign_ext_ex_i   = m_seq_item.data_sign_ext_ex_i;
+    vif.operand_a_ex_i       = m_seq_item.operand_a_ex_i;
+    vif.operand_b_ex_i       = m_seq_item.operand_b_ex_i;
+    vif.data_misaligned_ex_i = 1'b0;
   endtask
 
   //==================================================================================
