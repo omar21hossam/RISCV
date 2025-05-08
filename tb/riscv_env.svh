@@ -9,7 +9,11 @@ class riscv_env extends uvm_env;
   //==================================================================================
   // Classes Handles
   //==================================================================================
+  // Configuration Classes
+  //-----------------------------------------------------------------------------------
   fetch_config_obj       env_config;
+  alu_config             m_alu_config;
+  mul_config             m_mul_config;
 
   // Agents
   //-----------------------------------------------------------------------------------
@@ -58,6 +62,11 @@ class riscv_env extends uvm_env;
     // Creation
     //-----------------------------------------------------------------------------------
 
+    // Configs
+    //------------------------------------------
+    m_alu_config = alu_config::type_id::create("m_alu_config", this);
+    m_mul_config = mul_config::type_id::create("m_mul_config", this);
+
     // Agents
     //------------------------------------------
     m_vseqr = riscv_vseqr::type_id::create("m_vseqr", this);
@@ -92,12 +101,28 @@ class riscv_env extends uvm_env;
       `uvm_fatal("build_phase", "End to End env - unable to get configuration object")
     uvm_config_db#(fetch_config_obj)::set(this, "m_fetch_agent", "CFG", env_config);
 
+    // ALU Config Class
+    //------------------------------------------
+    if (!uvm_config_db#(alu_config)::get(this, "", "alu_config", m_alu_config)) begin
+      `uvm_fatal(get_full_name(), "Failed to get configuration for alu_config");
+    end else begin
+      uvm_config_db#(alu_config)::set(this, "m_alu_agent", "alu_config", m_alu_config);
+    end
+
+    // MUL Config Class
+    //------------------------------------------
+    if (!uvm_config_db#(mul_config)::get(this, "", "mul_config", m_mul_config)) begin
+      `uvm_fatal(get_full_name(), "Failed to get configuration for mul_config");
+    end else begin
+      uvm_config_db#(mul_config)::set(this, "m_mul_agent", "mul_config", m_mul_config);
+    end
+
     // ALU Configurations
     //------------------------------------------
     if (!uvm_config_db#(virtual alu_intf_)::get(this, "", "alu_intf_top2test", alu_intf_)) begin
       `uvm_fatal(get_full_name(), "Failed to get configuration for alu_if");
     end else begin
-      uvm_config_db#(virtual alu_intf_)::set(this, "env", "alu_intf_test2env", alu_intf_);
+      uvm_config_db#(virtual alu_intf_)::set(this, "m_alu_agent", "alu_intf_test2env", alu_intf_);
     end
 
     // MUL Configurations

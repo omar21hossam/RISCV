@@ -4,6 +4,7 @@ class mul_agent extends uvm_agent;
   mul_sequencer sequencer;
   mul_driver driver;
   mul_monitor monitor;
+  mul_config m_config;
   // Declare the virtual interface
   virtual mul_if config_virtual;
   // Constructor
@@ -14,9 +15,13 @@ class mul_agent extends uvm_agent;
   // Build phase
   function void build_phase(uvm_phase phase);
     super.build_phase(phase);
-    sequencer = mul_sequencer::type_id::create("sequencer", this);
-    driver = mul_driver::type_id::create("driver", this);
     monitor = mul_monitor::type_id::create("monitor", this);
+
+    if (m_config.is_active) begin
+      sequencer = mul_sequencer::type_id::create("sequencer", this);
+      driver = mul_driver::type_id::create("driver", this);
+    end
+    
     // Get the virtual interface from the config DB
     if (!uvm_config_db#(virtual mul_if)::get(this, "", "mul_intf", config_virtual))
       `uvm_fatal("NO_CONFIG", {"Config not found for ", get_full_name(), ".mul_intf"});

@@ -11,6 +11,7 @@ package riscv_classes_pkg;
   `include "ALU_DIV/tb_files/alu_sequence_item.svh"
   `include "ALU_DIV/tb_files/alu_driver.svh"
   `include "ALU_DIV/tb_files/alu_monitor.svh"
+  `include "ALU_DIV/tb_files/alu_config.svh"
   `include "ALU_DIV/tb_files/alu_agent.svh"
   `include "ALU_DIV/tb_files/alu_scoreboard.svh"
   `include "ALU_DIV/tb_files/alu_coverage_collector.svh"
@@ -23,8 +24,9 @@ package riscv_classes_pkg;
   `include "mul/mul_sequencer.svh"
   `include "mul/mul_monitor.svh"
   `include "mul/mul_driver.svh"
-  `include "mul/mul_scoreboard.svh"
+  `include "mul/mul_config.svh"
   `include "mul/mul_agent.svh"
+  `include "mul/mul_scoreboard.svh"
 
   //==================================================================================
   // LSU classes inclusion
