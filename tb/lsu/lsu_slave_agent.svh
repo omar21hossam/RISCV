@@ -1,16 +1,16 @@
-class lsu_env extends uvm_env;
+class lsu_slave_agent extends uvm_agent;
 
   //==================================================================================
   // Registeration
   //==================================================================================
-  `uvm_component_utils(lsu_env)
+  `uvm_component_utils(lsu_slave_agent)
 
   //==================================================================================
   // Classes Handles
   //==================================================================================
-  lsu_slave_agent m_agent;
-  lsu_scoreboard m_scoreboard;
-  lsu_subscriber m_subscriber;
+  lsu_slave_sequencer m_sequencer;
+  lsu_slave_driver m_driver;
+  lsu_slave_monitor m_monitor;
 
   //==================================================================================
   // Configurations
@@ -20,7 +20,7 @@ class lsu_env extends uvm_env;
   //==================================================================================
   // Function: Constructor
   //==================================================================================
-  function new(string name = "lsu_env", uvm_component parent = null);
+  function new(string name, uvm_component parent);
     super.new(name, parent);
   endfunction
 
@@ -29,22 +29,22 @@ class lsu_env extends uvm_env;
   //==================================================================================
   function void build_phase(uvm_phase phase);
     super.build_phase(phase);
-    `uvm_info(get_name(), "Building LSU Environment", UVM_HIGH)
+    `uvm_info(get_name(), "Building LSU Agent", UVM_HIGH);
 
     // Creation
     // ---------
-    m_agent = lsu_slave_agent::type_id::create("m_agent", this);
-    m_scoreboard = lsu_scoreboard::type_id::create("m_scoreboard", this);
-    m_subscriber = lsu_subscriber#()::type_id::create("m_subscriber", this);
+    m_sequencer = lsu_slave_sequencer#()::type_id::create("m_sequencer", this);
+    m_driver = lsu_slave_driver#()::type_id::create("m_driver", this);
+    m_monitor = lsu_slave_monitor::type_id::create("m_monitor", this);
 
-
-    // Configuration
-    // -------------
+    // Driver and Monitor Configuration
     if (!uvm_config_db#(virtual lsu_if)::get(this, "", "vif", config_vif)) begin
       `uvm_fatal(get_name(), "Failed to get configuration for lsu_if");
     end else begin
-      uvm_config_db#(virtual lsu_if)::set(this, "m_agent", "vif", config_vif);
+      uvm_config_db#(virtual lsu_if)::set(this, "m_driver", "vif", config_vif);
+      uvm_config_db#(virtual lsu_if)::set(this, "m_monitor", "vif", config_vif);
     end
+
   endfunction
 
   //==================================================================================
@@ -52,8 +52,8 @@ class lsu_env extends uvm_env;
   //==================================================================================
   function void connect_phase(uvm_phase phase);
     super.connect_phase(phase);
-    `uvm_info(get_name(), "Connecting LSU Environment", UVM_HIGH)
-    m_agent.m_monitor.analysis_port.connect(m_scoreboard.analysis_fifo.analysis_export);
-    m_agent.m_monitor.analysis_port.connect(m_subscriber.analysis_export);
+    `uvm_info(get_name(), "Connecting LSU Agent", UVM_HIGH);
+    m_driver.seq_item_port.connect(m_sequencer.seq_item_export);
+    m_monitor.req_analysis_port.connect(m_sequencer.req_analysis_export);
   endfunction
 endclass

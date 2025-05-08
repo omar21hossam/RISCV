@@ -1,4 +1,4 @@
-class lsu_sequencer #(
+class lsu_master_sequencer #(
     type REQ = lsu_sequence_item,
     type RSP = REQ
 ) extends uvm_sequencer #(lsu_sequence_item);
@@ -6,12 +6,12 @@ class lsu_sequencer #(
   //==================================================================================
   // Registeration
   //==================================================================================
-  `uvm_component_utils(lsu_sequencer)
+  `uvm_component_utils(lsu_master_sequencer)
 
   //==================================================================================
   // Function: Constructor
   //==================================================================================
-  function new(string name = "lsu_sequencer", uvm_component parent = null);
+  function new(string name = "lsu_master_sequencer", uvm_component parent = null);
     super.new(name, parent);
   endfunction
 

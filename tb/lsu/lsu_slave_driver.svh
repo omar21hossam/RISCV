@@ -1,4 +1,4 @@
-class lsu_driver #(
+class lsu_slave_driver #(
     type REQ = lsu_sequence_item,
     type RSP = REQ
 ) extends uvm_driver #(lsu_sequence_item);
@@ -6,7 +6,7 @@ class lsu_driver #(
   //==================================================================================
   // Registeration
   //==================================================================================
-  `uvm_component_utils(lsu_driver)
+  `uvm_component_utils(lsu_slave_driver)
 
   //==================================================================================
   // Classes Handles
@@ -21,7 +21,7 @@ class lsu_driver #(
   //==================================================================================
   // Function: Constructor
   //==================================================================================
-  function new(string name = "lsu_driver", uvm_component parent = null);
+  function new(string name = "lsu_slave_driver", uvm_component parent = null);
     super.new(name, parent);
   endfunction
 

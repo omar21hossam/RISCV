@@ -1,8 +1,8 @@
-class lsu_monitor extends uvm_monitor;
+class lsu_master_monitor extends uvm_monitor;
   //==================================================================================
   // Registeration
   //==================================================================================
-  `uvm_component_utils(lsu_monitor)
+  `uvm_component_utils(lsu_master_monitor)
 
   //==================================================================================
   // Interface
@@ -22,7 +22,7 @@ class lsu_monitor extends uvm_monitor;
   //==================================================================================
   // Function: Constructor
   //==================================================================================
-  function new(string name = "lsu_monitor", uvm_component parent = null);
+  function new(string name = "lsu_master_monitor", uvm_component parent = null);
     super.new(name, parent);
   endfunction
 

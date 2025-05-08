@@ -45,7 +45,7 @@ class lsu_test extends uvm_test;
 
     // Factory Overrides
     // --------------------
-    set_type_override_by_type(lsu_driver#()::get_type(), lsu_active_driver#()::get_type());
+    set_type_override_by_type(lsu_slave_agent::get_type(), lsu_master_agent::get_type());
   endfunction
 
   //==================================================================================

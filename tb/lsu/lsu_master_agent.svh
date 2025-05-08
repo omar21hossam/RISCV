@@ -1,16 +1,16 @@
-class lsu_agent extends uvm_agent;
+class lsu_master_agent extends uvm_agent;
 
   //==================================================================================
   // Registeration
   //==================================================================================
-  `uvm_component_utils(lsu_agent)
+  `uvm_component_utils(lsu_master_agent)
 
   //==================================================================================
   // Classes Handles
   //==================================================================================
-  lsu_sequencer m_sequencer;
-  lsu_driver m_driver;
-  lsu_monitor m_monitor;
+  lsu_master_sequencer m_sequencer;
+  lsu_master_driver m_driver;
+  lsu_master_monitor m_monitor;
 
   //==================================================================================
   // Configurations
@@ -34,9 +34,9 @@ class lsu_agent extends uvm_agent;
 
     // Creation
     // ---------
-    m_sequencer = lsu_sequencer#()::type_id::create("m_sequencer", this);
-    m_driver = lsu_driver#()::type_id::create("m_driver", this);
-    m_monitor = lsu_monitor::type_id::create("m_monitor", this);
+    m_sequencer = lsu_master_sequencer#()::type_id::create("m_sequencer", this);
+    m_driver = lsu_master_driver#()::type_id::create("m_driver", this);
+    m_monitor = lsu_master_monitor::type_id::create("m_monitor", this);
 
     // Driver and Monitor Configuration
     if (!uvm_config_db#(virtual lsu_if)::get(this, "", "vif", config_vif)) begin
