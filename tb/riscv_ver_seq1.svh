@@ -1,9 +1,9 @@
-class vsequ1 extends vseq_base;  
-`uvm_object_utils(vsequ1)   
+class riscv_vseq extends vseq_base;  
+`uvm_object_utils(riscv_vseq)   
   //==================================================================================
   // Function: Constructor
   //==================================================================================
-  function new(string name = "vsequ1", uvm_component parent = null);
+  function new(string name = "riscv_vseq", uvm_component parent = null);
     super.new(name, parent);
   endfunction
 //==================================================================================
@@ -16,4 +16,4 @@ class vsequ1 extends vseq_base;
   virtual task body();
    //randomized and start the sequences
   endtask
-endclass:vsequ1
+endclass:riscv_vseq
