@@ -18,6 +18,7 @@ package riscv_pkg;
     S_TYPE,
     B_TYPE,
     J_TYPE,
+    U_TYPE,
     M_TYPE
   } instr_type_e;
 
@@ -56,7 +57,7 @@ package riscv_pkg;
   // I type instruction funct3 and funct7 fields
   // --------------------------------------------------------------------------------------
   typedef enum logic [2:0] {
-    ADDI      = 3'b000,
+    ADDI_JALR = 3'b000,
     SLLI      = 3'b001,
     SLTI      = 3'b010,
     SLTIU     = 3'b011,

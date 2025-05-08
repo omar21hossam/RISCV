@@ -2,7 +2,7 @@
 // Hierarchical  path definitions
 //==================================================================================
 `define MUL_PATH DUT.core_i.ex_stage_i.mult_i
-`define LSU_PATH DUT.core_i.load_store_unit
+`define LSU_PATH DUT.core_i.load_store_unit_i
 `define ALU_PATH DUT.core_i.ex_stage_i.alu_i 
 
 // Prefetch interface

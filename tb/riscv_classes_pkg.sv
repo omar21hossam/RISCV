@@ -19,10 +19,12 @@ package riscv_classes_pkg;
   // MUL classes inclusion
   //==================================================================================
   `include "mul/mul_sequence_item.svh"
-  `include "mul/mul_monitor.svh"
-  `include "mul/mul_agent.svh"
-  `include "mul/mul_scoreboard.svh"
   `include "mul/mul_coverage_collector.svh"
+  `include "mul/mul_sequencer.svh"
+  `include "mul/mul_monitor.svh"
+  `include "mul/mul_driver.svh"
+  `include "mul/mul_scoreboard.svh"
+  `include "mul/mul_agent.svh"
 
   //==================================================================================
   // LSU classes inclusion
@@ -39,24 +41,21 @@ package riscv_classes_pkg;
   //==================================================================================
   // Prefetch classes inclusion
   //==================================================================================
-  `include "prefetch/riscv_fetch_config_obj.svh"
-  `include "prefetch/riscv_seqitem.svh"
-  `include "prefetch/riscv_sequence_b.svh"
-  `include "prefetch/riscv_sequencer.svh"
-  `include "prefetch/riscv_main_driver.svh"
+  `include "riscv_sequence_item.svh"
+  `include "prefetch/fetch_config_obj.svh"
+  `include "prefetch/fetch_driver.svh"
   `include "prefetch/fetch_monitor.svh"
+  `include "prefetch/fetch_scoreboard.svh"
+  `include "prefetch/fetch_sequencer.svh"
   `include "prefetch/fetch_agent.svh"
-  `include "prefetch/riscv_scoreboard.svh"
-  `include "prefetch/riscv_subscriber.svh"
 
   //==================================================================================
   // RISCV TOP classes inclusion
   //==================================================================================
-  `include "riscv_sequence_item.svh"
-  `include "riscv_vsequ_base.svh"
-  `include "riscv_base_sequence.svh"
-  `include "riscv_vsequ_arith.svh"
   `include "riscv_vseqr.svh"
+  `include "riscv_base_sequence.svh"
+  `include "riscv_vsequ_base.svh"
+  `include "riscv_vsequ_arith.svh"
   `include "riscv_env.svh"
   `include "riscv_base_test.svh"
 

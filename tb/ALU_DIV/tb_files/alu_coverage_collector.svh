@@ -3,7 +3,7 @@ class alu_coverage_collector extends uvm_scoreboard;
   //==============================================================================
   //Description: Declare my transactions here
   //==============================================================================
-  alu_seq_item trans;
+  alu_seq_item trans_in;
   //==============================================================================
   //Description: Declare mailboxs
   //==============================================================================
@@ -29,7 +29,7 @@ class alu_coverage_collector extends uvm_scoreboard;
     super.new(name, parent);
     alu_mon2cov = new("alu_mon2cov", this);
     //=======================================================
-    trans = alu_seq_item::type_id::create("tran_in");
+    trans_in = alu_seq_item::type_id::create("trans_in");
     //=======================================================
     alu_output_group = new();
     alu_input_group = new();
@@ -44,8 +44,8 @@ endclass : alu_coverage_collector
 //extern methods
 //======================================
 function void alu_coverage_collector::write(alu_seq_item alu_trans);
-  tran_in = alu_trans;
-  if (in_out) begin : output_trans
+  trans_in = alu_trans;
+  if (trans_in.in_out) begin : output_trans
 
   end else begin : input_trans
 
@@ -53,8 +53,8 @@ function void alu_coverage_collector::write(alu_seq_item alu_trans);
 
 
 
-  //$cast(tran_in,slv_pkt.clone());  //TODO:check the clone method not work correctly
-  // tran_in =slv_pkt;
+  //$cast(trans_in,slv_pkt.clone());  //TODO:check the clone method not work correctly
+  // trans_in =slv_pkt;
   // slave_group.sample();
   // `uvm_info(get_type_name(),$sformatf("sampling is slave success"),UVM_NONE);
-endfunction : write_slv_monit
+endfunction

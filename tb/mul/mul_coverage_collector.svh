@@ -1,6 +1,4 @@
-class mul_coverage_collector #(
-    type T = mul_sequence_item
-) extends uvm_subscriber #(mul_sequence_item);
+class mul_coverage_collector extends uvm_subscriber #(mul_seq_item);
 
   //==================================================================================
   // Registeration
@@ -10,7 +8,7 @@ class mul_coverage_collector #(
   //==================================================================================
   // Classes Handles
   //==================================================================================
-  mul_sequence_item m_seq_item;
+  mul_seq_item m_seq_item;
 
   //==================================================================================
   // Covergroup: Input Transactions

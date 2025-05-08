@@ -76,7 +76,7 @@ class riscv_base_test extends uvm_test;
   virtual task run_phase(uvm_phase phase);
     super.run_phase(phase);
     phase.raise_objection(this);
-    m_vseq_base.start(m_env.vseqr);
+    m_vseq_base.start(m_env.m_vseqr);
     phase.phase_done.set_drain_time(this, 50 * riscv_pkg::CLK_FREQ);
     phase.drop_objection(this);
   endtask

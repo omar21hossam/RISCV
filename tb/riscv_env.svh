@@ -14,7 +14,7 @@ class riscv_env extends uvm_env;
   // Agents
   //-----------------------------------------------------------------------------------
   fetch_agent            m_fetch_agent;
-  mul_agent              m_mul_agnt;
+  mul_agent              m_mul_agent;
   lsu_agent              m_lsu_agent;
   alu_agent              m_alu_agent;
 
