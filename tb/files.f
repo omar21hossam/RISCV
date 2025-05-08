@@ -27,6 +27,10 @@
 ../rtl/cv32e40p_top.sv
 riscv_pkg.sv
 lsu/lsu_if.sv
+//===================================================
+//interfaces
+ALU_DIV/tb_files/ALU_interface.svh
+//====================================================
 riscv_classes_pkg.sv
 riscv_tb.sv
 mul/mul_interface.sv

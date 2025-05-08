@@ -9,7 +9,7 @@ class riscv_base_test extends uvm_test;
   // Class Handle
   //==================================================================================
   riscv_env             env;
-  riscv_sequenceb       seq;
+  //riscv_sequenceb       seq;
   fetch_config_obj      cfg;
   vsequ1              v_seq;
 
@@ -24,6 +24,8 @@ class riscv_base_test extends uvm_test;
   // Function: Constructor
   //==================================================================================
   virtual mul_if        mul_intf;
+  virtual ALU_interface alu_intf_;
+
   function new(string name = "riscv_base_test", uvm_component parent = null);
     super.new(name, parent);
   endfunction
@@ -41,6 +43,8 @@ class riscv_base_test extends uvm_test;
     v_seq = vsequ1::type_id::create("v_seq", this);
     seq = riscv_sequenceb::type_id::create("seq");
     if (seq == null) `uvm_info("build_phase", "sequence = null ", UVM_LOW);
+    //seq = riscv_sequenceb::type_id::create("seq");
+    //if (seq == null) `uvm_info("build_phase", "sequence = null ", UVM_LOW);
 
 
     //  cfg.agents_are_active = 1;
@@ -64,6 +68,21 @@ class riscv_base_test extends uvm_test;
     end else begin
       uvm_config_db#(virtual lsu_if)::set(this, "env", "lsu_intf", lsu_vif);
     end
+    if (!uvm_config_db#(virtual riscv_intf)::get(this, "", "main_intf", cfg.riscv_vintf_))
+      `uvm_fatal(get_full_name(), "Error in get interface in test");
+
+    if (!uvm_config_db#(virtual interface_clk)::get(this, "", "clk_", cfg.interface_clk_))
+      `uvm_fatal(get_full_name(), "Error in get interface in test");
+//====================================================================
+//Description: get alu interface then set it to env
+//====================================================================
+ if (!uvm_config_db#(virtual alu_intf_)::get(this, "", "alu_intf_top2test", alu_intf_))
+      `uvm_fatal(get_full_name(), "Error in get alu interface in test");
+//-----------------------------------------------------------
+uvm_config_db#(virtual alu_intf_)::set(this, "env", "alu_intf_test2env", alu_intf_);
+//====================================================================
+    uvm_config_db#(virtual interface_clk)::set(this, "*", "clk_", interface_clk_);
+    uvm_config_db#(fetch_config_obj)::set(this, "env", "CFG", cfg);
   endfunction
 
   //==================================================================================
@@ -75,6 +94,7 @@ class riscv_base_test extends uvm_test;
     seq.start(env.fetch_agnt.sqr);
     phase.phase_done.set_drain_time(this, 50 * riscv_pkg::CLK_FREQ);
     v_seq.start(env.vseqr);
+    //seq.start(env.fetch_agnt.sqr);
     phase.phase_done.set_drain_time(this, 5000ns);
     phase.drop_objection(this);
   endtask

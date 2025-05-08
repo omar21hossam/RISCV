@@ -77,7 +77,7 @@ package riscv_pkg;
 
   typedef enum logic [7:0] {
     SRAI  = 7'b0100000,
-    OTHER = 7'b0000000
+    OTHERS = 7'b0000000
   } i_funct7_e;
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -223,4 +223,12 @@ package riscv_pkg;
     SIGN_EXT = 2'b01
   } extend_e;
 
+
+//============================================================================== 
+//Description: enums and parameters
+//==============================================================================
+alu_opcode_e req_alu_op[28] ={ALU_ADD, ALU_SUB, ALU_ADDU, ALU_SUBU, ALU_XOR, ALU_OR, ALU_AND, ALU_SRA, ALU_SRL, 
+            ALU_SLL, ALU_LTS, ALU_LTU, ALU_LES, ALU_LEU,ALU_GTS , ALU_GTU, ALU_GES, ALU_GEU,
+            ALU_EQ , ALU_NE , ALU_SLTS , ALU_SLTU , ALU_SLETS, ALU_SLETU,ALU_DIVU,
+            ALU_DIV, ALU_REMU, ALU_REM};
 endpackage

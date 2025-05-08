@@ -1,3 +1,4 @@
+`include "riscv_interfaces.svh"
 module riscv_top_tb ();
 
   //==================================================================================
@@ -15,6 +16,15 @@ module riscv_top_tb ();
   `define LSU_PATH DUT.core_i.load_store_unit
  // import riscv_pkg::*;
 
+
+  //==================================================================================
+  // Clock Generation Block
+  //==================================================================================
+  bit clk = 1'b0;
+  initial begin
+    forever #(CLK_FREQ / 2) clk = ~clk;
+  end
+
   //==================================================================================
   // Interface Instantiation
   //==================================================================================
@@ -25,6 +35,8 @@ module riscv_top_tb ();
   // Prefetch interface instantiation
   // ALU-DIV interface instasntiation
   mul_if mul_intf ();
+  ALU_interface alu_intf_ (clk);
+  // MUL interface instantiation
   // LSU interface instantiation
   lsu_if lsu_intf (clk);
 
@@ -64,6 +76,50 @@ module riscv_top_tb ();
       .fetch_enable_i     (riscv_intf_.fetch_enable_i),
       .core_sleep_o       (riscv_intf_.core_sleep_o)
   );
+
+  //==================================================================================
+  // Instruction Memory Instantiation
+  //==================================================================================
+  riscv_instr_mem inst_mem_DUT (
+      .clk           (clk),
+      .instr_gnt_o   (riscv_intf_.instr_gnt_i),
+      .instr_rvalid_o(riscv_intf_.instr_rvalid_i),
+      .instr_rdata_o (riscv_intf_.instr_rdata_i),
+      .instr_req_i   (riscv_intf_.instr_req_o),
+      .instr_addr_i  (riscv_intf_.instr_addr_o),
+      .addr          (riscv_intf_.addr),
+      .inst          (riscv_intf_.inst),
+      .reset_n       (riscv_intf_.rst_ni)
+  );
+
+
+  //==================================================================================
+  // `defines
+  //==================================================================================
+  `define alu_signals_path           DUT.core_i.ex_stage_i.alu_i 
+  // `define alu_rst_n               `alu_signals_path.rst_n 
+  // `define alu_enable_i            `alu_signals_path.enable_i
+  // `define alu_operator_i          `alu_signals_path.operator_i
+  // `define alu_operand_a_i         `alu_signals_path.operand_a_i
+  // `define alu_operand_b_i         `alu_signals_path.operand_b_i
+  // `define alu_ex_ready_i          `alu_signals_path.ex_ready_i
+  // `define alu_result_o            `alu_signals_path.result_o
+  // `define alu_ready_o             `alu_signals_path.ready_o
+  // `define alu_comparison_result_o `alu_signals_path.comparison_result_o
+  // `define alu_vector_mode_i       `alu_signals_path.vector_mode_i
+  //==================================================================================
+  // connect alu modules ports to the ALU interface
+  //==================================================================================
+  assign alu_intf_.rst_n = `alu_signals_path.rst_n;
+  assign alu_intf_.enable_i = `alu_signals_path.enable_i;
+  assign alu_intf_.operator_i = `alu_signals_path.operator_i;
+  assign alu_intf_.operand_a_i = `alu_signals_path.operand_a_i;
+  assign alu_intf_.operand_b_i = `alu_signals_path.operand_b_i;
+  assign alu_intf_.ex_ready_i = `alu_signals_path.ex_ready_i;
+  assign alu_intf_.result_o = `alu_signals_path.result_o;
+  assign alu_intf_.ready_o = `alu_signals_path.ready_o;
+  assign alu_intf_.comparison_result_o = `alu_signals_path.comparison_result_o;
+  assign alu_intf_.vector_mode_i = `alu_signals_path.vector_mode_i;
 
   // =====================================================================
   // Connecting the interface to the DUT
@@ -135,6 +191,7 @@ assign mul_intf.mulh_active_o   = `mult_path.mulh_active_o;
 
     // Prefetch configuration setup
     // ALU-DIV configuration setup
+    uvm_config_db#(virtual ALU_interface)::set(null, "uvm_test_top", "alu_intf_top2test",alu_intf_);
     // MUL configuration setup
     // LSU configuration setup
     uvm_config_db#(virtual lsu_if)::set(null, "uvm_test_top", "lsu_intf", lsu_intf);
@@ -158,5 +215,6 @@ assign mul_intf.mulh_active_o   = `mult_path.mulh_active_o;
     forever #(10 / 2) clk = ~clk;
 
   end
+
 
 endmodule

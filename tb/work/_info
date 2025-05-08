@@ -1,0 +1,873 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/questasim64_10.7c/examples
+YALU_interface
+Z0 DXx6 sv_std 3 std 0 22 d=_JfHTnXCN[H5FjiaJJc0
+Z1 DXx4 work 12 cv32e40p_pkg 0 22 H]BC3cDFeN>b72887C8J52
+Z2 !s110 1746637828
+!i10b 1
+!s100 R`ddHGFDRMWiBb@ncT;oW1
+IME`U6IE43<>6MFe0:=;H03
+Z3 VDg1SIo80bB@j0V0VzS_@n1
+Z4 !s105 riscv_top_tb_sv_unit
+S1
+Z5 dC:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb
+w1746615130
+8ALU_DIV/tb_files/ALU_interface.svh
+FALU_DIV/tb_files/ALU_interface.svh
+L0 2
+Z6 OL;L;10.7c;67
+r1
+!s85 0
+31
+Z7 !s108 1746637828.000000
+!s107 ALU_DIV/tb_files/ALU_interface.svh|riscv_interfaces.svh|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/riscv_top_tb.sv|
+Z8 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/riscv_top_tb.sv|
+!i113 0
+Z9 o-work work -sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z10 tCvgOpt 0
+n@a@l@u_interface
+vcv32e40p_aligner
+R0
+Z11 !s110 1746634054
+!i10b 1
+!s100 4l^77>Ak696Ab1HJc2i9c0
+IReNE:K]of_5dKAl7UC``]2
+R3
+!s105 cv32e40p_aligner_sv_unit
+S1
+R5
+Z12 w1745770753
+8C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_aligner.sv
+FC:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_aligner.sv
+L0 23
+R6
+r1
+!s85 0
+31
+!s108 1746634053.000000
+!s107 C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_aligner.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_aligner.sv|
+!i113 0
+R9
+R10
+vcv32e40p_alu
+R0
+R1
+R11
+!i10b 1
+!s100 SHBa]dZWzZDVBM?Xe8WZ:3
+IX0hGmmz>YAY>N_5A_KhUh2
+R3
+!s105 cv32e40p_alu_sv_unit
+S1
+R5
+w1745880062
+8C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_alu.sv
+FC:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_alu.sv
+Z13 L0 28
+R6
+r1
+!s85 0
+31
+Z14 !s108 1746634054.000000
+!s107 C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_alu.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_alu.sv|
+!i113 0
+R9
+R10
+vcv32e40p_alu_div
+R0
+R11
+!i10b 1
+!s100 jaGm?beJO@98oKinK33HT2
+IT?CZC]RGQU1<[T10cL@GU1
+R3
+!s105 cv32e40p_alu_div_sv_unit
+S1
+R5
+R12
+8C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_alu_div.sv
+FC:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_alu_div.sv
+Z15 L0 26
+R6
+r1
+!s85 0
+31
+R14
+!s107 C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_alu_div.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_alu_div.sv|
+!i113 0
+R9
+R10
+Xcv32e40p_apu_core_pkg
+R0
+Z16 !s110 1746634057
+!i10b 1
+!s100 KjXeiaT0cSW?K>J9bhX2S2
+IbnURnV<IYb8^NahVR5=LU3
+VbnURnV<IYb8^NahVR5=LU3
+S1
+R5
+R12
+8C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/package/cv32e40p_apu_core_pkg.sv
+FC:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/package/cv32e40p_apu_core_pkg.sv
+L0 22
+R6
+r1
+!s85 0
+31
+Z17 !s108 1746634057.000000
+!s107 C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/package/cv32e40p_apu_core_pkg.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/package/cv32e40p_apu_core_pkg.sv|
+!i113 0
+R9
+R10
+vcv32e40p_apu_disp
+R0
+R11
+!i10b 1
+!s100 Q]1zFE=Ae_]^noR:dHnT_2
+IihkoP@=5S9df5`RUoh=`23
+R3
+!s105 cv32e40p_apu_disp_sv_unit
+S1
+R5
+R12
+8C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_apu_disp.sv
+FC:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_apu_disp.sv
+Z18 L0 25
+R6
+r1
+!s85 0
+31
+R14
+!s107 C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_apu_disp.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_apu_disp.sv|
+!i113 0
+R9
+R10
+vcv32e40p_clock_gate
+R0
+Z19 !s110 1746634056
+!i10b 1
+!s100 mPfAcjaAA6Tg5:a5O5VJ`1
+INcU;Z?c^Q4ANKRUiXDhB52
+R3
+!s105 cv32e40p_sim_clock_gate_sv_unit
+S1
+R5
+R12
+8C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_sim_clock_gate.sv
+FC:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_sim_clock_gate.sv
+Z20 L0 15
+R6
+r1
+!s85 0
+31
+Z21 !s108 1746634056.000000
+!s107 C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_sim_clock_gate.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_sim_clock_gate.sv|
+!i113 0
+R9
+R10
+vcv32e40p_compressed_decoder
+R0
+R1
+R11
+!i10b 1
+!s100 Rj3YM2L5H>z^eKGib2V`A2
+IBN:Dim0W`6@o]hNb6l2M00
+R3
+!s105 cv32e40p_compressed_decoder_sv_unit
+S1
+R5
+R12
+8C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_compressed_decoder.sv
+FC:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_compressed_decoder.sv
+Z22 L0 27
+R6
+r1
+!s85 0
+31
+R14
+!s107 C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_compressed_decoder.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_compressed_decoder.sv|
+!i113 0
+R9
+R10
+vcv32e40p_controller
+R0
+R1
+R11
+!i10b 1
+!s100 z]OQe9_0PeYdgngdHkB;80
+I:]GZnMVGKloDo^f_eml:30
+R3
+!s105 cv32e40p_controller_sv_unit
+S1
+R5
+R12
+8C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_controller.sv
+FC:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_controller.sv
+Z23 L0 31
+R6
+r1
+!s85 0
+31
+R14
+!s107 C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_controller.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_controller.sv|
+!i113 0
+R9
+R10
+vcv32e40p_core
+R0
+Z24 DXx4 work 21 cv32e40p_apu_core_pkg 0 22 bnURnV<IYb8^NahVR5=LU3
+R1
+R11
+!i10b 1
+!s100 ^8c[RUl9z_kXce^>d`^i]2
+IH`SXXjd68j6[:T?VoWFCk1
+R3
+!s105 cv32e40p_core_sv_unit
+S1
+R5
+R12
+8C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_core.sv
+FC:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_core.sv
+R23
+R6
+r1
+!s85 0
+31
+R14
+!s107 C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_core.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_core.sv|
+!i113 0
+R9
+R10
+vcv32e40p_cs_registers
+R0
+R1
+R11
+!i10b 1
+!s100 `]^E0QFQCY8bY`RGElYCg3
+IgAm_gc9F@::BBMS0o:fhD3
+R3
+!s105 cv32e40p_cs_registers_sv_unit
+S1
+R5
+R12
+8C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_cs_registers.sv
+FC:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_cs_registers.sv
+Z25 L0 30
+R6
+r1
+!s85 0
+31
+R14
+!s107 C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_cs_registers.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_cs_registers.sv|
+!i113 0
+R9
+R10
+vcv32e40p_decoder
+R0
+R1
+R24
+Z26 DXx4 work 16 cv32e40p_fpu_pkg 0 22 =:SlGVJXPeJKYJg]OV=T42
+R11
+!i10b 1
+!s100 I?L9IcnX_0n9D1iBOi4[K2
+I3HOBoAHmBAU[h7GGa`J:n3
+R3
+!s105 cv32e40p_decoder_sv_unit
+S1
+R5
+R12
+8C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_decoder.sv
+FC:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_decoder.sv
+R13
+R6
+r1
+!s85 0
+31
+R14
+!s107 C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_decoder.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_decoder.sv|
+!i113 0
+R9
+R10
+vcv32e40p_ex_stage
+R0
+R1
+R24
+Z27 !s110 1746634055
+!i10b 1
+!s100 HPG2YKhUTdV=3AkFUG^9=1
+I77?LCAg3IV[>2U2W[n71j1
+R3
+!s105 cv32e40p_ex_stage_sv_unit
+S1
+R5
+w1746553252
+8C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_ex_stage.sv
+FC:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_ex_stage.sv
+Z28 L0 32
+R6
+r1
+!s85 0
+31
+R14
+!s107 C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_ex_stage.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_ex_stage.sv|
+!i113 0
+R9
+R10
+vcv32e40p_ff_one
+R0
+R27
+!i10b 1
+!s100 4=i1?TWHESZ:Yz=Ukjn1S2
+IZ2^]SVM>:XehBfJ9SU]AN1
+R3
+!s105 cv32e40p_ff_one_sv_unit
+S1
+R5
+R12
+8C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_ff_one.sv
+FC:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_ff_one.sv
+R18
+R6
+r1
+!s85 0
+31
+Z29 !s108 1746634055.000000
+!s107 C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_ff_one.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_ff_one.sv|
+!i113 0
+R9
+R10
+vcv32e40p_fifo
+R0
+R27
+!i10b 1
+!s100 oG[o>So=SlkQ`[f`NL^lh0
+IgL3iW8@megLcnoG2oZ0em0
+R3
+!s105 cv32e40p_fifo_sv_unit
+S1
+R5
+R12
+8C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_fifo.sv
+FC:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_fifo.sv
+R20
+R6
+r1
+!s85 0
+31
+R29
+!s107 C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_fifo.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_fifo.sv|
+!i113 0
+R9
+R10
+Xcv32e40p_fpu_pkg
+R0
+R16
+!i10b 1
+!s100 _b;8nWM^=HIgAkhlJmN?23
+I=:SlGVJXPeJKYJg]OV=T42
+V=:SlGVJXPeJKYJg]OV=T42
+S1
+R5
+R12
+8C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/package/cv32e40p_fpu_pkg.sv
+FC:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/package/cv32e40p_fpu_pkg.sv
+Z30 L0 38
+R6
+r1
+!s85 0
+31
+R17
+!s107 C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/package/cv32e40p_fpu_pkg.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/package/cv32e40p_fpu_pkg.sv|
+!i113 0
+R9
+R10
+vcv32e40p_hwloop_regs
+R0
+R27
+!i10b 1
+!s100 VMFc2]=]kGNnXZ@K52>Jj2
+I;T]BGk@V5bg9zQH_QP_>X0
+R3
+!s105 cv32e40p_hwloop_regs_sv_unit
+S1
+R5
+R12
+8C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_hwloop_regs.sv
+FC:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_hwloop_regs.sv
+R18
+R6
+r1
+!s85 0
+31
+R29
+!s107 C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_hwloop_regs.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_hwloop_regs.sv|
+!i113 0
+R9
+R10
+vcv32e40p_id_stage
+R0
+R1
+R24
+R26
+R27
+!i10b 1
+!s100 ]h`G2S8dS_^_WAQAl^G5A0
+I^3jfE6MJHKmd<Fo=PFhF<1
+R3
+!s105 cv32e40p_id_stage_sv_unit
+S1
+R5
+R12
+8C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_id_stage.sv
+FC:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_id_stage.sv
+R25
+R6
+r1
+!s85 0
+31
+R29
+!s107 C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_id_stage.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_id_stage.sv|
+!i113 0
+R9
+R10
+vcv32e40p_if_stage
+R0
+R1
+R27
+!i10b 1
+!s100 DcCf5ifbOP=YQ?Pil2gCc0
+I1MW3HiP]2B=GMFh_EBTJl0
+R3
+!s105 cv32e40p_if_stage_sv_unit
+S1
+R5
+R12
+8C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_if_stage.sv
+FC:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_if_stage.sv
+R13
+R6
+r1
+!s85 0
+31
+R29
+!s107 C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_if_stage.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_if_stage.sv|
+!i113 0
+R9
+R10
+vcv32e40p_int_controller
+R0
+R1
+R27
+!i10b 1
+!s100 ]VVg`1??DNWn8S_J26l5R3
+I2@A16>fSoQaB1J8N0bYJ^3
+R3
+!s105 cv32e40p_int_controller_sv_unit
+S1
+R5
+R12
+8C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_int_controller.sv
+FC:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_int_controller.sv
+L0 24
+R6
+r1
+!s85 0
+31
+R29
+!s107 C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_int_controller.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_int_controller.sv|
+!i113 0
+R9
+R10
+vcv32e40p_load_store_unit
+R0
+R27
+!i10b 1
+!s100 LocA0`EP1CHl?eGg<3OF91
+I63VZkRkEh1KY43ii8HQSR1
+R3
+!s105 cv32e40p_load_store_unit_sv_unit
+S1
+R5
+R12
+8C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_load_store_unit.sv
+FC:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_load_store_unit.sv
+R15
+R6
+r1
+!s85 0
+31
+R29
+!s107 C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_load_store_unit.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_load_store_unit.sv|
+!i113 0
+R9
+R10
+vcv32e40p_mult
+R0
+R1
+R27
+!i10b 1
+!s100 7fYh[F_k`TY;GE8LH48AW1
+I[z21UJV?jC<=SRi3Ah5oo3
+R3
+!s105 cv32e40p_mult_sv_unit
+S1
+R5
+R12
+8C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_mult.sv
+FC:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_mult.sv
+R15
+R6
+r1
+!s85 0
+31
+R29
+!s107 C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_mult.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_mult.sv|
+!i113 0
+R9
+R10
+vcv32e40p_obi_interface
+R0
+R27
+!i10b 1
+!s100 g2=WPLEAoVD8g5=SnU0F;1
+Ibg81bY<o2g3F_?DhgSmQg0
+R3
+!s105 cv32e40p_obi_interface_sv_unit
+S1
+R5
+R12
+8C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_obi_interface.sv
+FC:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_obi_interface.sv
+R30
+R6
+r1
+!s85 0
+31
+R29
+!s107 C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_obi_interface.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_obi_interface.sv|
+!i113 0
+R9
+R10
+Xcv32e40p_pkg
+R0
+R16
+!i10b 1
+!s100 ]d`C[JzcTUF:NJ@kX`=Ii2
+IH]BC3cDFeN>b72887C8J52
+VH]BC3cDFeN>b72887C8J52
+S1
+R5
+w1745949479
+8C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/package/cv32e40p_pkg.sv
+FC:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/package/cv32e40p_pkg.sv
+R15
+R6
+r1
+!s85 0
+31
+R17
+!s107 C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/package/cv32e40p_pkg.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/package/cv32e40p_pkg.sv|
+!i113 0
+R9
+R10
+vcv32e40p_popcnt
+R0
+R19
+!i10b 1
+!s100 zoNPGV`ZGeWcbdO0>WN8]2
+I3AFSTc@58?jadd2Cz7k[R3
+R3
+!s105 cv32e40p_popcnt_sv_unit
+S1
+R5
+R12
+8C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_popcnt.sv
+FC:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_popcnt.sv
+R18
+R6
+r1
+!s85 0
+31
+R21
+!s107 C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_popcnt.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_popcnt.sv|
+!i113 0
+R9
+R10
+vcv32e40p_prefetch_buffer
+R0
+R19
+!i10b 1
+!s100 0jDJ3o98fZT6?h_EcRX:F3
+Id<H[[YalYlYzz0LiRVF`o0
+R3
+!s105 cv32e40p_prefetch_buffer_sv_unit
+S1
+R5
+R12
+8C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_prefetch_buffer.sv
+FC:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_prefetch_buffer.sv
+R22
+R6
+r1
+!s85 0
+31
+R21
+!s107 C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_prefetch_buffer.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_prefetch_buffer.sv|
+!i113 0
+R9
+R10
+vcv32e40p_prefetch_controller
+R0
+R1
+R19
+!i10b 1
+!s100 cGD71:6fXMzJQ1^6>]VYZ0
+IWA`QAFlW^:@gf]lI5hKzU3
+R3
+!s105 cv32e40p_prefetch_controller_sv_unit
+S1
+R5
+R12
+8C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_prefetch_controller.sv
+FC:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_prefetch_controller.sv
+L0 40
+R6
+r1
+!s85 0
+31
+R21
+!s107 C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_prefetch_controller.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_prefetch_controller.sv|
+!i113 0
+R9
+R10
+vcv32e40p_register_file
+R0
+R19
+!i10b 1
+!s100 BVki^DoWSY0>]hneSeSc13
+Im[XdI]Fb[h=W0XcC<e=z73
+R3
+!s105 cv32e40p_register_file_latch_sv_unit
+S1
+R5
+R12
+8C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_register_file_latch.sv
+FC:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_register_file_latch.sv
+R28
+R6
+r1
+!s85 0
+31
+R21
+!s107 C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_register_file_latch.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_register_file_latch.sv|
+!i113 0
+R9
+R10
+vcv32e40p_sleep_unit
+R0
+R1
+R19
+!i10b 1
+!s100 HOX6jXNda7MS_0D51WAF22
+IUoYD^Be2fMIDIIRhV2AD51
+R3
+!s105 cv32e40p_sleep_unit_sv_unit
+S1
+R5
+R12
+8C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_sleep_unit.sv
+FC:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_sleep_unit.sv
+L0 56
+R6
+r1
+!s85 0
+31
+R21
+!s107 C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_sleep_unit.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_sleep_unit.sv|
+!i113 0
+R9
+R10
+vcv32e40p_top
+R0
+R24
+R19
+!i10b 1
+!s100 VBXD8aiN9fW3<03`XGjn43
+Ih11AFlZX2g0E;6;0f@^Sm2
+R3
+!s105 cv32e40p_top_sv_unit
+S1
+R5
+R12
+8C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_top.sv
+FC:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_top.sv
+L0 14
+R6
+r1
+!s85 0
+31
+R21
+!s107 C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_top.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/rtl/cv32e40p_top.sv|
+!i113 0
+R9
+R10
+Xriscv_classes_pkg
+!s115 alu_intf_
+!s115 ALU_interface
+!s115 riscv_intf
+!s115 interface_clk
+R0
+Z31 DXx6 mtiUvm 7 uvm_pkg 0 22 3zPkj@YUcM=M^m3zCLh<H1
+Z32 DXx4 work 9 riscv_pkg 0 22 XlNM0=7b@`dGUFWhW9A^I1
+Z33 !s110 1746637744
+!i10b 1
+!s100 eDBfC>S0E1kz``c><i3?R0
+Ia9c8QTg<J_;gA`@DNVSe>2
+Va9c8QTg<J_;gA`@DNVSe>2
+S1
+R5
+w1746635926
+8C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/riscv_classes_pkg.sv
+FC:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/riscv_classes_pkg.sv
+FC:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/uvm_macros.svh
+FC:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_version_defines.svh
+FC:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_message_defines.svh
+FC:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_phase_defines.svh
+FC:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_object_defines.svh
+FC:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_printer_defines.svh
+FC:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_tlm_defines.svh
+FC:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/tlm1/uvm_tlm_imps.svh
+FC:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_sequence_defines.svh
+FC:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_callback_defines.svh
+FC:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_reg_defines.svh
+FC:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_deprecated_defines.svh
+Fprefetch/riscv_fetch_config_obj.svh
+Fprefetch/riscv_seqitem.svh
+FALU_DIV/tb_files/ALU_sequence_item.svh
+FALU_DIV/tb_files/ALU_driver.svh
+FALU_DIV/tb_files/ALU_monitor.svh
+FALU_DIV/tb_files/ALU_agent.svh
+FALU_DIV/tb_files/ALU_scoreboard.svh
+Friscv_env.svh
+Friscv_test.svh
+L0 1
+R6
+r1
+!s85 0
+31
+!s108 1746637743.000000
+!s107 riscv_test.svh|riscv_env.svh|ALU_DIV/tb_files/ALU_scoreboard.svh|ALU_DIV/tb_files/ALU_agent.svh|ALU_DIV/tb_files/ALU_monitor.svh|ALU_DIV/tb_files/ALU_driver.svh|ALU_DIV/tb_files/ALU_sequence_item.svh|prefetch/riscv_seqitem.svh|prefetch/riscv_fetch_config_obj.svh|C:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_deprecated_defines.svh|C:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_reg_defines.svh|C:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_callback_defines.svh|C:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_sequence_defines.svh|C:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/tlm1/uvm_tlm_imps.svh|C:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_tlm_defines.svh|C:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_printer_defines.svh|C:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_object_defines.svh|C:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_phase_defines.svh|C:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_message_defines.svh|C:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_version_defines.svh|C:/questasim64_10.7c/uvm-1.1d/../verilog_src/uvm-1.1d/src/uvm_macros.svh|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/riscv_classes_pkg.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/riscv_classes_pkg.sv|
+!i113 0
+R9
+R10
+Yriscv_intf
+R0
+R16
+!i10b 1
+!s100 5W^7bF<PGVP6`>o5<U@Ai2
+ImeB_CDe`l1`PS=_W[Bdhj2
+R3
+!s105 riscv_intf_main_sv_unit
+S1
+R5
+w1746356458
+8C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/riscv_intf_main.sv
+FC:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/riscv_intf_main.sv
+L0 1
+R6
+r1
+!s85 0
+31
+R17
+!s107 C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/riscv_intf_main.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/riscv_intf_main.sv|
+!i113 0
+R9
+R10
+Xriscv_pkg
+R0
+R33
+!i10b 1
+!s100 A@eE]]@f86T1[>[Jg?2U?1
+IXlNM0=7b@`dGUFWhW9A^I1
+VXlNM0=7b@`dGUFWhW9A^I1
+S1
+R5
+w1746634441
+8C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/riscv_pkg.sv
+FC:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/riscv_pkg.sv
+L0 1
+R6
+r1
+!s85 0
+31
+!s108 1746637744.000000
+!s107 C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/riscv_pkg.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/riscv_pkg.sv|
+!i113 0
+R9
+R10
+vriscv_top_tb
+R0
+R31
+R32
+DXx4 work 17 riscv_classes_pkg 0 22 a9c8QTg<J_;gA`@DNVSe>2
+R2
+!i10b 1
+!s100 JJZ1`e]R5ORV72<T@J5l63
+ID`g_4kUl_H79:g33KDP2l3
+R3
+R4
+S1
+R5
+w1746637825
+8C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/riscv_top_tb.sv
+FC:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/riscv_top_tb.sv
+L0 2
+R6
+r1
+!s85 0
+31
+R7
+Z34 !s107 ALU_DIV/tb_files/ALU_interface.svh|riscv_interfaces.svh|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/riscv_top_tb.sv|
+R8
+!i113 0
+R9
+R10
