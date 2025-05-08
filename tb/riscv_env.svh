@@ -21,7 +21,7 @@ class riscv_env extends uvm_env;
   lsu_agent        m_lsu_agent;
   lsu_scoreboard   m_lsu_scoreboard;
   lsu_subscriber   m_lsu_subscriber;
-  vsequencer       vseqr;
+  riscv_vseqr_base       vseqr;
 
   //==================================================================================
   // Interface
@@ -80,7 +80,7 @@ uvm_config_db#(virtual alu_intf_)::set(this, "env", "alu_intf_test2env", alu_int
     fetch_agnt = fetch_agent::type_id::create("fetch_agnt", this);
     scoreboard = riscv_scoreboard::type_id::create("scoreboard", this);
     subscriber = riscv_subscriber::type_id::create("subscriber", this);
-    vseqr      = vsequencer::type_id::create("vseqr",this);
+    vseqr      = riscv_vseqr_base::type_id::create("vseqr",this);
     // fetch_agnt = fetch_agent::type_id::create("fetch_agnt", this);
     // scoreboard = riscv_scoreboard::type_id::create("scoreboard", this);
     // subscriber = riscv_subscriber::type_id::create("subscriber", this);

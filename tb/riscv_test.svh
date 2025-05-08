@@ -10,7 +10,7 @@ class riscv_base_test extends uvm_test;
   //==================================================================================
   riscv_env             m_env;
   fetch_config_obj      m_cfg;
-  riscv_vseq            m_vseq;
+  riscv_vsequ_arith     m_vseq;
 
   //==================================================================================
   // Interfaces
@@ -37,7 +37,7 @@ class riscv_base_test extends uvm_test;
     // ---------------------------------------------------------------------
     m_env  = riscv_env::type_id::create("m_env", this);
     m_cfg  = fetch_config_obj::type_id::create("m_cfg", this);
-    m_vseq = riscv_vseq::type_id::create("m_vseq", this);
+    m_vseq = riscv_vsequ_arith::type_id::create("m_vseq", this);
 
     // Configuration
     // ---------------------------------------------------------------------
