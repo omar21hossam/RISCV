@@ -44,6 +44,19 @@ class lsu_sequence_item extends uvm_sequence_item;
   logic                    [31:0] data_wdata_o;
   rand int unsigned               latency;
 
+
+  // Discarded Signals
+  // ---------------------------------------------------
+  logic                      data_err_i = 1'b0;
+  logic                      data_err_pmp_i = 1'b0;
+  logic                      data_load_event_ex_i = 1'b0;
+  logic                      addr_useincr_ex_i = 1'b1;
+  logic               [ 5:0] data_atop_ex_i = 6'b0;
+  logic               [ 1:0] data_reg_offset_ex_i = 2'b0;
+  logic               [ 5:0] data_atop_o = 6'b0;
+  logic                      p_elw_start_o = 1'b0;
+  logic                      p_elw_finish_o = 1'b0;
+
   //==================================================================================
   // Constraints
   //==================================================================================

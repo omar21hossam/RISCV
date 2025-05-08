@@ -38,12 +38,12 @@ interface lsu_if (
   logic                      busy_o;
 
   // ======== Discarded Signals ======== //
-  logic                      data_err_i = 1'b0;
-  logic                      data_err_pmp_i = 1'b0;
-  logic                      data_load_event_ex_i = 1'b0;
-  logic                      addr_useincr_ex_i = 1'b1;
-  logic               [ 5:0] data_atop_ex_i = 6'b0;
-  logic               [ 1:0] data_reg_offset_ex_i = 2'b0;
+  logic                      data_err_i;
+  logic                      data_err_pmp_i;
+  logic                      data_load_event_ex_i;
+  logic                      addr_useincr_ex_i;
+  logic               [ 5:0] data_atop_ex_i;
+  logic               [ 1:0] data_reg_offset_ex_i;
   logic               [ 5:0] data_atop_o;
   logic                      p_elw_start_o;
   logic                      p_elw_finish_o;
