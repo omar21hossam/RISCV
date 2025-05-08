@@ -39,7 +39,7 @@ class ral_model extends uvm_reg_block;
 
     // Create PC register and add it to the map
     PC = PC_reg::type_id::create("PC", this);
-    PC.configure(this, null, PC_hdl_path);
+    PC.configure(this, null, "riscv_top_tb.DUT.core_i.if_stage_i.aligner_i.pc_q");
     PC.build();
     map.add_reg(PC, 'h100, "RW"); // Add PC register to the map
   endfunction
