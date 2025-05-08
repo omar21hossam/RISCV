@@ -29,11 +29,6 @@ class riscv_base_test extends uvm_test;
     if (!uvm_config_db#(virtual riscv_intf)::get(this, "", "main_intf", cfg.riscv_vintf_))
       `uvm_fatal(get_full_name(), "Error in get interface in test");
 
-    if (!uvm_config_db#(virtual interface_clk)::get(this, "", "clk_", cfg.interface_clk_))
-      `uvm_fatal(get_full_name(), "Error in get interface in test");
-
-    uvm_config_db#(virtual interface_clk)::set(this, "*", "clk_", interface_clk_);
-
 
     uvm_config_db#(fetch_config_obj)::set(this, "env", "CFG", cfg);
 

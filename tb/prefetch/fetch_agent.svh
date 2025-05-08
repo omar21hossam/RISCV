@@ -1,15 +1,3 @@
-// package  fetch_agent_pkg; 
-
-
-//   import  fetch_config_obj_pkg::*;  
-//   import  riscv_driver_pkg::*;   
-//   import  riscv_sequencer_pkg::*;    
-//   import  riscv_seq_item_pkg::*;   
-//   import  fetch_monitor_pkg::*;  // monitor the two entities
-
-//   import uvm_pkg::*;    // important to be imort in all packages
-//   `include "uvm_macros.svh"
-
 class fetch_agent extends uvm_agent;
 
   `uvm_component_utils(fetch_agent)   // registeration in the factory 
@@ -54,6 +42,3 @@ class fetch_agent extends uvm_agent;
   endfunction 
 
 endclass: fetch_agent
-
-
-//endpackage
