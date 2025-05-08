@@ -27,10 +27,9 @@ endfunction:build_phase
 //==============================================================================
 task run_phase(uvm_phase phase);
   super.run_phase(phase);
-  wait(vif.rst_n);
   forever begin
   seq_item = alu_seq_item::type_id::create("seq_item",this);
-    @(posedge vif.core_clk iff vif.enable_i);
+  @(posedge vif.core_clk iff vif.enable_i && vif.rst_n);  
   fork
     begin:inp_sampling
     if($isunknown(vif.operator_i ||vif.operand_b_i || vif.operand_a_i)) begin
@@ -44,6 +43,7 @@ task run_phase(uvm_phase phase);
       seq_item.operand_a_i = vif.operand_a_i;
       seq_item.operand_b_i = vif.operand_b_i;
       seq_item.ex_ready_i  = vif.ex_ready_i;
+      seq_item.testing_time = $realtime;
       `uvm_info(get_type_name(), $sformatf("ALU Monitor: Sampling inputs: %s", seq_item.convert2string()), UVM_MEDIUM);
       analysis_port.write(seq_item);
       `uvm_info(get_type_name(), $sformatf("send input transaction to scoreboard"), UVM_MEDIUM);
@@ -63,6 +63,7 @@ task run_phase(uvm_phase phase);
        seq_item.result_o = vif.result_o;
        seq_item.ready_o = vif.ready_o;
        seq_item.comparison_result_o = vif.comparison_result_o;
+       seq_item.testing_time = $realtime;
 	 // end
        `uvm_info(get_type_name(), $sformatf("ALU Monitor: Sampling outputs: %s", seq_item.convert2string()), UVM_MEDIUM);
         analysis_port.write(seq_item);

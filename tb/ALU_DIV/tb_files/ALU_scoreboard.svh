@@ -41,12 +41,13 @@ class alu_scoreboard extends uvm_scoreboard;
             trans.ready_o = 1;
        end 
        else begin
-			trans_model.operand_a_i = trans.operand_a_i;
-			trans_model.operand_b_i = trans.operand_b_i;
-			trans_model.operator_i = trans.operator_i;
-			trans_model.enable_i = trans.enable_i;
-			trans_model.ex_ready_i = trans.ex_ready_i;
-			trans_model.rst_n = trans.rst_n;
+	 trans_model.operand_a_i = trans.operand_a_i;
+ 	 trans_model.operand_b_i = trans.operand_b_i;
+ 	 trans_model.operator_i = trans.operator_i;
+	 trans_model.enable_i = trans.enable_i;
+	 trans_model.ex_ready_i = trans.ex_ready_i;
+	 trans_model.rst_n = trans.rst_n;
+	 trans_model.testing_time = trans.testing_time;
             case(trans.operator_i)
             ALU_ADD:begin
                 trans_model.result_o = trans.operand_a_i + trans.operand_b_i;
