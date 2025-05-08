@@ -29,3 +29,5 @@ riscv_pkg.sv
 lsu/lsu_if.sv
 riscv_classes_pkg.sv
 riscv_tb.sv
+mul/mul_interface.sv
+riscv_tb.sv

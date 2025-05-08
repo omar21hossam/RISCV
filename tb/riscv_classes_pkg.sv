@@ -1,6 +1,10 @@
 package riscv_classes_pkg;
     import uvm_pkg::*;
     `include "uvm_macros.svh"
+
+  //==================================================================================
+  // MUL classes inclusion
+  //==================================================================================
     `include "riscv_fetch_config_obj.svh"
     `include "riscv_seqitem.svh"
     `include "riscv_sequence_b.svh"
@@ -8,6 +12,10 @@ package riscv_classes_pkg;
     `include "riscv_main_driver.svh"
     `include "fetch_monitor.svh"
     `include "fetch_agent.svh"
+    `include "mul_sequence_item.svh"
+    `include "mul_monitor.svh"
+    `include "mul_agent.svh"
+    `include "mul_scoreboard.svh"
     `include "riscv_scoreboard.svh"
     `include "riscv_subscriber.svh"
     `include "riscv_env.svh"
@@ -24,4 +32,19 @@ package riscv_classes_pkg;
   `include "lsu/lsu_driver.svh";
   `include "lsu/lsu_monitor.svh";
   `include "lsu/lsu_agent.svh";
-endpackage : riscv_classes_pkg
+
+  //==================================================================================
+  // Prefetch classes inclusion
+  //==================================================================================
+  `include "prefetch/riscv_fetch_config_obj.svh"
+  `include "prefetch/riscv_seqitem.svh"
+  `include "prefetch/riscv_sequence_b.svh"
+  `include "prefetch/riscv_sequencer.svh"
+  `include "prefetch/riscv_main_driver.svh"
+  `include "prefetch/fetch_monitor.svh"
+  `include "prefetch/fetch_agent.svh"
+  `include "prefetch/riscv_scoreboard.svh"
+  `include "prefetch/riscv_subscriber.svh"
+  `include "riscv_env.svh"
+  `include "riscv_test.svh"
+endpackage

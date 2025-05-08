@@ -11,12 +11,14 @@ class riscv_env extends uvm_env;
   // Classes Handles
   //==================================================================================
   fetch_agent      fetch_agnt;
+  mul_agent        mul_agnt;
   riscv_scoreboard scoreboard;
   riscv_subscriber subscriber;
   fetch_config_obj env_config;
   lsu_agent        m_lsu_agent;
   lsu_scoreboard   m_lsu_scoreboard;
   lsu_subscriber   m_lsu_subscriber;
+  vsequencer       vseqr;
 
   //==================================================================================
   // Interface
@@ -56,6 +58,15 @@ class riscv_env extends uvm_env;
     end else begin
       uvm_config_db#(virtual lsu_if)::set(this, "m_agent", "lsu_intf", lsu_vif);
     end
+    if(!uvm_config_db #(virtual mul_if)::get(this, "", "mul_intf", mul_intf))
+            `uvm_fatal("NO_CONFIG", {"Config not found for ", get_full_name(), ".mul_intf"});
+    uvm_config_db #(virtual mul_if)::set(this, "mul_agnt", "mul_intf", mul_intf);
+
+    fetch_agnt = fetch_agent::type_id::create("fetch_agnt", this);
+    scoreboard = riscv_scoreboard::type_id::create("scoreboard", this);
+    subscriber = riscv_subscriber::type_id::create("subscriber", this);
+    vseqr      = vsequencer::type_id::create("vseqr",this);
+
   endfunction
 
   //==================================================================================
@@ -70,6 +81,8 @@ class riscv_env extends uvm_env;
     // LSU TLM
     m_lsu_agent.m_lsu_monitor.analysis_port.connect(m_lsu_scoreboard.analysis_fifo.analysis_export);
     m_lsu_agent.m_lsu_monitor.analysis_port.connect(m_lsu_subscriber.analysis_export);
+    vseqr.pf_seqr  = fetch_agnt.sqr;
+    vseqr.lsu_seqr = lsu_agnt.m_sequencer;
   endfunction
 
 endclass

@@ -6,7 +6,7 @@ logic                   rst_n;
 // input signals
 logic                   enable_i;
 // operator_i is used for mul, mac, and dot operations
-mul_opcode_e     operator_i;
+mul_opcode_e            operator_i;
 
 logic [1:0]             short_signed_i;
 logic                   short_subword_i;

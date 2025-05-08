@@ -1,7 +1,6 @@
 # vsim -wlf mul_top.wlf -logfile sim.log -c -coverage -assertdebug -voptargs="+acc" work.mul_top -do "coverage save -onexit -directive -codeAll mul_top.ucdb; run -all" 
-# Start time: 23:26:30 on May 03,2025
-# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
-# ** Warning: mul_sequence.svh(21): (vopt-2240) Treating stand-alone use of function 'randomize' as an implicit VOID cast.
+# Start time: 15:14:19 on May 06,2025
+# ** Note: (vsim-8009) Loading existing optimized design _opt
 # //  Questa Sim-64
 # //  Version 10.7c win64 Aug 18 2018
 # //
@@ -55,24 +54,18 @@
 # UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(216) @ 0: reporter [Questa UVM]  questa_uvm::init(+struct)
 # UVM_INFO @ 0: reporter [RNTST] Running test mul_test...
 # Starting simulation
-# UVM_INFO mul_scoreboard.svh(25) @ 20: uvm_test_top.env.scoreboard [uvm_test_top.env.scoreboard] Scoreboard: Received item with rst_n=0, skipping
-# UVM_INFO mul_scoreboard.svh(34) @ 121: uvm_test_top.env.scoreboard [uvm_test_top.env.scoreboard] Scoreboard: Received item with operator_i=6
-# UVM_INFO mul_scoreboard.svh(35) @ 121: uvm_test_top.env.scoreboard [uvm_test_top.env.scoreboard] Scoreboard: Received item with operand_a_i=268202993
-# UVM_INFO mul_scoreboard.svh(36) @ 121: uvm_test_top.env.scoreboard [uvm_test_top.env.scoreboard] Scoreboard: Received item with operand_b_i=3457957153
-# UVM_INFO mul_scoreboard.svh(37) @ 121: uvm_test_top.env.scoreboard [uvm_test_top.env.scoreboard] Scoreboard: Received item with operand_c_i=0
-# UVM_INFO mul_scoreboard.svh(80) @ 121: uvm_test_top.env.scoreboard [uvm_test_top.env.scoreboard] Scoreboard: MUL_HSU operation
-# UVM_INFO mul_scoreboard.svh(81) @ 121: uvm_test_top.env.scoreboard [uvm_test_top.env.scoreboard] Scoreboard: b = 3457957153
-# UVM_INFO mul_scoreboard.svh(82) @ 121: uvm_test_top.env.scoreboard [uvm_test_top.env.scoreboard] Scoreboard: b_signed = -837010143
-# UVM_INFO mul_scoreboard.svh(83) @ 121: uvm_test_top.env.scoreboard [uvm_test_top.env.scoreboard] Scoreboard: cdee8b9d3875f11
-# UVM_ERROR mul_scoreboard.svh(106) @ 121: uvm_test_top.env.scoreboard [uvm_test_top.env.scoreboard] Scoreboard: Mismatch! Expected cdee8b9, got cde8790
+# UVM_INFO mul_scoreboard.svh(24) @ 20: uvm_test_top.env.scoreboard [uvm_test_top.env.scoreboard] Scoreboard: Received item with rst_n=0, skipping
+# UVM_INFO mul_scoreboard.svh(73) @ 121: uvm_test_top.env.scoreboard [uvm_test_top.env.scoreboard] Scoreboard: MUL_HSU operation
+# UVM_INFO mul_scoreboard.svh(74) @ 121: uvm_test_top.env.scoreboard [uvm_test_top.env.scoreboard] Scoreboard: b240b1595e0b8547
+# UVM_ERROR mul_scoreboard.svh(97) @ 121: uvm_test_top.env.scoreboard [uvm_test_top.env.scoreboard] Scoreboard: Mismatch! Expected b240b159, got b240b378
 # UVM_INFO verilog_src/uvm-1.1d/src/base/uvm_objection.svh(1267) @ 121: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
-# UVM_INFO mul_scoreboard.svh(121) @ 121: uvm_test_top.env.scoreboard [uvm_test_top.env.scoreboard] Scoreboard: Passed cases: 0
-# UVM_INFO mul_scoreboard.svh(122) @ 121: uvm_test_top.env.scoreboard [uvm_test_top.env.scoreboard] Scoreboard: Failed cases: 1
+# UVM_INFO mul_scoreboard.svh(112) @ 121: uvm_test_top.env.scoreboard [uvm_test_top.env.scoreboard] Scoreboard: Passed cases: 0
+# UVM_INFO mul_scoreboard.svh(113) @ 121: uvm_test_top.env.scoreboard [uvm_test_top.env.scoreboard] Scoreboard: Failed cases: 1
 # 
 # --- UVM Report Summary ---
 # 
 # ** Report counts by severity
-# UVM_INFO :   15
+# UVM_INFO :    9
 # UVM_WARNING :    0
 # UVM_ERROR :    1
 # UVM_FATAL :    0
@@ -80,9 +73,9 @@
 # [Questa UVM]     2
 # [RNTST]     1
 # [TEST_DONE]     1
-# [uvm_test_top.env.scoreboard]    12
+# [uvm_test_top.env.scoreboard]     6
 # ** Note: $finish    : C:/questasim64_10.7c/win64/../verilog_src/uvm-1.1d/src/base/uvm_root.svh(430)
 #    Time: 121 ns  Iteration: 53  Instance: /mul_top
 # Saving coverage database on exit...
-# End time: 23:26:33 on May 03,2025, Elapsed time: 0:00:03
-# Errors: 0, Warnings: 2
+# End time: 15:14:21 on May 06,2025, Elapsed time: 0:00:02
+# Errors: 0, Warnings: 1

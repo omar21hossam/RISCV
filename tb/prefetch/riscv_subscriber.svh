@@ -1,9 +1,3 @@
-// package riscv_subscriber_pkg;
-// import uvm_pkg::* ; 
-// `include "uvm_macros.svh"
-
-// import riscv_seq_item_pkg::*;
-
 class riscv_subscriber extends uvm_component ;
     `uvm_component_utils(riscv_subscriber)
    
@@ -55,4 +49,3 @@ task run_phase (uvm_phase phase);
         
     endfunction */
 endclass
-// endpackage
