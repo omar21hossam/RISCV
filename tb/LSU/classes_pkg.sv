@@ -7,6 +7,7 @@ package classes_pkg;
   `include "lsu_subscriber.svh";
   `include "lsu_scoreboard.svh";
   `include "lsu_driver.svh";
+  `include "lsu_active_driver.svh";
   `include "lsu_monitor.svh";
   `include "lsu_agent.svh";
   `include "lsu_env.svh";

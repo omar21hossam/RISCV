@@ -8,7 +8,7 @@ class lsu_test extends uvm_test;
   // Class Handle
   //==================================================================================
   lsu_env m_env;
-  lsu_master_sequence m_seq;
+  lsu_sequence m_seq;
 
   //==================================================================================
   // Configurations
@@ -32,7 +32,7 @@ class lsu_test extends uvm_test;
     // Creation
     // ---------
     m_env = lsu_env::type_id::create("m_env", this);
-    m_seq = lsu_master_sequence::type_id::create("m_seq", this);
+    m_seq = lsu_sequence::type_id::create("m_seq", this);
 
 
     // Configuration
