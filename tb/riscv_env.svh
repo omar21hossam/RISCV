@@ -6,6 +6,7 @@ class riscv_env extends uvm_env;
   riscv_scoreboard scoreboard;
   riscv_subscriber subscriber;
   fetch_config_obj env_config;
+  vsequencer       vseqr;
 
 
   function new(string name = "riscv_env", uvm_component parent = null);
@@ -23,6 +24,7 @@ class riscv_env extends uvm_env;
     fetch_agnt = fetch_agent::type_id::create("fetch_agnt", this);
     scoreboard = riscv_scoreboard::type_id::create("scoreboard", this);
     subscriber = riscv_subscriber::type_id::create("subscriber", this);
+    vseqr      = vsequencer::type_id::create("vseqr",this);
 
   endfunction
 
@@ -31,7 +33,8 @@ class riscv_env extends uvm_env;
     //connecting the scoreboard and subscriber to the monitor's analysis port
     fetch_agnt.agt_ap.connect(scoreboard.sb_export);
     fetch_agnt.agt_ap.connect(subscriber.cov_export);
-
+    vseqr.pf_seqr  = fetch_agnt.sqr;
+    vseqr.lsu_seqr = lsu_agnt.m_sequencer;
   endfunction
 
 endclass
