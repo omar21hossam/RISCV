@@ -5,13 +5,15 @@ module riscv_top_tb ();
   //==================================================================================
   import uvm_pkg::*;
   import riscv_classes_pkg::*;
-  import riscv_pkg::*;
+ // import riscv_pkg::*;
 
   //==================================================================================
   // Interface Instantiation
   //==================================================================================
+    bit clk = 1'b0;
+
   riscv_intf riscv_intf_ (clk);
-  interface_clk interface_clk_ (clk);
+ 
   // Prefetch interface instantiation
   // ALU-DIV interface instasntiation
   // MUL interface instantiation
@@ -36,13 +38,13 @@ module riscv_top_tb ();
       .instr_addr_o       (riscv_intf_.instr_addr_o),
       .instr_rdata_i      (riscv_intf_.instr_rdata_i),
       .data_req_o         (riscv_intf_.data_req_o),
-      .data_gnt_i         (0),
-      .data_rvalid_i      (0),
+      .data_gnt_i         ('b0),
+      .data_rvalid_i      ('b0),
       .data_we_o          (riscv_intf_.data_we_o),
       .data_be_o          (riscv_intf_.data_be_o),
       .data_addr_o        (riscv_intf_.data_addr_o),
       .data_wdata_o       (riscv_intf_.data_wdata_o),
-      .data_rdata_i       (0),
+      .data_rdata_i       ('b0),
       .irq_i              (riscv_intf_.irq_i),
       .irq_ack_o          (riscv_intf_.irq_ack_o),
       .irq_id_o           (riscv_intf_.irq_id_o),
@@ -54,28 +56,9 @@ module riscv_top_tb ();
       .core_sleep_o       (riscv_intf_.core_sleep_o)
   );
 
-  //==================================================================================
-  // Instruction Memory Instantiation
-  //==================================================================================
-  riscv_instr_mem inst_mem_DUT (
-      .clk           (clk),
-      .instr_gnt_o   (riscv_intf_.instr_gnt_i),
-      .instr_rvalid_o(riscv_intf_.instr_rvalid_i),
-      .instr_rdata_o (riscv_intf_.instr_rdata_i),
-      .instr_req_i   (riscv_intf_.instr_req_o),
-      .instr_addr_i  (riscv_intf_.instr_addr_o),
-      .addr          (riscv_intf_.addr),
-      .inst          (riscv_intf_.inst),
-      .reset_n       (riscv_intf_.rst_ni)
-
-  );
-
   // =====================================================================
   // Connecting the interface to the DUT
   // ======================================================================
-  // DUT interface
-  bind riscv_instr_mem : inst_mem_DUT inst_mem_intf inst_mem_intf_ (.*);
-
   // Prefetch interface
   // ALU-DIV interface
   // MUL interface
@@ -87,7 +70,6 @@ module riscv_top_tb ();
   //==================================================================================
   initial begin
     uvm_config_db#(virtual riscv_intf)::set(null, "uvm_test_top", "main_intf", riscv_intf_);
-    uvm_config_db#(virtual interface_clk)::set(null, "uvm_test_top", "clk_", interface_clk_);
     // Prefetch configuration setup
     // ALU-DIV configuration setup
     // MUL configuration setup
@@ -107,9 +89,10 @@ module riscv_top_tb ();
   //==================================================================================
   // Clock Generation Block
   //==================================================================================
-  bit clk = 1'b0;
   initial begin
-    forever #(CLK_FREQ / 2) clk = ~clk;
+//forever #(CLK_FREQ / 2) clk = ~clk;
+    forever #(10 / 2) clk = ~clk;
+
   end
 
 endmodule

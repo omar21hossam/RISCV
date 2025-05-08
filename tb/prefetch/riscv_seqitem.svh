@@ -1,8 +1,3 @@
-// package riscv_seq_item_pkg;
-
-// import uvm_pkg ::* ; 
-// `include "uvm_macros.svh"
-
 class riscv_seq_item extends uvm_sequence_item;
 
 
@@ -16,8 +11,7 @@ class riscv_seq_item extends uvm_sequence_item;
 //////////__signals on main intf must be driven__////
      logic pulp_clock_en_i=0; 
      logic scan_cg_en_i=0;  
-    
-     logic    rst_ni;
+     logic rst_ni='b1;
      logic [31:0] boot_addr_i=0;
      logic [31:0] mtvec_addr_i=0;
      logic [31:0] dm_halt_addr_i=0;
@@ -27,12 +21,13 @@ class riscv_seq_item extends uvm_sequence_item;
      logic debug_req_i=0;
      logic fetch_enable_i=1;
 ////////__signals for int mem to write on__//////////
- bit [31:0] instruction;
- bit [31:0] addr;
-    int min_addr = 0;
-    int max_addr = 1023;
-    int num_instr = 256;
-   static int x =0;
+ logic [31:0] instruction;
+ logic        instr_gnt_i; //op of driver
+ logic        instr_rvalid_i; //op of driver 
+ logic [31:0] instr_rdata_i; //op of driver
+ logic        instr_req_o;   //ip to driver
+ logic [31:0] instr_addr_o;   //ip to driver
+
 /////////////////////////////////////////////////////
 
 
@@ -149,20 +144,8 @@ instr_type dist {R_TYPE :/ 20, I_TYPE :/ 30, U_TYPE :/ 10, B_TYPE :/ 10, S_TYPE 
         endcase
         return instruction;    endfunction
 
-function bit [31:0] calc_add();
-
-            //Calculate address (word aligned)
-            addr = ((min_addr + (x % (max_addr - min_addr + 1))) <<2 );
-             // Convert to byte address
-            //Shifting left by 2 bits is equivalent to multiplying by 4
-            x=x+1;
-            $display("calc_add called: x=%0d addr=0x%0h", x, addr);
-return addr;
-endfunction
-
 function void post_randomize();
-      pack_instruction();
-        calc_add();  
+      pack_instruction();  
      $display("Instruction: %s", convert2asm());     
     endfunction
     
@@ -238,5 +221,3 @@ function string convert2asm();
     endfunction
 
 endclass :riscv_seq_item
-
-//endpackage

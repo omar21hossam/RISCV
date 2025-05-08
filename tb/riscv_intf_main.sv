@@ -21,9 +21,7 @@ interface riscv_intf(input logic clk);
     //op
       logic [31:0] instr_addr_o;
       logic        instr_req_o;
-/////
-    logic [31:0] inst;
-    logic [31:0] addr;
+
     // Data memory interface
     //ip
     

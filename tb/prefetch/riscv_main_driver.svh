@@ -1,69 +1,88 @@
-
-// package riscv_driver_pkg ;
-// import uvm_pkg::* ; 
-// `include "uvm_macros.svh"
-//  import riscv_seq_item_pkg::*;
-
 class riscv_driver extends uvm_driver #(riscv_seq_item) ; 
 
 `uvm_component_utils(riscv_driver)
 
   virtual  riscv_intf    riscv_vintf_ ;
- riscv_seq_item      seq_item ;
+ riscv_seq_item      seq_item_rsp  ; //driver will respond 
 function new (string name = "riscv_driver" ,uvm_component parent= null ) ; 
     super.new(name , parent) ;
 endfunction
 
+
+  function void reset();
+          riscv_vintf_.rst_ni              <=0 ; 
+          riscv_vintf_.boot_addr_i         <=0 ;
+          riscv_vintf_.mtvec_addr_i        <=0 ;
+          riscv_vintf_.dm_halt_addr_i      <=0 ;
+          riscv_vintf_.hart_id_i           <=0 ;
+          riscv_vintf_.dm_exception_addr_i <=0 ;
+          riscv_vintf_.irq_i               <=0 ;
+          riscv_vintf_.debug_req_i         <=0 ;
+          riscv_vintf_.fetch_enable_i      <=0 ;
+          riscv_vintf_.pulp_clock_en_i     <=0 ;
+          riscv_vintf_.scan_cg_en_i        <=0 ;
+          riscv_vintf_.instr_gnt_i         <=0 ;
+          riscv_vintf_.instr_rvalid_i      <=0 ; 
+          riscv_vintf_.instr_rdata_i       <=0 ;
+
+  endfunction
+
+
 task run_phase (uvm_phase phase);
     
     super.run_phase(phase) ;
-/**************memory initialization driving**********/    
- for (int i = 0; i <= 256; i++) begin
-  seq_item = riscv_seq_item::type_id::create("seq_item")  ; 
-        seq_item_port.get_next_item(seq_item) ; 
-         riscv_vintf_.addr         <= seq_item.addr;
-          riscv_vintf_.inst        <= seq_item.instruction;
-        seq_item_port.item_done() ; 
- end
-/*********************** direct sequence *****************************/
- for (int i = 0; i <= 9; i++) begin
-  seq_item = riscv_seq_item::type_id::create("seq_item")  ; 
-        seq_item_port.get_next_item(seq_item) ; 
-         riscv_vintf_.addr         <= seq_item.addr;
-          riscv_vintf_.inst        <= seq_item.instruction;
-        seq_item_port.item_done() ; 
- end
-
-
-/********************normal driving****************************/
-
-
-
-
+   
+         reset();
+         #50;
       forever begin
-        seq_item = riscv_seq_item::type_id::create("seq_item")  ; 
-        seq_item_port.get_next_item(seq_item) ; 
+        seq_item_rsp = riscv_seq_item::type_id::create("seq_item_rsp")  ; 
+        seq_item_port.get_next_item(seq_item_rsp) ; 
+          riscv_vintf_.rst_ni              <= seq_item_rsp.rst_ni; 
+   fork      
+/************************** memory obi ************************/
 
-        @(riscv_vintf_.ckb_p)
+  begin
+ @( posedge riscv_vintf_.clk)
+ $display("");
+  begin
+   riscv_vintf_.instr_rvalid_i      <=0 ; 
+  wait ( riscv_vintf_.instr_req_o =='b1) begin
+riscv_vintf_.instr_gnt_i    <=1;
+#10;
+riscv_vintf_.instr_gnt_i    <=0;  
+riscv_vintf_.instr_rvalid_i <=1 ;      
+riscv_vintf_.instr_rdata_i  <=seq_item_rsp.instruction ;                                
+         
+                                  end
+       
+                        end 
+
+  end
+
+/********************************************************************/
+     begin
+ @(riscv_vintf_.ckb_p)
         begin
-          riscv_vintf_.rst_ni              <= seq_item.rst_ni; 
-          riscv_vintf_.boot_addr_i         <= seq_item.boot_addr_i;
-          riscv_vintf_.mtvec_addr_i        <= seq_item.mtvec_addr_i;
-          riscv_vintf_.dm_halt_addr_i      <= seq_item.dm_halt_addr_i;
-          riscv_vintf_.hart_id_i           <= seq_item.hart_id_i;
-          riscv_vintf_.dm_exception_addr_i <= seq_item.dm_exception_addr_i;
-          riscv_vintf_.irq_i               <= seq_item.irq_i;
-          riscv_vintf_.debug_req_i         <= seq_item.debug_req_i;
-          riscv_vintf_.fetch_enable_i      <= seq_item.fetch_enable_i;
-          riscv_vintf_.pulp_clock_en_i <= seq_item.pulp_clock_en_i;
-          riscv_vintf_.scan_cg_en_i <= seq_item.scan_cg_en_i;
+          riscv_vintf_.boot_addr_i         <= seq_item_rsp.boot_addr_i;
+          riscv_vintf_.mtvec_addr_i        <= seq_item_rsp.mtvec_addr_i;
+          riscv_vintf_.dm_halt_addr_i      <= seq_item_rsp.dm_halt_addr_i;
+          riscv_vintf_.hart_id_i           <= seq_item_rsp.hart_id_i;
+          riscv_vintf_.dm_exception_addr_i <= seq_item_rsp.dm_exception_addr_i;
+          riscv_vintf_.irq_i               <= seq_item_rsp.irq_i;
+          riscv_vintf_.debug_req_i         <= seq_item_rsp.debug_req_i;
+          riscv_vintf_.fetch_enable_i      <= seq_item_rsp.fetch_enable_i;
+          riscv_vintf_.pulp_clock_en_i     <= seq_item_rsp.pulp_clock_en_i;
+          riscv_vintf_.scan_cg_en_i        <= seq_item_rsp.scan_cg_en_i;
+ end
+ end
+  join 
+           seq_item_port.item_done() ; 
+            
 
-            seq_item_port.item_done() ; 
 end
-      end
+
+      
     endtask
 
 
 endclass
-
-//endpackage
