@@ -1,6 +1,12 @@
 module riscv_top_tb ();
 
   //==================================================================================
+  // Hierarchical  path definitions
+  //==================================================================================
+  `define mult_path DUT.core_i.ex_stage_i.mult_i
+  string regfile_path = "riscv_top_tb.DUT.core_i.id_stage_i.register_file_i"
+
+  //==================================================================================
   // Packages
   //==================================================================================
   import uvm_pkg::*;
@@ -16,7 +22,7 @@ module riscv_top_tb ();
  
   // Prefetch interface instantiation
   // ALU-DIV interface instasntiation
-  // MUL interface instantiation
+  mul_if mul_intf ();
   // LSU interface instantiation
 
   //==================================================================================
@@ -63,13 +69,36 @@ module riscv_top_tb ();
   // ALU-DIV interface
   // MUL interface
   // LSU interface
-
+assign mul_intf.clk             = `mult_path.clk;
+assign mul_intf.rst_n           = `mult_path.rst_n;
+assign mul_intf.enable_i        = `mult_path.enable_i;
+assign mul_intf.operator_i      = `mult_path.operator_i;
+assign mul_intf.short_signed_i  = `mult_path.short_signed_i;
+assign mul_intf.short_subword_i = `mult_path.short_subword_i;
+assign mul_intf.operand_a_i     = `mult_path.op_a_i;
+assign mul_intf.operand_b_i     = `mult_path.op_b_i;
+assign mul_intf.operand_c_i     = `mult_path.op_c_i;
+assign mul_intf.imm_i           = `mult_path.imm_i;
+assign mul_intf.dot_signed_i    = `mult_path.dot_signed_i;
+assign mul_intf.dot_op_a_i      = `mult_path.dot_op_a_i;
+assign mul_intf.dot_op_b_i      = `mult_path.dot_op_b_i;
+assign mul_intf.dot_op_c_i      = `mult_path.dot_op_c_i;
+assign mul_intf.is_clpx_i       = `mult_path.is_clpx_i;
+assign mul_intf.clpx_shift_i    = `mult_path.clpx_shift_i;
+assign mul_intf.clpx_img_i      = `mult_path.clpx_img_i;
+assign mul_intf.ex_ready_i      = `mult_path.ex_ready_i;
+assign mul_intf.result_o        = `mult_path.result_o;
+assign mul_intf.multicycle_o    = `mult_path.multicycle_o;
+assign mul_intf.ready_o         = `mult_path.ready_o;
+assign mul_intf.mulh_active_o   = `mult_path.mulh_active_o;
 
   //==================================================================================
   // Configuration
   //==================================================================================
   initial begin
     uvm_config_db#(virtual riscv_intf)::set(null, "uvm_test_top", "main_intf", riscv_intf_);
+     uvm_config_db#(virtual mul_if)::set(null, "uvm_test_top", "mul_intf", mul_intf);
+
     // Prefetch configuration setup
     // ALU-DIV configuration setup
     // MUL configuration setup

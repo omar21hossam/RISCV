@@ -3,6 +3,7 @@ class riscv_env extends uvm_env;
   `uvm_component_utils(riscv_env)
 
   fetch_agent      fetch_agnt;
+  mul_agent        mul_agnt;
   riscv_scoreboard scoreboard;
   riscv_subscriber subscriber;
   fetch_config_obj env_config;
@@ -20,6 +21,9 @@ class riscv_env extends uvm_env;
       `uvm_fatal("build_phase", "End to End env - unable to get configuration object")
     uvm_config_db#(fetch_config_obj)::set(this, "fetch_agnt", "CFG", env_config);
 
+    if(!uvm_config_db #(virtual mul_if)::get(this, "", "mul_intf", mul_intf))
+            `uvm_fatal("NO_CONFIG", {"Config not found for ", get_full_name(), ".mul_intf"});
+    uvm_config_db #(virtual mul_if)::set(this, "mul_agnt", "mul_intf", mul_intf);
 
     fetch_agnt = fetch_agent::type_id::create("fetch_agnt", this);
     scoreboard = riscv_scoreboard::type_id::create("scoreboard", this);

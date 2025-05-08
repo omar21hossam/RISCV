@@ -18,10 +18,9 @@ class mul_agent extends uvm_agent;
     driver = mul_driver::type_id::create("driver", this);
     monitor = mul_monitor::type_id::create("monitor", this);
     // Get the virtual interface from the config DB
-    if (!uvm_config_db #(virtual mul_if)::get(this, "", "vif", config_virtual)) begin
-      `uvm_fatal("NO_VIF", "Virtual interface not found in config DB")
-    end
-    uvm_config_db #(virtual mul_if)::set(this, "*", "vif", config_virtual);
+    if(!uvm_config_db #(virtual mul_if)::get(this, "", "mul_intf", mul_intf))
+            `uvm_fatal("NO_CONFIG", {"Config not found for ", get_full_name(), ".mul_intf"});
+    uvm_config_db #(virtual mul_if)::set(this, "monitor", "mul_intf", mul_intf);
   endfunction
 
   // Connect phase
