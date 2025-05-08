@@ -35,6 +35,10 @@ task run_phase (uvm_phase phase);
          reset();
          #50;
       forever begin
+
+
+
+
         seq_item_rsp = riscv_seq_item::type_id::create("seq_item_rsp")  ; 
         seq_item_port.get_next_item(seq_item_rsp) ; 
           riscv_vintf_.rst_ni              <= seq_item_rsp.rst_ni; 
@@ -43,16 +47,18 @@ task run_phase (uvm_phase phase);
 
   begin
  @( posedge riscv_vintf_.clk)
- $display("");
   begin
    riscv_vintf_.instr_rvalid_i      <=0 ; 
   wait ( riscv_vintf_.instr_req_o =='b1) begin
 riscv_vintf_.instr_gnt_i    <=1;
 #10;
 riscv_vintf_.instr_gnt_i    <=0;  
-riscv_vintf_.instr_rvalid_i <=1 ;      
-riscv_vintf_.instr_rdata_i  <=seq_item_rsp.instruction ;                                
-         
+riscv_vintf_.instr_rvalid_i <=1 ;    
+if (!(seq_item_rsp.instr_mem.exists(riscv_vintf_.instr_addr_o))) begin
+riscv_vintf_.instr_rdata_i  <=seq_item_rsp.instruction ;
+  seq_item_rsp.instr_mem[riscv_vintf_.instr_addr_o]  =seq_item_rsp.instruction    ;
+                                                                 end
+else    riscv_vintf_.instr_rdata_i  <=seq_item_rsp.instr_mem[riscv_vintf_.instr_addr_o];                                                              
                                   end
        
                         end 

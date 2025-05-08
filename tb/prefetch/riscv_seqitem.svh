@@ -9,6 +9,9 @@ class riscv_seq_item extends uvm_sequence_item;
  endfunction
 
 //////////__signals on main intf must be driven__////
+    // Static associative array (shared across all instances)
+  static bit [31:0] instr_mem [bit [31:0]];
+   
      logic pulp_clock_en_i=0; 
      logic scan_cg_en_i=0;  
      logic rst_ni='b1;
