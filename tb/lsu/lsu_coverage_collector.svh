@@ -1,11 +1,11 @@
-class lsu_subscriber #(
+class lsu_coverage_collector #(
     type T = lsu_sequence_item
 ) extends uvm_subscriber #(lsu_sequence_item);
 
   //==================================================================================
   // Registeration
   //==================================================================================
-  `uvm_component_utils(lsu_subscriber)
+  `uvm_component_utils(lsu_coverage_collector)
 
   //==================================================================================
   // Classes Handles
@@ -133,7 +133,7 @@ class lsu_subscriber #(
   //==================================================================================
   // Function: Constructor
   //==================================================================================
-  function new(string name = "lsu_subscriber", uvm_component parent = null);
+  function new(string name = "lsu_coverage_collector", uvm_component parent = null);
     super.new(name, parent);
 
     // Construction of embedded covergroup (defined in a class) is not supported

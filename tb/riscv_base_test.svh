@@ -10,7 +10,7 @@ class riscv_base_test extends uvm_test;
   //==================================================================================
   riscv_env             m_env;
   fetch_config_obj      m_cfg;
-  riscv_vsequ_arith     m_vseq;
+  riscv_vsequ_base      m_vseq_base;
 
   //==================================================================================
   // Interfaces
@@ -35,9 +35,9 @@ class riscv_base_test extends uvm_test;
 
     // Creation
     // ---------------------------------------------------------------------
-    m_env  = riscv_env::type_id::create("m_env", this);
-    m_cfg  = fetch_config_obj::type_id::create("m_cfg", this);
-    m_vseq = riscv_vsequ_arith::type_id::create("m_vseq", this);
+    m_env = riscv_env::type_id::create("m_env", this);
+    m_cfg = fetch_config_obj::type_id::create("m_cfg", this);
+    m_vseq_base = riscv_vseqr::type_id::create("m_vseq_base", this);
 
     // Configuration
     // ---------------------------------------------------------------------
@@ -68,7 +68,6 @@ class riscv_base_test extends uvm_test;
     end else begin
       uvm_config_db#(virtual alu_intf_)::set(this, "m_env", "alu_intf_test2env", alu_intf_);
     end
-    //====================================================================
   endfunction
 
   //==================================================================================
@@ -77,7 +76,7 @@ class riscv_base_test extends uvm_test;
   virtual task run_phase(uvm_phase phase);
     super.run_phase(phase);
     phase.raise_objection(this);
-    m_vseq.start(m_env.vseqr);
+    m_vseq_base.start(m_env.vseqr);
     phase.phase_done.set_drain_time(this, 50 * riscv_pkg::CLK_FREQ);
     phase.drop_objection(this);
   endtask

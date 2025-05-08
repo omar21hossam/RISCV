@@ -4,7 +4,7 @@ package classes_pkg;
   `include "lsu_sequence_item.svh";
   `include "lsu_sequence.svh";
   `include "lsu_sequencer.svh";
-  `include "lsu_subscriber.svh";
+  `include "lsu_coverage_collector.svh";
   `include "lsu_scoreboard.svh";
   `include "lsu_driver.svh";
   `include "lsu_active_driver.svh";

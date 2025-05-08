@@ -28,6 +28,6 @@ class riscv_vsequ_arith extends riscv_vsequ_base;
       //start the sequences
       //
       //
-    join
+    join_any
   endtask
 endclass : riscv_vsequ_arith

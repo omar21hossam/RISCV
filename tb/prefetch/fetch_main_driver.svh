@@ -1,9 +1,9 @@
-class riscv_driver extends uvm_driver #(riscv_seq_item) ; 
+class riscv_driver extends uvm_driver #(riscv_sequence_item) ; 
 
 `uvm_component_utils(riscv_driver)
 
   virtual  riscv_intf    riscv_vintf_ ;
- riscv_seq_item      seq_item_rsp  ; //driver will respond 
+ riscv_sequence_item      seq_item_rsp  ; //driver will respond 
 function new (string name = "riscv_driver" ,uvm_component parent= null ) ; 
     super.new(name , parent) ;
 endfunction
@@ -39,7 +39,7 @@ task run_phase (uvm_phase phase);
 
 
 
-        seq_item_rsp = riscv_seq_item::type_id::create("seq_item_rsp")  ; 
+        seq_item_rsp = riscv_sequence_item::type_id::create("seq_item_rsp")  ; 
         seq_item_port.get_next_item(seq_item_rsp) ; 
           riscv_vintf_.rst_ni              <= seq_item_rsp.rst_ni; 
    fork      

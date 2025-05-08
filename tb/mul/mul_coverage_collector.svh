@@ -1,27 +1,40 @@
-class lsu_env extends uvm_env;
+class mul_coverage_collector #(
+    type T = mul_sequence_item
+) extends uvm_subscriber #(mul_sequence_item);
 
   //==================================================================================
   // Registeration
   //==================================================================================
-  `uvm_component_utils(lsu_env)
+  `uvm_component_utils(mul_coverage_collector)
 
   //==================================================================================
   // Classes Handles
   //==================================================================================
-  lsu_agent m_agent;
-  lsu_scoreboard m_scoreboard;
-  lsu_coverage_collector m_subscriber;
+  mul_sequence_item m_seq_item;
 
   //==================================================================================
-  // Configurations
+  // Covergroup: Input Transactions
   //==================================================================================
-  virtual lsu_if config_vif;
+  covergroup cov_inputs;
+
+  endgroup
+
+
+
+  //==================================================================================
+  // Covergroup: Output Transactions
+  //==================================================================================
+  covergroup cov_outputs;
+
+  endgroup
 
   //==================================================================================
   // Function: Constructor
   //==================================================================================
-  function new(string name = "lsu_env", uvm_component parent = null);
+  function new(string name = "mul_coverage_collector", uvm_component parent = null);
     super.new(name, parent);
+    cov_inputs  = new();
+    cov_outputs = new();
   endfunction
 
   //==================================================================================
@@ -29,31 +42,16 @@ class lsu_env extends uvm_env;
   //==================================================================================
   function void build_phase(uvm_phase phase);
     super.build_phase(phase);
-    `uvm_info(get_name(), "Building LSU Environment", UVM_HIGH)
-
-    // Creation
-    // ---------
-    m_agent = lsu_agent::type_id::create("m_agent", this);
-    m_scoreboard = lsu_scoreboard::type_id::create("m_scoreboard", this);
-    m_subscriber = lsu_coverage_collector#()::type_id::create("m_subscriber", this);
-
-
-    // Configuration
-    // -------------
-    if (!uvm_config_db#(virtual lsu_if)::get(this, "", "vif", config_vif)) begin
-      `uvm_fatal(get_name(), "Failed to get configuration for lsu_if");
-    end else begin
-      uvm_config_db#(virtual lsu_if)::set(this, "m_agent", "vif", config_vif);
-    end
+    `uvm_info(get_name(), "Building MUL Subscriber", UVM_HIGH);
   endfunction
 
   //==================================================================================
-  // Function: Connect Phase
+  // Function: Write
   //==================================================================================
-  function void connect_phase(uvm_phase phase);
-    super.connect_phase(phase);
-    `uvm_info(get_name(), "Connecting LSU Environment", UVM_HIGH)
-    m_agent.m_monitor.analysis_port.connect(m_scoreboard.analysis_fifo.analysis_export);
-    m_agent.m_monitor.analysis_port.connect(m_subscriber.analysis_export);
+  function void write(T t);
+    m_seq_item = t;
+    cov_inputs.sample();
+    cov_outputs.sample();
   endfunction
+
 endclass

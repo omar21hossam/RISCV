@@ -1,6 +1,6 @@
 
 
-class riscv_sequencer extends uvm_sequencer #(riscv_seq_item) ; 
+class riscv_sequencer extends uvm_sequencer #(riscv_sequence_item) ; 
 
 `uvm_component_utils(riscv_sequencer)
 
