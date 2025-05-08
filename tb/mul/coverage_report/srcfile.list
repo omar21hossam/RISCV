@@ -7,7 +7,7 @@ mul_monitor.svh
 mul_scoreboard.svh
 mul_sequence.svh
 mul_sequence_item.svh
-mul_sequencer.svh
+mul_coverage_collector.svh
 mul_tb.sv
 mul_test.svh
 package_uvm.sv

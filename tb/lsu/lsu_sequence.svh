@@ -27,7 +27,7 @@ class lsu_sequence extends uvm_sequence;
   // Task: Body
   //==================================================================================
   task body();
-    repeat (10000) begin
+    forever begin
       start_item(m_seq_item);
       if (!m_seq_item.randomize())
         `uvm_fatal(get_name(), "Failed to randomize sequence item");

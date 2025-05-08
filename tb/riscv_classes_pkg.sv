@@ -1,66 +1,62 @@
 package riscv_classes_pkg;
-   //`define alu_files_path "ALU_DIV/tb_files/"
-    import uvm_pkg::*;
-    import riscv_pkg::*;  //need to import the static array of required alu instructions
-    `include "uvm_macros.svh"
+  //==================================================================================
+  // UVM inclusion
+  //==================================================================================
+  import uvm_pkg::*;
+  `include "uvm_macros.svh"
+
+  //==================================================================================
+  // ALU classes inclusion
+  //==================================================================================
+  `include "ALU_DIV/tb_files/alu_sequence_item.svh"
+  `include "ALU_DIV/tb_files/alu_driver.svh"
+  `include "ALU_DIV/tb_files/alu_monitor.svh"
+  `include "ALU_DIV/tb_files/alu_agent.svh"
+  `include "ALU_DIV/tb_files/alu_scoreboard.svh"
+  `include "ALU_DIV/tb_files/alu_coverage_collector.svh"
 
   //==================================================================================
   // MUL classes inclusion
   //==================================================================================
-    `include "riscv_fetch_config_obj.svh"
-    `include "riscv_seqitem.svh"
-    `include "riscv_sequence_b.svh"
-    `include "riscv_sequencer.svh"
-    `include "riscv_main_driver.svh"
-    `include "fetch_monitor.svh"
-    `include "fetch_agent.svh"
-    `include "mul_sequence_item.svh"
-    `include "mul_monitor.svh"
-    `include "mul_agent.svh"
-    `include "mul_scoreboard.svh"
-    `include "riscv_scoreboard.svh"
-    `include "riscv_subscriber.svh"
-    `include "prefetch/riscv_fetch_config_obj.svh"
-    `include "prefetch/riscv_seqitem.svh"
-    `include /*`alu_files_path*/ "ALU_DIV/tb_files/ALU_sequence_item.svh"
-    `include /*`alu_files_path*/ "ALU_DIV/tb_files/ALU_driver.svh"
-    `include /*`alu_files_path*/ "ALU_DIV/tb_files/ALU_monitor.svh"
-    `include /*`alu_files_path*/ "ALU_DIV/tb_files/ALU_agent.svh"
-    `include /*`alu_files_path*/ "ALU_DIV/tb_files/ALU_scoreboard.svh"
-    // `include "riscv_sequence_b.svh"
-    // `include "riscv_sequencer.svh"
-    // `include "riscv_main_driver.svh"
-    // `include "fetch_monitor.svh"
-    // `include "fetch_agent.svh"
-    // `include "riscv_scoreboard.svh"
-    // `include "riscv_subscriber.svh"
-    `include "riscv_env.svh"
-    `include "riscv_test.svh"
+  `include "mul/mul_sequence_item.svh"
+  `include "mul/mul_coverage_collector.svh"
+  `include "mul/mul_sequencer.svh"
+  `include "mul/mul_monitor.svh"
+  `include "mul/mul_driver.svh"
+  `include "mul/mul_scoreboard.svh"
+  `include "mul/mul_agent.svh"
 
   //==================================================================================
   // LSU classes inclusion
   //==================================================================================
-  `include "lsu/lsu_sequence_item.svh";
-  `include "lsu/lsu_sequence.svh";
-  `include "lsu/lsu_sequencer.svh";
-  `include "lsu/lsu_subscriber.svh";
-  `include "lsu/lsu_scoreboard.svh";
-  `include "lsu/lsu_driver.svh";
-  `include "lsu/lsu_monitor.svh";
-  `include "lsu/lsu_agent.svh";
+  `include "lsu/lsu_sequence_item.svh"
+  `include "lsu/lsu_sequence.svh"
+  `include "lsu/lsu_sequencer.svh"
+  `include "lsu/lsu_coverage_collector.svh"
+  `include "lsu/lsu_scoreboard.svh"
+  `include "lsu/lsu_driver.svh"
+  `include "lsu/lsu_monitor.svh"
+  `include "lsu/lsu_agent.svh"
 
   //==================================================================================
   // Prefetch classes inclusion
   //==================================================================================
-  `include "prefetch/riscv_fetch_config_obj.svh"
-  `include "prefetch/riscv_seqitem.svh"
-  `include "prefetch/riscv_sequence_b.svh"
-  `include "prefetch/riscv_sequencer.svh"
-  `include "prefetch/riscv_main_driver.svh"
+  `include "riscv_sequence_item.svh"
+  `include "prefetch/fetch_config_obj.svh"
+  `include "prefetch/fetch_driver.svh"
   `include "prefetch/fetch_monitor.svh"
+  `include "prefetch/fetch_scoreboard.svh"
+  `include "prefetch/fetch_sequencer.svh"
   `include "prefetch/fetch_agent.svh"
-  `include "prefetch/riscv_scoreboard.svh"
-  `include "prefetch/riscv_subscriber.svh"
+
+  //==================================================================================
+  // RISCV TOP classes inclusion
+  //==================================================================================
+  `include "riscv_vseqr.svh"
+  `include "riscv_base_sequence.svh"
+  `include "riscv_vsequ_base.svh"
+  `include "riscv_vsequ_arith.svh"
   `include "riscv_env.svh"
-  `include "riscv_test.svh"
+  `include "riscv_base_test.svh"
+
 endpackage

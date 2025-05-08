@@ -10,7 +10,7 @@ class lsu_env extends uvm_env;
   //==================================================================================
   lsu_agent m_agent;
   lsu_scoreboard m_scoreboard;
-  lsu_subscriber m_subscriber;
+  lsu_coverage_collector m_subscriber;
 
   //==================================================================================
   // Configurations
@@ -35,7 +35,7 @@ class lsu_env extends uvm_env;
     // ---------
     m_agent = lsu_agent::type_id::create("m_agent", this);
     m_scoreboard = lsu_scoreboard::type_id::create("m_scoreboard", this);
-    m_subscriber = lsu_subscriber#()::type_id::create("m_subscriber", this);
+    m_subscriber = lsu_coverage_collector#()::type_id::create("m_subscriber", this);
 
 
     // Configuration

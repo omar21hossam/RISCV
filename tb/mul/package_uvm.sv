@@ -3,7 +3,7 @@ package package_uvm;
     `include "uvm_macros.svh"
     `include "mul_sequence_item.svh"
     `include "mul_sequence.svh"
-    `include "mul_sequencer.svh"
+    `include "mul_coverage_collector.svh"
     `include "mul_monitor.svh"
     `include "mul_driver.svh"
     `include "mul_agent.svh"

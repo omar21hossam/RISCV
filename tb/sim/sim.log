@@ -1,0 +1,90 @@
+# vsim -wlf riscv.wlf -logfile sim.log -c -coverage -voptargs="+acc" work.riscv_top_tb -do "coverage save -onexit -directive -codeAll riscv.ucdb; run -all" 
+# Start time: 23:53:28 on May 08,2025
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# Support of the MGLS_LICENSE_FILE and LM_LICENSE_FILE licensing environment variables will be discontinued starting with the 2025.1 release. Please update to using the SALT_LICENSE_SERVER variable.
+# Please contact Siemens EDA Customer Support (https://support.sw.siemens.com/) for assistance.
+# ** Warning: (vopt-13408) Code coverage will be disabled for some DUs/packages/classes and source files.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=2.
+# //  Questa Sim-64
+# //  Version 2024.1 win64 Feb  1 2024
+# //
+# // Unpublished work. Copyright 2024 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading sv_std.std
+# Loading work.ALU_interface(fast)
+# Loading work.mul_if(fast)
+# Loading work.lsu_if(fast)
+# Loading work.riscv_intf(fast)
+# Loading work.cv32e40p_pkg(fast)
+# Loading work.riscv_pkg(fast)
+# Loading mtiUvm.uvm_pkg(fast)
+# Loading work.riscv_classes_pkg(fast)
+# Loading mtiUvm.questa_uvm_pkg(fast)
+# Loading work.riscv_top_tb(fast)
+# Loading work.riscv_intf(fast__2)
+# Loading work.mul_if(fast__2)
+# Loading work.ALU_interface(fast__2)
+# Loading work.lsu_if(fast__2)
+# Loading work.cv32e40p_apu_core_pkg(fast)
+# Loading work.cv32e40p_top(fast)
+# Loading work.cv32e40p_core(fast)
+# Loading work.cv32e40p_sleep_unit(fast)
+# Loading work.cv32e40p_clock_gate(fast)
+# Loading work.cv32e40p_if_stage(fast)
+# Loading work.cv32e40p_prefetch_buffer(fast)
+# Loading work.cv32e40p_prefetch_controller(fast)
+# Loading work.cv32e40p_fifo(fast)
+# Loading work.cv32e40p_obi_interface(fast)
+# Loading work.cv32e40p_aligner(fast)
+# Loading work.cv32e40p_compressed_decoder(fast)
+# Loading work.cv32e40p_fpu_pkg(fast)
+# Loading work.cv32e40p_id_stage(fast)
+# Loading work.cv32e40p_register_file(fast)
+# Loading work.cv32e40p_clock_gate(fast__1)
+# Loading work.cv32e40p_decoder(fast)
+# Loading work.cv32e40p_controller(fast)
+# Loading work.cv32e40p_int_controller(fast)
+# Loading work.cv32e40p_ex_stage(fast)
+# Loading work.cv32e40p_alu(fast)
+# Loading work.cv32e40p_popcnt(fast)
+# Loading work.cv32e40p_ff_one(fast)
+# Loading work.cv32e40p_alu_div(fast)
+# Loading work.cv32e40p_mult(fast)
+# Loading work.cv32e40p_load_store_unit(fast)
+# Loading work.cv32e40p_obi_interface(fast__1)
+# Loading work.cv32e40p_cs_registers(fast)
+# ** Error (suppressible): (vsim-12460) Illegal assignment to class work.riscv_classes_pkg::riscv_vsequ_base from class work.riscv_classes_pkg::riscv_vseqr
+#    Time: 0 ps  Iteration: 0  Region: /riscv_classes_pkg File: ../riscv_base_test.svh Line: 40
+# ** Error (suppressible): (vsim-8386) Illegal assignment to type 'enum reg[2:0] cv32e40p_pkg::mul_opcode_e' from type 'enum reg[2:0] riscv_pkg::mul_opcode_e': An enum variable may only be assigned the same enum typed variable or one of its values.
+#    Time: 0 ps  Iteration: 0  Region: /riscv_classes_pkg File: ../mul/mul_monitor.svh Line: 40
+# ** Error (suppressible): (vsim-8386) Illegal assignment to type 'enum reg[6:0] riscv_pkg::alu_opcode_e' from type 'enum reg[6:0] cv32e40p_pkg::alu_opcode_e': An enum variable may only be assigned the same enum typed variable or one of its values.
+#    Time: 0 ps  Iteration: 0  Region: /riscv_classes_pkg File: ../ALU_DIV/tb_files/alu_monitor.svh Line: 42
+# ** Error: (vsim-8754) Actual input arg. of type 'virtual ALU_interface' for formal 'value' of 'set' is not compatible with the formal's type 'virtual alu_intf_'.
+#    Time: 0 ps  Iteration: 0  Region: /riscv_classes_pkg File: ../riscv_base_test.svh Line: 69
+# ** Error: (vsim-13216) Illegal assignment to type 'virtual alu_intf_' from type 'virtual ALU_interface':
+#    Time: 0 ps  Iteration: 0  Region: /riscv_classes_pkg File: ../riscv_base_test.svh Line: 69
+# ** Error: (vsim-13216) Illegal assignment to type 'virtual alu_intf_' from type 'virtual ALU_interface':
+#    Time: 0 ps  Iteration: 0  Region: /riscv_classes_pkg File: ../riscv_base_test.svh Line: 66
+# ** Error: (vsim-8754) Actual input arg. of type 'virtual ALU_interface' for formal 'value' of 'set' is not compatible with the formal's type 'virtual alu_intf_'.
+#    Time: 0 ps  Iteration: 0  Region: /riscv_classes_pkg File: ../riscv_env.svh Line: 100
+# ** Error: (vsim-13216) Illegal assignment to type 'virtual alu_intf_' from type 'virtual ALU_interface':
+#    Time: 0 ps  Iteration: 0  Region: /riscv_classes_pkg File: ../riscv_env.svh Line: 100
+# ** Error: (vsim-13216) Illegal assignment to type 'virtual alu_intf_' from type 'virtual ALU_interface':
+#    Time: 0 ps  Iteration: 0  Region: /riscv_classes_pkg File: ../riscv_env.svh Line: 97
+# ** Error: (vsim-8754) Actual inout arg. of type 'virtual ALU_interface' for formal 'value' of 'get' is not compatible with the formal's type 'virtual alu_intf_'.
+#    Time: 0 ps  Iteration: 0  Region: /riscv_classes_pkg File: ../riscv_env.svh Line: 97
+# ** Error: (vsim-8754) Actual inout arg. of type 'virtual ALU_interface' for formal 'value' of 'get' is not compatible with the formal's type 'virtual alu_intf_'.
+#    Time: 0 ps  Iteration: 0  Region: /riscv_classes_pkg File: ../riscv_base_test.svh Line: 66
+# Error loading design
+# End time: 23:53:34 on May 08,2025, Elapsed time: 0:00:06
+# Errors: 11, Warnings: 2
