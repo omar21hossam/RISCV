@@ -1,9 +1,3 @@
-// package riscv_scoreboard_pkg;
-// import uvm_pkg::* ; 
-// `include "uvm_macros.svh"
-
-// import riscv_seq_item_pkg::*;
-
 class riscv_scoreboard extends uvm_scoreboard;
     `uvm_component_utils(riscv_scoreboard)
     
@@ -53,4 +47,3 @@ task run_phase(uvm_phase phase ) ;
         
 endclass
 
-//endpackage

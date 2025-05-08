@@ -1,9 +1,3 @@
-// package fetch_monitor_pkg ; 
-    
-// import uvm_pkg::* ; 
-//  import riscv_seq_item_pkg::*;
-//  `include "uvm_macros.svh"
-
 class fetch_monitor extends uvm_monitor  ; 
 
 `uvm_component_utils(fetch_monitor)
@@ -27,11 +21,6 @@ uvm_analysis_port#(riscv_seq_item)     mon_ap;
         super.build_phase(phase);
 
         mon_ap= new("mon_ap",this) ;
-        
-        //        if(!uvm_config_db#(virtual interface_clk)::get(this,"","clk_",vinterface_clk))
-        //  begin
-        //      `uvm_fatal(get_full_name(),"Error in get clk interface in test");
-        //  end
 
     endfunction
 
@@ -56,5 +45,3 @@ uvm_analysis_port#(riscv_seq_item)     mon_ap;
     endtask
 
         endclass
-
-//endpackage
