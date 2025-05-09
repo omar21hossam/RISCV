@@ -1,12 +1,10 @@
-
-  import cv32e40p_pkg::*;
 class mul_seq_item extends uvm_sequence_item;
   `uvm_object_utils(mul_seq_item)
   // Declare the data members
 rand logic                   rst_n;
 // input signals
 rand logic                   enable_i;
-rand mul_opcode_e            operator_i;
+rand riscv_pkg::mul_opcode_e            operator_i;
 
 rand logic [1:0]             short_signed_i;
 rand logic                   short_subword_i;

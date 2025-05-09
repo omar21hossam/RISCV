@@ -157,6 +157,8 @@ class riscv_env extends uvm_env;
 
     // MUL
     //------------------------------------------
+    m_mul_agent.monitor.analysis_port.connect(m_mul_scoreboard.sc_analysis_imp);
+    m_mul_agent.monitor.analysis_port.connect(m_mul_cov_collector.analysis_export);
 
     // LSU
     //------------------------------------------
