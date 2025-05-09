@@ -1,10 +1,11 @@
 # walid pathes
-set TB_path  "C:\Users\Wello\Desktop\material\SI Academy\SV Course\PROJECTS\RISCV\code\RISCV\tb\ALU_DIV\tb_files"
-set dut_path "C:\Users\Wello\Desktop\material\SI Academy\SV Course\PROJECTS\RISCV\code\RISCV\rtl"
+#set TB_path  "C:\Users\Wello\Desktop\material\SI Academy\SV Course\PROJECTS\RISCV\code\RISCV\tb\ALU_DIV\tb_files"
+#set dut_path "C:\Users\Wello\Desktop\material\SI Academy\SV Course\PROJECTS\RISCV\code\RISCV\rtl"
 
 # osama pathes
-# set TB_path  "C:\Users\Wello\Desktop\material\SI Academy\SV Course\PROJECTS\RISCV\code\RISCV\tb\ALU_DIV\tb_files"
-# set dut_path "C:\Users\Wello\Desktop\material\SI Academy\SV Course\PROJECTS\RISCV\code\RISCV\rtl"
+ set TB_path  "O:\COURSES\SI Vision\Projects\RISCV\repo\tb\ALU_DIV\tb_files"
+ set dut_path "O:\COURSES\SI Vision\Projects\RISCV\repo\rtl"
+
 
 # Directory to store coverage databases
 # set cov_dir "coverage_results"
