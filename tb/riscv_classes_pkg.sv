@@ -10,6 +10,7 @@ package riscv_classes_pkg;
   //==================================================================================
   `include "ALU_DIV/tb_files/alu_sequence_item.svh"
   `include "ALU_DIV/tb_files/alu_driver.svh"
+  `include "ALU_DIV/tb_files/alu_sequencer.svh"
   `include "ALU_DIV/tb_files/alu_monitor.svh"
   `include "ALU_DIV/tb_files/alu_config.svh"
   `include "ALU_DIV/tb_files/alu_agent.svh"
