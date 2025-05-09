@@ -21,6 +21,6 @@ class fetch_seq_item extends uvm_sequence_item;
   logic clear_instr_valid_i ;  // clear instruction valid bit in IF/ID pipe
   logic pc_set_i ;  // set the program counter to a new value
   logic instr_valid_id_o ;
-  logic instr_rdata_id_o;
+  logic  [31:0] instr_rdata_id_o;
 
  endclass :fetch_seq_item

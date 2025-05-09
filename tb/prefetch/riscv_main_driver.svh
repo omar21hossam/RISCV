@@ -67,7 +67,7 @@ else    riscv_vintf_.instr_rdata_i  <=seq_item_rsp.instr_mem[riscv_vintf_.instr_
 
 /********************************************************************/
      begin
- @(riscv_vintf_.ckb_p)
+@( posedge riscv_vintf_.clk)
         begin
           riscv_vintf_.boot_addr_i         <= seq_item_rsp.boot_addr_i;
           riscv_vintf_.mtvec_addr_i        <= seq_item_rsp.mtvec_addr_i;

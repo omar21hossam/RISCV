@@ -13,6 +13,7 @@ module riscv_top_tb ();
     bit clk = 1'b0;
 
   riscv_intf riscv_intf_ (clk);
+  fetch_interface fetch_interface_ (clk);
  
   // Prefetch interface instantiation
   // ALU-DIV interface instasntiation
@@ -70,6 +71,7 @@ module riscv_top_tb ();
   //==================================================================================
   initial begin
     uvm_config_db#(virtual riscv_intf)::set(null, "uvm_test_top", "main_intf", riscv_intf_);
+       
     // Prefetch configuration setup
     // ALU-DIV configuration setup
     // MUL configuration setup

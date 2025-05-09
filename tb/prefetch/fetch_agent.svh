@@ -2,7 +2,7 @@ class fetch_agent extends uvm_agent;
 
   `uvm_component_utils(fetch_agent)   // registeration in the factory 
 
-  uvm_analysis_port#(riscv_seq_item)     agt_ap;
+  uvm_analysis_port#(fetch_seq_item)     agt_ap;
 
    fetch_config_obj  cfg;  
     riscv_driver drv;   
@@ -34,7 +34,7 @@ class fetch_agent extends uvm_agent;
     
     super.connect_phase(phase) ;
       drv.riscv_vintf_ =  cfg.riscv_vintf_ ; 
-    mon.riscv_vintf_ =  cfg.riscv_vintf_   ;
+    mon.fetch_interface_ =  cfg.fetch_interface_   ;
     drv.seq_item_port.connect(sqr.seq_item_export);
     mon.mon_ap.connect(agt_ap)   ;
     

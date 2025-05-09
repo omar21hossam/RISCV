@@ -3,10 +3,10 @@ class fetch_monitor extends uvm_monitor  ;
 `uvm_component_utils(fetch_monitor)
     
 
- virtual   riscv_intf    riscv_vintf_ ;
- riscv_seq_item      seq_item ;
+ virtual   fetch_interface    fetch_interface_ ;
+ fetch_seq_item      seq_item ;
 
-uvm_analysis_port#(riscv_seq_item)     mon_ap;
+uvm_analysis_port#(fetch_seq_item)     mon_ap;
 
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -29,14 +29,14 @@ uvm_analysis_port#(riscv_seq_item)     mon_ap;
     super.run_phase(phase) ; 
 
    forever begin
-    seq_item =riscv_seq_item::type_id::create("seq_item") ; 
+    seq_item =fetch_seq_item::type_id::create("seq_item") ; 
 
-      @(negedge riscv_vintf_.clk)
+      @(negedge fetch_interface_.clk)
       begin
-      seq_item.rst_ni  = riscv_vintf_.rst_ni;
+      seq_item.rst_ni  = fetch_interface_.rst_ni;
 
       end
-    @(riscv_vintf_.ckb_p)
+   @( posedge fetch_interface_.clk)
       begin
         mon_ap.write(seq_item) ;
      end
