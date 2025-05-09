@@ -13,7 +13,7 @@ module riscv_top_tb ();
     bit clk = 1'b0;
 
   riscv_intf riscv_intf_ (clk);
-  fetch_interface fetch_interface_ (clk);
+ // fetch_interface fetch_interface_ (clk);
  
   // Prefetch interface instantiation
   // ALU-DIV interface instasntiation
@@ -56,7 +56,8 @@ module riscv_top_tb ();
       .fetch_enable_i     (riscv_intf_.fetch_enable_i),
       .core_sleep_o       (riscv_intf_.core_sleep_o)
   );
-
+//`include "riscv_assign.svh"
+bind  cv32e40p_if_stage :  DUT.core_i.if_stage_i fetch_interface fetch_interface_ (.*)  ;
   // =====================================================================
   // Connecting the interface to the DUT
   // ======================================================================
@@ -71,7 +72,8 @@ module riscv_top_tb ();
   //==================================================================================
   initial begin
     uvm_config_db#(virtual riscv_intf)::set(null, "uvm_test_top", "main_intf", riscv_intf_);
-       
+      uvm_config_db#(virtual fetch_interface)::set(null, "uvm_test_top", "fetch_intf", DUT.core_i.if_stage_i.fetch_interface_);
+           
     // Prefetch configuration setup
     // ALU-DIV configuration setup
     // MUL configuration setup

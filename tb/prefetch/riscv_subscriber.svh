@@ -1,9 +1,9 @@
 class riscv_subscriber extends uvm_component ;
     `uvm_component_utils(riscv_subscriber)
    
-    riscv_seq_item  seq_item;
-    uvm_analysis_export#(riscv_seq_item) cov_export ;
-uvm_tlm_analysis_fifo#(riscv_seq_item) cov_fifo ; 
+    fetch_seq_item  seq_item;
+    uvm_analysis_export#(fetch_seq_item) cov_export ;
+uvm_tlm_analysis_fifo#(fetch_seq_item) cov_fifo ; 
 covergroup riscv_CP;
 
 

@@ -2,9 +2,10 @@ class riscv_scoreboard extends uvm_scoreboard;
     `uvm_component_utils(riscv_scoreboard)
     
 
-uvm_analysis_export#(riscv_seq_item) sb_export ;
-uvm_tlm_analysis_fifo#(riscv_seq_item) sb_fifo ; 
-riscv_seq_item seq_item  ;
+
+uvm_analysis_export#(fetch_seq_item) sb_export ;
+uvm_tlm_analysis_fifo#(fetch_seq_item) sb_fifo ; 
+fetch_seq_item seq_item  ;
 
     function new(string name = "riscv_scoreboard", uvm_component parent = null);
         super.new(name, parent);
@@ -26,10 +27,19 @@ task run_phase(uvm_phase phase ) ;
     super.run_phase(phase) ; 
 
       forever begin
-   
-    
-
       sb_fifo.get(seq_item) ; 
+ /* check inst_fetch done correctly from: 
+ mem(driver) >- prefetch buffer >- aligner >- c.decoder >- ifstage op
+ */
+
+ 
+//seq_item
+
+
+
+
+
+
       end
 
       endtask

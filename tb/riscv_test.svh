@@ -6,7 +6,8 @@ class riscv_base_test extends uvm_test;
   fetch_config_obj      cfg;
 
   virtual riscv_intf    riscv_intf_;
-  virtual interface_clk interface_clk_;
+   virtual   fetch_interface    fetch_interface_ ;
+ 
   function new(string name = "riscv_base_test", uvm_component parent = null);
     super.new(name, parent);
   endfunction
@@ -26,6 +27,10 @@ class riscv_base_test extends uvm_test;
 
     if (!uvm_config_db#(virtual riscv_intf)::get(this, "", "main_intf", cfg.riscv_vintf_))
       `uvm_fatal(get_full_name(), "Error in get interface in test");
+
+    if (!uvm_config_db#(virtual fetch_interface)::get(this, "", "fetch_intf", cfg.fetch_interface_))
+      `uvm_fatal(get_full_name(), "Error in get interface in test");
+
 
 
     uvm_config_db#(fetch_config_obj)::set(this, "env", "CFG", cfg);

@@ -18,6 +18,7 @@ package riscv_classes_pkg;
   `include "uvm_macros.svh"  
   `include "prefetch/riscv_config_obj.svh"
   `include "prefetch/riscv_seqitem.svh"
+  `include "prefetch/fetch_seq_item.svh"
   `include "prefetch/riscv_sequence_b.svh"
   `include "prefetch/riscv_sequencer.svh"
   `include "prefetch/riscv_main_driver.svh"

@@ -33,7 +33,6 @@ uvm_analysis_port#(fetch_seq_item)     mon_ap;
 
       @(negedge fetch_interface_.clk)
       begin
-      seq_item.rst_ni  = fetch_interface_.rst_ni;
 
       end
    @( posedge fetch_interface_.clk)
