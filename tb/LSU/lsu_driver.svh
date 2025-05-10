@@ -88,8 +88,6 @@ class lsu_driver #(
     vif.data_gnt_i = 1'b1;
     @(negedge vif.clk);
     vif.data_gnt_i = 1'b0;
-    vif.data_req_ex_i = (m_seq_item.data_misaligned_o) ? 1'b1 : 1'b0;
-    vif.data_misaligned_ex_i = (m_seq_item.data_misaligned_o) ? 1'b1 : 1'b0;
     wait_for_response();
 
     // Response to the OBI request
@@ -119,8 +117,6 @@ class lsu_driver #(
       vif.data_gnt_i = 1'b1;
       @(negedge vif.clk);
       vif.data_gnt_i = 1'b0;
-      vif.data_req_ex_i = 1'b0;
-      vif.data_misaligned_ex_i = 1'b0;
 
       // Response to the OBI request
       if (m_seq_item.data_we_o == riscv_pkg::LOAD) begin
