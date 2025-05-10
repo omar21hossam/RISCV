@@ -1,14 +1,22 @@
 class riscv_config_obj extends uvm_object;
-  `uvm_object_utils(fetch_config_obj);
+
+  //==================================================================================
+  // Registeration
+  //==================================================================================
+  `uvm_object_utils(riscv_config_obj);
 
 
 
-  //enum curries the agent state {active or passive}
+  //==================================================================================
+  // Agent State Enum
+  //==================================================================================
   uvm_active_passive_enum active;
 
-  /////////////////////////function new//////////////////////// 
-  function new(string name = "fetch_config_obj");
+  //==================================================================================
+  // Function: Constructor
+  //==================================================================================
+  function new(string name = "riscv_config_obj");
     super.new(name);
   endfunction
 
-endclass : fetch_config_obj
+endclass

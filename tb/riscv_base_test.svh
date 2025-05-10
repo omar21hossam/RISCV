@@ -62,8 +62,8 @@ class riscv_base_test extends uvm_test;
     uvm_config_db#(mul_config)::set(this, "m_env", "mul_config", m_mul_config);
 
     // top interface configuration setup
-    if (!uvm_config_db#(virtual riscv_intf)::get(this, "", "main_intf", riscv_vintf_))
-      `uvm_fatal(get_full_name(), "Error in get interface in test");begin
+    if (!uvm_config_db#(virtual riscv_intf)::get(this, "", "main_intf", riscv_vintf_)) begin
+      `uvm_fatal(get_full_name(), "Error in get interface in test");
     end else begin
       uvm_config_db#(virtual riscv_intf)::set(this, "m_env", "main_intf", riscv_vintf_);
     end

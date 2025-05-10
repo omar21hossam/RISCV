@@ -21,7 +21,7 @@ class mul_driver extends uvm_driver #(mul_seq_item);
   function void reset();
     vif.rst_n <= 0;
     vif.enable_i <= 0;
-    vif.operator_i <= MUL_I;
+    vif.operator_i <= riscv_pkg::MUL_I;
 
     vif.short_signed_i <= 0;
     vif.short_subword_i <= 0;
