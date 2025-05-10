@@ -4,7 +4,6 @@ package riscv_classes_pkg;
   //==================================================================================
   import uvm_pkg::*;
   `include "uvm_macros.svh"
-  `include "riscv_sequence_item.svh"
 
   //==================================================================================
   // ALU classes inclusion
@@ -56,11 +55,11 @@ package riscv_classes_pkg;
   // RISCV TOP classes inclusion
   //==================================================================================
   `include "riscv_config_obj.svh"
-  `include "riscv_main_sequencer.svh"
   `include "riscv_vseqr.svh"
   `include "riscv_base_sequence.svh"
   `include "riscv_vsequ_base.svh"
   `include "riscv_vsequ_arith.svh"
+  `include "riscv_main_sequencer.svh" 
   `include "riscv_main_driver.svh"
   `include "riscv_main_agent.svh"
   `include "riscv_env.svh"

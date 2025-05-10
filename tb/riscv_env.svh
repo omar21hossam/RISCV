@@ -11,17 +11,17 @@ class riscv_env extends uvm_env;
   //==================================================================================
   // Configuration Classes
   //-----------------------------------------------------------------------------------
-  riscv_config_obj         env_config;
-  alu_config               m_alu_config;
-  mul_config               m_mul_config;
+  riscv_config_obj       env_config;
+  alu_config             m_alu_config;
+  mul_config             m_mul_config;
 
   // Agents
   //-----------------------------------------------------------------------------------
-  fetch_agent              m_fetch_agent;
-  mul_agent                m_mul_agent;
-  lsu_agent                m_lsu_agent;
-  alu_agent                m_alu_agent;
-  riscv_main_agent         m_riscv_main_agent;
+  fetch_agent            m_fetch_agent;
+  mul_agent              m_mul_agent;
+  lsu_agent              m_lsu_agent;
+  alu_agent              m_alu_agent;
+  riscv_main_agent       m_riscv_main_agent;
   // Coverage Collectors
   //-----------------------------------------------------------------------------------
   lsu_coverage_collector   m_lsu_cov_collector;
@@ -30,23 +30,22 @@ class riscv_env extends uvm_env;
   fetch_coverage_collector m_fetch_coverage_collector;
   // Scoreboards
   //-----------------------------------------------------------------------------------
-  lsu_scoreboard           m_lsu_scoreboard;
-  alu_scoreboard           m_alu_scoreboard;
-  mul_scoreboard           m_mul_scoreboard;
-  fetch_scoreboard         m_fetch_scoreboard;
+  lsu_scoreboard         m_lsu_scoreboard;
+  alu_scoreboard         m_alu_scoreboard;
+  mul_scoreboard         m_mul_scoreboard;
+  fetch_scoreboard       m_fetch_scoreboard;
   // Virtual Sequencer
   //-----------------------------------------------------------------------------------
-  riscv_vseqr              m_vseqr;
+  riscv_vseqr            m_vseqr;
 
   //==================================================================================
   // Interfaces
   //==================================================================================
-  virtual lsu_if           lsu_vif;
-  virtual ALU_interface    alu_intf_;
-  virtual mul_if           mul_intf;
-  virtual riscv_intf       riscv_intf_;
-  virtual fetch_interface  fetch_interface_;
-
+  virtual lsu_if            lsu_vif;
+  virtual ALU_interface     alu_intf_;
+  virtual mul_if            mul_intf;
+  virtual riscv_intf        riscv_intf_;
+  virtual fetch_interface   fetch_interface_ ;
   //==================================================================================
   // Function: Constructor
   //==================================================================================
@@ -73,7 +72,7 @@ class riscv_env extends uvm_env;
     */
     // Agents
     //------------------------------------------
-    m_riscv_main_agent = riscv_main_agent::type_id::create("m_riscv_main_agent", this);
+    m_riscv_main_agent =riscv_main_agent::type_id::create("m_riscv_main_agent", this)
     m_vseqr = riscv_vseqr::type_id::create("m_vseqr", this);
     m_fetch_agent = fetch_agent::type_id::create("m_fetch_agent", this);
     m_alu_agent = alu_agent::type_id::create("m_alu_agent", this);
@@ -86,8 +85,7 @@ class riscv_env extends uvm_env;
     m_lsu_cov_collector = lsu_coverage_collector#()::type_id::create("m_lsu_cov_collector", this);
     m_alu_cov_collector = alu_coverage_collector::type_id::create("m_alu_cov_collector", this);
     m_mul_cov_collector = mul_coverage_collector::type_id::create("m_mul_cov_collector", this);
-    m_fetch_coverage_collector =
-        fetch_coverage_collector::type_id::create("m_fetch_coverage_collector", this);
+    m_fetch_coverage_collector = fetch_coverage_collector::type_id::create("m_fetch_coverage_collector", this);
 
     // Scoreboards
     //------------------------------------------
@@ -124,28 +122,24 @@ class riscv_env extends uvm_env;
     end else begin
       uvm_config_db#(mul_config)::set(this, "m_mul_agent", "mul_config", m_mul_config);
     end
-    //****************************************************************************************
+//****************************************************************************************
     // RISCV MAIN intf
     //------------------------------------------
-
-    if (!uvm_config_db#(virtual riscv_intf)::get(this, "", "main_intf", riscv_vintf_)) begin
-      `uvm_fatal(get_full_name(), "Error in get interface in test");
+ 
+    if (!uvm_config_db#(virtual riscv_intf)::get(this, "", "main_intf", riscv_vintf_))
+      `uvm_fatal(get_full_name(), "Error in get interface in test");begin
     end else begin
-      uvm_config_db#(virtual riscv_intf)::set(this, "m_riscv_main_agent", "main_intf",
-                                              riscv_vintf_);
+      uvm_config_db#(virtual riscv_intf)::set(this, "m_riscv_main_agent", "main_intf", riscv_vintf_);
     end
 
 
-    // FETCH intf
+   // FETCH intf
     //------------------------------------------
-    if (!uvm_config_db#(virtual fetch_interface)::get(
-            this, "", "fetch_intf", fetch_interface_
-        )) begin
+    if (!uvm_config_db#(virtual fetch_interface)::get(this, "", "fetch_intf", fetch_interface_)) begin
       `uvm_fatal(get_full_name(), "Error in get alu interface in test");
     end else begin
-      uvm_config_db#(virtual fetch_interface)::set(this, "m_fetch_agent", "fetch_intf",
-                                                   fetch_interface_);
-    end
+      uvm_config_db#(virtual fetch_interface)::set(this, "m_fetch_agent", "fetch_intf", fetch_interface_);
+    end 
     // ALU intf
     //------------------------------------------
     if (!uvm_config_db#(virtual alu_intf_)::get(this, "", "alu_intf_top2test", alu_intf_)) begin

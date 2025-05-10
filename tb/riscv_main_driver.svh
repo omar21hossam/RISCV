@@ -1,39 +1,22 @@
 class riscv_main_driver extends uvm_driver #(riscv_sequence_item);
-  //==================================================================================
-  // Registeration
-  //==================================================================================
+
   `uvm_component_utils(riscv_main_driver)
 
-  //==================================================================================
-  // Interfaces
-  //==================================================================================
-  virtual riscv_intf  riscv_vintf_;
-
-  //==================================================================================
-  // Classes Handles
-  //==================================================================================
+  virtual riscv_intf riscv_vintf_;
   riscv_sequence_item seq_item_rsp;  //driver will respond 
-
-  //==================================================================================
-  // Function: Constructor
-  //==================================================================================
   function new(string name = "riscv_main_driver", uvm_component parent = null);
     super.new(name, parent);
   endfunction
 
-  //==================================================================================
-  // Function: Build Phase
-  //==================================================================================
-  function void build_phase(uvm_phase phase);
+
+function void build_phase(uvm_phase phase);
     super.build_phase(phase);
     if (!uvm_config_db#(virtual riscv_vintf)::get(this, "", "main_intf", riscv_vintf_)) begin
       `uvm_fatal(get_name(), "Failed to get configuration for riscv intf in driver");
     end
   endfunction
 
-  //==================================================================================
-  // Function: Reset
-  //==================================================================================
+
   function void reset();
     riscv_vintf_.rst_ni              <= 0;
     riscv_vintf_.boot_addr_i         <= 0;
@@ -52,20 +35,24 @@ class riscv_main_driver extends uvm_driver #(riscv_sequence_item);
 
   endfunction
 
-  //==================================================================================
-  // task: Run Phase
-  //==================================================================================
+
   task run_phase(uvm_phase phase);
 
     super.run_phase(phase);
+
     reset();
     #(3 * riscv_pkg::CLK_FREQ);
     forever begin
+
+
+
+
       seq_item_rsp = riscv_sequence_item::type_id::create("seq_item_rsp");
       seq_item_port.get_next_item(seq_item_rsp);
       riscv_vintf_.rst_ni <= seq_item_rsp.rst_ni;
       fork
         /************************** memory obi ************************/
+
         begin
           @(posedge riscv_vintf_.clk) begin
             riscv_vintf_.instr_rvalid_i <= 0;
@@ -80,7 +67,9 @@ class riscv_main_driver extends uvm_driver #(riscv_sequence_item);
               end else
                 riscv_vintf_.instr_rdata_i <= seq_item_rsp.instr_mem[riscv_vintf_.instr_addr_o];
             end
+
           end
+
         end
 
         /********************************************************************/
@@ -100,6 +89,12 @@ class riscv_main_driver extends uvm_driver #(riscv_sequence_item);
         end
       join
       seq_item_port.item_done();
+
+
     end
+
+
   endtask
+
+
 endclass
