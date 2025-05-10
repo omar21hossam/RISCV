@@ -26,7 +26,7 @@ class riscv_main_driver extends uvm_driver #(riscv_sequence_item);
   //==================================================================================
   function void build_phase(uvm_phase phase);
     super.build_phase(phase);
-    if (!uvm_config_db#(virtual riscv_vintf)::get(this, "", "main_intf", riscv_vintf_)) begin
+    if (!uvm_config_db#(virtual riscv_intf)::get(this, "", "main_intf", riscv_vintf_)) begin
       `uvm_fatal(get_name(), "Failed to get configuration for riscv intf in driver");
     end
   endfunction

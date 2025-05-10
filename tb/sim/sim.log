@@ -69,21 +69,21 @@
 #    Time: 0 ps  Iteration: 0  Region: /riscv_classes_pkg File: ../mul/mul_monitor.svh Line: 40
 # ** Error (suppressible): (vsim-8386) Illegal assignment to type 'enum reg[6:0] riscv_pkg::alu_opcode_e' from type 'enum reg[6:0] cv32e40p_pkg::alu_opcode_e': An enum variable may only be assigned the same enum typed variable or one of its values.
 #    Time: 0 ps  Iteration: 0  Region: /riscv_classes_pkg File: ../ALU_DIV/tb_files/alu_monitor.svh Line: 42
-# ** Error: (vsim-8754) Actual input arg. of type 'virtual ALU_interface' for formal 'value' of 'set' is not compatible with the formal's type 'virtual alu_intf_'.
+# ** Error: (vsim-8754) Actual input arg. of type 'virtual ALU_interface' for formal 'value' of 'set' is not compatible with the formal's type 'virtual ALU_interface'.
 #    Time: 0 ps  Iteration: 0  Region: /riscv_classes_pkg File: ../riscv_base_test.svh Line: 69
-# ** Error: (vsim-13216) Illegal assignment to type 'virtual alu_intf_' from type 'virtual ALU_interface':
+# ** Error: (vsim-13216) Illegal assignment to type 'virtual ALU_interface' from type 'virtual ALU_interface':
 #    Time: 0 ps  Iteration: 0  Region: /riscv_classes_pkg File: ../riscv_base_test.svh Line: 69
-# ** Error: (vsim-13216) Illegal assignment to type 'virtual alu_intf_' from type 'virtual ALU_interface':
+# ** Error: (vsim-13216) Illegal assignment to type 'virtual ALU_interface' from type 'virtual ALU_interface':
 #    Time: 0 ps  Iteration: 0  Region: /riscv_classes_pkg File: ../riscv_base_test.svh Line: 66
-# ** Error: (vsim-8754) Actual input arg. of type 'virtual ALU_interface' for formal 'value' of 'set' is not compatible with the formal's type 'virtual alu_intf_'.
+# ** Error: (vsim-8754) Actual input arg. of type 'virtual ALU_interface' for formal 'value' of 'set' is not compatible with the formal's type 'virtual ALU_interface'.
 #    Time: 0 ps  Iteration: 0  Region: /riscv_classes_pkg File: ../riscv_env.svh Line: 100
-# ** Error: (vsim-13216) Illegal assignment to type 'virtual alu_intf_' from type 'virtual ALU_interface':
+# ** Error: (vsim-13216) Illegal assignment to type 'virtual ALU_interface' from type 'virtual ALU_interface':
 #    Time: 0 ps  Iteration: 0  Region: /riscv_classes_pkg File: ../riscv_env.svh Line: 100
-# ** Error: (vsim-13216) Illegal assignment to type 'virtual alu_intf_' from type 'virtual ALU_interface':
+# ** Error: (vsim-13216) Illegal assignment to type 'virtual ALU_interface' from type 'virtual ALU_interface':
 #    Time: 0 ps  Iteration: 0  Region: /riscv_classes_pkg File: ../riscv_env.svh Line: 97
-# ** Error: (vsim-8754) Actual inout arg. of type 'virtual ALU_interface' for formal 'value' of 'get' is not compatible with the formal's type 'virtual alu_intf_'.
+# ** Error: (vsim-8754) Actual inout arg. of type 'virtual ALU_interface' for formal 'value' of 'get' is not compatible with the formal's type 'virtual ALU_interface'.
 #    Time: 0 ps  Iteration: 0  Region: /riscv_classes_pkg File: ../riscv_env.svh Line: 97
-# ** Error: (vsim-8754) Actual inout arg. of type 'virtual ALU_interface' for formal 'value' of 'get' is not compatible with the formal's type 'virtual alu_intf_'.
+# ** Error: (vsim-8754) Actual inout arg. of type 'virtual ALU_interface' for formal 'value' of 'get' is not compatible with the formal's type 'virtual ALU_interface'.
 #    Time: 0 ps  Iteration: 0  Region: /riscv_classes_pkg File: ../riscv_base_test.svh Line: 66
 # Error loading design
 # End time: 23:53:34 on May 08,2025, Elapsed time: 0:00:06

@@ -28,6 +28,7 @@ class riscv_env extends uvm_env;
   alu_coverage_collector   m_alu_cov_collector;
   mul_coverage_collector   m_mul_cov_collector;
   fetch_coverage_collector m_fetch_coverage_collector;
+
   // Scoreboards
   //-----------------------------------------------------------------------------------
   lsu_scoreboard           m_lsu_scoreboard;
@@ -62,15 +63,6 @@ class riscv_env extends uvm_env;
 
     // Creation
     //-----------------------------------------------------------------------------------
-
-    // Configs
-    //------------------------------------------
-    /*
-    m_alu_config = alu_config::type_id::create("m_alu_config", this);
-    m_mul_config = mul_config::type_id::create("m_mul_config", this);
-    env_config   = riscv_config_obj::type_id::create("env_config", this);
-
-    */
     // Agents
     //------------------------------------------
     m_riscv_main_agent = riscv_main_agent::type_id::create("m_riscv_main_agent", this);
@@ -102,7 +94,6 @@ class riscv_env extends uvm_env;
 
     // Configuration
     //-----------------------------------------------------------------------------------
-
     // riscv Config Class
     //------------------------------------------
     if (!uvm_config_db#(riscv_config_obj)::get(this, "", "CFG", env_config))
@@ -124,17 +115,14 @@ class riscv_env extends uvm_env;
     end else begin
       uvm_config_db#(mul_config)::set(this, "m_mul_agent", "mul_config", m_mul_config);
     end
-    //****************************************************************************************
-    // RISCV MAIN intf
-    //------------------------------------------
 
-    if (!uvm_config_db#(virtual riscv_intf)::get(this, "", "main_intf", riscv_vintf_)) begin
+    // RISCV MAIN interface
+    //------------------------------------------
+    if (!uvm_config_db#(virtual riscv_intf)::get(this, "", "main_intf", riscv_intf_)) begin
       `uvm_fatal(get_full_name(), "Error in get interface in test");
     end else begin
-      uvm_config_db#(virtual riscv_intf)::set(this, "m_riscv_main_agent", "main_intf",
-                                              riscv_vintf_);
+      uvm_config_db#(virtual riscv_intf)::set(this, "m_riscv_main_agent", "main_intf", riscv_intf_);
     end
-
 
     // FETCH intf
     //------------------------------------------
@@ -148,10 +136,10 @@ class riscv_env extends uvm_env;
     end
     // ALU intf
     //------------------------------------------
-    if (!uvm_config_db#(virtual alu_intf_)::get(this, "", "alu_intf_top2test", alu_intf_)) begin
+    if (!uvm_config_db#(virtual ALU_interface)::get(this, "", "alu_intf_top2test", alu_intf_)) begin
       `uvm_fatal(get_full_name(), "Failed to get configuration for alu_if");
     end else begin
-      uvm_config_db#(virtual alu_intf_)::set(this, "m_alu_agent", "alu_intf_test2env", alu_intf_);
+      uvm_config_db#(virtual ALU_interface)::set(this, "m_alu_agent", "alu_intf_test2env", alu_intf_);
     end
 
     // MUL intf
@@ -184,12 +172,13 @@ class riscv_env extends uvm_env;
     m_fetch_agent.agt_ap.connect(m_fetch_coverage_collector.cov_export);
     // ALU
     //------------------------------------------
-    m_alu_agent.monitor.analysis_port.connect(m_alu_scoreboard.sc_analysis_imp);
+    m_alu_agent.m_monitor.analysis_port.connect(m_alu_scoreboard.sc_analysis_imp);
+    m_alu_agent.m_monitor.analysis_port.connect(m_alu_cov_collector.alu_mon2cov);
 
     // MUL
     //------------------------------------------
-    m_mul_agent.monitor.analysis_port.connect(m_mul_scoreboard.sc_analysis_imp);
-    m_mul_agent.monitor.analysis_port.connect(m_mul_cov_collector.analysis_export);
+    m_mul_agent.monitor.mon_analysis_port.connect(m_mul_scoreboard.sc_analysis_imp);
+    m_mul_agent.monitor.mon_analysis_port.connect(m_mul_cov_collector.analysis_export);
 
     // LSU
     //------------------------------------------
@@ -198,7 +187,7 @@ class riscv_env extends uvm_env;
 
     // Virtual Sequencers Connections
     //-----------------------------------------------------------------------------------
-    m_vseqr.m_instr_seqr = m_fetch_agent.m_sequencer;
+    m_vseqr.m_instr_seqr = m_riscv_main_agent.m_sequencer;
     m_vseqr.m_data_seqr  = m_lsu_agent.m_sequencer;
   endfunction
 

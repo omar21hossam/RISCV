@@ -6,7 +6,7 @@ interface mul_if (
   // input signals
   logic                          enable_i;
   // operator_i is used for mul, mac, and dot operations
-  riscv_pkg::mul_opcode_e        operator_i;
+  cv32e40p_pkg::mul_opcode_e        operator_i;
 
   logic                   [ 1:0] short_signed_i;
   logic                          short_subword_i;

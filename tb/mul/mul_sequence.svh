@@ -25,7 +25,7 @@ class mul_seq extends uvm_sequence #(mul_seq_item);
     start_item(seq_item);
     seq_item.rst_n = 1;
     seq_item.enable_i = 1;
-    seq_item.operator_i = MUL_H;
+    seq_item.operator_i = riscv_pkg::MUL_H;
 
     seq_item.short_subword_i = 1'b0;
     seq_item.short_signed_i = 2'b01;

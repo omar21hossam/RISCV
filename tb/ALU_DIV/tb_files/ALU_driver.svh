@@ -28,7 +28,7 @@ class alu_driver extends uvm_driver #(alu_seq_item);
     `uvm_info(get_type_name(), "Resetting input signals", UVM_LOW)
     vif.vector_mode_i = 'b0;
     vif.enable_i = 'b0;
-    vif.operator_i = 'b0;
+    vif.operator_i = cv32e40p_pkg::ALU_ADD;
     vif.operand_a_i = 'b0;
     vif.operand_b_i = 'b0;
     vif.ex_ready_i = 'b0;

@@ -1,35 +1,38 @@
-`timescale 1ns/1ps 
-interface ALU_interface(input bit core_clk,rst_n);
-import cv32e40p_pkg::*;
-//==============================================
-//Description: Interface signals
-//==============================================
-logic enable_i;           //ALU enable signal  [used on DIV module]***
-alu_opcode_e operator_i;  //ALU operation
-logic ex_ready_i;         //EX stage ready for next result  [used on DIV module]***
-logic [31:0] operand_a_i,operand_b_i;  //input operands
-logic [1:0] vector_mode_i; 
-//-------------------------------------------------------------------
-logic [31:0] result_o;				          //output result
-logic comparison_result_o;					  //Comparison result(e.g.,for SLT)
-logic ready_o;								  //Result valid/ready handshake to EX stage [used on DIV module]***
+`timescale 1ns / 1ps
+interface ALU_interface (
+    input bit core_clk
+);
+  import cv32e40p_pkg::*;
+  //==============================================
+  //Description: Interface signals
+  //==============================================
+  logic        rst_n;
+  logic        enable_i;  //ALU enable signal  [used on DIV module]***
+  alu_opcode_e operator_i;  //ALU operation
+  logic        ex_ready_i;  //EX stage ready for next result  [used on DIV module]***
+  logic [31:0] operand_a_i, operand_b_i;  //input operands
+  logic [ 1:0] vector_mode_i;
+  //-------------------------------------------------------------------
+  logic [31:0] result_o;  //output result
+  logic        comparison_result_o;  //Comparison result(e.g.,for SLT)
+  logic        ready_o;  //Result valid/ready handshake to EX stage [used on DIV module]***
 
-//==============================================
-//Description: Clocking block
-//==============================================
+  //==============================================
+  //Description: Clocking block
+  //==============================================
   clocking cb @(posedge core_clk);
-	default input #2ns output #2ns ; //this direction related to the testbench
-	output enable_i ,operator_i ,ex_ready_i;
-        output operand_a_i ,operand_b_i;
-	input  result_o , comparison_result_o ,ready_o;
-  endclocking:cb 
-//==============================================
-//Description: internal signals
-//==============================================
-//==============================================
-//Description: Assertions and Covergroups
-//==============================================
-endinterface:ALU_interface
+    default input #2ns output #2ns;  //this direction related to the testbench
+    output enable_i, operator_i, ex_ready_i;
+    output operand_a_i, operand_b_i;
+    input result_o, comparison_result_o, ready_o;
+  endclocking : cb
+  //==============================================
+  //Description: internal signals
+  //==============================================
+  //==============================================
+  //Description: Assertions and Covergroups
+  //==============================================
+endinterface : ALU_interface
 
 
 //==============================================================================

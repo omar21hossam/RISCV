@@ -4,7 +4,7 @@
 `define MUL_PATH DUT.core_i.ex_stage_i.mult_i
 `define LSU_PATH DUT.core_i.load_store_unit_i
 `define ALU_PATH DUT.core_i.ex_stage_i.alu_i
-`define  IF_PATH DUT.core_i.if_stage_i 
+`define  IF_PATH DUT.core_i.if_stage_i
 
 // Prefetch interface
 // ---------------------------------------------------------------------
@@ -18,7 +18,6 @@ assign fetch_interface_.is_fetch_failed_o         = `IF_PATH.is_fetch_failed_o;
 assign fetch_interface_.req_i                     = `IF_PATH.req_i;
 assign fetch_interface_.instr_gnt_i               = `IF_PATH.instr_gnt_i;
 assign fetch_interface_.instr_rvalid_i            = `IF_PATH.instr_rvalid_i;
-
 assign fetch_interface_.instr_rdata_i             = `IF_PATH.instr_rdata_i;
 assign fetch_interface_.jump_target_id_i          = `IF_PATH.jump_target_id_i;
 assign fetch_interface_.jump_target_ex_i          = `IF_PATH.jump_target_ex_i;

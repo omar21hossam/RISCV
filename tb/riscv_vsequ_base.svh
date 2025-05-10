@@ -15,8 +15,8 @@ class riscv_vsequ_base extends uvm_sequence;
   //==================================================================================
   // Function: Constructor
   //==================================================================================
-  function new(string name = "riscv_vsequ_base", uvm_component parent = null);
-    super.new(name, parent);
+  function new(string name = "riscv_vsequ_base");
+    super.new(name);
   endfunction
 
   //==================================================================================

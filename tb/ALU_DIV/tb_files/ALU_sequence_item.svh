@@ -3,7 +3,7 @@ class alu_seq_item extends uvm_sequence_item;
   //============================================
   // Declare the data members
   //============================================
-  rand riscv_pkg::alu_opcode_e operator_i;  // ALU operation code
+  rand cv32e40p_pkg::alu_opcode_e operator_i;  // ALU operation code
   rand logic [31:0] operand_a_i, operand_b_i;  //  operands
   rand bit rst_n;  // Active low reset signal
   rand logic enable_i;  // ALU enable signal
@@ -12,6 +12,10 @@ class alu_seq_item extends uvm_sequence_item;
   logic [31:0] result_o;  // output result
   logic comparison_result_o;  // Comparison result (e.g., for SLT)
   logic ready_o;  // Result valid/ready handshake to EX stage
+  // alu_opcode_e req_alu_op[28] ={ALU_ADD, ALU_SUB, ALU_ADDU, ALU_SUBU, ALU_XOR, ALU_OR, ALU_AND, ALU_SRA, ALU_SRL,
+  //           ALU_SLL, ALU_LTS, ALU_LTU, ALU_LES, ALU_LEU,ALU_GTS , ALU_GTU, ALU_GES, ALU_GEU,
+  //           ALU_EQ , ALU_NE , ALU_SLTS , ALU_SLTU , ALU_SLETS, ALU_SLETU,ALU_DIVU,
+  //           ALU_DIV, ALU_REMU, ALU_REM};
   //============================================
   //Declare internal signals
   //============================================

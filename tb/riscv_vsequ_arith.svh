@@ -8,8 +8,8 @@ class riscv_vsequ_arith extends riscv_vsequ_base;
   //==================================================================================
   // Function: Constructor
   //==================================================================================
-  function new(string name = "riscv_vsequ_arith", uvm_component parent = null);
-    super.new(name, parent);
+  function new(string name = "riscv_vsequ_arith");
+    super.new(name);
   endfunction
 
   //==================================================================================

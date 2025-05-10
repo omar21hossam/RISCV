@@ -34,6 +34,7 @@
 ../ALU_DIV/tb_files/ALU_interface.svh
 ../mul/mul_interface.sv
 ../riscv_intf_main.sv
+../prefetch/fetch_intf.sv
 //===================================================
 //packages
 ../riscv_pkg.sv
