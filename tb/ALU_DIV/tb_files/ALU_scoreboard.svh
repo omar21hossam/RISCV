@@ -4,6 +4,9 @@ class alu_scoreboard extends uvm_scoreboard;
   `uvm_component_utils(alu_scoreboard)
   uvm_analysis_imp_alu_mon #(alu_seq_item, alu_scoreboard) sc_analysis_imp;
   alu_seq_item seq_item_mon_out_q[$], seq_item_model_q[$];
+
+  int success;
+  int failed;
   //==============================================================================
   //Description: function new
   //==============================================================================
@@ -50,57 +53,50 @@ class alu_scoreboard extends uvm_scoreboard;
       trans_model.ex_ready_i = trans.ex_ready_i;
       trans_model.rst_n = trans.rst_n;
       trans_model.testing_time = trans.testing_time;
+      if (trans_model.operand_a_i == trans_model.operand_b_i)
+        trans_model.comparison_result_o = 1'b1;
+      else trans_model.comparison_result_o = 1'b0;
       case (trans.operator_i)
         riscv_pkg::ALU_ADD: begin
           trans_model.result_o = trans.operand_a_i + trans.operand_b_i;
-          trans_model.comparison_result_o = 1'b0;
           trans_model.ready_o = 1'b1;
           trans_model.op_type = 1;
         end
         riscv_pkg::ALU_SUB: begin
           trans_model.result_o = trans.operand_a_i - trans.operand_b_i;
-          trans_model.comparison_result_o = 1'b0;
           trans_model.ready_o = 1'b1;
           trans_model.op_type = 1;
         end
         riscv_pkg::ALU_ADDU: begin
           trans_model.result_o = trans.operand_a_i + trans.operand_b_i;
-          trans_model.comparison_result_o = 1'b0;
           trans_model.ready_o = 1'b1;
         end
         riscv_pkg::ALU_SUBU: begin
           trans_model.result_o = trans.operand_a_i - trans.operand_b_i;
-          trans_model.comparison_result_o = 1'b0;
           trans_model.ready_o = 1'b1;
         end
         riscv_pkg::ALU_XOR: begin
           trans_model.result_o = trans.operand_a_i ^ trans.operand_b_i;
-          trans_model.comparison_result_o = 1'b0;
           trans_model.ready_o = 1'b1;
         end
         riscv_pkg::ALU_OR: begin
           trans_model.result_o = trans.operand_a_i | trans.operand_b_i;
-          trans_model.comparison_result_o = 1'b0;
           trans_model.ready_o = 1'b1;
         end
         riscv_pkg::ALU_AND: begin
           trans_model.result_o = trans.operand_a_i & trans.operand_b_i;
-          trans_model.comparison_result_o = 1'b0;
           trans_model.ready_o = 1'b1;
         end
         riscv_pkg::ALU_SRA: begin
           trans_model.result_o = $signed(trans.operand_a_i) >>> trans.operand_b_i[4:0];
-          trans_model.comparison_result_o = 1'b0;
           trans_model.ready_o = 1'b1;
         end
         riscv_pkg::ALU_SRL: begin
           trans_model.result_o = trans.operand_a_i >> trans.operand_b_i[4:0];
-          trans_model.comparison_result_o = 1'b0;
           trans_model.ready_o = 1'b1;
         end
         riscv_pkg::ALU_SLL: begin
           trans_model.result_o = trans.operand_a_i << trans.operand_b_i[4:0];
-          trans_model.comparison_result_o = 1'b0;
           trans_model.ready_o = 1'b1;
         end
         riscv_pkg::ALU_LTS: begin
@@ -264,24 +260,36 @@ class alu_scoreboard extends uvm_scoreboard;
           end
         end
         riscv_pkg::ALU_DIVU: begin
-          trans_model.result_o = trans.operand_b_i / trans.operand_a_i;
+          if (trans.operand_a_i == 0)
+            trans_model.result_o = 'hFFFFFFFF;
+          else
+            trans_model.result_o = trans.operand_b_i / trans.operand_a_i;
           trans_model.ready_o = 1'b1;
-          trans_model.comparison_result_o = 1'b0;
         end
         riscv_pkg::ALU_DIV: begin
-          trans_model.result_o = $signed(trans.operand_b_i) / $signed(trans.operand_a_i);
+          if (trans.operand_a_i == 0)
+            trans_model.result_o = -'sd1;
+          else if (trans.operand_a_i == -'sd1 && trans.operand_b_i == 'h80000000)
+            trans_model.result_o = 'h80000000;
+          else
+            trans_model.result_o = $signed(trans.operand_b_i) / $signed(trans.operand_a_i);
           trans_model.ready_o = 1'b1;
-          trans_model.comparison_result_o = 1'b0;
         end
         riscv_pkg::ALU_REMU: begin
-          trans_model.result_o = trans.operand_b_i % trans.operand_a_i;
+          if (trans.operand_a_i == 0)
+            trans_model.result_o = trans.operand_b_i;
+          else
+            trans_model.result_o = trans.operand_b_i % trans.operand_a_i;
           trans_model.ready_o = 1'b1;
-          trans_model.comparison_result_o = 1'b0;
         end
         riscv_pkg::ALU_REM: begin
-          trans_model.result_o = $signed(trans.operand_b_i) % $signed(trans.operand_a_i);
+          if (trans.operand_a_i == 0)
+            trans_model.result_o = trans.operand_b_i;
+          else if (trans.operand_a_i == -'sd1 && trans.operand_b_i == 'h80000000)
+            trans_model.result_o = 0;
+          else
+            trans_model.result_o = $signed(trans.operand_b_i) % $signed(trans.operand_a_i);
           trans_model.ready_o = 1'b1;
-          trans_model.comparison_result_o = 1'b0;
         end
         default: begin
           `uvm_fatal(get_type_name(), $sformatf(
@@ -306,22 +314,23 @@ class alu_scoreboard extends uvm_scoreboard;
         if (seq_item_mon_out_q[0].compare(seq_item_model_q[0])) begin
           `uvm_info(get_type_name(), $sformatf("ALU Scoreboard: Comparison result: %s", "PASS"),
                     UVM_HIGH);
+          success++;
         end else begin
           // seq_item_model_q[0].print();
           `uvm_info(
               get_type_name(), $sformatf(
               "ALU Scoreboard: Comparison model result: %s", seq_item_model_q[0].convert2string()),
-              UVM_HIGH);
+              UVM_MEDIUM);
           `uvm_info(get_type_name(), $sformatf(
                     "ALU Scoreboard: Comparison mon_out result: %s",
                     seq_item_mon_out_q[0].convert2string()
-                    ), UVM_HIGH);
+                    ), UVM_MEDIUM);
 
           // seq_item_mon_out_q[0].print();
           `uvm_error(get_type_name(), $sformatf(
                      "ALU Scoreboard: Comparison result: %s with ID :%0d", "FAIL", trans_ID));
           // $stop;
-
+          failed++;
         end
       end else break;
 
@@ -330,4 +339,10 @@ class alu_scoreboard extends uvm_scoreboard;
       seq_item_model_q.delete(0);
     end
   endfunction : check_phase
+
+  function void report_phase(uvm_phase phase);
+    super.report_phase(phase);
+    `uvm_info(get_full_name(), $sformatf("Scoreboard: Passed cases: %0d", success), UVM_NONE);
+    `uvm_info(get_full_name(), $sformatf("Scoreboard: Failed cases: %0d", failed), UVM_NONE);
+  endfunction
 endclass

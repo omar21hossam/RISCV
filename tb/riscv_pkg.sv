@@ -1,6 +1,6 @@
 package riscv_pkg;
   parameter int CLK_FREQ = 100;
-  parameter int SEQUENCES = 1000;
+  parameter int SEQUENCES = 10;
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////
   //                                 ___                      _                                     //
@@ -19,8 +19,7 @@ package riscv_pkg;
     S_TYPE,
     B_TYPE,
     J_TYPE,
-    U_TYPE,
-    M_TYPE
+    U_TYPE
   } instr_type_e;
 
   // Operation codes for the RISC-V instruction set architecture

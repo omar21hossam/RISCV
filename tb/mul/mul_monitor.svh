@@ -28,13 +28,12 @@ class mul_monitor extends uvm_monitor;
     super.run_phase(phase);
     //@(posedge vif.clk);
     forever begin
-      @(posedge vif.clk iff vif.ready_o);
-      if (vif.rst_n == 0) begin 
+      @(posedge vif.ready_o);
+      if (vif.rst_n == 0) begin
         seq_item.rst_n = 0;
         mon_analysis_port.write(seq_item);
       end
       else begin
-        
         #1step;
         seq_item.enable_i = vif.enable_i;
         seq_item.operator_i = vif.operator_i;

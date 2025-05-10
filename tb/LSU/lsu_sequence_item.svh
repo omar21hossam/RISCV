@@ -16,46 +16,46 @@ class lsu_sequence_item extends uvm_sequence_item;
   //==================================================================================
   // Execute Stage Signals
   // ---------------------------------------------------
-  rand riscv_pkg::we_e            data_we_ex_i;
-  rand riscv_pkg::type_e          data_type_ex_i;
-  rand logic               [31:0] data_wdata_ex_i;
-  rand riscv_pkg::extend_e        data_sign_ext_ex_i;
-  logic                           data_req_ex_i;
-  rand logic               [31:0] operand_a_ex_i;
-  rand logic               [31:0] operand_b_ex_i;
-  rand logic               [31:0] effective_addr;
-  logic                           data_misaligned_ex_i;
-  logic                           data_misaligned_o;
-  logic                    [31:0] data_rdata_ex_o;
-  logic                           lsu_ready_ex_o;
-  logic                           lsu_ready_wb_o;
-  logic                           busy_o;
+  rand logic               data_we_ex_i;
+  rand logic        [ 1:0] data_type_ex_i;
+  rand logic        [31:0] data_wdata_ex_i;
+  rand logic        [ 1:0] data_sign_ext_ex_i;
+  logic                    data_req_ex_i;
+  rand logic        [31:0] operand_a_ex_i;
+  rand logic        [31:0] operand_b_ex_i;
+  rand logic        [31:0] effective_addr;
+  logic                    data_misaligned_ex_i;
+  logic                    data_misaligned_o;
+  logic             [31:0] data_rdata_ex_o;
+  logic                    lsu_ready_ex_o;
+  logic                    lsu_ready_wb_o;
+  logic                    busy_o;
 
   // OBI External Bus Interface Signals
   // ---------------------------------------------------
-  rand logic               [31:0] data_rdata_i;
-  rand logic               [31:0] data_rdata_next_i;
-  logic                           data_gnt_i;
-  logic                           data_rvalid_i;
-  logic                           data_req_o;
-  logic                    [31:0] data_addr_o;
-  logic                           data_we_o;
-  logic                    [ 3:0] data_be_o;
-  logic                    [31:0] data_wdata_o;
-  rand int unsigned               latency;
+  rand logic        [31:0] data_rdata_i;
+  rand logic        [31:0] data_rdata_next_i;
+  logic                    data_gnt_i;
+  logic                    data_rvalid_i;
+  logic                    data_req_o;
+  logic             [31:0] data_addr_o;
+  logic                    data_we_o;
+  logic             [ 3:0] data_be_o;
+  logic             [31:0] data_wdata_o;
+  rand int unsigned        latency;
 
 
   // Discarded Signals
   // ---------------------------------------------------
-  logic                      data_err_i = 1'b0;
-  logic                      data_err_pmp_i = 1'b0;
-  logic                      data_load_event_ex_i = 1'b0;
-  logic                      addr_useincr_ex_i = 1'b1;
-  logic               [ 5:0] data_atop_ex_i = 6'b0;
-  logic               [ 1:0] data_reg_offset_ex_i = 2'b0;
-  logic               [ 5:0] data_atop_o = 6'b0;
-  logic                      p_elw_start_o = 1'b0;
-  logic                      p_elw_finish_o = 1'b0;
+  logic                    data_err_i            = 1'b0;
+  logic                    data_err_pmp_i        = 1'b0;
+  logic                    data_load_event_ex_i  = 1'b0;
+  logic                    addr_useincr_ex_i     = 1'b1;
+  logic             [ 5:0] data_atop_ex_i        = 6'b0;
+  logic             [ 1:0] data_reg_offset_ex_i  = 2'b0;
+  logic             [ 5:0] data_atop_o           = 6'b0;
+  logic                    p_elw_start_o         = 1'b0;
+  logic                    p_elw_finish_o        = 1'b0;
 
   //==================================================================================
   // Constraints
@@ -120,9 +120,9 @@ class lsu_sequence_item extends uvm_sequence_item;
     printer.print_field("data_misaligned_o", data_misaligned_o, $bits(data_misaligned_o), UVM_BIN);
 
     // Operation Signals
-    printer.print_string("data_we_ex_i", data_we_ex_i.name());
-    printer.print_string("data_type_ex_i", data_type_ex_i.name());
-    printer.print_string("data_sign_ext_ex_i", data_sign_ext_ex_i.name());
+    printer.print_field("data_we_ex_i", data_we_ex_i, $bits(data_we_o), UVM_BIN);
+    printer.print_field("data_type_ex_i", data_type_ex_i, $bits(data_we_o), UVM_BIN);
+    printer.print_field("data_sign_ext_ex_i", data_sign_ext_ex_i, $bits(data_we_o), UVM_BIN);
     printer.print_field("data_we_o", data_we_o, $bits(data_we_o), UVM_BIN);
     printer.print_field("data_be_o", data_be_o, $bits(data_be_o), UVM_BIN);
 

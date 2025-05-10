@@ -74,7 +74,7 @@ class riscv_init_sequence extends uvm_sequence #(riscv_sequence_item);
 endclass
 
 
-class riscv_arith_sequence extends riscv_init_sequence #(riscv_sequence_item);
+class riscv_arith_sequence extends riscv_init_sequence;
 
   //==================================================================================
   // Registeration
@@ -97,7 +97,7 @@ class riscv_arith_sequence extends riscv_init_sequence #(riscv_sequence_item);
   // Task: Pre-Body
   //==================================================================================
   task pre_body();
-    m_seq_item = riscv_sequence_item::type_id::create("m_seq_item");
+    super.pre_body();
   endtask
 
   //==================================================================================
@@ -105,19 +105,29 @@ class riscv_arith_sequence extends riscv_init_sequence #(riscv_sequence_item);
   //==================================================================================
   task body();
     super.body();
-    repeat(riscv_pkg::SEQUENCES) begin
+    m_seq_item = riscv_sequence_item::type_id::create("m_seq_item");
+    repeat (riscv_pkg::SEQUENCES) begin
+      // Start the arithmetic sequence
+      start_item(m_seq_item);
+      if (!m_seq_item.randomize() with {
+            m_seq_item.instr_type inside {riscv_pkg::I_TYPE};
+            m_seq_item.opcode inside {riscv_pkg::OP_LOAD};
+            m_seq_item.funct3 inside {riscv_pkg::LB, riscv_pkg::LH, riscv_pkg::LW, riscv_pkg::LBU, riscv_pkg::LHU};
+          }) begin
+        `uvm_fatal(get_name(), "Failed to randomize sequence item");
+      end
+      // Finish the sequence
+      finish_item(m_seq_item);
 
       // Start the arithmetic sequence
       start_item(m_seq_item);
       if (!m_seq_item.randomize() with {
-            m_seq_item.instr_type == riscv_pkg::M_TYPE;
-            m_seq_item.opcode == riscv_pkg::OP_RTYPE;
-            m_seq_item.funct3 == riscv_pkg::MUL;
-            m_seq_item.funct7 == riscv_pkg::M_FUNCT7;
+            m_seq_item.instr_type inside {riscv_pkg::S_TYPE};
+            m_seq_item.opcode inside {riscv_pkg::OP_STORE};
+            m_seq_item.funct3 inside {riscv_pkg::SB, riscv_pkg::SH, riscv_pkg::SW};
           }) begin
         `uvm_fatal(get_name(), "Failed to randomize sequence item");
       end
-
       // Finish the sequence
       finish_item(m_seq_item);
     end

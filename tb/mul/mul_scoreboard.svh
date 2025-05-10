@@ -80,7 +80,7 @@ class mul_scoreboard extends uvm_scoreboard;
                   $signed(t.operand_b_i);  // Signed multiplication with subword
               `uvm_info(get_full_name(), $sformatf("Scoreboard: MUL_H operation"), UVM_HIGH);
               `uvm_info(get_full_name(), $sformatf("Scoreboard: %0h", expected_result), UVM_HIGH);
-              expected_result = $signed(expected_result[63:32]);  // Truncate to 32 bits
+              expected_result = (expected_result[63:32]);  // Truncate to 32 bits
             end
             default: begin
               expected_result = 32'hDEADBEEF;  // Invalid operation
@@ -94,10 +94,15 @@ class mul_scoreboard extends uvm_scoreboard;
         end
       endcase
 
-      // Check the result against the DUT output
       if (t.result_o !== expected_result) begin
         `uvm_error(get_full_name(), $sformatf(
-                   "Scoreboard: Mismatch! Expected %0h, got %0h", expected_result, t.result_o));
+                   "Scoreboard: Mismatch! Expected %0h, got %0h, operation %s, op_a %0h, op_b %0h",
+                   expected_result,
+                   t.result_o,
+                   t.operator_i,
+                   t.operand_a_i,
+                   t.operand_b_i
+                   ));
         failed_cases++;
       end else begin
         `uvm_info(get_full_name(), $sformatf(
@@ -114,10 +119,8 @@ class mul_scoreboard extends uvm_scoreboard;
 
   function void extract_phase(uvm_phase phase);
     super.extract_phase(phase);
-    `uvm_info(get_full_name(), $sformatf("Scoreboard: Passed cases: %0d", passed_cases),
-              UVM_HIGH);
-    `uvm_info(get_full_name(), $sformatf("Scoreboard: Failed cases: %0d", failed_cases),
-              UVM_HIGH);
+    `uvm_info(get_full_name(), $sformatf("Scoreboard: Passed cases: %0d", passed_cases), UVM_NONE);
+    `uvm_info(get_full_name(), $sformatf("Scoreboard: Failed cases: %0d", failed_cases), UVM_NONE);
   endfunction
 
 endclass

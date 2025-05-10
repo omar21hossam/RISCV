@@ -83,7 +83,6 @@ class lsu_monitor extends uvm_monitor;
       m_seq_item.lsu_ready_ex_o = vif.lsu_ready_ex_o;
       m_seq_item.lsu_ready_wb_o = vif.lsu_ready_wb_o;
       m_seq_item.busy_o = vif.busy_o;
-
       #1step analysis_port.write(m_seq_item);
     end
   endtask

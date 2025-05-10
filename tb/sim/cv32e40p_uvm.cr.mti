@@ -5,7 +5,7 @@ QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
 Top level modules:
 	--none--
 
-} {} {}} {D:/Si-Vision Academy/final-project/code/tb/riscv_classes_pkg.sv} {2 {vlog -work work -vopt -sv -stats=none {D:/Si-Vision Academy/final-project/code/tb/riscv_classes_pkg.sv}
+} {} {}} {D:/Si-Vision Academy/final-project/code/tb/riscv_classes_pkg.sv} {0 {vlog -work work -vopt -sv -stats=none {D:/Si-Vision Academy/final-project/code/tb/riscv_classes_pkg.sv}
 QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
 -- Compiling package riscv_classes_pkg
 -- Importing package mtiUvm.uvm_pkg (uvm-1.1d Built-in)
@@ -13,9 +13,12 @@ QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
 -- Importing package riscv_pkg
 -- Importing package cv32e40p_pkg
 ** Warning: D:/Si-Vision Academy/final-project/code/tb/riscv_sequence_item.svh(195): (vlog-2240) Treating stand-alone use of function 'pack_instruction' as an implicit VOID cast.
-
-Top level modules:
-	--none--
+** Error (suppressible): (vlog-13276) D:/Si-Vision Academy/final-project/code/tb/lsu/lsu_sequence_item.svh(123:41): Could not find field/method name (name) in 'data_we_ex_i' of 'data_we_ex_i.name'.
+** Error (suppressible): (vlog-13276) D:/Si-Vision Academy/final-project/code/tb/lsu/lsu_sequence_item.svh(123:41): Could not find field/method name (name) in 'data_we_ex_i' of 'data_we_ex_i.name.$$'.
+** Error (suppressible): (vlog-13276) D:/Si-Vision Academy/final-project/code/tb/lsu/lsu_sequence_item.svh(124:43): Could not find field/method name (name) in 'data_type_ex_i' of 'data_type_ex_i.name'.
+** Error (suppressible): (vlog-13276) D:/Si-Vision Academy/final-project/code/tb/lsu/lsu_sequence_item.svh(124:43): Could not find field/method name (name) in 'data_type_ex_i' of 'data_type_ex_i.name.$$'.
+** Error (suppressible): (vlog-13276) D:/Si-Vision Academy/final-project/code/tb/lsu/lsu_sequence_item.svh(125:47): Could not find field/method name (name) in 'data_sign_ext_ex_i' of 'data_sign_ext_ex_i.name'.
+** Error (suppressible): (vlog-13276) D:/Si-Vision Academy/final-project/code/tb/lsu/lsu_sequence_item.svh(125:47): Could not find field/method name (name) in 'data_sign_ext_ex_i' of 'data_sign_ext_ex_i.name.$$'.
 
 } {} {}} {D:/Si-Vision Academy/final-project/code/tb/riscv_if.sv} {1 {vlog -work work -vopt -sv -stats=none {D:/Si-Vision Academy/final-project/code/tb/riscv_if.sv}
 QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
@@ -75,6 +78,13 @@ QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
 
 Top level modules:
 	cv32e40p_cs_registers
+
+} {} {}} {D:/Si-Vision Academy/final-project/code/tb/riscv_pkg.sv} {1 {vlog -work work -vopt -sv -stats=none {D:\Si-Vision Academy\final-project\code\tb\riscv_pkg.sv}
+QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
+-- Compiling package riscv_pkg
+
+Top level modules:
+	--none--
 
 } {} {}} {D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_int_controller.sv} {1 {vlog -work work -vopt -sv -stats=none {D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_int_controller.sv}
 QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
@@ -214,14 +224,6 @@ QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
 
 Top level modules:
 	cv32e40p_top
-
-} {} {}} {D:/Si-Vision Academy/final-project/code/tb/lsu/lsu_if.sv} {1 {vlog -work work -vopt -sv -stats=none {D:/Si-Vision Academy/final-project/code/tb/lsu/lsu_if.sv}
-QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
--- Compiling interface lsu_if
--- Importing package riscv_pkg
-
-Top level modules:
-	--none--
 
 } {} {}} {D:/Si-Vision Academy/final-project/code/tb/riscv_top_tb.sv} {1 {vlog -work work -vopt -sv -stats=none {D:/Si-Vision Academy/final-project/code/tb/riscv_top_tb.sv}
 QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
