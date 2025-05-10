@@ -8,35 +8,35 @@
 
 // Prefetch interface
 // ---------------------------------------------------------------------
-assign fetch_interface_.instr_req_o               = `IF_PATH.instr_req_o;
-assign fetch_interface_.instr_addr_o              = `IF_PATH.instr_addr_o;
-assign fetch_interface_.instr_valid_id_o          = `IF_PATH.instr_valid_id_o;
-assign fetch_interface_.instr_rdata_id_o          = `IF_PATH.instr_rdata_id_o;
-assign fetch_interface_.pc_if_o                   = `IF_PATH.pc_if_o;
-assign fetch_interface_.pc_id_o                   = `IF_PATH.pc_id_o;
-assign fetch_interface_.is_fetch_failed_o         = `IF_PATH.is_fetch_failed_o;
-assign fetch_interface_.req_i                     = `IF_PATH.req_i;
-assign fetch_interface_.instr_gnt_i               = `IF_PATH.instr_gnt_i;
-assign fetch_interface_.instr_rvalid_i            = `IF_PATH.instr_rvalid_i;
-assign fetch_interface_.instr_rdata_i             = `IF_PATH.instr_rdata_i;
-assign fetch_interface_.jump_target_id_i          = `IF_PATH.jump_target_id_i;
-assign fetch_interface_.jump_target_ex_i          = `IF_PATH.jump_target_ex_i;
-assign fetch_interface_.clear_instr_valid_i       = `IF_PATH.clear_instr_valid_i;
-assign fetch_interface_.pc_set_i                  = `IF_PATH.pc_set_i;
+assign fetch_intf.instr_req_o               = `IF_PATH.instr_req_o;
+assign fetch_intf.instr_addr_o              = `IF_PATH.instr_addr_o;
+assign fetch_intf.instr_valid_id_o          = `IF_PATH.instr_valid_id_o;
+assign fetch_intf.instr_rdata_id_o          = `IF_PATH.instr_rdata_id_o;
+assign fetch_intf.pc_if_o                   = `IF_PATH.pc_if_o;
+assign fetch_intf.pc_id_o                   = `IF_PATH.pc_id_o;
+assign fetch_intf.is_fetch_failed_o         = `IF_PATH.is_fetch_failed_o;
+assign fetch_intf.req_i                     = `IF_PATH.req_i;
+assign fetch_intf.instr_gnt_i               = `IF_PATH.instr_gnt_i;
+assign fetch_intf.instr_rvalid_i            = `IF_PATH.instr_rvalid_i;
+assign fetch_intf.instr_rdata_i             = `IF_PATH.instr_rdata_i;
+assign fetch_intf.jump_target_id_i          = `IF_PATH.jump_target_id_i;
+assign fetch_intf.jump_target_ex_i          = `IF_PATH.jump_target_ex_i;
+assign fetch_intf.clear_instr_valid_i       = `IF_PATH.clear_instr_valid_i;
+assign fetch_intf.pc_set_i                  = `IF_PATH.pc_set_i;
 
 
 // ALU-DIV interface
 // ---------------------------------------------------------------------
-assign alu_intf_.rst_n               = `ALU_PATH.rst_n;
-assign alu_intf_.enable_i            = `ALU_PATH.enable_i;
-assign alu_intf_.operator_i          = `ALU_PATH.operator_i;
-assign alu_intf_.operand_a_i         = `ALU_PATH.operand_a_i;
-assign alu_intf_.operand_b_i         = `ALU_PATH.operand_b_i;
-assign alu_intf_.ex_ready_i          = `ALU_PATH.ex_ready_i;
-assign alu_intf_.result_o            = `ALU_PATH.result_o;
-assign alu_intf_.ready_o             = `ALU_PATH.ready_o;
-assign alu_intf_.comparison_result_o = `ALU_PATH.comparison_result_o;
-assign alu_intf_.vector_mode_i       = `ALU_PATH.vector_mode_i;
+assign alu_intf.rst_n               = `ALU_PATH.rst_n;
+assign alu_intf.enable_i            = `ALU_PATH.enable_i;
+assign alu_intf.operator_i          = `ALU_PATH.operator_i;
+assign alu_intf.operand_a_i         = `ALU_PATH.operand_a_i;
+assign alu_intf.operand_b_i         = `ALU_PATH.operand_b_i;
+assign alu_intf.ex_ready_i          = `ALU_PATH.ex_ready_i;
+assign alu_intf.result_o            = `ALU_PATH.result_o;
+assign alu_intf.ready_o             = `ALU_PATH.ready_o;
+assign alu_intf.comparison_result_o = `ALU_PATH.comparison_result_o;
+assign alu_intf.vector_mode_i       = `ALU_PATH.vector_mode_i;
 
 // LSU interface
 // ---------------------------------------------------------------------

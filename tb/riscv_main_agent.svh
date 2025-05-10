@@ -15,7 +15,7 @@ class riscv_main_agent extends uvm_agent;
   riscv_config_obj                         m_config;
   riscv_main_driver                        m_driver;
   riscv_main_sequencer                     m_sequencer;
-  virtual riscv_intf                       riscv_vintf_;
+  virtual riscv_if                         riscv_vif;
 
   //==================================================================================
   // Function: Constructor
@@ -30,7 +30,7 @@ class riscv_main_agent extends uvm_agent;
   function void build_phase(uvm_phase phase);
     super.build_phase(phase);
 
-    if (!uvm_config_db#(riscv_config_obj)::get(this, "", "CFG", m_config))
+    if (!uvm_config_db#(riscv_config_obj)::get(this, "", "riscv_config_obj", m_config))
       `uvm_fatal("build_phase", "agent - unable to get configuration object")
 
 
@@ -40,10 +40,10 @@ class riscv_main_agent extends uvm_agent;
     m_sequencer = riscv_main_sequencer::type_id::create("m_sequencer", this);
     m_driver = riscv_main_driver::type_id::create("m_driver", this);
 
-    if (!uvm_config_db#(virtual riscv_intf)::get(this, "", "main_intf", riscv_vintf_)) begin
+    if (!uvm_config_db#(virtual riscv_if)::get(this, "", "riscv_intf", riscv_vif)) begin
       `uvm_fatal(get_full_name(), "Error in get interface in agent");
     end else begin
-      uvm_config_db#(virtual riscv_intf)::set(this, "m_driver", "main_intf", riscv_vintf_);
+      uvm_config_db#(virtual riscv_if)::set(this, "m_driver", "riscv_intf", riscv_vif);
     end
 
 

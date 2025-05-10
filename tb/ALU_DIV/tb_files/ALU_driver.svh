@@ -3,7 +3,7 @@ class alu_driver extends uvm_driver #(alu_seq_item);
   // Declare the sequence item type
   alu_seq_item seq_item;
   // Declare the virtual interface
-  virtual ALU_interface vif;
+  virtual alu_if vif;
 
   //==============================================================================
   //Description: function new
@@ -17,7 +17,7 @@ class alu_driver extends uvm_driver #(alu_seq_item);
   //==============================================================================
   function void build_phase(uvm_phase phase);
     super.build_phase(phase);
-    if (!uvm_config_db#(virtual ALU_interface)::get(this, "", "vif_d", vif)) begin
+    if (!uvm_config_db#(virtual alu_if)::get(this, "", "vif_d", vif)) begin
       `uvm_fatal("NO_VIF", "Virtual interface not found in config DB")
     end
   endfunction
@@ -25,7 +25,6 @@ class alu_driver extends uvm_driver #(alu_seq_item);
   //Description:reseting inputs
   //==============================================================================
   task reset_inputs;
-    `uvm_info(get_type_name(), "Resetting input signals", UVM_LOW)
     vif.vector_mode_i = 'b0;
     vif.enable_i = 'b0;
     vif.operator_i = cv32e40p_pkg::ALU_ADD;
@@ -51,8 +50,6 @@ class alu_driver extends uvm_driver #(alu_seq_item);
           wait (vif.ready_o);
           @(posedge vif.core_clk);
         end
-        `uvm_info(get_type_name(), $sformatf(
-                  "ALU Driver: Driving inputs: %s", seq_item.convert2string()), UVM_MEDIUM);
         vif.vector_mode_i  <= seq_item.vector_mode_i;
         vif.cb.enable_i    <= seq_item.enable_i;
         vif.cb.operator_i  <= seq_item.operator_i;
@@ -60,7 +57,6 @@ class alu_driver extends uvm_driver #(alu_seq_item);
         vif.cb.operand_b_i <= seq_item.operand_b_i;
         vif.cb.ex_ready_i  <= seq_item.ex_ready_i;
         seq_item_port.item_done();
-        `uvm_info(get_type_name(), $sformatf("ALU Driver: Driving inputs done"), UVM_NONE);
       end
   endtask
 

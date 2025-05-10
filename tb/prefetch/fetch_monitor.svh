@@ -3,7 +3,7 @@ class fetch_monitor extends uvm_monitor  ;
 `uvm_component_utils(fetch_monitor)
     
 
- virtual   fetch_interface    fetch_interface_ ;
+ virtual   fetch_if    fetch_intf ;
  fetch_seq_item      seq_item ;
 
 uvm_analysis_port#(fetch_seq_item)     mon_ap;
@@ -23,7 +23,7 @@ uvm_analysis_port#(fetch_seq_item)     mon_ap;
         mon_ap= new("mon_ap",this) ;
 
  
-    if (!uvm_config_db#(virtual fetch_interface)::get(this, "", "fetch_intf", fetch_interface_)) begin
+    if (!uvm_config_db#(virtual fetch_if)::get(this, "", "fetch_intf", fetch_intf)) begin
       `uvm_fatal(get_name(), "Failed to get configuration for fetch intf in mon");
     end
    
@@ -37,25 +37,25 @@ uvm_analysis_port#(fetch_seq_item)     mon_ap;
    forever begin
     seq_item =fetch_seq_item::type_id::create("seq_item") ; 
 
-      @(posedge fetch_interface_.clk)
+      @(posedge fetch_intf.clk)
       begin
 
 
- if (fetch_interface_.instr_rvalid_i)
+ if (fetch_intf.instr_rvalid_i)
  begin
 
-seq_item.instr_rdata_i = fetch_interface_.instr_rdata_i ;
-seq_item.pc_id_o = fetch_interface_.pc_id_o ;
-seq_item.pc_if_o = fetch_interface_.pc_if_o ;
-seq_item.instr_addr_o = fetch_interface_.instr_addr_o ;
+seq_item.instr_rdata_i = fetch_intf.instr_rdata_i ;
+seq_item.pc_id_o = fetch_intf.pc_id_o ;
+seq_item.pc_if_o = fetch_intf.pc_if_o ;
+seq_item.instr_addr_o = fetch_intf.instr_addr_o ;
 
 
- @(negedge fetch_interface_.clk)
+ @(negedge fetch_intf.clk)
       
       begin
 
-seq_item.instr_rdata_id_o = fetch_interface_.instr_rdata_id_o ;
-seq_item.instr_valid_id_o = fetch_interface_.instr_valid_id_o ;
+seq_item.instr_rdata_id_o = fetch_intf.instr_rdata_id_o ;
+seq_item.instr_valid_id_o = fetch_intf.instr_valid_id_o ;
 
  mon_ap.write(seq_item) ;
 // $display("time %0t: data_id_o %0d , valid_id_o %0d ,  instr_addr_o %0d ,  pc_id_o %0d ,  pc_if_o %0d ,  instr_rdata_i %0d",  $time,seq_item.instr_rdata_id_o,seq_item.instr_valid_id_o,

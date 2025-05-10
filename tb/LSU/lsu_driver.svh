@@ -47,6 +47,7 @@ class lsu_driver #(
   // Task: Run Phase
   //==================================================================================
   task run_phase(uvm_phase phase);
+    reset();
     forever begin
       seq_item_port.get_next_item(m_seq_item);
       obi_rsp_hndlr();
@@ -55,6 +56,15 @@ class lsu_driver #(
     end
   endtask
 
+  //==================================================================================
+  // Task: reset
+  //==================================================================================
+  task reset();
+    `uvm_info(get_name(), "Resetting LSU Driver", UVM_HIGH);
+    vif.data_gnt_i    = 1'b0;
+    vif.data_rdata_i  = 'b0;
+    vif.data_rvalid_i = 1'b0;
+  endtask
   //==================================================================================
   // Task: OBI response handler
   //==================================================================================

@@ -7,7 +7,7 @@ class alu_agent extends uvm_agent;
   alu_driver m_driver;
   alu_monitor m_monitor;
   alu_config m_config;
-  virtual ALU_interface vinf;
+  virtual alu_if vinf;
 
   //==============================================================================
   //Description: function new
@@ -24,7 +24,7 @@ class alu_agent extends uvm_agent;
     m_config  = alu_config::type_id::create("m_config", this);
     m_monitor = alu_monitor::type_id::create("m_monitor", this);
 
-    if (!uvm_config_db#(virtual ALU_interface)::get(this, "", "vif", vinf)) begin
+    if (!uvm_config_db#(virtual alu_if)::get(this, "", "alu_intf", vinf)) begin
       `uvm_fatal(get_full_name(), "Error on interface connectivity")
     end
 
@@ -37,8 +37,8 @@ class alu_agent extends uvm_agent;
       m_driver    = alu_driver::type_id::create("m_driver", this);
     end
 
-    uvm_config_db#(virtual ALU_interface)::set(this, "m_driver", "vif_d", vinf);
-    uvm_config_db#(virtual ALU_interface)::set(this, "m_monitor", "vif_m", vinf);
+    uvm_config_db#(virtual alu_if)::set(this, "m_driver", "vif_d", vinf);
+    uvm_config_db#(virtual alu_if)::set(this, "m_monitor", "vif_m", vinf);
   endfunction : build_phase
 
   //==============================================================================

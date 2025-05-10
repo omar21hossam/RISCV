@@ -61,7 +61,7 @@ class riscv_sequence_item extends uvm_sequence_item;
 
   //----------------------------------------------------------------------------------
   constraint valid_type_c {
-    soft instr_type dist {
+    instr_type dist {
       riscv_pkg::R_TYPE := 50,
       riscv_pkg::I_TYPE := 50,
       riscv_pkg::U_TYPE := 50,
@@ -192,8 +192,8 @@ class riscv_sequence_item extends uvm_sequence_item;
   // function: post_randomize
   //==================================================================================
   function void post_randomize();
-    // pack_instruction();
-    $display("Instruction: %s", convert2asm());
+    pack_instruction();
+    // $display("Instruction: %s", convert2asm());
   endfunction
 
   //==================================================================================

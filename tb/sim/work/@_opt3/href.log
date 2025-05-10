@@ -1,14 +1,71 @@
-BEGIN 3:fetch_interface:fast__1:work
+BEGIN 3:fetch_if:fast__1:work
+    instr_valid_id_o :  1:riscv_classes_pkg:fast:work
+    pc_if_o :  1:riscv_classes_pkg:fast:work
     instr_rvalid_i :  1:riscv_classes_pkg:fast:work
     clk :  1:riscv_classes_pkg:fast:work
     instr_addr_o :  1:riscv_classes_pkg:fast:work
     instr_rdata_i :  1:riscv_classes_pkg:fast:work
     instr_rdata_id_o :  1:riscv_classes_pkg:fast:work
     pc_id_o :  1:riscv_classes_pkg:fast:work
-    instr_valid_id_o :  1:riscv_classes_pkg:fast:work
-    pc_if_o :  1:riscv_classes_pkg:fast:work
 END 
-BEGIN 3:riscv_intf:fast__2:work
+BEGIN 3:lsu_if:fast__2:work
+    data_type_ex_i :  1:riscv_top_tb:fast:work
+    addr_useincr_ex_i :  1:riscv_top_tb:fast:work
+    data_req_ex_i :  1:riscv_top_tb:fast:work
+    data_gnt_i :  1:riscv_top_tb:fast:work
+    data_err_pmp_i :  1:riscv_top_tb:fast:work
+    operand_a_ex_i :  1:riscv_top_tb:fast:work
+    data_sign_ext_ex_i :  1:riscv_top_tb:fast:work
+    data_be_o :  1:riscv_top_tb:fast:work
+    p_elw_start_o :  1:riscv_top_tb:fast:work
+    lsu_ready_wb_o :  1:riscv_top_tb:fast:work
+    data_req_o :  1:riscv_top_tb:fast:work
+    data_atop_ex_i :  1:riscv_top_tb:fast:work
+    data_rdata_i :  1:riscv_top_tb:fast:work
+    p_elw_finish_o :  1:riscv_top_tb:fast:work
+    data_wdata_ex_i :  1:riscv_top_tb:fast:work
+    data_misaligned_ex_i :  1:riscv_top_tb:fast:work
+    data_we_o :  1:riscv_top_tb:fast:work
+    data_we_ex_i :  1:riscv_top_tb:fast:work
+    operand_b_ex_i :  1:riscv_top_tb:fast:work
+    data_rdata_ex_o :  1:riscv_top_tb:fast:work
+    data_err_i :  1:riscv_top_tb:fast:work
+    data_wdata_o :  1:riscv_top_tb:fast:work
+    data_load_event_ex_i :  1:riscv_top_tb:fast:work
+    busy_o :  1:riscv_top_tb:fast:work
+    data_rvalid_i :  1:riscv_top_tb:fast:work
+    data_atop_o :  1:riscv_top_tb:fast:work
+    lsu_ready_ex_o :  1:riscv_top_tb:fast:work
+    data_reg_offset_ex_i :  1:riscv_top_tb:fast:work
+    data_misaligned_o :  1:riscv_top_tb:fast:work
+    data_addr_o :  1:riscv_top_tb:fast:work
+END 
+BEGIN 3:fetch_if:fast__2:work
+    instr_valid_id_o :  1:riscv_top_tb:fast:work
+    instr_rdata_i :  1:riscv_top_tb:fast:work
+    instr_rdata_id_o :  1:riscv_top_tb:fast:work
+    jump_target_id_i :  1:riscv_top_tb:fast:work
+    pc_if_o :  1:riscv_top_tb:fast:work
+    jump_target_ex_i :  1:riscv_top_tb:fast:work
+    pc_id_o :  1:riscv_top_tb:fast:work
+    clear_instr_valid_i :  1:riscv_top_tb:fast:work
+    is_fetch_failed_o :  1:riscv_top_tb:fast:work
+    pc_set_i :  1:riscv_top_tb:fast:work
+    req_i :  1:riscv_top_tb:fast:work
+    instr_req_o :  1:riscv_top_tb:fast:work
+    instr_gnt_i :  1:riscv_top_tb:fast:work
+    instr_addr_o :  1:riscv_top_tb:fast:work
+    instr_rvalid_i :  1:riscv_top_tb:fast:work
+END 
+BEGIN 3:riscv_if:fast__2:work
+    dm_exception_addr_i :  1:riscv_top_tb:fast:work
+    debug_havereset_o :  1:riscv_top_tb:fast:work
+    boot_addr_i :  1:riscv_top_tb:fast:work
+    irq_i :  1:riscv_top_tb:fast:work
+    instr_rvalid_i :  1:riscv_top_tb:fast:work
+    fetch_enable_i :  1:riscv_top_tb:fast:work
+    hart_id_i :  1:riscv_top_tb:fast:work
+    debug_req_i :  1:riscv_top_tb:fast:work
     scan_cg_en_i :  1:riscv_top_tb:fast:work
     instr_gnt_i :  1:riscv_top_tb:fast:work
     debug_halted_o :  1:riscv_top_tb:fast:work
@@ -23,19 +80,80 @@ BEGIN 3:riscv_intf:fast__2:work
     instr_addr_o :  1:riscv_top_tb:fast:work
     core_sleep_o :  1:riscv_top_tb:fast:work
     rst_ni :  1:riscv_top_tb:fast:work
-    dm_exception_addr_i :  1:riscv_top_tb:fast:work
-    debug_havereset_o :  1:riscv_top_tb:fast:work
-    boot_addr_i :  1:riscv_top_tb:fast:work
-    irq_i :  1:riscv_top_tb:fast:work
-    instr_rvalid_i :  1:riscv_top_tb:fast:work
-    fetch_enable_i :  1:riscv_top_tb:fast:work
-    hart_id_i :  1:riscv_top_tb:fast:work
-    debug_req_i :  1:riscv_top_tb:fast:work
 END 
-BEGIN 3:ALU_interface:fast__2:work
+BEGIN 3:lsu_if:fast__1:work
+    data_req_o :  1:riscv_classes_pkg:fast:work
+    busy_o :  1:riscv_classes_pkg:fast:work
+    lsu_ready_wb_o :  1:riscv_classes_pkg:fast:work
+    data_rvalid_i :  1:riscv_classes_pkg:fast:work
+    data_we_o :  1:riscv_classes_pkg:fast:work
+    data_type_ex_i :  1:riscv_classes_pkg:fast:work
+    data_misaligned_ex_i :  1:riscv_classes_pkg:fast:work
+    data_req_ex_i :  1:riscv_classes_pkg:fast:work
+    rst_n :  1:riscv_classes_pkg:fast:work
+    operand_b_ex_i :  1:riscv_classes_pkg:fast:work
+    operand_a_ex_i :  1:riscv_classes_pkg:fast:work
+    lsu_ready_ex_o :  1:riscv_classes_pkg:fast:work
+    data_rdata_i :  1:riscv_classes_pkg:fast:work
+    data_addr_o :  1:riscv_classes_pkg:fast:work
+    data_we_ex_i :  1:riscv_classes_pkg:fast:work
+    data_wdata_o :  1:riscv_classes_pkg:fast:work
+    data_sign_ext_ex_i :  1:riscv_classes_pkg:fast:work
+    data_be_o :  1:riscv_classes_pkg:fast:work
+    data_wdata_ex_i :  1:riscv_classes_pkg:fast:work
+    data_misaligned_o :  1:riscv_classes_pkg:fast:work
+    data_rdata_ex_o :  1:riscv_classes_pkg:fast:work
+    data_gnt_i :  1:riscv_classes_pkg:fast:work
+END 
+BEGIN 3:mul_if:fast__1:work
+    mulh_active_o :  1:riscv_classes_pkg:fast:work
+    rst_n :  1:riscv_classes_pkg:fast:work
+    operand_c_i :  1:riscv_classes_pkg:fast:work
+    clpx_shift_i :  1:riscv_classes_pkg:fast:work
+    clk :  1:riscv_classes_pkg:fast:work
+    operator_i :  1:riscv_classes_pkg:fast:work
+    ready_o :  1:riscv_classes_pkg:fast:work
+    ex_ready_i :  1:riscv_classes_pkg:fast:work
+    short_subword_i :  1:riscv_classes_pkg:fast:work
+    dot_op_b_i :  1:riscv_classes_pkg:fast:work
+    multicycle_o :  1:riscv_classes_pkg:fast:work
+    operand_b_i :  1:riscv_classes_pkg:fast:work
+    is_clpx_i :  1:riscv_classes_pkg:fast:work
+    dot_signed_i :  1:riscv_classes_pkg:fast:work
+    enable_i :  1:riscv_classes_pkg:fast:work
+    imm_i :  1:riscv_classes_pkg:fast:work
+    clpx_img_i :  1:riscv_classes_pkg:fast:work
+    short_signed_i :  1:riscv_classes_pkg:fast:work
+    dot_op_a_i :  1:riscv_classes_pkg:fast:work
+    result_o :  1:riscv_classes_pkg:fast:work
+    operand_a_i :  1:riscv_classes_pkg:fast:work
+    dot_op_c_i :  1:riscv_classes_pkg:fast:work
+END 
+BEGIN 1:cv32e40p_alu:fast:work
+    operand_b_i :  1:riscv_top_tb:fast:work
+    comparison_result_o :  1:riscv_top_tb:fast:work
+    operand_a_i :  1:riscv_top_tb:fast:work
+    vector_mode_i :  1:riscv_top_tb:fast:work
     rst_n :  1:riscv_top_tb:fast:work
     enable_i :  1:riscv_top_tb:fast:work
     operator_i :  1:riscv_top_tb:fast:work
+    ex_ready_i :  1:riscv_top_tb:fast:work
+    result_o :  1:riscv_top_tb:fast:work
+    ready_o :  1:riscv_top_tb:fast:work
+END 
+BEGIN 3:alu_if:fast__1:work
+    comparison_result_o :  1:riscv_classes_pkg:fast:work
+    ready_o :  1:riscv_classes_pkg:fast:work
+    core_clk :  1:riscv_classes_pkg:fast:work
+    operand_a_i :  1:riscv_classes_pkg:fast:work
+    operand_b_i :  1:riscv_classes_pkg:fast:work
+    enable_i :  1:riscv_classes_pkg:fast:work
+    result_o :  1:riscv_classes_pkg:fast:work
+    ex_ready_i :  1:riscv_classes_pkg:fast:work
+    rst_n :  1:riscv_classes_pkg:fast:work
+    operator_i :  1:riscv_classes_pkg:fast:work
+END 
+BEGIN 3:alu_if:fast__2:work
     ex_ready_i :  1:riscv_top_tb:fast:work
     result_o :  1:riscv_top_tb:fast:work
     ready_o :  1:riscv_top_tb:fast:work
@@ -43,32 +161,42 @@ BEGIN 3:ALU_interface:fast__2:work
     comparison_result_o :  1:riscv_top_tb:fast:work
     operand_a_i :  1:riscv_top_tb:fast:work
     vector_mode_i :  1:riscv_top_tb:fast:work
+    rst_n :  1:riscv_top_tb:fast:work
+    enable_i :  1:riscv_top_tb:fast:work
+    operator_i :  1:riscv_top_tb:fast:work
 END 
-BEGIN 3:mul_if:fast__1:work
-    multicycle_o :  1:riscv_classes_pkg:fast:work
-    short_signed_i :  1:riscv_classes_pkg:fast:work
-    dot_op_a_i :  1:riscv_classes_pkg:fast:work
-    ready_o :  1:riscv_classes_pkg:fast:work
-    operand_a_i :  1:riscv_classes_pkg:fast:work
-    dot_op_c_i :  1:riscv_classes_pkg:fast:work
-    rst_n :  1:riscv_classes_pkg:fast:work
-    operand_c_i :  1:riscv_classes_pkg:fast:work
-    clpx_shift_i :  1:riscv_classes_pkg:fast:work
-    clk :  1:riscv_classes_pkg:fast:work
-    result_o :  1:riscv_classes_pkg:fast:work
-    operator_i :  1:riscv_classes_pkg:fast:work
-    dot_signed_i :  1:riscv_classes_pkg:fast:work
-    ex_ready_i :  1:riscv_classes_pkg:fast:work
-    mulh_active_o :  1:riscv_classes_pkg:fast:work
-    short_subword_i :  1:riscv_classes_pkg:fast:work
-    dot_op_b_i :  1:riscv_classes_pkg:fast:work
-    operand_b_i :  1:riscv_classes_pkg:fast:work
-    is_clpx_i :  1:riscv_classes_pkg:fast:work
-    enable_i :  1:riscv_classes_pkg:fast:work
-    imm_i :  1:riscv_classes_pkg:fast:work
-    clpx_img_i :  1:riscv_classes_pkg:fast:work
+BEGIN 1:cv32e40p_load_store_unit:fast:work
+    data_load_event_ex_i :  1:riscv_top_tb:fast:work
+    data_atop_ex_i :  1:riscv_top_tb:fast:work
+    data_wdata_ex_i :  1:riscv_top_tb:fast:work
+    data_misaligned_ex_i :  1:riscv_top_tb:fast:work
+    data_we_ex_i :  1:riscv_top_tb:fast:work
+    operand_b_ex_i :  1:riscv_top_tb:fast:work
+    lsu_ready_wb_o :  1:riscv_top_tb:fast:work
+    data_err_i :  1:riscv_top_tb:fast:work
+    data_req_ex_i :  1:riscv_top_tb:fast:work
+    p_elw_finish_o :  1:riscv_top_tb:fast:work
+    data_sign_ext_ex_i :  1:riscv_top_tb:fast:work
+    data_atop_o :  1:riscv_top_tb:fast:work
+    data_reg_offset_ex_i :  1:riscv_top_tb:fast:work
+    data_misaligned_o :  1:riscv_top_tb:fast:work
+    data_type_ex_i :  1:riscv_top_tb:fast:work
+    addr_useincr_ex_i :  1:riscv_top_tb:fast:work
+    busy_o :  1:riscv_top_tb:fast:work
+    data_err_pmp_i :  1:riscv_top_tb:fast:work
+    operand_a_ex_i :  1:riscv_top_tb:fast:work
+    lsu_ready_ex_o :  1:riscv_top_tb:fast:work
+    data_rdata_ex_o :  1:riscv_top_tb:fast:work
+    p_elw_start_o :  1:riscv_top_tb:fast:work
 END 
 BEGIN 3:mul_if:fast__2:work
+    operand_b_i :  1:riscv_top_tb:fast:work
+    clpx_img_i :  1:riscv_top_tb:fast:work
+    short_subword_i :  1:riscv_top_tb:fast:work
+    is_clpx_i :  1:riscv_top_tb:fast:work
+    dot_op_b_i :  1:riscv_top_tb:fast:work
+    mulh_active_o :  1:riscv_top_tb:fast:work
+    enable_i :  1:riscv_top_tb:fast:work
     dot_signed_i :  1:riscv_top_tb:fast:work
     operator_i :  1:riscv_top_tb:fast:work
     operand_c_i :  1:riscv_top_tb:fast:work
@@ -82,125 +210,9 @@ BEGIN 3:mul_if:fast__2:work
     ready_o :  1:riscv_top_tb:fast:work
     rst_n :  1:riscv_top_tb:fast:work
     imm_i :  1:riscv_top_tb:fast:work
-    enable_i :  1:riscv_top_tb:fast:work
-    operand_b_i :  1:riscv_top_tb:fast:work
-    clpx_img_i :  1:riscv_top_tb:fast:work
-    short_subword_i :  1:riscv_top_tb:fast:work
-    is_clpx_i :  1:riscv_top_tb:fast:work
-    dot_op_b_i :  1:riscv_top_tb:fast:work
-    mulh_active_o :  1:riscv_top_tb:fast:work
     result_o :  1:riscv_top_tb:fast:work
-END 
-BEGIN 3:lsu_if:fast__1:work
-    busy_o :  1:riscv_classes_pkg:fast:work
-    rst_n :  1:riscv_classes_pkg:fast:work
-    data_sign_ext_ex_i :  1:riscv_classes_pkg:fast:work
-    data_req_o :  1:riscv_classes_pkg:fast:work
-    data_req_ex_i :  1:riscv_classes_pkg:fast:work
-    data_we_o :  1:riscv_classes_pkg:fast:work
-    data_rdata_i :  1:riscv_classes_pkg:fast:work
-    data_rdata_ex_o :  1:riscv_classes_pkg:fast:work
-    data_we_ex_i :  1:riscv_classes_pkg:fast:work
-    data_wdata_o :  1:riscv_classes_pkg:fast:work
-    operand_b_ex_i :  1:riscv_classes_pkg:fast:work
-    lsu_ready_wb_o :  1:riscv_classes_pkg:fast:work
-    data_wdata_ex_i :  1:riscv_classes_pkg:fast:work
-    data_gnt_i :  1:riscv_classes_pkg:fast:work
-    data_addr_o :  1:riscv_classes_pkg:fast:work
-    data_misaligned_ex_i :  1:riscv_classes_pkg:fast:work
-    data_be_o :  1:riscv_classes_pkg:fast:work
-    data_rvalid_i :  1:riscv_classes_pkg:fast:work
-    operand_a_ex_i :  1:riscv_classes_pkg:fast:work
-    lsu_ready_ex_o :  1:riscv_classes_pkg:fast:work
-    data_type_ex_i :  1:riscv_classes_pkg:fast:work
-    data_misaligned_o :  1:riscv_classes_pkg:fast:work
-END 
-BEGIN 3:ALU_interface:fast__1:work
-    ex_ready_i :  1:riscv_classes_pkg:fast:work
-    rst_n :  1:riscv_classes_pkg:fast:work
-    operator_i :  1:riscv_classes_pkg:fast:work
-    ready_o :  1:riscv_classes_pkg:fast:work
-    core_clk :  1:riscv_classes_pkg:fast:work
-    operand_a_i :  1:riscv_classes_pkg:fast:work
-    result_o :  1:riscv_classes_pkg:fast:work
-    operand_b_i :  1:riscv_classes_pkg:fast:work
-    comparison_result_o :  1:riscv_classes_pkg:fast:work
-    enable_i :  1:riscv_classes_pkg:fast:work
-END 
-BEGIN 1:cv32e40p_alu:fast:work
-    result_o :  1:riscv_top_tb:fast:work
-    ready_o :  1:riscv_top_tb:fast:work
-    operand_b_i :  1:riscv_top_tb:fast:work
-    comparison_result_o :  1:riscv_top_tb:fast:work
-    operand_a_i :  1:riscv_top_tb:fast:work
-    vector_mode_i :  1:riscv_top_tb:fast:work
-    rst_n :  1:riscv_top_tb:fast:work
-    enable_i :  1:riscv_top_tb:fast:work
-    operator_i :  1:riscv_top_tb:fast:work
-    ex_ready_i :  1:riscv_top_tb:fast:work
-END 
-BEGIN 3:lsu_if:fast__2:work
-    data_req_o :  1:riscv_top_tb:fast:work
-    data_atop_ex_i :  1:riscv_top_tb:fast:work
-    data_rdata_i :  1:riscv_top_tb:fast:work
-    p_elw_finish_o :  1:riscv_top_tb:fast:work
-    data_wdata_ex_i :  1:riscv_top_tb:fast:work
-    data_misaligned_ex_i :  1:riscv_top_tb:fast:work
-    data_we_o :  1:riscv_top_tb:fast:work
-    data_we_ex_i :  1:riscv_top_tb:fast:work
-    operand_b_ex_i :  1:riscv_top_tb:fast:work
-    data_be_o :  1:riscv_top_tb:fast:work
-    data_err_i :  1:riscv_top_tb:fast:work
-    data_req_ex_i :  1:riscv_top_tb:fast:work
-    data_load_event_ex_i :  1:riscv_top_tb:fast:work
-    busy_o :  1:riscv_top_tb:fast:work
-    data_rvalid_i :  1:riscv_top_tb:fast:work
-    data_atop_o :  1:riscv_top_tb:fast:work
-    lsu_ready_ex_o :  1:riscv_top_tb:fast:work
-    data_reg_offset_ex_i :  1:riscv_top_tb:fast:work
-    data_misaligned_o :  1:riscv_top_tb:fast:work
-    data_addr_o :  1:riscv_top_tb:fast:work
-    data_type_ex_i :  1:riscv_top_tb:fast:work
-    addr_useincr_ex_i :  1:riscv_top_tb:fast:work
-    data_wdata_o :  1:riscv_top_tb:fast:work
-    data_gnt_i :  1:riscv_top_tb:fast:work
-    data_err_pmp_i :  1:riscv_top_tb:fast:work
-    operand_a_ex_i :  1:riscv_top_tb:fast:work
-    data_sign_ext_ex_i :  1:riscv_top_tb:fast:work
-    data_rdata_ex_o :  1:riscv_top_tb:fast:work
-    p_elw_start_o :  1:riscv_top_tb:fast:work
-    lsu_ready_wb_o :  1:riscv_top_tb:fast:work
-END 
-BEGIN 1:cv32e40p_load_store_unit:fast:work
-    data_err_i :  1:riscv_top_tb:fast:work
-    data_req_ex_i :  1:riscv_top_tb:fast:work
-    p_elw_finish_o :  1:riscv_top_tb:fast:work
-    data_sign_ext_ex_i :  1:riscv_top_tb:fast:work
-    data_atop_o :  1:riscv_top_tb:fast:work
-    data_reg_offset_ex_i :  1:riscv_top_tb:fast:work
-    data_misaligned_o :  1:riscv_top_tb:fast:work
-    data_type_ex_i :  1:riscv_top_tb:fast:work
-    addr_useincr_ex_i :  1:riscv_top_tb:fast:work
-    busy_o :  1:riscv_top_tb:fast:work
-    data_err_pmp_i :  1:riscv_top_tb:fast:work
-    operand_a_ex_i :  1:riscv_top_tb:fast:work
-    lsu_ready_ex_o :  1:riscv_top_tb:fast:work
-    data_rdata_ex_o :  1:riscv_top_tb:fast:work
-    p_elw_start_o :  1:riscv_top_tb:fast:work
-    data_load_event_ex_i :  1:riscv_top_tb:fast:work
-    data_atop_ex_i :  1:riscv_top_tb:fast:work
-    data_wdata_ex_i :  1:riscv_top_tb:fast:work
-    data_misaligned_ex_i :  1:riscv_top_tb:fast:work
-    data_we_ex_i :  1:riscv_top_tb:fast:work
-    operand_b_ex_i :  1:riscv_top_tb:fast:work
-    lsu_ready_wb_o :  1:riscv_top_tb:fast:work
 END 
 BEGIN 1:cv32e40p_if_stage:fast:work
-    instr_rdata_id_o :  1:riscv_top_tb:fast:work
-    jump_target_id_i :  1:riscv_top_tb:fast:work
-    pc_if_o :  1:riscv_top_tb:fast:work
-    jump_target_ex_i :  1:riscv_top_tb:fast:work
-    pc_id_o :  1:riscv_top_tb:fast:work
     clear_instr_valid_i :  1:riscv_top_tb:fast:work
     is_fetch_failed_o :  1:riscv_top_tb:fast:work
     pc_set_i :  1:riscv_top_tb:fast:work
@@ -211,8 +223,21 @@ BEGIN 1:cv32e40p_if_stage:fast:work
     instr_rvalid_i :  1:riscv_top_tb:fast:work
     instr_valid_id_o :  1:riscv_top_tb:fast:work
     instr_rdata_i :  1:riscv_top_tb:fast:work
+    instr_rdata_id_o :  1:riscv_top_tb:fast:work
+    jump_target_id_i :  1:riscv_top_tb:fast:work
+    pc_if_o :  1:riscv_top_tb:fast:work
+    jump_target_ex_i :  1:riscv_top_tb:fast:work
+    pc_id_o :  1:riscv_top_tb:fast:work
 END 
 BEGIN 1:cv32e40p_mult:fast:work
+    mulh_active_o :  1:riscv_top_tb:fast:work
+    enable_i :  1:riscv_top_tb:fast:work
+    dot_signed_i :  1:riscv_top_tb:fast:work
+    operator_i :  1:riscv_top_tb:fast:work
+    op_c_i :  1:riscv_top_tb:fast:work
+    ex_ready_i :  1:riscv_top_tb:fast:work
+    op_a_i :  1:riscv_top_tb:fast:work
+    clpx_shift_i :  1:riscv_top_tb:fast:work
     short_signed_i :  1:riscv_top_tb:fast:work
     dot_op_c_i :  1:riscv_top_tb:fast:work
     multicycle_o :  1:riscv_top_tb:fast:work
@@ -226,29 +251,4 @@ BEGIN 1:cv32e40p_mult:fast:work
     short_subword_i :  1:riscv_top_tb:fast:work
     is_clpx_i :  1:riscv_top_tb:fast:work
     dot_op_b_i :  1:riscv_top_tb:fast:work
-    mulh_active_o :  1:riscv_top_tb:fast:work
-    enable_i :  1:riscv_top_tb:fast:work
-    dot_signed_i :  1:riscv_top_tb:fast:work
-    operator_i :  1:riscv_top_tb:fast:work
-    op_c_i :  1:riscv_top_tb:fast:work
-    ex_ready_i :  1:riscv_top_tb:fast:work
-    op_a_i :  1:riscv_top_tb:fast:work
-    clpx_shift_i :  1:riscv_top_tb:fast:work
-END 
-BEGIN 3:fetch_interface:fast__2:work
-    instr_req_o :  1:riscv_top_tb:fast:work
-    instr_gnt_i :  1:riscv_top_tb:fast:work
-    instr_addr_o :  1:riscv_top_tb:fast:work
-    instr_rvalid_i :  1:riscv_top_tb:fast:work
-    instr_valid_id_o :  1:riscv_top_tb:fast:work
-    instr_rdata_i :  1:riscv_top_tb:fast:work
-    instr_rdata_id_o :  1:riscv_top_tb:fast:work
-    jump_target_id_i :  1:riscv_top_tb:fast:work
-    pc_if_o :  1:riscv_top_tb:fast:work
-    jump_target_ex_i :  1:riscv_top_tb:fast:work
-    pc_id_o :  1:riscv_top_tb:fast:work
-    clear_instr_valid_i :  1:riscv_top_tb:fast:work
-    is_fetch_failed_o :  1:riscv_top_tb:fast:work
-    pc_set_i :  1:riscv_top_tb:fast:work
-    req_i :  1:riscv_top_tb:fast:work
 END 

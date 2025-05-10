@@ -23,15 +23,89 @@ R0
 R1
 R0
 R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+Z2 !s12c _opt4
+R1
+R2
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
 !s12c _opt2
 R1
 !s12c _opt1
 R1
-Z2 !s12c _opt
+Z3 !s12c _opt
 R1
-R2
+R3
 R1
-R2
+R3
 R1
 !s11f vlog 2024.1 2024.02, Feb  1 2024
 13
@@ -40,898 +114,973 @@ R1
 !i10e 25
 !i10f 100
 cModel Technology
-dD:/Si-Vision Academy/final-project/lsu-sim
+Z4 dD:/Si-Vision Academy/final-project/lsu-sim
 T_opt3
-!s11d Academy/final-project/code/tb/sim/work riscv_intf 1 Academy/final-project/code/tb/sim/work 1 riscv_intf 
-Z3 !s11d Academy/final-project/code/tb/sim/work riscv_intf 1 D:/Si-Vision 1 riscv_intf 
-Z4 !s11d Academy/final-project/code/tb/sim/work fetch_interface 1 D:/Si-Vision 1 fetch_interface 
-!s11d Academy/final-project/code/tb/sim/work lsu_if 1 D:/Si-Vision 1 lsu_if 
-!s11d Academy/final-project/code/tb/sim/work mul_if 1 D:/Si-Vision 1 mul_if 
-!s11d Academy/final-project/code/tb/sim/work 5 1 ALU_interface 1 D:/Si-Vision 
-!s11d Academy/final-project/code/tb/sim/work riscv_classes_pkg 1 D:/Si-Vision 1 riscv_classes_pkg 
-R3
-R4
-!s11d uvm_pkg C:/questasim64_2024.1/uvm-1.1d 5 ALU_interface 1 D:/Si-Vision Academy/final-project/code/tb/sim/work 1 D:/Si-Vision mul_if 1 D:/Si-Vision Academy/final-project/code/tb/sim/work 1 D:/Si-Vision lsu_if 1 D:/Si-Vision 
-!s110 1746884360
-VCAKc_<0MBHH`E904E@fjV1
-04 12 4 work riscv_top_tb fast 0
-=1-8c8caa4d4a8d-681f5706-2c3-4ab0
+Z5 !s11d Academy/final-project/code/tb/sim/work riscv_if 1 Academy/final-project/code/tb/sim/work 1 riscv_if 
+Z6 !s11d Academy/final-project/code/tb/sim/work riscv_if 1 D:/Si-Vision 1 riscv_if 
+Z7 !s11d Academy/final-project/code/tb/sim/work fetch_if 1 D:/Si-Vision 1 fetch_if 
+Z8 !s11d Academy/final-project/code/tb/sim/work lsu_if 1 D:/Si-Vision 1 lsu_if 
+Z9 !s11d Academy/final-project/code/tb/sim/work mul_if 1 D:/Si-Vision 1 mul_if 
+Z10 !s11d Academy/final-project/code/tb/sim/work 5 1 alu_if 1 D:/Si-Vision 
+Z11 !s11d Academy/final-project/code/tb/sim/work riscv_classes_pkg 1 D:/Si-Vision 1 riscv_classes_pkg 
+R6
+R7
+Z12 !s11d uvm_pkg C:/questasim64_2024.1/uvm-1.1d 5 alu_if 1 D:/Si-Vision Academy/final-project/code/tb/sim/work 1 D:/Si-Vision mul_if 1 D:/Si-Vision Academy/final-project/code/tb/sim/work 1 D:/Si-Vision lsu_if 1 D:/Si-Vision 
+!s110 1746902394
+VhWBWN@BGO7:5Jmi]`]FzI3
+Z13 04 12 4 work riscv_top_tb fast 0
+=38-8c8caa4d4a8d-681f9d78-338-24f4
 R1
-!s12f OEM100
-!s12b OEM100
-!s124 OEM100
-o-quiet -auto_acc_if_foreign -work work +acc
-Z5 tCvgOpt 0
+Z14 !s12f OEM100
+Z15 !s12b OEM100
+Z16 !s124 OEM100
+Z17 o-quiet -auto_acc_if_foreign -work work +acc
+Z18 tCvgOpt 0
 n@_opt3
-OL;O;2024.1;79
+Z19 OL;O;2024.1;79
+T_opt4
+R5
+R6
+R7
+R8
+R9
+R10
+R11
+R6
+R7
+R12
+!s110 1746888554
+VT84eN`7cHKB[Xzkf?DTAN3
+R13
+=1-8c8caa4d4a8d-681f6769-1c4-29f0
+R1
+R14
+R15
+R16
+R17
+R18
+n@_opt4
+R19
+R4
+Yalu_if
+2D:/Si-Vision Academy/final-project/code/tb/ALU_DIV/tb_files/alu_if.sv
+Z20 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
+Z21 DXx4 work 12 cv32e40p_pkg 0 22 :azJ:<TikmO8EB74U1>?O0
+Z22 !s110 1746894775
+!i10b 1
+!s100 JU2SNjRicmekcDd=e=^F33
+I>_g3Q5Kh]Zma?^9^14lAg1
+S1
+Z23 dD:/Si-Vision Academy/final-project/code/tb/sim
+w1746888544
+8D:/Si-Vision Academy/final-project/code/tb/ALU_DIV/tb_files/alu_if.sv
+FD:/Si-Vision Academy/final-project/code/tb/ALU_DIV/tb_files/alu_if.sv
+!i122 1310
+Z24 L0 2 0
+Z25 VDg1SIo80bB@j0V0VzS_@n1
+Z26 OL;L;2024.1;79
+r1
+!s85 0
+31
+Z27 !s108 1746894775.000000
+!s107 D:/Si-Vision Academy/final-project/code/tb/ALU_DIV/tb_files/alu_if.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/tb/ALU_DIV/tb_files/alu_if.sv|
+!i113 0
+Z28 o-work work -sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R18
 YALU_interface
-2D:/Si-Vision Academy/final-project/code/tb/ALU_DIV/tb_files/ALU_interface.svh
-Z6 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
-Z7 DXx4 work 12 cv32e40p_pkg 0 22 :azJ:<TikmO8EB74U1>?O0
-Z8 !s110 1746884303
+2D:/Si-Vision Academy/final-project/code/tb/ALU_DIV/tb_files/alu_if.svh
+R20
+R21
+!s110 1746884303
 !i10b 1
 !s100 KocUzAh6hzn6>i4hh4I7z1
 IecJJHOlYWMK@dm6;h?=PI2
 S1
-Z9 dD:/Si-Vision Academy/final-project/code/tb/sim
+R23
 w1746883995
-8D:/Si-Vision Academy/final-project/code/tb/ALU_DIV/tb_files/ALU_interface.svh
-FD:/Si-Vision Academy/final-project/code/tb/ALU_DIV/tb_files/ALU_interface.svh
+8D:/Si-Vision Academy/final-project/code/tb/ALU_DIV/tb_files/alu_if.svh
+FD:/Si-Vision Academy/final-project/code/tb/ALU_DIV/tb_files/alu_if.svh
 !i122 1064
-L0 2 0
-Z10 VDg1SIo80bB@j0V0VzS_@n1
-Z11 OL;L;2024.1;79
+R24
+R25
+R26
 r1
 !s85 0
 31
-Z12 !s108 1746884302.000000
-!s107 D:/Si-Vision Academy/final-project/code/tb/ALU_DIV/tb_files/ALU_interface.svh|
-!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/tb/ALU_DIV/tb_files/ALU_interface.svh|
+Z29 !s108 1746884302.000000
+!s107 D:/Si-Vision Academy/final-project/code/tb/ALU_DIV/tb_files/alu_if.svh|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/tb/ALU_DIV/tb_files/alu_if.svh|
 !i113 0
-Z13 o-work work -sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
-R5
+R28
+R18
 n@a@l@u_interface
 vcv32e40p_aligner
 2D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_aligner.sv
-R6
-Z14 !s110 1746884298
+R20
+Z30 !s110 1746894770
 !i10b 1
 !s100 nN7SCkmhVG_RO1C1a@b503
 Ii5lo^MBHnC33SDc61_[bn3
 S1
-R9
-Z15 w1746879810
+R23
+Z31 w1746879810
 8D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_aligner.sv
 FD:/Si-Vision Academy/final-project/code/rtl/cv32e40p_aligner.sv
-!i122 1029
+!i122 1275
 L0 23 230
-R10
-R11
+R25
+R26
 r1
 !s85 0
 31
-Z16 !s108 1746884298.000000
+Z32 !s108 1746894770.000000
 !s107 D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_aligner.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_aligner.sv|
 !i113 0
-R13
-R5
+R28
+R18
 vcv32e40p_alu
 2D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_alu.sv
-R6
-R7
-R14
+R20
+R21
+R30
 !i10b 1
 !s100 Nb9P]a7E4BFF8gGTVNY253
 Izk]m23RWDPG<heSbEnVTl3
 S1
-R9
-R15
+R23
+R31
 8D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_alu.sv
 FD:/Si-Vision Academy/final-project/code/rtl/cv32e40p_alu.sv
-!i122 1030
+!i122 1276
 L0 28 959
-R10
-R11
+R25
+R26
 r1
 !s85 0
 31
-R16
+R32
 !s107 D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_alu.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_alu.sv|
 !i113 0
-R13
-R5
+R28
+R18
 vcv32e40p_alu_div
 2D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_alu_div.sv
-R6
-R14
+R20
+R30
 !i10b 1
 !s100 DKaXCSoZ4Jh5DTTlEAQOk1
 Iz[[GN_e;K0>1RIA_=l[2K1
 S1
-R9
-R15
+R23
+R31
 8D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_alu_div.sv
 FD:/Si-Vision Academy/final-project/code/rtl/cv32e40p_alu_div.sv
-!i122 1031
+!i122 1277
 L0 26 201
-R10
-R11
+R25
+R26
 r1
 !s85 0
 31
-R16
+R32
 !s107 D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_alu_div.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_alu_div.sv|
 !i113 0
-R13
-R5
+R28
+R18
 Xcv32e40p_apu_core_pkg
 2D:/Si-Vision Academy/final-project/code/rtl/package/cv32e40p_apu_core_pkg.sv
-R6
-Z17 !s110 1746884301
+R20
+Z33 !s110 1746894774
 !i10b 1
 !s100 BfS6EaQkd8YdhjhSMgMk;1
 IcoJC2k;_TWjLR^5:<DZ`<3
 S1
-R9
-R15
+R23
+R31
 8D:/Si-Vision Academy/final-project/code/rtl/package/cv32e40p_apu_core_pkg.sv
 FD:/Si-Vision Academy/final-project/code/rtl/package/cv32e40p_apu_core_pkg.sv
-!i122 1056
+!i122 1302
 L0 22 0
 VcoJC2k;_TWjLR^5:<DZ`<3
-R11
+R26
 r1
 !s85 0
 31
-Z18 !s108 1746884301.000000
+Z34 !s108 1746894774.000000
 !s107 D:/Si-Vision Academy/final-project/code/rtl/package/cv32e40p_apu_core_pkg.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/rtl/package/cv32e40p_apu_core_pkg.sv|
 !i113 0
-R13
-R5
+R28
+R18
 vcv32e40p_apu_disp
 2D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_apu_disp.sv
-R6
-R14
+R20
+R30
 !i10b 1
 !s100 oU_mf4bQkM=hE`M;1nUH53
 IXel`mNc>zD:mHnDcH]agn0
 S1
-R9
-R15
+R23
+R31
 8D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_apu_disp.sv
 FD:/Si-Vision Academy/final-project/code/rtl/cv32e40p_apu_disp.sv
-!i122 1032
+!i122 1278
 L0 25 218
-R10
-R11
+R25
+R26
 r1
 !s85 0
 31
-R16
+R32
 !s107 D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_apu_disp.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_apu_disp.sv|
 !i113 0
-R13
-R5
+R28
+R18
 vcv32e40p_clock_gate
 2D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_sim_clock_gate.sv
-R6
-Z19 !s110 1746884300
+R20
+Z35 !s110 1746894773
 !i10b 1
 !s100 _20hQfRmW^MMjk[<4Bh<91
 I:;d8?ilIkmddZdNo?D1Mk3
 S1
-R9
-R15
+R23
+R31
 8D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_sim_clock_gate.sv
 FD:/Si-Vision Academy/final-project/code/rtl/cv32e40p_sim_clock_gate.sv
-!i122 1053
+!i122 1299
 L0 15 16
-R10
-R11
+R25
+R26
 r1
 !s85 0
 31
-Z20 !s108 1746884300.000000
+Z36 !s108 1746894773.000000
 !s107 D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_sim_clock_gate.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_sim_clock_gate.sv|
 !i113 0
-R13
-R5
+R28
+R18
 vcv32e40p_compressed_decoder
 2D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_compressed_decoder.sv
-R6
-R7
-R14
+R20
+R21
+R30
 !i10b 1
 !s100 1TX;z4<IDXMf>SHioH[;_0
 IoeXAQiR`AHWOW=EX=_7mM0
 S1
-R9
-R15
+R23
+R31
 8D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_compressed_decoder.sv
 FD:/Si-Vision Academy/final-project/code/rtl/cv32e40p_compressed_decoder.sv
-!i122 1033
+!i122 1279
 L0 27 575
-R10
-R11
+R25
+R26
 r1
 !s85 0
 31
-R16
+R32
 !s107 D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_compressed_decoder.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_compressed_decoder.sv|
 !i113 0
-R13
-R5
+R28
+R18
 vcv32e40p_controller
 2D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_controller.sv
-R6
-R7
-R14
+R20
+R21
+R30
 !i10b 1
 !s100 _jHAIU5`DHhbo^odJfK6C3
 I>K_ePeUo[SORJ8dA]@aUA2
 S1
-R9
-R15
+R23
+R31
 8D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_controller.sv
 FD:/Si-Vision Academy/final-project/code/rtl/cv32e40p_controller.sv
-!i122 1034
+!i122 1280
 L0 31 1579
-R10
-R11
+R25
+R26
 r1
 !s85 0
 31
-R16
+R32
 !s107 D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_controller.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_controller.sv|
 !i113 0
-R13
-R5
+R28
+R18
 vcv32e40p_core
 2D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_core.sv
-R6
-Z21 DXx4 work 21 cv32e40p_apu_core_pkg 0 22 coJC2k;_TWjLR^5:<DZ`<3
-R7
-Z22 !s110 1746884299
+R20
+Z37 DXx4 work 21 cv32e40p_apu_core_pkg 0 22 coJC2k;_TWjLR^5:<DZ`<3
+R21
+R30
 !i10b 1
 !s100 `a[Y0f5B7bHQ`NMQE`9X80
 IR;MnzQ]aQVzQG0B3e8@P>2
 S1
-R9
-R15
+R23
+R31
 8D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_core.sv
 FD:/Si-Vision Academy/final-project/code/rtl/cv32e40p_core.sv
-!i122 1035
+!i122 1281
 L0 31 1262
-R10
-R11
+R25
+R26
 r1
 !s85 0
 31
-R16
+R32
 !s107 D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_core.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_core.sv|
 !i113 0
-R13
-R5
+R28
+R18
 vcv32e40p_cs_registers
 2D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_cs_registers.sv
-R6
-R7
-R22
+R20
+R21
+R30
 !i10b 1
 !s100 7Q:M0o3IZK2fz3`KKcFW:2
 IH8lW@1]hbCE[zMA>SCoz]0
 S1
-R9
-R15
+R23
+R31
 8D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_cs_registers.sv
 FD:/Si-Vision Academy/final-project/code/rtl/cv32e40p_cs_registers.sv
-!i122 1036
+!i122 1282
 L0 30 1518
-R10
-R11
+R25
+R26
 r1
 !s85 0
 31
-Z23 !s108 1746884299.000000
+R32
 !s107 D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_cs_registers.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_cs_registers.sv|
 !i113 0
-R13
-R5
+R28
+R18
 vcv32e40p_decoder
 2D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_decoder.sv
-R6
-R7
+R20
 R21
-Z24 DXx4 work 16 cv32e40p_fpu_pkg 0 22 fb5^QEWmaAHoHVaj[l9FY0
-R22
+R37
+Z38 DXx4 work 16 cv32e40p_fpu_pkg 0 22 fb5^QEWmaAHoHVaj[l9FY0
+!s110 1746894771
 !i10b 1
 !s100 [5;1GKSfI_>PaJdIbmdRZ1
 Iz6?bSYb><faIjXoEX8eaA1
 S1
-R9
-R15
+R23
+R31
 8D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_decoder.sv
 FD:/Si-Vision Academy/final-project/code/rtl/cv32e40p_decoder.sv
-!i122 1037
+!i122 1283
 L0 28 2970
-R10
-R11
+R25
+R26
 r1
 !s85 0
 31
-R23
+R32
 !s107 D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_decoder.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_decoder.sv|
 !i113 0
-R13
-R5
+R28
+R18
 vcv32e40p_ex_stage
 2D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_ex_stage.sv
-R6
-R7
+R20
 R21
-R22
+R37
+Z39 !s110 1746894772
 !i10b 1
 !s100 1VQIg7kDOL6Vc0O62enNT1
 IYl?G3`>P:O;]W7W]BA;QZ0
 S1
-R9
-R15
+R23
+R31
 8D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_ex_stage.sv
 FD:/Si-Vision Academy/final-project/code/rtl/cv32e40p_ex_stage.sv
-!i122 1038
+!i122 1284
 L0 32 448
-R10
-R11
+R25
+R26
 r1
 !s85 0
 31
-R23
+Z40 !s108 1746894772.000000
 !s107 D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_ex_stage.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_ex_stage.sv|
 !i113 0
-R13
-R5
+R28
+R18
 vcv32e40p_ff_one
 2D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_ff_one.sv
-R6
-R22
+R20
+R39
 !i10b 1
 !s100 `dj4@Q:75UY<G:DVYR2Q:3
 Iz<=i9;FBYIZaOiAW`F1kJ2
 S1
-R9
-R15
+R23
+R31
 8D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_ff_one.sv
 FD:/Si-Vision Academy/final-project/code/rtl/cv32e40p_ff_one.sv
-!i122 1039
+!i122 1285
 L0 25 75
-R10
-R11
+R25
+R26
 r1
 !s85 0
 31
-R23
+R40
 !s107 D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_ff_one.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_ff_one.sv|
 !i113 0
-R13
-R5
+R28
+R18
 vcv32e40p_fifo
 2D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_fifo.sv
-R6
-R22
+R20
+R39
 !i10b 1
 !s100 :`nD>KQ8DC9O=PHZigCLa1
 I@64L8<XiRzW8C?2]_M_cK1
 S1
-R9
-R15
+R23
+R31
 8D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_fifo.sv
 FD:/Si-Vision Academy/final-project/code/rtl/cv32e40p_fifo.sv
-!i122 1040
+!i122 1286
 L0 15 154
-R10
-R11
+R25
+R26
 r1
 !s85 0
 31
-R23
+R40
 !s107 D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_fifo.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_fifo.sv|
 !i113 0
-R13
-R5
+R28
+R18
 Xcv32e40p_fpu_pkg
 2D:/Si-Vision Academy/final-project/code/rtl/package/cv32e40p_fpu_pkg.sv
-R6
-R17
+R20
+R33
 !i10b 1
 !s100 g0K<Iz1TXX5fWeV3QU9;K1
 Ifb5^QEWmaAHoHVaj[l9FY0
 S1
-R9
-R15
+R23
+R31
 8D:/Si-Vision Academy/final-project/code/rtl/package/cv32e40p_fpu_pkg.sv
 FD:/Si-Vision Academy/final-project/code/rtl/package/cv32e40p_fpu_pkg.sv
-!i122 1057
+!i122 1303
 L0 38 0
 Vfb5^QEWmaAHoHVaj[l9FY0
-R11
+R26
 r1
 !s85 0
 31
-R18
+R34
 !s107 D:/Si-Vision Academy/final-project/code/rtl/package/cv32e40p_fpu_pkg.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/rtl/package/cv32e40p_fpu_pkg.sv|
 !i113 0
-R13
-R5
+R28
+R18
 vcv32e40p_hwloop_regs
 2D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_hwloop_regs.sv
-R6
-R22
+R20
+R39
 !i10b 1
 !s100 VHg6MV0JKIThEP?DGdeo12
 I4m]JKYM;Th@Oil4DTE4bW0
 S1
-R9
-R15
+R23
+R31
 8D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_hwloop_regs.sv
 FD:/Si-Vision Academy/final-project/code/rtl/cv32e40p_hwloop_regs.sv
-!i122 1041
+!i122 1287
 L0 25 93
-R10
-R11
+R25
+R26
 r1
 !s85 0
 31
-R23
+R40
 !s107 D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_hwloop_regs.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_hwloop_regs.sv|
 !i113 0
-R13
-R5
+R28
+R18
 vcv32e40p_id_stage
 2D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_id_stage.sv
-R6
-R7
+R20
 R21
-R24
-R22
+R37
+R38
+R39
 !i10b 1
 !s100 fVcQ4DZnUWdMUXn2h;J<G1
 In0m^Nhf4h_^ScgU=Pchgh3
 S1
-R9
-R15
+R23
+R31
 8D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_id_stage.sv
 FD:/Si-Vision Academy/final-project/code/rtl/cv32e40p_id_stage.sv
-!i122 1042
+!i122 1288
 L0 30 1804
-R10
-R11
+R25
+R26
 r1
 !s85 0
 31
-R23
+R40
 !s107 D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_id_stage.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_id_stage.sv|
 !i113 0
-R13
-R5
+R28
+R18
 vcv32e40p_if_stage
 2D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_if_stage.sv
-R6
-R7
-R22
+R20
+R21
+R39
 !i10b 1
 !s100 cmZa:UMXXTN7SS8B6S7^32
 IJY7eVm_TVhzH5dzUJ:;A23
 S1
-R9
-R15
+R23
+R31
 8D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_if_stage.sv
 FD:/Si-Vision Academy/final-project/code/rtl/cv32e40p_if_stage.sv
-!i122 1043
+!i122 1289
 L0 28 292
-R10
-R11
+R25
+R26
 r1
 !s85 0
 31
-R23
+R40
 !s107 D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_if_stage.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_if_stage.sv|
 !i113 0
-R13
-R5
+R28
+R18
 vcv32e40p_int_controller
 2D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_int_controller.sv
-R6
-R7
-R19
+R20
+R21
+R39
 !i10b 1
 !s100 A2_CD4<E^C]gO_bWNEe4<0
 I;LZCS5`ddcI19BhKMnP@T2
 S1
-R9
-R15
+R23
+R31
 8D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_int_controller.sv
 FD:/Si-Vision Academy/final-project/code/rtl/cv32e40p_int_controller.sv
-!i122 1044
+!i122 1290
 L0 24 129
-R10
-R11
+R25
+R26
 r1
 !s85 0
 31
-R23
+R40
 !s107 D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_int_controller.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_int_controller.sv|
 !i113 0
-R13
-R5
+R28
+R18
 vcv32e40p_load_store_unit
 2D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_load_store_unit.sv
-R6
-R19
+R20
+R39
 !i10b 1
 !s100 7T_6iZ[nH3A:?Y9Kg0i5J3
 II6In;U^@@omzPP@OUziL_1
 S1
-R9
-R15
+R23
+R31
 8D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_load_store_unit.sv
 FD:/Si-Vision Academy/final-project/code/rtl/cv32e40p_load_store_unit.sv
-!i122 1045
+!i122 1291
 L0 26 524
-R10
-R11
+R25
+R26
 r1
 !s85 0
 31
-R20
+R40
 !s107 D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_load_store_unit.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_load_store_unit.sv|
 !i113 0
-R13
-R5
+R28
+R18
 vcv32e40p_mult
 2D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_mult.sv
-R6
-R7
-R19
+R20
+R21
+R35
 !i10b 1
 !s100 RPkKBDS2S0]GQB55]<i`o1
 Ib8MI06X8BVfM[5TKnamAl3
 S1
-R9
-R15
+R23
+R31
 8D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_mult.sv
 FD:/Si-Vision Academy/final-project/code/rtl/cv32e40p_mult.sv
-!i122 1046
+!i122 1292
 L0 26 362
-R10
-R11
+R25
+R26
 r1
 !s85 0
 31
-R20
+R40
 !s107 D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_mult.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_mult.sv|
 !i113 0
-R13
-R5
+R28
+R18
 vcv32e40p_obi_interface
 2D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_obi_interface.sv
-R6
-R19
+R20
+R35
 !i10b 1
 !s100 WLl9EbD33H8mK]VcccbRN0
 I@Y0EGEmc0ShBhPTN5>`T11
 S1
-R9
-R15
+R23
+R31
 8D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_obi_interface.sv
 FD:/Si-Vision Academy/final-project/code/rtl/cv32e40p_obi_interface.sv
-!i122 1047
+!i122 1293
 L0 38 169
-R10
-R11
+R25
+R26
 r1
 !s85 0
 31
-R20
+R36
 !s107 D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_obi_interface.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_obi_interface.sv|
 !i113 0
-R13
-R5
+R28
+R18
 Xcv32e40p_pkg
 2D:/Si-Vision Academy/final-project/code/rtl/package/cv32e40p_pkg.sv
-R6
-R17
+R20
+R33
 !i10b 1
 !s100 5nGJ6cZ3TD6nCE3UDoNjY3
 I:azJ:<TikmO8EB74U1>?O0
 S1
-R9
-R15
+R23
+R31
 8D:/Si-Vision Academy/final-project/code/rtl/package/cv32e40p_pkg.sv
 FD:/Si-Vision Academy/final-project/code/rtl/package/cv32e40p_pkg.sv
-!i122 1058
+!i122 1304
 L0 26 0
 V:azJ:<TikmO8EB74U1>?O0
-R11
+R26
 r1
 !s85 0
 31
-R18
+R34
 !s107 D:/Si-Vision Academy/final-project/code/rtl/package/cv32e40p_pkg.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/rtl/package/cv32e40p_pkg.sv|
 !i113 0
-R13
-R5
+R28
+R18
 vcv32e40p_popcnt
 2D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_popcnt.sv
-R6
-R19
+R20
+R35
 !i10b 1
 !s100 RDJ6CRdWK`RkkC6kVb_=L3
 IEmjKS=5H9Tl^0ZQP7bD;c0
 S1
-R9
-R15
+R23
+R31
 8D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_popcnt.sv
 FD:/Si-Vision Academy/final-project/code/rtl/cv32e40p_popcnt.sv
-!i122 1048
+!i122 1294
 L0 25 38
-R10
-R11
+R25
+R26
 r1
 !s85 0
 31
-R20
+R36
 !s107 D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_popcnt.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_popcnt.sv|
 !i113 0
-R13
-R5
+R28
+R18
 vcv32e40p_prefetch_buffer
 2D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_prefetch_buffer.sv
-R6
-R19
+R20
+R35
 !i10b 1
 !s100 T91=`^FR4UmfGR3PY1e[_3
 I;lI@GB`]F30J:SYPXT[^Z2
 S1
-R9
-R15
+R23
+R31
 8D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_prefetch_buffer.sv
 FD:/Si-Vision Academy/final-project/code/rtl/cv32e40p_prefetch_buffer.sv
-!i122 1049
+!i122 1295
 L0 27 228
-R10
-R11
+R25
+R26
 r1
 !s85 0
 31
-R20
+R36
 !s107 D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_prefetch_buffer.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_prefetch_buffer.sv|
 !i113 0
-R13
-R5
+R28
+R18
 vcv32e40p_prefetch_controller
 2D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_prefetch_controller.sv
-R6
-R7
-R19
+R20
+R21
+R35
 !i10b 1
 !s100 a^CLzNM0Jdd;a2PdQ2c3h1
 I=ca3Sad3XzDI96jRf_>TR3
 S1
-R9
-R15
+R23
+R31
 8D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_prefetch_controller.sv
 FD:/Si-Vision Academy/final-project/code/rtl/cv32e40p_prefetch_controller.sv
-!i122 1050
+!i122 1296
 L0 40 324
-R10
-R11
+R25
+R26
 r1
 !s85 0
 31
-R20
+R36
 !s107 D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_prefetch_controller.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_prefetch_controller.sv|
 !i113 0
-R13
-R5
+R28
+R18
 vcv32e40p_register_file
 2D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_register_file_latch.sv
-R6
-R19
+R20
+R35
 !i10b 1
 !s100 nX7<?96D0J_7QB]Io<^;S2
 IOFJ3F8ckdBVMZfgGeNLJc3
 S1
-R9
-R15
+R23
+R31
 8D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_register_file_latch.sv
 FD:/Si-Vision Academy/final-project/code/rtl/cv32e40p_register_file_latch.sv
-!i122 1052
+!i122 1298
 L0 32 161
-R10
-R11
+R25
+R26
 r1
 !s85 0
 31
-R20
+R36
 !s107 D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_register_file_latch.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_register_file_latch.sv|
 !i113 0
-R13
-R5
+R28
+R18
 vcv32e40p_sleep_unit
 2D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_sleep_unit.sv
-R6
-R7
-R17
+R20
+R21
+R35
 !i10b 1
 !s100 =RD1BI0YIkAdnaSBgmI0`2
 Iii6DIl]hK_=cYECO2NgkX2
 S1
-R9
-R15
+R23
+R31
 8D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_sleep_unit.sv
 FD:/Si-Vision Academy/final-project/code/rtl/cv32e40p_sleep_unit.sv
-!i122 1054
+!i122 1300
 L0 56 237
-R10
-R11
+R25
+R26
 r1
 !s85 0
 31
-R20
+R36
 !s107 D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_sleep_unit.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_sleep_unit.sv|
 !i113 0
-R13
-R5
+R28
+R18
 vcv32e40p_top
 2D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_top.sv
-R6
-R21
-R17
+R20
+R37
+R33
 !i10b 1
 !s100 G2I_Ji69RWgQCmbh=RT9d2
 Iin@00@2:cHNf3c<CbW2`f2
 S1
-R9
-R15
+R23
+R31
 8D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_top.sv
 FD:/Si-Vision Academy/final-project/code/rtl/cv32e40p_top.sv
-!i122 1055
+!i122 1301
 L0 14 166
-R10
-R11
+R25
+R26
 r1
 !s85 0
 31
-R18
+R36
 !s107 D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_top.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_top.sv|
 !i113 0
-R13
-R5
+R28
+R18
+Yfetch_if
+2D:/Si-Vision Academy/final-project/code/tb/prefetch/fetch_if.sv
+R20
+Z41 !s110 1746894776
+!i10b 1
+!s100 OKIn?T?c:5_VT_cgfEl1X2
+IHmL?V`6IdXLfbWP?7z=ek0
+S1
+R23
+w1746887719
+8D:/Si-Vision Academy/final-project/code/tb/prefetch/fetch_if.sv
+FD:/Si-Vision Academy/final-project/code/tb/prefetch/fetch_if.sv
+!i122 1311
+Z42 L0 1 0
+R25
+R26
+r1
+!s85 0
+31
+Z43 !s108 1746894776.000000
+!s107 D:/Si-Vision Academy/final-project/code/tb/prefetch/fetch_if.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/tb/prefetch/fetch_if.sv|
+!i113 0
+R28
+R18
 Yfetch_interface
 2D:/Si-Vision Academy/final-project/code/tb/prefetch/fetch_intf.sv
-R6
-Z25 !s110 1746884302
+R20
+Z44 !s110 1746884302
 !i10b 1
 !s100 P_I>Ic8eBLJ3`AF==8?9z1
 IbzPZ<[I^]=?ZFz3RfA1=g3
 S1
-R9
+R23
 w1746884283
 8D:/Si-Vision Academy/final-project/code/tb/prefetch/fetch_intf.sv
 FD:/Si-Vision Academy/final-project/code/tb/prefetch/fetch_intf.sv
 !i122 1063
-Z26 L0 1 0
-R10
-R11
+R42
+R25
+R26
 r1
 !s85 0
 31
-R12
+R29
 !s107 D:/Si-Vision Academy/final-project/code/tb/prefetch/fetch_intf.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/tb/prefetch/fetch_intf.sv|
 !i113 0
-R13
-R5
+R28
+R18
 Ylsu_if
 2D:/Si-Vision Academy/final-project/code/tb/lsu/lsu_if.sv
-R6
-Z27 DXx4 work 9 riscv_pkg 0 22 aM<M1Ub;UejdV[iAUHgzL1
-R8
+R20
+Z45 DXx4 work 9 riscv_pkg 0 22 aM<M1Ub;UejdV[iAUHgzL1
+R22
 !i10b 1
 !s100 =0nA2mcVWHTzS@W=P7Hj^0
 I_]<c9ML9=7GdJomJ3zX9d2
 S1
-R9
-R15
+R23
+R31
 8D:/Si-Vision Academy/final-project/code/tb/lsu/lsu_if.sv
 FD:/Si-Vision Academy/final-project/code/tb/lsu/lsu_if.sv
-!i122 1065
+!i122 1308
+R42
+R25
 R26
-R10
-R11
 r1
 !s85 0
 31
-Z28 !s108 1746884303.000000
+R27
 !s107 D:/Si-Vision Academy/final-project/code/tb/lsu/lsu_if.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/tb/lsu/lsu_if.sv|
 !i113 0
-R13
-R5
+R28
+R18
 Ymul_if
 2D:/Si-Vision Academy/final-project/code/tb/mul/mul_interface.sv
-R6
-R7
-R8
+R20
+R21
+R22
 !i10b 1
 !s100 YJHShz4@oW4?JzNh0d6Md1
 I@PjN`RD<g^??[:_4ozbNV0
 S1
-R9
+R23
 w1746883590
 8D:/Si-Vision Academy/final-project/code/tb/mul/mul_interface.sv
 FD:/Si-Vision Academy/final-project/code/tb/mul/mul_interface.sv
-!i122 1066
+!i122 1309
+R42
+R25
 R26
-R10
-R11
 r1
 !s85 0
 31
-R28
+R27
 !s107 D:/Si-Vision Academy/final-project/code/tb/mul/mul_interface.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/tb/mul/mul_interface.sv|
 !i113 0
-R13
-R5
+R28
+R18
 Xriscv_classes_pkg
 !i114 1
 2D:/Si-Vision Academy/final-project/code/tb/riscv_classes_pkg.sv
-!s115 riscv_intf
-!s115 fetch_interface
+!s115 riscv_if
+!s115 fetch_if
 !s115 lsu_if
 !s115 mul_if
-!s115 ALU_interface
-R6
-Z29 DXx6 mtiUvm 7 uvm_pkg 0 22 MiVhEBb9cnBN5^J=<XBKI2
-R27
-R7
-!s110 1746884357
+!s115 alu_if
+R20
+Z46 DXx6 mtiUvm 7 uvm_pkg 0 22 MiVhEBb9cnBN5^J=<XBKI2
+R45
+R21
+!s110 1746902390
 !i10b 1
-!s100 <[@D>hI]jEPA:e1APoYZX3
-IzE;Q0:[iIdAmIIQAL<PQ]0
+!s100 nLKHJj7EWPOn5H?DYdDZO2
+IT27h[fC_Y^17zKSRXGI3<0
 S1
-R9
-w1746884351
+R23
+w1746902375
 8D:/Si-Vision Academy/final-project/code/tb/riscv_classes_pkg.sv
 FD:/Si-Vision Academy/final-project/code/tb/riscv_classes_pkg.sv
 FC:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/uvm_macros.svh
@@ -978,104 +1127,129 @@ FD:/Si-Vision Academy/final-project/code/tb/prefetch/fetch_scoreboard.svh
 FD:/Si-Vision Academy/final-project/code/tb/prefetch/fetch_subscriber.svh
 FD:/Si-Vision Academy/final-project/code/tb/riscv_config_obj.svh
 FD:/Si-Vision Academy/final-project/code/tb/riscv_main_sequencer.svh
-FD:/Si-Vision Academy/final-project/code/tb/riscv_vseqr.svh
-FD:/Si-Vision Academy/final-project/code/tb/riscv_base_sequence.svh
-FD:/Si-Vision Academy/final-project/code/tb/riscv_vsequ_base.svh
-FD:/Si-Vision Academy/final-project/code/tb/riscv_vsequ_arith.svh
+FD:/Si-Vision Academy/final-project/code/tb/riscv_virtual_sequencer.svh
+FD:/Si-Vision Academy/final-project/code/tb/riscv_sequences.svh
+FD:/Si-Vision Academy/final-project/code/tb/riscv_virtual_base_sequence.svh
+FD:/Si-Vision Academy/final-project/code/tb/riscv_virtual_sequence.svh
 FD:/Si-Vision Academy/final-project/code/tb/riscv_main_driver.svh
 FD:/Si-Vision Academy/final-project/code/tb/riscv_main_agent.svh
 FD:/Si-Vision Academy/final-project/code/tb/riscv_env.svh
-FD:/Si-Vision Academy/final-project/code/tb/riscv_base_test.svh
-!i122 1067
+FD:/Si-Vision Academy/final-project/code/tb/riscv_test.svh
+!i122 1343
+R42
+VT27h[fC_Y^17zKSRXGI3<0
 R26
-VzE;Q0:[iIdAmIIQAL<PQ]0
-R11
 r1
 !s85 0
 31
-!s108 1746884356.000000
-!s107 D:/Si-Vision Academy/final-project/code/tb/riscv_base_test.svh|D:/Si-Vision Academy/final-project/code/tb/riscv_env.svh|D:/Si-Vision Academy/final-project/code/tb/riscv_main_agent.svh|D:/Si-Vision Academy/final-project/code/tb/riscv_main_driver.svh|D:/Si-Vision Academy/final-project/code/tb/riscv_vsequ_arith.svh|D:/Si-Vision Academy/final-project/code/tb/riscv_vsequ_base.svh|D:/Si-Vision Academy/final-project/code/tb/riscv_base_sequence.svh|D:/Si-Vision Academy/final-project/code/tb/riscv_vseqr.svh|D:/Si-Vision Academy/final-project/code/tb/riscv_main_sequencer.svh|D:/Si-Vision Academy/final-project/code/tb/riscv_config_obj.svh|D:/Si-Vision Academy/final-project/code/tb/prefetch/fetch_subscriber.svh|D:/Si-Vision Academy/final-project/code/tb/prefetch/fetch_scoreboard.svh|D:/Si-Vision Academy/final-project/code/tb/prefetch/fetch_agent.svh|D:/Si-Vision Academy/final-project/code/tb/prefetch/fetch_monitor.svh|D:/Si-Vision Academy/final-project/code/tb/prefetch/fetch_seq_item.svh|D:/Si-Vision Academy/final-project/code/tb/lsu/lsu_agent.svh|D:/Si-Vision Academy/final-project/code/tb/lsu/lsu_monitor.svh|D:/Si-Vision Academy/final-project/code/tb/lsu/lsu_driver.svh|D:/Si-Vision Academy/final-project/code/tb/lsu/lsu_scoreboard.svh|D:/Si-Vision Academy/final-project/code/tb/lsu/lsu_coverage_collector.svh|D:/Si-Vision Academy/final-project/code/tb/lsu/lsu_sequencer.svh|D:/Si-Vision Academy/final-project/code/tb/lsu/lsu_sequence.svh|D:/Si-Vision Academy/final-project/code/tb/lsu/lsu_sequence_item.svh|D:/Si-Vision Academy/final-project/code/tb/mul/mul_scoreboard.svh|D:/Si-Vision Academy/final-project/code/tb/mul/mul_agent.svh|D:/Si-Vision Academy/final-project/code/tb/mul/mul_config.svh|D:/Si-Vision Academy/final-project/code/tb/mul/mul_driver.svh|D:/Si-Vision Academy/final-project/code/tb/mul/mul_monitor.svh|D:/Si-Vision Academy/final-project/code/tb/mul/mul_sequencer.svh|D:/Si-Vision Academy/final-project/code/tb/mul/mul_coverage_collector.svh|D:/Si-Vision Academy/final-project/code/tb/mul/mul_sequence_item.svh|D:/Si-Vision Academy/final-project/code/tb/ALU_DIV/tb_files/alu_coverage_collector.svh|D:/Si-Vision Academy/final-project/code/tb/ALU_DIV/tb_files/alu_scoreboard.svh|D:/Si-Vision Academy/final-project/code/tb/ALU_DIV/tb_files/alu_agent.svh|D:/Si-Vision Academy/final-project/code/tb/ALU_DIV/tb_files/alu_config.svh|D:/Si-Vision Academy/final-project/code/tb/ALU_DIV/tb_files/alu_monitor.svh|D:/Si-Vision Academy/final-project/code/tb/ALU_DIV/tb_files/alu_sequencer.svh|D:/Si-Vision Academy/final-project/code/tb/ALU_DIV/tb_files/alu_driver.svh|D:/Si-Vision Academy/final-project/code/tb/ALU_DIV/tb_files/alu_sequence_item.svh|D:/Si-Vision Academy/final-project/code/tb/riscv_sequence_item.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_deprecated_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_reg_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_callback_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_sequence_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/tlm1/uvm_tlm_imps.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_tlm_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_printer_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_object_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_phase_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_message_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_version_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/uvm_macros.svh|D:/Si-Vision Academy/final-project/code/tb/riscv_classes_pkg.sv|
+!s108 1746902390.000000
+!s107 D:/Si-Vision Academy/final-project/code/tb/riscv_test.svh|D:/Si-Vision Academy/final-project/code/tb/riscv_env.svh|D:/Si-Vision Academy/final-project/code/tb/riscv_main_agent.svh|D:/Si-Vision Academy/final-project/code/tb/riscv_main_driver.svh|D:/Si-Vision Academy/final-project/code/tb/riscv_virtual_sequence.svh|D:/Si-Vision Academy/final-project/code/tb/riscv_virtual_base_sequence.svh|D:/Si-Vision Academy/final-project/code/tb/riscv_sequences.svh|D:/Si-Vision Academy/final-project/code/tb/riscv_virtual_sequencer.svh|D:/Si-Vision Academy/final-project/code/tb/riscv_main_sequencer.svh|D:/Si-Vision Academy/final-project/code/tb/riscv_config_obj.svh|D:/Si-Vision Academy/final-project/code/tb/prefetch/fetch_subscriber.svh|D:/Si-Vision Academy/final-project/code/tb/prefetch/fetch_scoreboard.svh|D:/Si-Vision Academy/final-project/code/tb/prefetch/fetch_agent.svh|D:/Si-Vision Academy/final-project/code/tb/prefetch/fetch_monitor.svh|D:/Si-Vision Academy/final-project/code/tb/prefetch/fetch_seq_item.svh|D:/Si-Vision Academy/final-project/code/tb/lsu/lsu_agent.svh|D:/Si-Vision Academy/final-project/code/tb/lsu/lsu_monitor.svh|D:/Si-Vision Academy/final-project/code/tb/lsu/lsu_driver.svh|D:/Si-Vision Academy/final-project/code/tb/lsu/lsu_scoreboard.svh|D:/Si-Vision Academy/final-project/code/tb/lsu/lsu_coverage_collector.svh|D:/Si-Vision Academy/final-project/code/tb/lsu/lsu_sequencer.svh|D:/Si-Vision Academy/final-project/code/tb/lsu/lsu_sequence.svh|D:/Si-Vision Academy/final-project/code/tb/lsu/lsu_sequence_item.svh|D:/Si-Vision Academy/final-project/code/tb/mul/mul_scoreboard.svh|D:/Si-Vision Academy/final-project/code/tb/mul/mul_agent.svh|D:/Si-Vision Academy/final-project/code/tb/mul/mul_config.svh|D:/Si-Vision Academy/final-project/code/tb/mul/mul_driver.svh|D:/Si-Vision Academy/final-project/code/tb/mul/mul_monitor.svh|D:/Si-Vision Academy/final-project/code/tb/mul/mul_sequencer.svh|D:/Si-Vision Academy/final-project/code/tb/mul/mul_coverage_collector.svh|D:/Si-Vision Academy/final-project/code/tb/mul/mul_sequence_item.svh|D:/Si-Vision Academy/final-project/code/tb/ALU_DIV/tb_files/alu_coverage_collector.svh|D:/Si-Vision Academy/final-project/code/tb/ALU_DIV/tb_files/alu_scoreboard.svh|D:/Si-Vision Academy/final-project/code/tb/ALU_DIV/tb_files/alu_agent.svh|D:/Si-Vision Academy/final-project/code/tb/ALU_DIV/tb_files/alu_config.svh|D:/Si-Vision Academy/final-project/code/tb/ALU_DIV/tb_files/alu_monitor.svh|D:/Si-Vision Academy/final-project/code/tb/ALU_DIV/tb_files/alu_sequencer.svh|D:/Si-Vision Academy/final-project/code/tb/ALU_DIV/tb_files/alu_driver.svh|D:/Si-Vision Academy/final-project/code/tb/ALU_DIV/tb_files/alu_sequence_item.svh|D:/Si-Vision Academy/final-project/code/tb/riscv_sequence_item.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_deprecated_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_reg_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_callback_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_sequence_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/tlm1/uvm_tlm_imps.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_tlm_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_printer_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_object_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_phase_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_message_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/macros/uvm_version_defines.svh|C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src/uvm_macros.svh|D:/Si-Vision Academy/final-project/code/tb/riscv_classes_pkg.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/tb/riscv_classes_pkg.sv|
 !i113 0
-R13
-R5
+R28
+R18
+Yriscv_if
+2D:/Si-Vision Academy/final-project/code/tb/riscv_if.sv
+R20
+R41
+!i10b 1
+!s100 ^AfiYToZQl_O=IA1Q=cW]3
+Iah?:i@>39?h>8>do`1Rnd2
+S1
+R23
+w1746887709
+8D:/Si-Vision Academy/final-project/code/tb/riscv_if.sv
+FD:/Si-Vision Academy/final-project/code/tb/riscv_if.sv
+!i122 1312
+R42
+R25
+R26
+r1
+!s85 0
+31
+R43
+!s107 D:/Si-Vision Academy/final-project/code/tb/riscv_if.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/tb/riscv_if.sv|
+!i113 0
+R28
+R18
 Yriscv_intf
 2D:/Si-Vision Academy/final-project/code/tb/riscv_intf_main.sv
-R6
-R25
+R20
+R44
 !i10b 1
 !s100 fK038PkaZZWPMo>N1P<Ud1
 ITbR;k=RCoNd8KZ=FG]Dii2
 S1
-R9
-R15
+R23
+R31
 8D:/Si-Vision Academy/final-project/code/tb/riscv_intf_main.sv
 FD:/Si-Vision Academy/final-project/code/tb/riscv_intf_main.sv
 !i122 1060
+R42
+R25
 R26
-R10
-R11
 r1
 !s85 0
 31
-R12
+R29
 !s107 D:/Si-Vision Academy/final-project/code/tb/riscv_intf_main.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/tb/riscv_intf_main.sv|
 !i113 0
-R13
-R5
+R28
+R18
 Xriscv_pkg
 2D:/Si-Vision Academy/final-project/code/tb/riscv_pkg.sv
-R6
-R25
+R20
+R22
 !i10b 1
 !s100 ]EQYchCoQ^G=5YJV2c4dV1
 IaM<M1Ub;UejdV[iAUHgzL1
 S1
-R9
-R15
+R23
+R31
 8D:/Si-Vision Academy/final-project/code/tb/riscv_pkg.sv
 FD:/Si-Vision Academy/final-project/code/tb/riscv_pkg.sv
-!i122 1061
-R26
+!i122 1306
+R42
 VaM<M1Ub;UejdV[iAUHgzL1
-R11
+R26
 r1
 !s85 0
 31
-R12
+R27
 !s107 D:/Si-Vision Academy/final-project/code/tb/riscv_pkg.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/tb/riscv_pkg.sv|
 !i113 0
-R13
-R5
+R28
+R18
 vriscv_top_tb
 2D:/Si-Vision Academy/final-project/code/tb/riscv_top_tb.sv
-R6
-R29
-R27
-R7
-DXx4 work 17 riscv_classes_pkg 0 22 jWb90RACZTH6ThN:4XFLz1
-R25
+R20
+R46
+R45
+R21
+DXx4 work 17 riscv_classes_pkg 0 22 5Y;zO1]gaeW0haDf_2i_k1
+R22
 !i10b 1
-!s100 kdW3P=21]F825@^YC:<fi3
-I=W7>1[d;d0GN;]4`DPiNI0
+!s100 ckU0CFG]e`eoQb6TYRoYg2
+Ih?Im=SIF6e_D23o`Sde1S0
 S1
-R9
-w1746884117
+R23
+w1746894000
 8D:/Si-Vision Academy/final-project/code/tb/riscv_top_tb.sv
 FD:/Si-Vision Academy/final-project/code/tb/riscv_top_tb.sv
 FD:/Si-Vision Academy/final-project/code/tb/riscv_assign.svh
-!i122 1062
-L0 2 204
-R10
-R11
+!i122 1307
+L0 2 203
+R25
+R26
 r1
 !s85 0
 31
-R12
+R27
 !s107 D:/Si-Vision Academy/final-project/code/tb/riscv_assign.svh|D:/Si-Vision Academy/final-project/code/tb/riscv_top_tb.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|D:/Si-Vision Academy/final-project/code/tb/riscv_top_tb.sv|
 !i113 0
-R13
-R5
+R28
+R18

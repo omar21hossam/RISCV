@@ -1,11 +1,6 @@
 # vsim -wlf riscv.wlf -logfile sim.log -c -coverage -voptargs="+acc" work.riscv_top_tb -do "coverage save -onexit -directive -codeAll riscv.ucdb; run -all" 
-# Start time: 23:53:28 on May 08,2025
-# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
-# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
-# Support of the MGLS_LICENSE_FILE and LM_LICENSE_FILE licensing environment variables will be discontinued starting with the 2025.1 release. Please update to using the SALT_LICENSE_SERVER variable.
-# Please contact Siemens EDA Customer Support (https://support.sw.siemens.com/) for assistance.
-# ** Warning: (vopt-13408) Code coverage will be disabled for some DUs/packages/classes and source files.
-# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=2.
+# Start time: 17:53:28 on May 10,2025
+# ** Note: (vsim-8009) Loading existing optimized design _opt3
 # //  Questa Sim-64
 # //  Version 2024.1 win64 Feb  1 2024
 # //
@@ -21,20 +16,22 @@
 # // and may not be used in any way not expressly authorized by SISW.
 # //
 # Loading sv_std.std
-# Loading work.ALU_interface(fast)
+# Loading work.alu_if(fast)
 # Loading work.mul_if(fast)
 # Loading work.lsu_if(fast)
-# Loading work.riscv_intf(fast)
+# Loading work.fetch_if(fast)
+# Loading work.riscv_if(fast)
 # Loading work.cv32e40p_pkg(fast)
 # Loading work.riscv_pkg(fast)
 # Loading mtiUvm.uvm_pkg(fast)
 # Loading work.riscv_classes_pkg(fast)
 # Loading mtiUvm.questa_uvm_pkg(fast)
 # Loading work.riscv_top_tb(fast)
-# Loading work.riscv_intf(fast__2)
+# Loading work.riscv_if(fast__2)
 # Loading work.mul_if(fast__2)
-# Loading work.ALU_interface(fast__2)
+# Loading work.alu_if(fast__2)
 # Loading work.lsu_if(fast__2)
+# Loading work.fetch_if(fast__2)
 # Loading work.cv32e40p_apu_core_pkg(fast)
 # Loading work.cv32e40p_top(fast)
 # Loading work.cv32e40p_core(fast)
@@ -63,28 +60,71 @@
 # Loading work.cv32e40p_load_store_unit(fast)
 # Loading work.cv32e40p_obi_interface(fast__1)
 # Loading work.cv32e40p_cs_registers(fast)
-# ** Error (suppressible): (vsim-12460) Illegal assignment to class work.riscv_classes_pkg::riscv_vsequ_base from class work.riscv_classes_pkg::riscv_vseqr
-#    Time: 0 ps  Iteration: 0  Region: /riscv_classes_pkg File: ../riscv_base_test.svh Line: 40
-# ** Error (suppressible): (vsim-8386) Illegal assignment to type 'enum reg[2:0] cv32e40p_pkg::mul_opcode_e' from type 'enum reg[2:0] riscv_pkg::mul_opcode_e': An enum variable may only be assigned the same enum typed variable or one of its values.
-#    Time: 0 ps  Iteration: 0  Region: /riscv_classes_pkg File: ../mul/mul_monitor.svh Line: 40
-# ** Error (suppressible): (vsim-8386) Illegal assignment to type 'enum reg[6:0] riscv_pkg::alu_opcode_e' from type 'enum reg[6:0] cv32e40p_pkg::alu_opcode_e': An enum variable may only be assigned the same enum typed variable or one of its values.
-#    Time: 0 ps  Iteration: 0  Region: /riscv_classes_pkg File: ../ALU_DIV/tb_files/alu_monitor.svh Line: 42
-# ** Error: (vsim-8754) Actual input arg. of type 'virtual ALU_interface' for formal 'value' of 'set' is not compatible with the formal's type 'virtual ALU_interface'.
-#    Time: 0 ps  Iteration: 0  Region: /riscv_classes_pkg File: ../riscv_base_test.svh Line: 69
-# ** Error: (vsim-13216) Illegal assignment to type 'virtual ALU_interface' from type 'virtual ALU_interface':
-#    Time: 0 ps  Iteration: 0  Region: /riscv_classes_pkg File: ../riscv_base_test.svh Line: 69
-# ** Error: (vsim-13216) Illegal assignment to type 'virtual ALU_interface' from type 'virtual ALU_interface':
-#    Time: 0 ps  Iteration: 0  Region: /riscv_classes_pkg File: ../riscv_base_test.svh Line: 66
-# ** Error: (vsim-8754) Actual input arg. of type 'virtual ALU_interface' for formal 'value' of 'set' is not compatible with the formal's type 'virtual ALU_interface'.
-#    Time: 0 ps  Iteration: 0  Region: /riscv_classes_pkg File: ../riscv_env.svh Line: 100
-# ** Error: (vsim-13216) Illegal assignment to type 'virtual ALU_interface' from type 'virtual ALU_interface':
-#    Time: 0 ps  Iteration: 0  Region: /riscv_classes_pkg File: ../riscv_env.svh Line: 100
-# ** Error: (vsim-13216) Illegal assignment to type 'virtual ALU_interface' from type 'virtual ALU_interface':
-#    Time: 0 ps  Iteration: 0  Region: /riscv_classes_pkg File: ../riscv_env.svh Line: 97
-# ** Error: (vsim-8754) Actual inout arg. of type 'virtual ALU_interface' for formal 'value' of 'get' is not compatible with the formal's type 'virtual ALU_interface'.
-#    Time: 0 ps  Iteration: 0  Region: /riscv_classes_pkg File: ../riscv_env.svh Line: 97
-# ** Error: (vsim-8754) Actual inout arg. of type 'virtual ALU_interface' for formal 'value' of 'get' is not compatible with the formal's type 'virtual ALU_interface'.
-#    Time: 0 ps  Iteration: 0  Region: /riscv_classes_pkg File: ../riscv_base_test.svh Line: 66
-# Error loading design
-# End time: 23:53:34 on May 08,2025, Elapsed time: 0:00:06
-# Errors: 11, Warnings: 2
+# ** Warning: (vsim-8386) Illegal assignment to type 'enum bit riscv_pkg::we_e' from type 'wire': An enum variable may only be assigned the same enum typed variable or one of its values.
+#    Time: 0 ps  Iteration: 0  Instance: /riscv_top_tb File: ../riscv_assign.svh Line: 45
+# ** Warning: (vsim-8386) Illegal assignment to type 'enum bit[1:0] riscv_pkg::type_e' from type 'wire[1:0]': An enum variable may only be assigned the same enum typed variable or one of its values.
+#    Time: 0 ps  Iteration: 0  Instance: /riscv_top_tb File: ../riscv_assign.svh Line: 46
+# ** Warning: (vsim-8386) Illegal assignment to type 'enum bit[1:0] riscv_pkg::extend_e' from type 'wire[1:0]': An enum variable may only be assigned the same enum typed variable or one of its values.
+#    Time: 0 ps  Iteration: 0  Instance: /riscv_top_tb File: ../riscv_assign.svh Line: 50
+# ** Warning: (vsim-3838) Variable '/riscv_top_tb/alu_intf/ex_ready_i' written by continuous and procedural assignments. 
+# One of the assignments is implicit. See ../ALU_DIV/tb_files/alu_if.sv(12).
+#    Time: 0 ps  Iteration: 0  Instance: /riscv_top_tb File: ../riscv_assign.svh Line: 35
+# ** Warning: (vsim-3838) Variable '/riscv_top_tb/alu_intf/operand_b_i' written by continuous and procedural assignments. 
+# One of the assignments is implicit. See ../ALU_DIV/tb_files/alu_if.sv(13).
+#    Time: 0 ps  Iteration: 0  Instance: /riscv_top_tb File: ../riscv_assign.svh Line: 34
+# ** Warning: (vsim-3838) Variable '/riscv_top_tb/alu_intf/operand_a_i' written by continuous and procedural assignments. 
+# One of the assignments is implicit. See ../ALU_DIV/tb_files/alu_if.sv(13).
+#    Time: 0 ps  Iteration: 0  Instance: /riscv_top_tb File: ../riscv_assign.svh Line: 33
+# ** Warning: (vsim-3838) Variable '/riscv_top_tb/alu_intf/operator_i' written by continuous and procedural assignments. 
+# One of the assignments is implicit. See ../ALU_DIV/tb_files/alu_if.sv(11).
+#    Time: 0 ps  Iteration: 0  Instance: /riscv_top_tb File: ../riscv_assign.svh Line: 32
+# ** Warning: (vsim-3838) Variable '/riscv_top_tb/alu_intf/enable_i' written by continuous and procedural assignments. 
+# One of the assignments is implicit. See ../ALU_DIV/tb_files/alu_if.sv(10).
+#    Time: 0 ps  Iteration: 0  Instance: /riscv_top_tb File: ../riscv_assign.svh Line: 31
+# Loading C:/questasim64_2024.1/uvm-1.1d\win64\uvm_dpi.dll
+# coverage save -onexit -directive -codeAll riscv.ucdb
+#  run -all
+# ----------------------------------------------------------------
+# UVM-1.1d
+# (C) 2007-2013 Mentor Graphics Corporation
+# (C) 2007-2013 Cadence Design Systems, Inc.
+# (C) 2006-2013 Synopsys, Inc.
+# (C) 2011-2013 Cypress Semiconductor Corp.
+# ----------------------------------------------------------------
+# 
+#   ***********       IMPORTANT RELEASE NOTES         ************
+# 
+#   You are using a version of the UVM library that has been compiled
+#   with `UVM_NO_DEPRECATED undefined.
+#   See http://www.eda.org/svdb/view.php?id=3313 for more details.
+# 
+#   You are using a version of the UVM library that has been compiled
+#   with `UVM_OBJECT_MUST_HAVE_CONSTRUCTOR undefined.
+#   See http://www.eda.org/svdb/view.php?id=3770 for more details.
+# 
+#       (Specify +UVM_NO_RELNOTES to turn off this notice)
+# 
+# UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(277) @ 0: reporter [Questa UVM] QUESTA_UVM-1.2.3
+# UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(278) @ 0: reporter [Questa UVM]  questa_uvm::init(+struct)
+# UVM_INFO @ 0: reporter [RNTST] Running test riscv_test...
+# Starting simulation
+# UVM_FATAL verilog_src/uvm-1.1d/src/base/uvm_component.svh(1747) @ 0: m_vseqr [CLDEXT] Cannot set 'm_vseqr' as a child of 'uvm_test_top.m_env', which already has a child by that name.
+# 
+# --- UVM Report Summary ---
+# 
+# ** Report counts by severity
+# UVM_INFO :    3
+# UVM_WARNING :    0
+# UVM_ERROR :    0
+# UVM_FATAL :    1
+# ** Report counts by id
+# [CLDEXT]     1
+# [Questa UVM]     2
+# [RNTST]     1
+# ** Note: $finish    : C:/questasim64_2024.1/win64/../verilog_src/uvm-1.1d/src/base/uvm_report_object.svh(292)
+#    Time: 0 ps  Iteration: 11  Region: /uvm_pkg::uvm_phase::m_run_phases
+# ** Note: Assertion failed
+#    Time: 0 ps  Scope: riscv_top_tb.DUT.core_i.load_store_unit_i File: ../../rtl/cv32e40p_load_store_unit.sv Line: 419
+# Saving coverage database on exit...
+# End time: 17:53:36 on May 10,2025, Elapsed time: 0:00:08
+# Errors: 0, Warnings: 8

@@ -24,12 +24,12 @@ class alu_scoreboard extends uvm_scoreboard;
     if (alu_seq_item.in_out == 1'b0) begin : inp_transaction
       `uvm_info(get_type_name(), $sformatf(
                 "ALU Scoreboard: Received input transaction: %s", alu_seq_item.convert2string()),
-                UVM_MEDIUM);
+                UVM_HIGH);
       Model(alu_seq_item);
     end else begin : out_transaction
       `uvm_info(get_type_name(), $sformatf(
                 "ALU Scoreboard: Received output transaction: %s", alu_seq_item.convert2string()),
-                UVM_MEDIUM);
+                UVM_HIGH);
       seq_item_mon_out_q.push_back(alu_seq_item);
     end
   endfunction : write_alu_mon
@@ -305,17 +305,17 @@ class alu_scoreboard extends uvm_scoreboard;
       if (seq_item_mon_out_q.size() > 0) begin
         if (seq_item_mon_out_q[0].compare(seq_item_model_q[0])) begin
           `uvm_info(get_type_name(), $sformatf("ALU Scoreboard: Comparison result: %s", "PASS"),
-                    UVM_NONE);
+                    UVM_HIGH);
         end else begin
           // seq_item_model_q[0].print();
           `uvm_info(
               get_type_name(), $sformatf(
               "ALU Scoreboard: Comparison model result: %s", seq_item_model_q[0].convert2string()),
-              UVM_NONE);
+              UVM_HIGH);
           `uvm_info(get_type_name(), $sformatf(
                     "ALU Scoreboard: Comparison mon_out result: %s",
                     seq_item_mon_out_q[0].convert2string()
-                    ), UVM_NONE);
+                    ), UVM_HIGH);
 
           // seq_item_mon_out_q[0].print();
           `uvm_error(get_type_name(), $sformatf(

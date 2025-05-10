@@ -2,7 +2,7 @@ class alu_test extends uvm_test;
     `uvm_component_utils(alu_test)
     alu_env env;
     alu_seq seq;
-    virtual ALU_interface vinf;
+    virtual alu_if vinf;
 //==============================================================================
 //Description: function new
 //==============================================================================
@@ -17,9 +17,9 @@ class alu_test extends uvm_test;
         env = alu_env::type_id::create("env", this);
         seq = alu_seq::type_id::create("seq", this);
         // Create the virtual interface and set it in the config DB
-        if(!uvm_config_db #(virtual ALU_interface)::get(this,"", "top2test",vinf))
+        if(!uvm_config_db #(virtual alu_if)::get(this,"", "top2test",vinf))
             `uvm_fatal("NO_CONFIG", {"Config not found for ", get_full_name(), "vinf"});
-        uvm_config_db #(virtual ALU_interface)::set(this,"env","vif",vinf);
+        uvm_config_db #(virtual alu_if)::set(this,"env","vif",vinf);
     endfunction:build_phase
 //==============================================================================
 //Description: run_phase

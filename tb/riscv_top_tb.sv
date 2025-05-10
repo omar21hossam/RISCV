@@ -1,4 +1,4 @@
-`timescale 1ns/1ps
+`timescale 1ns / 1ps
 module riscv_top_tb ();
   //==================================================================================
   // Packages
@@ -18,11 +18,11 @@ module riscv_top_tb ();
   //==================================================================================
   // Interface Instantiation
   //==================================================================================
-  riscv_intf riscv_intf_ (clk);
+  riscv_if riscv_intf (clk);
   mul_if mul_intf (clk);
-  ALU_interface alu_intf_ (clk);
+  alu_if alu_intf (clk);
   lsu_if lsu_intf (clk);
-  fetch_interface fetch_interface_ (clk);
+  fetch_if fetch_intf (clk);
 
   //==================================================================================
   // DUT Instantiation
@@ -30,22 +30,22 @@ module riscv_top_tb ();
   cv32e40p_top DUT (
       // Clock and Reset
       .clk_i (clk),
-      .rst_ni(riscv_intf_.rst_ni),
+      .rst_ni(riscv_intf.rst_ni),
 
-      .pulp_clock_en_i    (riscv_intf_.pulp_clock_en_i),
-      .scan_cg_en_i       (riscv_intf_.scan_cg_en_i),
-      .boot_addr_i        (riscv_intf_.boot_addr_i),
-      .mtvec_addr_i       (riscv_intf_.mtvec_addr_i),
-      .dm_halt_addr_i     (riscv_intf_.dm_halt_addr_i),
-      .hart_id_i          (riscv_intf_.hart_id_i),
-      .dm_exception_addr_i(riscv_intf_.dm_exception_addr_i),
+      .pulp_clock_en_i    (riscv_intf.pulp_clock_en_i),
+      .scan_cg_en_i       (riscv_intf.scan_cg_en_i),
+      .boot_addr_i        (riscv_intf.boot_addr_i),
+      .mtvec_addr_i       (riscv_intf.mtvec_addr_i),
+      .dm_halt_addr_i     (riscv_intf.dm_halt_addr_i),
+      .hart_id_i          (riscv_intf.hart_id_i),
+      .dm_exception_addr_i(riscv_intf.dm_exception_addr_i),
 
       // Instruction memory interface
-      .instr_req_o   (riscv_intf_.instr_req_o),
-      .instr_gnt_i   (riscv_intf_.instr_gnt_i),
-      .instr_rvalid_i(riscv_intf_.instr_rvalid_i),
-      .instr_addr_o  (riscv_intf_.instr_addr_o),
-      .instr_rdata_i (riscv_intf_.instr_rdata_i),
+      .instr_req_o   (riscv_intf.instr_req_o),
+      .instr_gnt_i   (riscv_intf.instr_gnt_i),
+      .instr_rvalid_i(riscv_intf.instr_rvalid_i),
+      .instr_addr_o  (riscv_intf.instr_addr_o),
+      .instr_rdata_i (riscv_intf.instr_rdata_i),
 
       // Data memory interface
       .data_req_o   (lsu_intf.data_req_o),
@@ -58,19 +58,19 @@ module riscv_top_tb ();
       .data_rdata_i (lsu_intf.data_rdata_i),
 
       // Interrupt inputs
-      .irq_i    (riscv_intf_.irq_i),
-      .irq_ack_o(riscv_intf_.irq_ack_o),
-      .irq_id_o (riscv_intf_.irq_id_o),
+      .irq_i    (riscv_intf.irq_i),
+      .irq_ack_o(riscv_intf.irq_ack_o),
+      .irq_id_o (riscv_intf.irq_id_o),
 
       // Debug Interface
-      .debug_req_i      (riscv_intf_.debug_req_i),
-      .debug_havereset_o(riscv_intf_.debug_havereset_o),
-      .debug_running_o  (riscv_intf_.debug_running_o),
-      .debug_halted_o   (riscv_intf_.debug_halted_o),
+      .debug_req_i      (riscv_intf.debug_req_i),
+      .debug_havereset_o(riscv_intf.debug_havereset_o),
+      .debug_running_o  (riscv_intf.debug_running_o),
+      .debug_halted_o   (riscv_intf.debug_halted_o),
 
       // CPU Control Signals
-      .fetch_enable_i(riscv_intf_.fetch_enable_i),
-      .core_sleep_o  (riscv_intf_.core_sleep_o)
+      .fetch_enable_i(riscv_intf.fetch_enable_i),
+      .core_sleep_o  (riscv_intf.core_sleep_o)
   );
 
   //==================================================================================
@@ -84,10 +84,10 @@ module riscv_top_tb ();
   initial begin
     // Main Interface configuration setup
     // ---------------------------------------------------------------------
-    uvm_config_db#(virtual riscv_intf)::set(null, "uvm_test_top", "main_intf", riscv_intf_);
+    uvm_config_db#(virtual riscv_if)::set(null, "uvm_test_top", "riscv_intf", riscv_intf);
 
     // Prefetch configuration setup
-    uvm_config_db#(virtual fetch_interface)::set(null, "uvm_test_top", "fetch_intf", fetch_interface_);
+    uvm_config_db#(virtual fetch_if)::set(null, "uvm_test_top", "fetch_intf", fetch_intf);
 
     // MUL configuration setup
     // ---------------------------------------------------------------------
@@ -96,8 +96,7 @@ module riscv_top_tb ();
 
     // ALU-DIV configuration setup
     // ---------------------------------------------------------------------
-    uvm_config_db#(virtual ALU_interface)::set(null, "uvm_test_top", "alu_intf_top2test",
-                                               alu_intf_);
+    uvm_config_db#(virtual alu_if)::set(null, "uvm_test_top", "alu_intf", alu_intf);
 
     // LSU configuration setup
     // ---------------------------------------------------------------------
@@ -105,7 +104,7 @@ module riscv_top_tb ();
 
     // Run the testbench with the specified test
     // ---------------------------------------------------------------------
-    run_test("riscv_base_test");
+    run_test("riscv_test");
   end
 
   initial begin

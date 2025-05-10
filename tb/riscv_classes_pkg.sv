@@ -57,13 +57,13 @@ package riscv_classes_pkg;
   //==================================================================================
   `include "riscv_config_obj.svh"
   `include "riscv_main_sequencer.svh"
-  `include "riscv_vseqr.svh"
-  `include "riscv_base_sequence.svh"
-  `include "riscv_vsequ_base.svh"
-  `include "riscv_vsequ_arith.svh"
+  `include "riscv_virtual_sequencer.svh"
+  `include "riscv_sequences.svh"
+  `include "riscv_virtual_base_sequence.svh"
+  `include "riscv_virtual_sequence.svh"
   `include "riscv_main_driver.svh"
   `include "riscv_main_agent.svh"
   `include "riscv_env.svh"
-  `include "riscv_base_test.svh"
+  `include "riscv_test.svh"
 
 endpackage

@@ -11,7 +11,7 @@ class riscv_env extends uvm_env;
   //==================================================================================
   // Configuration Classes
   //-----------------------------------------------------------------------------------
-  riscv_config_obj         env_config;
+  riscv_config_obj         m_riscv_config;
   alu_config               m_alu_config;
   mul_config               m_mul_config;
 
@@ -37,16 +37,16 @@ class riscv_env extends uvm_env;
   fetch_scoreboard         m_fetch_scoreboard;
   // Virtual Sequencer
   //-----------------------------------------------------------------------------------
-  riscv_vseqr              m_vseqr;
+  riscv_virtual_sequencer  m_vseqr;
 
   //==================================================================================
   // Interfaces
   //==================================================================================
   virtual lsu_if           lsu_vif;
-  virtual ALU_interface    alu_intf_;
-  virtual mul_if           mul_intf;
-  virtual riscv_intf       riscv_intf_;
-  virtual fetch_interface  fetch_interface_;
+  virtual alu_if           alu_vif;
+  virtual mul_if           mul_vif;
+  virtual riscv_if         riscv_vif;
+  virtual fetch_if         fetch_vif;
 
   //==================================================================================
   // Function: Constructor
@@ -66,7 +66,6 @@ class riscv_env extends uvm_env;
     // Agents
     //------------------------------------------
     m_riscv_main_agent = riscv_main_agent::type_id::create("m_riscv_main_agent", this);
-    m_vseqr = riscv_vseqr::type_id::create("m_vseqr", this);
     m_fetch_agent = fetch_agent::type_id::create("m_fetch_agent", this);
     m_alu_agent = alu_agent::type_id::create("m_alu_agent", this);
     m_mul_agent = mul_agent::type_id::create("m_mul_agent", this);
@@ -90,15 +89,16 @@ class riscv_env extends uvm_env;
 
     // Virtual Sequencer
     //------------------------------------------
-    m_vseqr = riscv_vseqr::type_id::create("m_vseqr", this);
+    m_vseqr = riscv_virtual_sequencer::type_id::create("m_vseqr", this);
 
     // Configuration
     //-----------------------------------------------------------------------------------
-    // riscv Config Class
+    // RISCV Config Class
     //------------------------------------------
-    if (!uvm_config_db#(riscv_config_obj)::get(this, "", "CFG", env_config))
+    if (!uvm_config_db#(riscv_config_obj)::get(this, "", "riscv_config_obj", m_riscv_config))
       `uvm_fatal("build_phase", "End to End env - unable to get configuration object")
-    uvm_config_db#(riscv_config_obj)::set(this, "m_riscv_main_agent", "CFG", env_config);
+    uvm_config_db#(riscv_config_obj)::set(this, "m_riscv_main_agent", "riscv_config_obj",
+                                          m_riscv_config);
 
     // ALU Config Class
     //------------------------------------------
@@ -116,46 +116,43 @@ class riscv_env extends uvm_env;
       uvm_config_db#(mul_config)::set(this, "m_mul_agent", "mul_config", m_mul_config);
     end
 
-    // RISCV MAIN interface
+    // RISCV Main Interface
     //------------------------------------------
-    if (!uvm_config_db#(virtual riscv_intf)::get(this, "", "main_intf", riscv_intf_)) begin
+    if (!uvm_config_db#(virtual riscv_if)::get(this, "", "riscv_intf", riscv_vif)) begin
       `uvm_fatal(get_full_name(), "Error in get interface in test");
     end else begin
-      uvm_config_db#(virtual riscv_intf)::set(this, "m_riscv_main_agent", "main_intf", riscv_intf_);
+      uvm_config_db#(virtual riscv_if)::set(this, "m_riscv_main_agent", "riscv_intf", riscv_vif);
     end
 
-    // FETCH intf
+    // Fetch Interface
     //------------------------------------------
-    if (!uvm_config_db#(virtual fetch_interface)::get(
-            this, "", "fetch_intf", fetch_interface_
-        )) begin
+    if (!uvm_config_db#(virtual fetch_if)::get(this, "", "fetch_intf", fetch_vif)) begin
       `uvm_fatal(get_full_name(), "Error in get alu interface in test");
     end else begin
-      uvm_config_db#(virtual fetch_interface)::set(this, "m_fetch_agent", "fetch_intf",
-                                                   fetch_interface_);
+      uvm_config_db#(virtual fetch_if)::set(this, "m_fetch_agent", "fetch_intf", fetch_vif);
     end
-    // ALU intf
+    // ALU Inteface
     //------------------------------------------
-    if (!uvm_config_db#(virtual ALU_interface)::get(this, "", "alu_intf_top2test", alu_intf_)) begin
+    if (!uvm_config_db#(virtual alu_if)::get(this, "", "alu_intf", alu_vif)) begin
       `uvm_fatal(get_full_name(), "Failed to get configuration for alu_if");
     end else begin
-      uvm_config_db#(virtual ALU_interface)::set(this, "m_alu_agent", "alu_intf_test2env", alu_intf_);
+      uvm_config_db#(virtual alu_if)::set(this, "m_alu_agent", "alu_intf", alu_vif);
     end
 
-    // MUL intf
+    // MUL Inteface
     //------------------------------------------
-    if (!uvm_config_db#(virtual mul_if)::get(this, "", "mul_intf", mul_intf)) begin
+    if (!uvm_config_db#(virtual mul_if)::get(this, "", "mul_intf", mul_vif)) begin
       `uvm_fatal("NO_CONFIG", {"Config not found for ", get_full_name(), ".mul_intf"});
     end else begin
-      uvm_config_db#(virtual mul_if)::set(this, "m_mul_agnt", "mul_intf", mul_intf);
+      uvm_config_db#(virtual mul_if)::set(this, "m_mul_agent", "mul_intf", mul_vif);
     end
 
-    // LSU intf
+    // LSU Inteface
     //------------------------------------------
     if (!uvm_config_db#(virtual lsu_if)::get(this, "", "lsu_intf", lsu_vif)) begin
       `uvm_fatal(get_name(), "Failed to get configuration for lsu_if");
     end else begin
-      uvm_config_db#(virtual lsu_if)::set(this, "m_agent", "lsu_intf", lsu_vif);
+      uvm_config_db#(virtual lsu_if)::set(this, "m_lsu_agent", "lsu_intf", lsu_vif);
     end
   endfunction
 

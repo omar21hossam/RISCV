@@ -39,7 +39,7 @@ class lsu_agent extends uvm_agent;
     m_monitor = lsu_monitor::type_id::create("m_monitor", this);
 
     // Driver and Monitor Configuration
-    if (!uvm_config_db#(virtual lsu_if)::get(this, "", "vif", config_vif)) begin
+    if (!uvm_config_db#(virtual lsu_if)::get(this, "", "lsu_intf", config_vif)) begin
       `uvm_fatal(get_name(), "Failed to get configuration for lsu_if");
     end else begin
       uvm_config_db#(virtual lsu_if)::set(this, "m_driver", "vif", config_vif);

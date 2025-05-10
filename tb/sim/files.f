@@ -31,10 +31,10 @@
 //===================================================
 //interfaces
 ../lsu/lsu_if.sv
-../ALU_DIV/tb_files/ALU_interface.svh
+../ALU_DIV/tb_files/alu_if.sv
 ../mul/mul_interface.sv
-../riscv_intf_main.sv
-../prefetch/fetch_intf.sv
+../riscv_if.sv
+../prefetch/fetch_if.sv
 //===================================================
 //packages
 ../riscv_pkg.sv
