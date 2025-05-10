@@ -14,7 +14,7 @@
     `include "riscv_test.svh"
 endpackage : riscv_classes_pkg*/
 package riscv_classes_pkg;
-  import uvm_pkg::*;
+  import uvm_pkg::*;  
   `include "uvm_macros.svh"  
   `include "prefetch/riscv_config_obj.svh"
   `include "prefetch/riscv_seqitem.svh"

@@ -32,7 +32,7 @@ task run_phase(uvm_phase phase ) ;
  mem(driver) >- prefetch buffer >- aligner >- c.decoder >- ifstage op
  */
 
- 
+     
 //seq_item
 
 
