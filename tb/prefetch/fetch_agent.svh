@@ -1,44 +1,37 @@
 class fetch_agent extends uvm_agent;
 
-  `uvm_component_utils(fetch_agent)  // registeration in the factory 
+  `uvm_component_utils(fetch_agent)  
 
-  uvm_analysis_port #(riscv_sequence_item) agt_ap;
+  uvm_analysis_port#(fetch_seq_item)     agt_ap;
+   
+    fetch_monitor mon; 
+ virtual   fetch_interface    fetch_interface_ ;
 
-  fetch_config_obj                         cfg;
-  fetch_driver                             drv;
-  fetch_sequencer                          m_sequencer;
-  fetch_monitor                            mon;
-
-  function new(string name = "fetch_agent", uvm_component parent = null);
-    super.new(name, parent);
+  function  new(string name = "fetch_agent" , uvm_component parent = null);
+    super.new(name,parent);
   endfunction
 
-  function void build_phase(uvm_phase phase);
+  function void build_phase (uvm_phase phase);
     super.build_phase(phase);
+      
+    agt_ap = new("agt_ap" , this ) ; 
 
-    if (!uvm_config_db#(fetch_config_obj)::get(this, "", "CFG", cfg))
-      `uvm_fatal("build_phase", "agent - unable to get configuration object")
-
-
-    agt_ap = new("agt_ap", this);
-
-
-    m_sequencer = fetch_sequencer::type_id::create("m_sequencer", this);
-    mon = fetch_monitor::type_id::create("mon", this);
-    drv = fetch_driver::type_id::create("drv", this);
-
+      mon =  fetch_monitor::type_id::create("mon",this);
+    // Driver and Monitor Configuration
+    if (!uvm_config_db#(virtual fetch_interface)::get(this, "", "fetch_intf", fetch_interface_)) begin
+      `uvm_fatal(get_name(), "Failed to get configuration for fetch_if");
+    end else begin
+      uvm_config_db#(virtual fetch_interface)::set(this, "mon", "fetch_intf", fetch_interface_);
+    end
   endfunction
 
-  function void connect_phase(uvm_phase phase);
+  function void connect_phase (uvm_phase phase);
 
+    
+    super.connect_phase(phase) ;
+    mon.mon_ap.connect(agt_ap)   ;
+    
 
-    super.connect_phase(phase);
-    drv.riscv_vintf_ = cfg.riscv_vintf_;
-    mon.riscv_vintf_ = cfg.riscv_vintf_;
-    drv.seq_item_port.connect(m_sequencer.seq_item_export);
-    mon.mon_ap.connect(agt_ap);
+  endfunction 
 
-
-  endfunction
-
-endclass : fetch_agent
+endclass: fetch_agent

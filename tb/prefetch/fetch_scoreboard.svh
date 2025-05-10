@@ -1,10 +1,10 @@
-class riscv_scoreboard extends uvm_scoreboard;
-    `uvm_component_utils(riscv_scoreboard)
+class fetch_scoreboard extends uvm_scoreboard;
+    `uvm_component_utils(fetch_scoreboard)
     
 
-uvm_analysis_export#(riscv_sequence_item) sb_export ;
-uvm_tlm_analysis_fifo#(riscv_sequence_item) sb_fifo ; 
-riscv_sequence_item seq_item  ;
+uvm_analysis_export#(fetch_seq_item) sb_export ;
+uvm_tlm_analysis_fifo#(fetch_seq_item) sb_fifo ; 
+fetch_seq_item seq_item  ;
 
     function new(string name = "riscv_scoreboard", uvm_component parent = null);
         super.new(name, parent);

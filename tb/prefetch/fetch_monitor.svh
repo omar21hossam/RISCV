@@ -3,10 +3,10 @@ class fetch_monitor extends uvm_monitor  ;
 `uvm_component_utils(fetch_monitor)
     
 
- virtual   riscv_intf    riscv_vintf_ ;
- riscv_sequence_item      seq_item ;
+ virtual   fetch_interface    fetch_interface_ ;
+ fetch_seq_item      seq_item ;
 
-uvm_analysis_port#(riscv_sequence_item)     mon_ap;
+uvm_analysis_port#(fetch_seq_item)     mon_ap;
 
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -22,6 +22,12 @@ uvm_analysis_port#(riscv_sequence_item)     mon_ap;
 
         mon_ap= new("mon_ap",this) ;
 
+ 
+    if (!uvm_config_db#(virtual fetch_interface)::get(this, "", "fetch_intf", fetch_interface_)) begin
+      `uvm_fatal(get_name(), "Failed to get configuration for fetch intf in mon");
+    end
+   
+
     endfunction
 
 ////////////////////////////--run phase--////////////////////////////
@@ -29,19 +35,37 @@ uvm_analysis_port#(riscv_sequence_item)     mon_ap;
     super.run_phase(phase) ; 
 
    forever begin
-    seq_item =riscv_sequence_item::type_id::create("seq_item") ; 
+    seq_item =fetch_seq_item::type_id::create("seq_item") ; 
 
-      @(negedge riscv_vintf_.clk)
+      @(posedge fetch_interface_.clk)
       begin
-      seq_item.rst_ni  = riscv_vintf_.rst_ni;
 
-      end
-    @(riscv_vintf_.ckb_p)
+
+ if (fetch_interface_.instr_rvalid_i)
+ begin
+
+seq_item.instr_rdata_i = fetch_interface_.instr_rdata_i ;
+seq_item.pc_id_o = fetch_interface_.pc_id_o ;
+seq_item.pc_if_o = fetch_interface_.pc_if_o ;
+seq_item.instr_addr_o = fetch_interface_.instr_addr_o ;
+
+
+ @(negedge fetch_interface_.clk)
+      
       begin
-        mon_ap.write(seq_item) ;
-     end
-      end
 
+seq_item.instr_rdata_id_o = fetch_interface_.instr_rdata_id_o ;
+seq_item.instr_valid_id_o = fetch_interface_.instr_valid_id_o ;
+
+ mon_ap.write(seq_item) ;
+// $display("time %0t: data_id_o %0d , valid_id_o %0d ,  instr_addr_o %0d ,  pc_id_o %0d ,  pc_if_o %0d ,  instr_rdata_i %0d",  $time,seq_item.instr_rdata_id_o,seq_item.instr_valid_id_o,
+// seq_item.instr_addr_o,seq_item.pc_id_o ,seq_item.pc_if_o ,seq_item.instr_rdata_i 
+
+//  );
+      end    
+      end
+      end
+   end
     endtask
 
         endclass

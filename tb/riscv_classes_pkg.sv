@@ -44,21 +44,24 @@ package riscv_classes_pkg;
   //==================================================================================
   // Prefetch classes inclusion
   //==================================================================================
-  `include "riscv_sequence_item.svh"
-  `include "prefetch/fetch_config_obj.svh"
-  `include "prefetch/fetch_driver.svh"
+  `include "prefetch/fetch_seq_item.svh"
   `include "prefetch/fetch_monitor.svh"
-  `include "prefetch/fetch_scoreboard.svh"
-  `include "prefetch/fetch_sequencer.svh"
   `include "prefetch/fetch_agent.svh"
+  `include "prefetch/fetch_scoreboard.svh"
+  `include "prefetch/fetch_subscriber.svh"
+ 
 
   //==================================================================================
   // RISCV TOP classes inclusion
   //==================================================================================
+  `include "riscv_config_obj.svh"
   `include "riscv_vseqr.svh"
   `include "riscv_base_sequence.svh"
   `include "riscv_vsequ_base.svh"
   `include "riscv_vsequ_arith.svh"
+  `include "riscv_main_sequencer.svh" 
+  `include "riscv_main_driver.svh"
+  `include "riscv_main_agent.svh"
   `include "riscv_env.svh"
   `include "riscv_base_test.svh"
 

@@ -22,6 +22,7 @@ module riscv_top_tb ();
   mul_if mul_intf (clk);
   ALU_interface alu_intf_ (clk);
   lsu_if lsu_intf (clk);
+  fetch_interface fetch_interface_ (clk);
 
   //==================================================================================
   // DUT Instantiation
@@ -86,7 +87,7 @@ module riscv_top_tb ();
     uvm_config_db#(virtual riscv_intf)::set(null, "uvm_test_top", "main_intf", riscv_intf_);
 
     // Prefetch configuration setup
-    // ...
+    uvm_config_db#(virtual fetch_interface)::set(null, "uvm_test_top", "fetch_intf", fetch_interface_);
 
     // MUL configuration setup
     // ---------------------------------------------------------------------

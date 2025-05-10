@@ -1,11 +1,19 @@
-class fetch_driver extends uvm_driver #(riscv_sequence_item);
+class riscv_main_driver extends uvm_driver #(riscv_sequence_item);
 
-  `uvm_component_utils(fetch_driver)
+  `uvm_component_utils(riscv_main_driver)
 
   virtual riscv_intf riscv_vintf_;
   riscv_sequence_item seq_item_rsp;  //driver will respond 
-  function new(string name = "fetch_driver", uvm_component parent = null);
+  function new(string name = "riscv_main_driver", uvm_component parent = null);
     super.new(name, parent);
+  endfunction
+
+
+function void build_phase(uvm_phase phase);
+    super.build_phase(phase);
+    if (!uvm_config_db#(virtual riscv_vintf)::get(this, "", "main_intf", riscv_vintf_)) begin
+      `uvm_fatal(get_name(), "Failed to get configuration for riscv intf in driver");
+    end
   endfunction
 
 
@@ -66,7 +74,7 @@ class fetch_driver extends uvm_driver #(riscv_sequence_item);
 
         /********************************************************************/
         begin
-          @(riscv_vintf_.ckb_p) begin
+          @(posedge riscv_vintf_.clk) begin
             riscv_vintf_.boot_addr_i         <= seq_item_rsp.boot_addr_i;
             riscv_vintf_.mtvec_addr_i        <= seq_item_rsp.mtvec_addr_i;
             riscv_vintf_.dm_halt_addr_i      <= seq_item_rsp.dm_halt_addr_i;

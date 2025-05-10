@@ -9,8 +9,8 @@ class riscv_base_test extends uvm_test;
   // Class Handle
   //==================================================================================
   riscv_env             m_env;
-  fetch_config_obj      m_cfg;
   riscv_vsequ_base      m_vseq_base;
+  riscv_config_obj      m_cfg;
   alu_config            m_alu_config;
   mul_config            m_mul_config;
 
@@ -21,7 +21,7 @@ class riscv_base_test extends uvm_test;
   virtual lsu_if        lsu_vif;
   virtual mul_if        mul_intf;
   virtual ALU_interface alu_intf_;
-
+  virtual fetch_interface fetch_interface_;
   //==================================================================================
   // Function: Constructor
   //==================================================================================
@@ -38,7 +38,7 @@ class riscv_base_test extends uvm_test;
     // Creation
     // ---------------------------------------------------------------------
     m_env = riscv_env::type_id::create("m_env", this);
-    m_cfg = fetch_config_obj::type_id::create("m_cfg", this);
+    m_cfg = riscv_config_obj::type_id::create("m_cfg", this);
     m_vseq_base = riscv_vseqr::type_id::create("m_vseq_base", this);
 
     // Configs
@@ -50,8 +50,8 @@ class riscv_base_test extends uvm_test;
 
     // Configuration
     // ---------------------------------------------------------------------
-    // fetch_config
-    uvm_config_db#(fetch_config_obj)::set(this, "m_env", "CFG", m_cfg);
+    // riscv_config
+    uvm_config_db#(riscv_config_obj)::set(this, "m_env", "CFG", m_cfg);
 
     // ALU Config Class
     //------------------------------------------
@@ -62,12 +62,17 @@ class riscv_base_test extends uvm_test;
     uvm_config_db#(mul_config)::set(this, "m_env", "mul_config", m_mul_config);
 
     // top interface configuration setup
-    if (!uvm_config_db#(virtual riscv_intf)::get(this, "", "main_intf", m_cfg.riscv_vintf_))
-      `uvm_fatal(get_full_name(), "Error in get interface in test");
+    if (!uvm_config_db#(virtual riscv_intf)::get(this, "", "main_intf", riscv_vintf_))
+      `uvm_fatal(get_full_name(), "Error in get interface in test");begin
+    end else begin
+      uvm_config_db#(virtual riscv_intf)::set(this, "m_env", "main_intf", riscv_vintf_);
+    end
+
+
 
     // MUL configuration setup
     if (!uvm_config_db#(virtual mul_if)::get(this, "", "mul_intf", mul_intf)) begin
-      `uvm_fatal("NO_CONFIG", {"Config not found for ", get_full_name(), ".mul_intf"});
+      `uvm_fatal("NO_INTF", {"Config not found for ", get_full_name(), ".mul_intf"});
     end else begin
       uvm_config_db#(virtual mul_if)::set(this, "m_env", "mul_intf", mul_intf);
     end
@@ -85,6 +90,13 @@ class riscv_base_test extends uvm_test;
     end else begin
       uvm_config_db#(virtual alu_intf_)::set(this, "m_env", "alu_intf_test2env", alu_intf_);
     end
+
+    // FETCH configuration setup
+    if (!uvm_config_db#(virtual fetch_interface)::get(this, "", "fetch_intf", fetch_interface_)) begin
+      `uvm_fatal(get_full_name(), "Error in get alu interface in test");
+    end else begin
+      uvm_config_db#(virtual fetch_interface)::set(this, "m_env", "fetch_intf", fetch_interface_);
+    end 
   endfunction
 
   //==================================================================================
