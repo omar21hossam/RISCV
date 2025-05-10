@@ -17,17 +17,17 @@ class mul_coverage_collector extends uvm_subscriber #(mul_seq_item);
     operand_a_i: coverpoint seq_item.operand_a_i {
       bins a_0 = {32'h00000000};
       bins a_1 = {32'hFFFFFFFF};
-      bins a_2 = {[32'h0000F000]:[32'hF0000000]};
+      bins a_2 = {[32'h0000F000:32'hF0000000]};
     }
 
     operand_b_i: coverpoint seq_item.operand_b_i {
       bins b_0 = {32'h00000000};
       bins b_1 = {32'hFFFFFFFF};
-      bins b_2 = {[32'h00000001]:[32'h0000F000]};
+      bins b_2 = {[32'h00000001:32'h0000F000]};
     }
     operator_i: coverpoint seq_item.operator_i {
-      bins MUL = {riscv_pkg::MUL};
-      bins MULH = {riscv_pkg::MULH};  
+      bins MUL = {riscv_pkg::MUL_MAC32};
+      bins MULH = {riscv_pkg::MUL_H};  
     }
     short_signed_i: coverpoint seq_item.short_signed_i {
       bins mul_u = {2'b00};
@@ -66,7 +66,7 @@ covergroup cross_all_variants;
                         binsof(operand_a_i.a_2) &&
                         binsof(operand_b_i.b_2) &&
                         binsof(short_signed_i.mul_su);
-      bins mul_su3 = binsof(operator_i.MUL) &&
+      bins mul_s3 = binsof(operator_i.MUL) &&
                         binsof(operand_a_i.a_2) &&
                         binsof(operand_b_i.b_2) &&
                         binsof(short_signed_i.mul_s);                 
@@ -74,11 +74,11 @@ covergroup cross_all_variants;
                            binsof(operand_a_i.a_2) &&
                            binsof(operand_b_i.b_2) &&
                            binsof(short_signed_i.mul_u);
-      bins mulh_unsigned = binsof(operator_i.MULH) &&
+      bins mulh_su = binsof(operator_i.MULH) &&
                            binsof(operand_a_i.a_2) &&
                            binsof(operand_b_i.b_2) &&
                            binsof(short_signed_i.mul_su);
-      bins mulh_unsigned = binsof(operator_i.MULH) &&
+      bins mulh_s = binsof(operator_i.MULH) &&
                            binsof(operand_a_i.a_2) &&
                            binsof(operand_b_i.b_2) &&
                            binsof(short_signed_i.mul_s);                     
@@ -115,6 +115,7 @@ covergroup cross_all_variants;
   function new(string name = "mul_coverage_collector", uvm_component parent = null);
     super.new(name, parent);
     cov_inputs  = new();
+    cross_all_variants = new();
     cov_outputs = new();
   endfunction
 
@@ -132,6 +133,7 @@ covergroup cross_all_variants;
   function void write(mul_seq_item t);
     seq_item = t;
     cov_inputs.sample();
+    cross_all_variants.sample();
     cov_outputs.sample();
   endfunction
 
