@@ -159,4 +159,15 @@ class lsu_coverage_collector #(
     cov_outputs.sample();
   endfunction
 
+  //==================================================================================
+  // Function: Report Phase
+  //==================================================================================
+  function void report_phase(uvm_phase phase);
+    super.report_phase(phase);
+    `uvm_info(get_type_name(), $sformatf("Coverage Input: %0.2f%%", cov_inputs.get_coverage()),
+              UVM_MEDIUM)
+    `uvm_info(get_type_name(), $sformatf("Coverage Output: %0.2f%%", cov_outputs.get_coverage()),
+              UVM_MEDIUM)
+  endfunction
+
 endclass

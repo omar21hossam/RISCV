@@ -58,3 +58,14 @@ function void alu_coverage_collector::write(alu_seq_item alu_trans);
   // slave_group.sample();
   // `uvm_info(get_type_name(),$sformatf("sampling is slave success"),UVM_NONE);
 endfunction
+
+//==================================================================================
+// Function: Report Phase
+//==================================================================================
+// function void report_phase(uvm_phase phase);
+//   super.report_phase(phase);
+//   `uvm_info(get_type_name(), $sformatf("Coverage Input: %0.2f%%", alu_input_group.get_coverage()),
+//             UVM_MEDIUM)
+//   `uvm_info(get_type_name(), $sformatf("Coverage Output: %0.2f%%", alu_output_group.get_coverage()),
+//             UVM_MEDIUM)
+// endfunction
