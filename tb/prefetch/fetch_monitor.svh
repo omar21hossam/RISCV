@@ -39,23 +39,21 @@ uvm_analysis_port#(fetch_seq_item)     mon_ap;
  begin
 
 seq_item.instr_rdata_i = fetch_interface_.instr_rdata_i ;
+
+seq_item.instr_addr_o = fetch_interface_.instr_addr_o ;
 seq_item.pc_id_o = fetch_interface_.pc_id_o ;
 seq_item.pc_if_o = fetch_interface_.pc_if_o ;
-seq_item.instr_addr_o = fetch_interface_.instr_addr_o ;
-
-
  @(negedge fetch_interface_.clk)
       
       begin
 
 seq_item.instr_rdata_id_o = fetch_interface_.instr_rdata_id_o ;
 seq_item.instr_valid_id_o = fetch_interface_.instr_valid_id_o ;
-
  mon_ap.write(seq_item) ;
-$display("time %0t: data_id_o %0d , valid_id_o %0d ,  instr_addr_o %0d ,  pc_id_o %0d ,  pc_if_o %0d ,  instr_rdata_i %0d",  $time,seq_item.instr_rdata_id_o,seq_item.instr_valid_id_o,
-seq_item.instr_addr_o,seq_item.pc_id_o ,seq_item.pc_if_o ,seq_item.instr_rdata_i 
+// $display("time %0t: data_id_o %0d , valid_id_o %0d ,  instr_addr_o %0d ,  pc_id_o %0d ,  pc_if_o %0d ,  instr_rdata_i %0d",  $time,seq_item.instr_rdata_id_o,seq_item.instr_valid_id_o,
+// seq_item.instr_addr_o,seq_item.pc_id_o ,seq_item.pc_if_o ,seq_item.instr_rdata_i 
 
- );
+//  );
       end    
       end
       end
