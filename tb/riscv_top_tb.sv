@@ -1,4 +1,4 @@
-`timescale 1ns / 1ps
+//`timescale 1ns / 1ps
 module riscv_top_tb ();
   //==================================================================================
   // Packages
