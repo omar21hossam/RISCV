@@ -24,10 +24,6 @@ class mul_scoreboard extends uvm_scoreboard;
       `uvm_info(get_full_name(), $sformatf("Scoreboard: Received item with rst_n=0, skipping"),
                 UVM_HIGH);
       return;
-    end else if (t.enable_i == 0) begin
-      `uvm_info(get_full_name(), $sformatf("Scoreboard: Received item with enable_i=0, skipping"),
-                UVM_HIGH);
-      return;
     end else begin
       // Perform the multiplication based on the operator_i
       case (t.operator_i)
