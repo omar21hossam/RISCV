@@ -27,9 +27,10 @@ endfunction:build_phase
 //==============================================================================
 //Description:run_phase
 //==============================================================================
+// a signal to detect if the ALU operation or operand is changed
+  bit detect_change;
 task run_phase(uvm_phase phase);
   super.run_phase(phase);
-  // a signal to detect if the ALU operation or operand is changed
   forever begin
   seq_item = alu_seq_item::type_id::create("seq_item",this);
   @(posedge vif.core_clk iff vif.enable_i && vif.rst_n);  
@@ -48,9 +49,11 @@ task run_phase(uvm_phase phase);
       seq_item.ex_ready_i  = vif.ex_ready_i;
       seq_item.testing_time = $realtime;
       if (compare_inputs(seq_item, seq_item_prev)) begin
-        `uvm_warning(get_type_name(),"ALU inputs are  the same");
+       // `uvm_warning(get_type_name(),"ALU inputs are  the same");
+       detect_change = 0;
       end
       else begin
+        detect_change = 1;
          analysis_port.write(seq_item);
       end
       seq_item_prev = alu_seq_item::type_id::create("seq_item_prev",this);
@@ -73,8 +76,9 @@ task run_phase(uvm_phase phase);
        seq_item.comparison_result_o = vif.comparison_result_o;
        seq_item.testing_time = $realtime;
 	 // end
+      if (detect_change) begin
         analysis_port.write(seq_item);
-        
+      end 
       end
     end
   join

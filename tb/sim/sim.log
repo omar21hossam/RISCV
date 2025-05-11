@@ -1,9 +1,8 @@
 # vsim -wlf riscv.wlf -logfile sim.log -c -coverage -assertdebug -voptargs="+acc" work.riscv_top_tb -do "coverage save -onexit  riscv.ucdb; run -all; coverage save riscv.ucdb" 
-# Start time: 16:40:02 on May 11,2025
+# Start time: 19:47:27 on May 11,2025
 # ** Note: (vsim-3813) Design is being optimized due to module recompilation...
-# ** Warning: (vopt-13408) Code coverage will be disabled for some DUs/packages/classes and source files.
 # ** Warning: ../riscv_sequence_item.svh(195): (vopt-2240) Treating stand-alone use of function 'pack_instruction' as an implicit VOID cast.
-# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=2.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
 # //  Questa Sim-64
 # //  Version 2021.1 win64 Jan 19 2021
 # //
@@ -79,6 +78,7 @@
 # One of the assignments is implicit. See ../ALU_DIV/tb_files/alu_if.sv(10).
 #    Time: 0 ps  Iteration: 0  Instance: /riscv_top_tb File: ../riscv_assign.svh Line: 31
 # Loading O:/Programming/Quartus/uvm-1.1d\win64\uvm_dpi.dll
+# ** Warning: (vsim-8634) Code was not compiled with coverage options.
 # coverage save -onexit  riscv.ucdb
 #  run -all
 # ----------------------------------------------------------------
@@ -105,13 +105,13 @@
 # UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(278) @ 0: reporter [Questa UVM]  questa_uvm::init(+struct)
 # UVM_INFO @ 0: reporter [RNTST] Running test riscv_test...
 # Starting simulation
-# UVM_INFO verilog_src/uvm-1.1d/src/base/uvm_objection.svh(1267) @ 3908450000: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
-# UVM_INFO ../mul/mul_scoreboard.svh(122) @ 3908450000: uvm_test_top.m_env.m_mul_scoreboard [uvm_test_top.m_env.m_mul_scoreboard] Scoreboard: Passed cases: 0
-# UVM_INFO ../mul/mul_scoreboard.svh(123) @ 3908450000: uvm_test_top.m_env.m_mul_scoreboard [uvm_test_top.m_env.m_mul_scoreboard] Scoreboard: Failed cases: 0
-# UVM_INFO ../ALU_DIV/tb_files/alu_scoreboard.svh(345) @ 3908450000: uvm_test_top.m_env.m_alu_scoreboard [uvm_test_top.m_env.m_alu_scoreboard] Scoreboard: Passed cases: 2062
-# UVM_INFO ../ALU_DIV/tb_files/alu_scoreboard.svh(346) @ 3908450000: uvm_test_top.m_env.m_alu_scoreboard [uvm_test_top.m_env.m_alu_scoreboard] Scoreboard: Failed cases: 0
-# UVM_INFO ../lsu/lsu_scoreboard.svh(157) @ 3908450000: uvm_test_top.m_env.m_lsu_scoreboard [m_lsu_scoreboard] Success Count: 0
-# UVM_INFO ../lsu/lsu_scoreboard.svh(158) @ 3908450000: uvm_test_top.m_env.m_lsu_scoreboard [m_lsu_scoreboard] Failure Count: 0
+# UVM_INFO verilog_src/uvm-1.1d/src/base/uvm_objection.svh(1267) @ 5363550000: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+# UVM_INFO ../mul/mul_scoreboard.svh(122) @ 5363550000: uvm_test_top.m_env.m_mul_scoreboard [uvm_test_top.m_env.m_mul_scoreboard] Scoreboard: Passed cases: 754
+# UVM_INFO ../mul/mul_scoreboard.svh(123) @ 5363550000: uvm_test_top.m_env.m_mul_scoreboard [uvm_test_top.m_env.m_mul_scoreboard] Scoreboard: Failed cases: 0
+# UVM_INFO ../ALU_DIV/tb_files/alu_scoreboard.svh(345) @ 5363550000: uvm_test_top.m_env.m_alu_scoreboard [uvm_test_top.m_env.m_alu_scoreboard] Scoreboard: Passed cases: 4703
+# UVM_INFO ../ALU_DIV/tb_files/alu_scoreboard.svh(346) @ 5363550000: uvm_test_top.m_env.m_alu_scoreboard [uvm_test_top.m_env.m_alu_scoreboard] Scoreboard: Failed cases: 0
+# UVM_INFO ../lsu/lsu_scoreboard.svh(157) @ 5363550000: uvm_test_top.m_env.m_lsu_scoreboard [m_lsu_scoreboard] Success Count: 2000
+# UVM_INFO ../lsu/lsu_scoreboard.svh(158) @ 5363550000: uvm_test_top.m_env.m_lsu_scoreboard [m_lsu_scoreboard] Failure Count: 0
 # 
 # --- UVM Report Summary ---
 # 
@@ -128,7 +128,7 @@
 # [uvm_test_top.m_env.m_alu_scoreboard]     2
 # [uvm_test_top.m_env.m_mul_scoreboard]     2
 # ** Note: $finish    : O:/Programming/Quartus/win64/../verilog_src/uvm-1.1d/src/base/uvm_root.svh(430)
-#    Time: 3908450 ns  Iteration: 53  Instance: /riscv_top_tb
+#    Time: 5363550 ns  Iteration: 53  Instance: /riscv_top_tb
 # Saving coverage database on exit...
-# End time: 16:40:15 on May 11,2025, Elapsed time: 0:00:13
+# End time: 19:47:34 on May 11,2025, Elapsed time: 0:00:07
 # Errors: 0, Warnings: 7
