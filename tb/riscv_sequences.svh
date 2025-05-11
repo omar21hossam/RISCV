@@ -189,8 +189,8 @@ class riscv_arith_sequence extends riscv_init_sequence;
           }) begin
         `uvm_fatal(get_name(), "Failed to randomize sequence item");
       end
-      // Finish the sequence
-      finish_item(m_seq_item);
+       // Finish the sequence
+       finish_item(m_seq_item);
     end
   endtask
 
