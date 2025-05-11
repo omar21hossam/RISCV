@@ -4,3 +4,4 @@
 *.log
 *.qtl
 /tb/sim/coverage_report
+tb/sim/riscv.wlf
