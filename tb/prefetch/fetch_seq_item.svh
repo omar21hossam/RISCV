@@ -1,12 +1,12 @@
 class fetch_seq_item extends uvm_sequence_item;
 
 
-`uvm_object_utils(fetch_seq_item)
- function new (string name = "fetch_seq_item");
+  `uvm_object_utils(fetch_seq_item)
+  function new(string name = "fetch_seq_item");
 
-    super.new(name) ;
-    
- endfunction
+    super.new(name);
+
+  endfunction
   logic   instr_req_o   ;
   logic   [31:0] instr_addr_o   ;
   logic   instr_gnt_i   ;
@@ -23,4 +23,4 @@ class fetch_seq_item extends uvm_sequence_item;
   logic instr_valid_id_o ;
   logic  [31:0] instr_rdata_id_o;
 
- endclass :fetch_seq_item
+endclass : fetch_seq_item

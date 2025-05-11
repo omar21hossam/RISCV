@@ -49,7 +49,7 @@ package riscv_classes_pkg;
   `include "prefetch/fetch_monitor.svh"
   `include "prefetch/fetch_agent.svh"
   `include "prefetch/fetch_scoreboard.svh"
-  `include "prefetch/fetch_subscriber.svh"
+  `include "prefetch/fetch_coverage_collector.svh"
  
 
   //==================================================================================
