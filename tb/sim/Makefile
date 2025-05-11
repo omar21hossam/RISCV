@@ -9,4 +9,4 @@ sim:
 	vcd2wlf riscv_top_tb.vcd riscv.wlf
 
 coverage:
-		vcover report -html -details -annotate -output coverage_report riscv.ucdb
+		vcover report -html -details -annotate -output coverage_report riscv.ucdbcv.ucdb

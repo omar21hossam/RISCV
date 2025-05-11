@@ -3,3 +3,4 @@
 *.qdb
 *.log
 *.qtl
+/tb/sim/coverage_report
