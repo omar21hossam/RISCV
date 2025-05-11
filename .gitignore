@@ -1,1 +1,5 @@
 /tb/sim
+*.vcd
+*.qdb
+*.log
+*.qtl
