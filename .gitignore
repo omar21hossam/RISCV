@@ -1,4 +1,4 @@
-/tb/sim
+/tb/sim/work
 *.vcd
 *.qdb
 *.log
