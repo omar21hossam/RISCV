@@ -1,13 +1,11 @@
-`include "riscv_interfaces.svh"
+`timescale 1ns / 1ps
 module riscv_top_tb ();
-
   //==================================================================================
   // Packages
   //==================================================================================
   import uvm_pkg::*;
   import riscv_classes_pkg::*;
   import riscv_pkg::*;
-
 
   //==================================================================================
   // Clock Generation Block
@@ -20,121 +18,93 @@ module riscv_top_tb ();
   //==================================================================================
   // Interface Instantiation
   //==================================================================================
-  riscv_intf riscv_intf_ (clk);
-  interface_clk interface_clk_ (clk);
-  // Prefetch interface instantiation
-  // ALU-DIV interface instasntiation
-  ALU_interface alu_intf_ (clk);
-  // MUL interface instantiation
-  // LSU interface instantiation
+  riscv_if riscv_intf (clk);
+  mul_if mul_intf (clk);
+  alu_if alu_intf (clk);
+  lsu_if lsu_intf (clk);
+  fetch_if fetch_intf (clk);
 
   //==================================================================================
   // DUT Instantiation
   //==================================================================================
   cv32e40p_top DUT (
-      .clk_i              (clk),                              // explicitly connect clk
-      .rst_ni             (riscv_intf_.rst_ni),
-      .pulp_clock_en_i    (riscv_intf_.pulp_clock_en_i),
-      .scan_cg_en_i       (riscv_intf_.scan_cg_en_i),
-      .boot_addr_i        (riscv_intf_.boot_addr_i),
-      .mtvec_addr_i       (riscv_intf_.mtvec_addr_i),
-      .dm_halt_addr_i     (riscv_intf_.dm_halt_addr_i),
-      .hart_id_i          (riscv_intf_.hart_id_i),
-      .dm_exception_addr_i(riscv_intf_.dm_exception_addr_i),
-      .instr_req_o        (riscv_intf_.instr_req_o),
-      .instr_gnt_i        (riscv_intf_.instr_gnt_i),
-      .instr_rvalid_i     (riscv_intf_.instr_rvalid_i),
-      .instr_addr_o       (riscv_intf_.instr_addr_o),
-      .instr_rdata_i      (riscv_intf_.instr_rdata_i),
-      .data_req_o         (riscv_intf_.data_req_o),
-      .data_gnt_i         (0),
-      .data_rvalid_i      (0),
-      .data_we_o          (riscv_intf_.data_we_o),
-      .data_be_o          (riscv_intf_.data_be_o),
-      .data_addr_o        (riscv_intf_.data_addr_o),
-      .data_wdata_o       (riscv_intf_.data_wdata_o),
-      .data_rdata_i       (0),
-      .irq_i              (riscv_intf_.irq_i),
-      .irq_ack_o          (riscv_intf_.irq_ack_o),
-      .irq_id_o           (riscv_intf_.irq_id_o),
-      .debug_req_i        (riscv_intf_.debug_req_i),
-      .debug_havereset_o  (riscv_intf_.debug_havereset_o),
-      .debug_running_o    (riscv_intf_.debug_running_o),
-      .debug_halted_o     (riscv_intf_.debug_halted_o),
-      .fetch_enable_i     (riscv_intf_.fetch_enable_i),
-      .core_sleep_o       (riscv_intf_.core_sleep_o)
+      // Clock and Reset
+      .clk_i (clk),
+      .rst_ni(riscv_intf.rst_ni),
+
+      .pulp_clock_en_i    (riscv_intf.pulp_clock_en_i),
+      .scan_cg_en_i       (riscv_intf.scan_cg_en_i),
+      .boot_addr_i        (riscv_intf.boot_addr_i),
+      .mtvec_addr_i       (riscv_intf.mtvec_addr_i),
+      .dm_halt_addr_i     (riscv_intf.dm_halt_addr_i),
+      .hart_id_i          (riscv_intf.hart_id_i),
+      .dm_exception_addr_i(riscv_intf.dm_exception_addr_i),
+
+      // Instruction memory interface
+      .instr_req_o   (riscv_intf.instr_req_o),
+      .instr_gnt_i   (riscv_intf.instr_gnt_i),
+      .instr_rvalid_i(riscv_intf.instr_rvalid_i),
+      .instr_addr_o  (riscv_intf.instr_addr_o),
+      .instr_rdata_i (riscv_intf.instr_rdata_i),
+
+      // Data memory interface
+      .data_req_o   (lsu_intf.data_req_o),
+      .data_gnt_i   (lsu_intf.data_gnt_i),
+      .data_rvalid_i(lsu_intf.data_rvalid_i),
+      .data_we_o    (lsu_intf.data_we_o),
+      .data_be_o    (lsu_intf.data_be_o),
+      .data_addr_o  (lsu_intf.data_addr_o),
+      .data_wdata_o (lsu_intf.data_wdata_o),
+      .data_rdata_i (lsu_intf.data_rdata_i),
+
+      // Interrupt inputs
+      .irq_i    (riscv_intf.irq_i),
+      .irq_ack_o(riscv_intf.irq_ack_o),
+      .irq_id_o (riscv_intf.irq_id_o),
+
+      // Debug Interface
+      .debug_req_i      (riscv_intf.debug_req_i),
+      .debug_havereset_o(riscv_intf.debug_havereset_o),
+      .debug_running_o  (riscv_intf.debug_running_o),
+      .debug_halted_o   (riscv_intf.debug_halted_o),
+
+      // CPU Control Signals
+      .fetch_enable_i(riscv_intf.fetch_enable_i),
+      .core_sleep_o  (riscv_intf.core_sleep_o)
   );
 
   //==================================================================================
-  // Instruction Memory Instantiation
+  // Binding internal interfaces
   //==================================================================================
-  riscv_instr_mem inst_mem_DUT (
-      .clk           (clk),
-      .instr_gnt_o   (riscv_intf_.instr_gnt_i),
-      .instr_rvalid_o(riscv_intf_.instr_rvalid_i),
-      .instr_rdata_o (riscv_intf_.instr_rdata_i),
-      .instr_req_i   (riscv_intf_.instr_req_o),
-      .instr_addr_i  (riscv_intf_.instr_addr_o),
-      .addr          (riscv_intf_.addr),
-      .inst          (riscv_intf_.inst),
-      .reset_n       (riscv_intf_.rst_ni)
-  );
-
+  `include "riscv_assign.svh"
 
   //==================================================================================
-  // `defines
-  //==================================================================================
-  `define alu_signals_path           DUT.core_i.ex_stage_i.alu_i 
-  // `define alu_rst_n               `alu_signals_path.rst_n 
-  // `define alu_enable_i            `alu_signals_path.enable_i
-  // `define alu_operator_i          `alu_signals_path.operator_i
-  // `define alu_operand_a_i         `alu_signals_path.operand_a_i
-  // `define alu_operand_b_i         `alu_signals_path.operand_b_i
-  // `define alu_ex_ready_i          `alu_signals_path.ex_ready_i
-  // `define alu_result_o            `alu_signals_path.result_o
-  // `define alu_ready_o             `alu_signals_path.ready_o
-  // `define alu_comparison_result_o `alu_signals_path.comparison_result_o
-  // `define alu_vector_mode_i       `alu_signals_path.vector_mode_i
-  //==================================================================================
-  // connect alu modules ports to the ALU interface
-  //==================================================================================
-  assign alu_intf_.rst_n = `alu_signals_path.rst_n;
-  assign alu_intf_.enable_i = `alu_signals_path.enable_i;
-  assign alu_intf_.operator_i = `alu_signals_path.operator_i;
-  assign alu_intf_.operand_a_i = `alu_signals_path.operand_a_i;
-  assign alu_intf_.operand_b_i = `alu_signals_path.operand_b_i;
-  assign alu_intf_.ex_ready_i = `alu_signals_path.ex_ready_i;
-  assign alu_intf_.result_o = `alu_signals_path.result_o;
-  assign alu_intf_.ready_o = `alu_signals_path.ready_o;
-  assign alu_intf_.comparison_result_o = `alu_signals_path.comparison_result_o;
-  assign alu_intf_.vector_mode_i = `alu_signals_path.vector_mode_i;
-
-  // =====================================================================
-  // Connecting the interface to the DUT
-  // ======================================================================
-  // DUT interface
-  bind riscv_instr_mem : inst_mem_DUT inst_mem_intf inst_mem_intf_ (.*);
-
-  // Prefetch interface
-  // ALU-DIV interface
-  // MUL interface
-  // LSU interface
-
-
-  //==================================================================================
-  // Configuration
+  // Configuration and Test
   //==================================================================================
   initial begin
-    uvm_config_db#(virtual riscv_intf)::set(null, "uvm_test_top", "main_intf", riscv_intf_);
-    uvm_config_db#(virtual interface_clk)::set(null, "uvm_test_top", "clk_", interface_clk_);
+    // Main Interface configuration setup
+    // ---------------------------------------------------------------------
+    uvm_config_db#(virtual riscv_if)::set(null, "uvm_test_top", "riscv_intf", riscv_intf);
+
     // Prefetch configuration setup
-    // ALU-DIV configuration setup
-    uvm_config_db#(virtual ALU_interface)::set(null, "uvm_test_top", "alu_intf_top2test",alu_intf_);
+    uvm_config_db#(virtual fetch_if)::set(null, "uvm_test_top", "fetch_intf", fetch_intf);
+
     // MUL configuration setup
+    // ---------------------------------------------------------------------
+    uvm_config_db#(virtual mul_if)::set(null, "uvm_test_top", "mul_intf", mul_intf);
+
+
+    // ALU-DIV configuration setup
+    // ---------------------------------------------------------------------
+    uvm_config_db#(virtual alu_if)::set(null, "uvm_test_top", "alu_intf", alu_intf);
+
     // LSU configuration setup
+    // ---------------------------------------------------------------------
+    uvm_config_db#(virtual lsu_if)::set(null, "uvm_test_top", "lsu_intf", lsu_intf);
 
     // Run the testbench with the specified test
-    run_test("riscv_base_test");
+    // ---------------------------------------------------------------------
+    run_test("riscv_test");
   end
 
   initial begin
@@ -142,8 +112,5 @@ module riscv_top_tb ();
     $dumpvars(0, riscv_top_tb);
     $display("Starting simulation");
   end
-
-
-
 
 endmodule

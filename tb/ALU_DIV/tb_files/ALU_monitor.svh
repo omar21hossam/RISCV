@@ -4,7 +4,7 @@ class alu_monitor extends uvm_monitor;
 //Description: declarations
 //============================================================================== 
 alu_seq_item seq_item;
-virtual ALU_interface vif;
+virtual alu_if vif;
 uvm_analysis_port #(alu_seq_item) analysis_port;
 //==============================================================================
 //Description: function new
@@ -18,7 +18,7 @@ endfunction:new
 //==============================================================================
 function void build_phase(uvm_phase phase);
 super.build_phase(phase);
-if (!uvm_config_db #(virtual ALU_interface)::get(this,"", "vif_m",vif)) begin
+if (!uvm_config_db #(virtual alu_if)::get(this,"", "vif_m",vif)) begin
   `uvm_fatal(get_type_name(),"Error on interface connectivity");
 end
 endfunction:build_phase
@@ -44,9 +44,7 @@ task run_phase(uvm_phase phase);
       seq_item.operand_b_i = vif.operand_b_i;
       seq_item.ex_ready_i  = vif.ex_ready_i;
       seq_item.testing_time = $realtime;
-      `uvm_info(get_type_name(), $sformatf("ALU Monitor: Sampling inputs: %s", seq_item.convert2string()), UVM_MEDIUM);
       analysis_port.write(seq_item);
-      `uvm_info(get_type_name(), $sformatf("send input transaction to scoreboard"), UVM_MEDIUM);
     end
     end
 //===============================================================================
@@ -65,9 +63,7 @@ task run_phase(uvm_phase phase);
        seq_item.comparison_result_o = vif.comparison_result_o;
        seq_item.testing_time = $realtime;
 	 // end
-       `uvm_info(get_type_name(), $sformatf("ALU Monitor: Sampling outputs: %s", seq_item.convert2string()), UVM_MEDIUM);
         analysis_port.write(seq_item);
-        `uvm_info(get_type_name(), $sformatf("send output transaction to scoreboard"), UVM_LOW);
       end
     end
   join

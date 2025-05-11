@@ -6,7 +6,6 @@ module top;
   import classes_pkg::*;
   import riscv_pkg::*;
   bit clk;
-  bit IS_LSU_INTEGRATED = 1'b0;
 
   //==================================================================================
   // Interface Instantiation
@@ -56,7 +55,6 @@ module top;
   //==================================================================================
   initial begin
     uvm_config_db#(virtual lsu_if)::set(null, "uvm_test_top", "vif", intf);
-    uvm_config_db#(bit)::set(null, "uvm_test_top", "IS_LSU_INTEGRATED", IS_LSU_INTEGRATED);
     run_test("lsu_test");
   end
 

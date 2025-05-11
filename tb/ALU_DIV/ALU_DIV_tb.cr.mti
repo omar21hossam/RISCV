@@ -12,9 +12,9 @@ QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 18 2018
 Top level modules:
 	cv32e40p_ff_one
 
-} {} {}} {C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/ALU_DIV/tb_files/ALU_interface.svh} {1 {vlog -work work -vopt -sv -stats=none {C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/ALU_DIV/tb_files/ALU_interface.svh}
+} {} {}} {C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/ALU_DIV/tb_files/alu_if.svh} {1 {vlog -work work -vopt -sv -stats=none {C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/ALU_DIV/tb_files/alu_if.svh}
 QuestaSim-64 vlog 10.7c Compiler 2018.08 Aug 18 2018
--- Compiling interface ALU_interface
+-- Compiling interface alu_if
 -- Importing package cv32e40p_pkg
 
 Top level modules:

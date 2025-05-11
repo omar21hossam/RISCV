@@ -1,18 +1,12 @@
-// package fetch_monitor_pkg ; 
-    
-// import uvm_pkg::* ; 
-//  import riscv_seq_item_pkg::*;
-//  `include "uvm_macros.svh"
-
 class fetch_monitor extends uvm_monitor  ; 
 
 `uvm_component_utils(fetch_monitor)
     
 
- virtual   riscv_intf    riscv_vintf_ ;
- riscv_seq_item      seq_item ;
+ virtual   fetch_if    fetch_intf ;
+ fetch_seq_item      seq_item ;
 
-uvm_analysis_port#(riscv_seq_item)     mon_ap;
+uvm_analysis_port#(fetch_seq_item)     mon_ap;
 
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -27,11 +21,12 @@ uvm_analysis_port#(riscv_seq_item)     mon_ap;
         super.build_phase(phase);
 
         mon_ap= new("mon_ap",this) ;
-        
-        //        if(!uvm_config_db#(virtual interface_clk)::get(this,"","clk_",vinterface_clk))
-        //  begin
-        //      `uvm_fatal(get_full_name(),"Error in get clk interface in test");
-        //  end
+
+ 
+    if (!uvm_config_db#(virtual fetch_if)::get(this, "", "fetch_intf", fetch_intf)) begin
+      `uvm_fatal(get_name(), "Failed to get configuration for fetch intf in mon");
+    end
+   
 
     endfunction
 
@@ -40,21 +35,37 @@ uvm_analysis_port#(riscv_seq_item)     mon_ap;
     super.run_phase(phase) ; 
 
    forever begin
-    seq_item =riscv_seq_item::type_id::create("seq_item") ; 
+    seq_item =fetch_seq_item::type_id::create("seq_item") ; 
 
-      @(negedge riscv_vintf_.clk)
+      @(posedge fetch_intf.clk)
       begin
-      seq_item.rst_ni  = riscv_vintf_.rst_ni;
 
-      end
-    @(riscv_vintf_.ckb_p)
+
+ if (fetch_intf.instr_rvalid_i)
+ begin
+
+seq_item.instr_rdata_i = fetch_intf.instr_rdata_i ;
+seq_item.pc_id_o = fetch_intf.pc_id_o ;
+seq_item.pc_if_o = fetch_intf.pc_if_o ;
+seq_item.instr_addr_o = fetch_intf.instr_addr_o ;
+
+
+ @(negedge fetch_intf.clk)
+      
       begin
-        mon_ap.write(seq_item) ;
-     end
-      end
 
+seq_item.instr_rdata_id_o = fetch_intf.instr_rdata_id_o ;
+seq_item.instr_valid_id_o = fetch_intf.instr_valid_id_o ;
+
+ mon_ap.write(seq_item) ;
+// $display("time %0t: data_id_o %0d , valid_id_o %0d ,  instr_addr_o %0d ,  pc_id_o %0d ,  pc_if_o %0d ,  instr_rdata_i %0d",  $time,seq_item.instr_rdata_id_o,seq_item.instr_valid_id_o,
+// seq_item.instr_addr_o,seq_item.pc_id_o ,seq_item.pc_if_o ,seq_item.instr_rdata_i 
+
+//  );
+      end    
+      end
+      end
+   end
     endtask
 
         endclass
-
-//endpackage

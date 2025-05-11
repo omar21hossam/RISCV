@@ -1,0 +1,6 @@
+/tb/sim/work
+*.vcd
+*.qdb
+*.log
+*.qtl
+/tb/sim/coverage_report

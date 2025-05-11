@@ -1,0 +1,137 @@
+# vsim -wlf riscv.wlf -logfile sim.log -c -coverage -assertdebug -voptargs="+acc" work.riscv_top_tb -do "coverage save -onexit  riscv.ucdb; run -all; coverage save riscv.ucdb" 
+# Start time: 15:41:29 on May 11,2025
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# Support of the MGLS_LICENSE_FILE and LM_LICENSE_FILE licensing environment variables will be discontinued starting with the 2025.1 release. Please update to using the SALT_LICENSE_SERVER variable.
+# Please contact Siemens EDA Customer Support (https://support.sw.siemens.com/) for assistance.
+# ** Warning: (vopt-13408) Code coverage will be disabled for some DUs/packages/classes and source files.
+# ** Warning: ../riscv_sequence_item.svh(195): (vopt-2240) Treating stand-alone use of function 'pack_instruction' as an implicit VOID cast.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=3.
+# //  Questa Sim-64
+# //  Version 2024.1 win64 Feb  1 2024
+# //
+# // Unpublished work. Copyright 2024 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading sv_std.std
+# Loading work.alu_if(fast)
+# Loading work.mul_if(fast)
+# Loading work.lsu_if(fast)
+# Loading work.fetch_if(fast)
+# Loading work.riscv_if(fast)
+# Loading work.cv32e40p_pkg(fast)
+# Loading work.riscv_pkg(fast)
+# Loading mtiUvm.uvm_pkg(fast)
+# Loading work.riscv_classes_pkg(fast)
+# Loading mtiUvm.questa_uvm_pkg(fast)
+# Loading work.riscv_top_tb(fast)
+# Loading work.riscv_if(fast__2)
+# Loading work.mul_if(fast__2)
+# Loading work.alu_if(fast__2)
+# Loading work.lsu_if(fast__2)
+# Loading work.fetch_if(fast__2)
+# Loading work.cv32e40p_apu_core_pkg(fast)
+# Loading work.cv32e40p_top(fast)
+# Loading work.cv32e40p_core(fast)
+# Loading work.cv32e40p_sleep_unit(fast)
+# Loading work.cv32e40p_clock_gate(fast)
+# Loading work.cv32e40p_if_stage(fast)
+# Loading work.cv32e40p_prefetch_buffer(fast)
+# Loading work.cv32e40p_prefetch_controller(fast)
+# Loading work.cv32e40p_fifo(fast)
+# Loading work.cv32e40p_obi_interface(fast)
+# Loading work.cv32e40p_aligner(fast)
+# Loading work.cv32e40p_compressed_decoder(fast)
+# Loading work.cv32e40p_fpu_pkg(fast)
+# Loading work.cv32e40p_id_stage(fast)
+# Loading work.cv32e40p_register_file(fast)
+# Loading work.cv32e40p_clock_gate(fast__1)
+# Loading work.cv32e40p_decoder(fast)
+# Loading work.cv32e40p_controller(fast)
+# Loading work.cv32e40p_int_controller(fast)
+# Loading work.cv32e40p_ex_stage(fast)
+# Loading work.cv32e40p_alu(fast)
+# Loading work.cv32e40p_popcnt(fast)
+# Loading work.cv32e40p_ff_one(fast)
+# Loading work.cv32e40p_alu_div(fast)
+# Loading work.cv32e40p_mult(fast)
+# Loading work.cv32e40p_load_store_unit(fast)
+# Loading work.cv32e40p_obi_interface(fast__1)
+# Loading work.cv32e40p_cs_registers(fast)
+# ** Warning: (vsim-3838) Variable '/riscv_top_tb/alu_intf/ex_ready_i' written by continuous and procedural assignments. 
+# One of the assignments is implicit. See ../ALU_DIV/tb_files/alu_if.sv(12).
+#    Time: 0 ps  Iteration: 0  Instance: /riscv_top_tb File: ../riscv_assign.svh Line: 35
+# ** Warning: (vsim-3838) Variable '/riscv_top_tb/alu_intf/operand_b_i' written by continuous and procedural assignments. 
+# One of the assignments is implicit. See ../ALU_DIV/tb_files/alu_if.sv(13).
+#    Time: 0 ps  Iteration: 0  Instance: /riscv_top_tb File: ../riscv_assign.svh Line: 34
+# ** Warning: (vsim-3838) Variable '/riscv_top_tb/alu_intf/operand_a_i' written by continuous and procedural assignments. 
+# One of the assignments is implicit. See ../ALU_DIV/tb_files/alu_if.sv(13).
+#    Time: 0 ps  Iteration: 0  Instance: /riscv_top_tb File: ../riscv_assign.svh Line: 33
+# ** Warning: (vsim-3838) Variable '/riscv_top_tb/alu_intf/operator_i' written by continuous and procedural assignments. 
+# One of the assignments is implicit. See ../ALU_DIV/tb_files/alu_if.sv(11).
+#    Time: 0 ps  Iteration: 0  Instance: /riscv_top_tb File: ../riscv_assign.svh Line: 32
+# ** Warning: (vsim-3838) Variable '/riscv_top_tb/alu_intf/enable_i' written by continuous and procedural assignments. 
+# One of the assignments is implicit. See ../ALU_DIV/tb_files/alu_if.sv(10).
+#    Time: 0 ps  Iteration: 0  Instance: /riscv_top_tb File: ../riscv_assign.svh Line: 31
+# Loading C:/questasim64_2024.1/uvm-1.1d\win64\uvm_dpi.dll
+# coverage save -onexit  riscv.ucdb
+#  run -all
+# ----------------------------------------------------------------
+# UVM-1.1d
+# (C) 2007-2013 Mentor Graphics Corporation
+# (C) 2007-2013 Cadence Design Systems, Inc.
+# (C) 2006-2013 Synopsys, Inc.
+# (C) 2011-2013 Cypress Semiconductor Corp.
+# ----------------------------------------------------------------
+# 
+#   ***********       IMPORTANT RELEASE NOTES         ************
+# 
+#   You are using a version of the UVM library that has been compiled
+#   with `UVM_NO_DEPRECATED undefined.
+#   See http://www.eda.org/svdb/view.php?id=3313 for more details.
+# 
+#   You are using a version of the UVM library that has been compiled
+#   with `UVM_OBJECT_MUST_HAVE_CONSTRUCTOR undefined.
+#   See http://www.eda.org/svdb/view.php?id=3770 for more details.
+# 
+#       (Specify +UVM_NO_RELNOTES to turn off this notice)
+# 
+# UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(277) @ 0: reporter [Questa UVM] QUESTA_UVM-1.2.3
+# UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(278) @ 0: reporter [Questa UVM]  questa_uvm::init(+struct)
+# UVM_INFO @ 0: reporter [RNTST] Running test riscv_test...
+# Starting simulation
+# UVM_INFO verilog_src/uvm-1.1d/src/base/uvm_objection.svh(1267) @ 5318050000: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+# UVM_INFO ../mul/mul_scoreboard.svh(122) @ 5318050000: uvm_test_top.m_env.m_mul_scoreboard [uvm_test_top.m_env.m_mul_scoreboard] Scoreboard: Passed cases: 757
+# UVM_INFO ../mul/mul_scoreboard.svh(123) @ 5318050000: uvm_test_top.m_env.m_mul_scoreboard [uvm_test_top.m_env.m_mul_scoreboard] Scoreboard: Failed cases: 0
+# UVM_INFO ../ALU_DIV/tb_files/alu_scoreboard.svh(345) @ 5318050000: uvm_test_top.m_env.m_alu_scoreboard [uvm_test_top.m_env.m_alu_scoreboard] Scoreboard: Passed cases: 14304
+# UVM_INFO ../ALU_DIV/tb_files/alu_scoreboard.svh(346) @ 5318050000: uvm_test_top.m_env.m_alu_scoreboard [uvm_test_top.m_env.m_alu_scoreboard] Scoreboard: Failed cases: 0
+# UVM_INFO ../lsu/lsu_scoreboard.svh(157) @ 5318050000: uvm_test_top.m_env.m_lsu_scoreboard [m_lsu_scoreboard] Success Count: 2000
+# UVM_INFO ../lsu/lsu_scoreboard.svh(158) @ 5318050000: uvm_test_top.m_env.m_lsu_scoreboard [m_lsu_scoreboard] Failure Count: 0
+# 
+# --- UVM Report Summary ---
+# 
+# ** Report counts by severity
+# UVM_INFO :   10
+# UVM_WARNING :    0
+# UVM_ERROR :    0
+# UVM_FATAL :    0
+# ** Report counts by id
+# [Questa UVM]     2
+# [RNTST]     1
+# [TEST_DONE]     1
+# [m_lsu_scoreboard]     2
+# [uvm_test_top.m_env.m_alu_scoreboard]     2
+# [uvm_test_top.m_env.m_mul_scoreboard]     2
+# ** Note: $finish    : C:/questasim64_2024.1/win64/../verilog_src/uvm-1.1d/src/base/uvm_root.svh(430)
+#    Time: 5318050 ns  Iteration: 53  Instance: /riscv_top_tb
+# Saving coverage database on exit...
+# End time: 15:41:50 on May 11,2025, Elapsed time: 0:00:21
+# Errors: 0, Warnings: 8

@@ -17,7 +17,6 @@ class lsu_driver #(
   // Configurations
   //==================================================================================
   virtual lsu_if vif;
-  bit IS_LSU_INTEGRATED;
 
   //==================================================================================
   // Function: Constructor
@@ -42,10 +41,6 @@ class lsu_driver #(
     if (!uvm_config_db#(virtual lsu_if)::get(this, "", "vif", vif)) begin
       `uvm_fatal(get_name(), "Failed to get configuration for lsu_if");
     end
-
-    if (!uvm_config_db#(bit)::get(this, "", "IS_LSU_INTEGRATED", IS_LSU_INTEGRATED)) begin
-      `uvm_fatal(get_name(), "Failed to get configuration for IS_LSU_INTEGRATED");
-    end
   endfunction
 
   //==================================================================================
@@ -54,20 +49,10 @@ class lsu_driver #(
   task run_phase(uvm_phase phase);
     reset();
     forever begin
-      // In case of integrated LSU, no sequence is needed
-      if (IS_LSU_INTEGRATED) begin
-        seq_item_port.get_next_item(m_seq_item);
-        obi_rsp_hndlr();
-        #1step;
-        seq_item_port.item_done();
-      end  // In case of pre-integration, sequence is needed
-      else begin
-        seq_item_port.get_next_item(m_seq_item);
-        drv_lsu_ex();
-        obi_rsp_hndlr();
-        #1step;
-        seq_item_port.item_done();
-      end
+      seq_item_port.get_next_item(m_seq_item);
+      obi_rsp_hndlr();
+      #1step;
+      seq_item_port.item_done();
     end
   endtask
 
@@ -76,38 +61,10 @@ class lsu_driver #(
   //==================================================================================
   task reset();
     `uvm_info(get_name(), "Resetting LSU Driver", UVM_HIGH);
-    vif.rst_n                = 1'b0;
-    vif.data_we_ex_i         = riscv_pkg::LOAD;
-    vif.data_type_ex_i       = riscv_pkg::BYTE1;
-    vif.data_wdata_ex_i      = 'b0;
-    vif.data_sign_ext_ex_i   = riscv_pkg::SIGN_EXT;
-    vif.data_req_ex_i        = 'b0;
-    vif.operand_a_ex_i       = 'b0;
-    vif.operand_b_ex_i       = 'b0;
-    vif.data_misaligned_ex_i = 'b0;
-    vif.data_gnt_i           = 1'b0;
-    vif.data_rdata_i         = 'b0;
-    vif.data_rvalid_i        = 1'b0;
-    repeat (3) @(negedge vif.clk);
-    vif.rst_n = 1'b1;
+    vif.data_gnt_i    = 1'b0;
+    vif.data_rdata_i  = 'b0;
+    vif.data_rvalid_i = 1'b0;
   endtask
-
-  //==================================================================================
-  // Task: drive LSU signals at EX stage
-  //==================================================================================
-  task drv_lsu_ex();
-    @(negedge vif.clk iff vif.lsu_ready_ex_o);
-    `uvm_info(get_name(), "Driving LSU EX stage signals", UVM_HIGH);
-    vif.data_req_ex_i        = 1'b1;
-    vif.data_we_ex_i         = m_seq_item.data_we_ex_i;
-    vif.data_type_ex_i       = m_seq_item.data_type_ex_i;
-    vif.data_wdata_ex_i      = m_seq_item.data_wdata_ex_i;
-    vif.data_sign_ext_ex_i   = m_seq_item.data_sign_ext_ex_i;
-    vif.operand_a_ex_i       = m_seq_item.operand_a_ex_i;
-    vif.operand_b_ex_i       = m_seq_item.operand_b_ex_i;
-    vif.data_misaligned_ex_i = 1'b0;
-  endtask
-
   //==================================================================================
   // Task: OBI response handler
   //==================================================================================
@@ -131,8 +88,6 @@ class lsu_driver #(
     vif.data_gnt_i = 1'b1;
     @(negedge vif.clk);
     vif.data_gnt_i = 1'b0;
-    vif.data_req_ex_i = (m_seq_item.data_misaligned_o) ? 1'b1 : 1'b0;
-    vif.data_misaligned_ex_i = (m_seq_item.data_misaligned_o) ? 1'b1 : 1'b0;
     wait_for_response();
 
     // Response to the OBI request
@@ -162,8 +117,6 @@ class lsu_driver #(
       vif.data_gnt_i = 1'b1;
       @(negedge vif.clk);
       vif.data_gnt_i = 1'b0;
-      vif.data_req_ex_i = 1'b0;
-      vif.data_misaligned_ex_i = 1'b0;
 
       // Response to the OBI request
       if (m_seq_item.data_we_o == riscv_pkg::LOAD) begin

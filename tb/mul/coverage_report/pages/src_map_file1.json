@@ -8,7 +8,7 @@ var g_data = {'dummy':null,
 '9':'mul_scoreboard.svh',
 '4':'mul_sequence.svh',
 '3':'mul_sequence_item.svh',
-'5':'mul_sequencer.svh',
+'5':'mul_coverage_collector.svh',
 '1':'mul_tb.sv',
 '11':'mul_test.svh',
 '12':'package_uvm.sv'};

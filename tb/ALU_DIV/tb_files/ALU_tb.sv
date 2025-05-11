@@ -1,5 +1,5 @@
 `timescale 1ns/1ps  
-`include "ALU_interface.svh"
+`include "alu_if.svh"
 module riscv_alu_top_tb(
 );
 //==============================================================================
@@ -34,7 +34,7 @@ end
 //==============================================================================
 //Description: Interface
 //==============================================================================
-ALU_interface  intf1(clk_tb,rst_n_tb);
+alu_if  intf1(clk_tb,rst_n_tb);
 //==============================================================================
 //Description: DUT
 //==============================================================================
@@ -63,7 +63,7 @@ cv32e40p_alu alu_dut(
 //Description: Main block
 //==============================================================================
 initial begin
-uvm_config_db#(virtual ALU_interface)::set(null,"uvm_test_top","top2test",intf1);
+uvm_config_db#(virtual alu_if)::set(null,"uvm_test_top","top2test",intf1);
   run_test("alu_test");		
 end
 

@@ -10,13 +10,12 @@ class lsu_env extends uvm_env;
   //==================================================================================
   lsu_agent m_agent;
   lsu_scoreboard m_scoreboard;
-  lsu_subscriber m_subscriber;
+  lsu_coverage_collector m_subscriber;
 
   //==================================================================================
   // Configurations
   //==================================================================================
   virtual lsu_if config_vif;
-  bit IS_LSU_INTEGRATED;
 
   //==================================================================================
   // Function: Constructor
@@ -36,7 +35,7 @@ class lsu_env extends uvm_env;
     // ---------
     m_agent = lsu_agent::type_id::create("m_agent", this);
     m_scoreboard = lsu_scoreboard::type_id::create("m_scoreboard", this);
-    m_subscriber = lsu_subscriber#()::type_id::create("m_subscriber", this);
+    m_subscriber = lsu_coverage_collector#()::type_id::create("m_subscriber", this);
 
 
     // Configuration
@@ -45,12 +44,6 @@ class lsu_env extends uvm_env;
       `uvm_fatal(get_name(), "Failed to get configuration for lsu_if");
     end else begin
       uvm_config_db#(virtual lsu_if)::set(this, "m_agent", "vif", config_vif);
-    end
-
-    if (!uvm_config_db#(bit)::get(this, "", "IS_LSU_INTEGRATED", IS_LSU_INTEGRATED)) begin
-      `uvm_fatal(get_name(), "Failed to get configuration for IS_LSU_INTEGRATED");
-    end else begin
-      uvm_config_db#(bit)::set(this, "m_agent", "IS_LSU_INTEGRATED", IS_LSU_INTEGRATED);
     end
   endfunction
 

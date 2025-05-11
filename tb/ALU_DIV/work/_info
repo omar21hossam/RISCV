@@ -29,16 +29,16 @@ Z4 VDg1SIo80bB@j0V0VzS_@n1
 S1
 Z5 dC:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/ALU_DIV
 w1745965481
-8C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/ALU_DIV/tb_files/ALU_interface.svh
-FC:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/ALU_DIV/tb_files/ALU_interface.svh
+8C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/ALU_DIV/tb_files/alu_if.svh
+FC:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/ALU_DIV/tb_files/alu_if.svh
 L0 2
 Z6 OL;L;10.7c;67
 r1
 !s85 0
 31
 Z7 !s108 1746074978.000000
-!s107 C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/ALU_DIV/tb_files/ALU_interface.svh|
-!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/ALU_DIV/tb_files/ALU_interface.svh|
+!s107 C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/ALU_DIV/tb_files/alu_if.svh|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/ALU_DIV/tb_files/alu_if.svh|
 !i113 0
 Z8 o-work work -sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
 R0
@@ -210,7 +210,7 @@ r1
 R8
 R0
 Xpackage_uvm
-!s115 ALU_interface
+!s115 alu_if
 R1
 Z13 DXx6 mtiUvm 7 uvm_pkg 0 22 3zPkj@YUcM=M^m3zCLh<H1
 R2
@@ -278,7 +278,7 @@ r1
 !s85 0
 31
 !s108 1746074976.000000
-!s107 C:\Users\Wello\Desktop\material\SI Academy\SV Course\PROJECTS\RISCV\code\RISCV\tb\ALU_DIV\tb_files\ALU_interface.svh|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/ALU_DIV/tb_files/ALU_tb.sv|
+!s107 C:\Users\Wello\Desktop\material\SI Academy\SV Course\PROJECTS\RISCV\code\RISCV\tb\ALU_DIV\tb_files\alu_if.svh|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/ALU_DIV/tb_files/ALU_tb.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|C:/Users/Wello/Desktop/material/SI Academy/SV Course/PROJECTS/RISCV/code/RISCV/tb/ALU_DIV/tb_files/ALU_tb.sv|
 !i113 0
 R8
