@@ -100,7 +100,7 @@ class lsu_sequence_item extends uvm_sequence_item;
   // }
 
   // Randomizing the OBI response latency
-  constraint max_latency_c {latency < 5;}
+  constraint max_latency_c {latency < riscv_pkg::MEM_LATENCY;}
 
   //==================================================================================
   // Function: do_print
