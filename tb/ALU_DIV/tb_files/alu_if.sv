@@ -1,4 +1,4 @@
-//`timescale 1ns/1ps
+`timescale 1ns/1ps
 interface alu_if (
     input bit core_clk
 );
@@ -21,7 +21,7 @@ interface alu_if (
   //Description: Clocking block
   //==============================================
   clocking cb @(posedge core_clk);
-    default input #2 output #2;  //this direction related to the testbench
+    default input #2ns output #2ns;  //this direction related to the testbench
     output enable_i, operator_i, ex_ready_i;
     output operand_a_i, operand_b_i;
     input result_o, comparison_result_o, ready_o;

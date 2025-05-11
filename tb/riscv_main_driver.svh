@@ -62,7 +62,6 @@ class riscv_main_driver extends uvm_driver #(riscv_sequence_item);
     reset();
 
     #(3 * riscv_pkg::CLK_FREQ);
- 
     forever begin
       seq_item_port.get_next_item(seq_item_rsp);
 
@@ -70,20 +69,14 @@ class riscv_main_driver extends uvm_driver #(riscv_sequence_item);
       riscv_vif.rst_ni <= seq_item_rsp.rst_ni;
       riscv_vif.fetch_enable_i <= seq_item_rsp.fetch_enable_i;
 
-      @(posedge riscv_vif.clk)
-      riscv_vif.instr_rvalid_i      <=0 ; 
-      wait ( riscv_vif.instr_req_o =='b1) begin
+      @(posedge riscv_vif.clk iff riscv_vif.instr_req_o);
       riscv_vif.instr_gnt_i <= 1;
 
-#(1 * riscv_pkg::CLK_FREQ);
-
-      riscv_vif.instr_gnt_i <= 0;
+      @(posedge riscv_vif.clk);
       riscv_vif.instr_rvalid_i <= 1;
       riscv_vif.instr_rdata_i  <= seq_item_rsp.instruction;
 
-
       seq_item_port.item_done();
-      end
     end
   endtask
 endclass
