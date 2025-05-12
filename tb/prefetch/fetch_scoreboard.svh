@@ -9,7 +9,6 @@ class fetch_scoreboard extends uvm_scoreboard;
   int branch_expected = 0;
   int jump_expected = 0;
   bit flush_detected = 'b0;
-  int x,y;
 
   typedef enum logic [1:0] {
     INSTR_NONE   = 2'b00,
@@ -122,12 +121,12 @@ class fetch_scoreboard extends uvm_scoreboard;
     end else begin
 
       if ((seq_item.pc_if_o - seq_item.pc_id_o == 4))
-      x=1;
+    
     /*    `uvm_info("FETCH SB", $sformatf(
                   "ADDRESS_CHECK_NORMAL: Operation of inst fetch done correctly"), UVM_HIGH)*/
       else if ((seq_item.pc_id_o != 0) && (seq_item.pc_if_o != 0))
      /*   `uvm_error("FETCH_SB", $sformatf("Error in instrection address in normal operation"))*/
-y=2;
+
     end
   endfunction
 
