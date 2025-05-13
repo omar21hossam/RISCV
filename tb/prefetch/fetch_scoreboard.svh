@@ -44,16 +44,19 @@ class fetch_scoreboard extends uvm_scoreboard;
 
     forever begin
       sb_fifo.get(seq_item);
+     //     $display("sb time %0t: data_id_o %0h , valid_id_o %0d ,  instr_addr_o %0d ,  pc_id_o %0d ,  pc_if_o %0d ,  instr_rdata_i %0h",  $time,seq_item.instr_rdata_id_o,seq_item.instr_valid_id_o,
+  //          seq_item.instr_addr_o,seq_item.pc_id_o ,seq_item.pc_if_o ,seq_item.instr_rdata_i 
+//);
       if (seq_item.instr_valid_id_o) begin
 
-     /*   if (!(seq_item.instr_rdata_i == seq_item.instr_rdata_id_o))
+        if (!(seq_item.instr_rdata_i == seq_item.instr_rdata_id_o)) begin
           `uvm_error("FETCH_SB", $sformatf(
                      "FETCH done wrongly in normal op (no stall or flush),instr_id_o = %0d, instr_i = %0d",
                      seq_item.instr_rdata_id_o,
                      seq_item.instr_rdata_i
-                     ))
+                     ))  end
         else `uvm_info("FETCH SB", $sformatf("FETCH done correctly "), UVM_HIGH)
-*/
+
         info = classify_instruction(seq_item.instr_rdata_id_o);
 
         check_add(seq_item.pc_if_o, seq_item.pc_id_o);
@@ -112,20 +115,20 @@ class fetch_scoreboard extends uvm_scoreboard;
   function check_add(input logic [31:0] add_f, input logic [31:0] add_d);
     if (flush_detected == 'b1) begin
 
-   /*   `uvm_info("FETCH SB", $sformatf("ADDRESS_CHECK_JB: inst add_f  %0d , inst add_d  %0d ",
+     `uvm_info("FETCH SB", $sformatf("ADDRESS_CHECK_JB: inst add_f  %0d , inst add_d  %0d ",
                                       seq_item.pc_if_o, seq_item.pc_id_o), UVM_LOW)
 
 
-*/
+
       flush_detected = 'b0;
     end else begin
 
       if ((seq_item.pc_if_o - seq_item.pc_id_o == 4))
     
-    /*    `uvm_info("FETCH SB", $sformatf(
-                  "ADDRESS_CHECK_NORMAL: Operation of inst fetch done correctly"), UVM_HIGH)*/
+       `uvm_info("FETCH SB", $sformatf(
+                  "ADDRESS_CHECK_NORMAL: Operation of inst fetch done correctly"), UVM_HIGH)
       else if ((seq_item.pc_id_o != 0) && (seq_item.pc_if_o != 0))
-     /*   `uvm_error("FETCH_SB", $sformatf("Error in instrection address in normal operation"))*/
+       `uvm_error("FETCH_SB", $sformatf("Error in instrection address in normal operation"))
 
     end
   endfunction
