@@ -71,9 +71,9 @@ join_any
         // Pop the oldest IP and OP items (matched by position)
          matched_ip = ip_queue.pop_front();
          matched_op = op_queue.pop_front();
- /*      $display("sb time %0t: data_id_o %0h , valid_id_o %0d ,  instr_addr_o %0d ,  pc_id_o %0d ,  pc_if_o %0d ,  instr_rdata_i %0h",  $time,matched_op.instr_rdata_id_o,matched_op.instr_valid_id_o,
+       $display("sb time %0t: data_id_o %0h , valid_id_o %0d ,  instr_addr_o %0d ,  pc_id_o %0d ,  pc_if_o %0d ,  instr_rdata_i %0h",  $time,matched_op.instr_rdata_id_o,matched_op.instr_valid_id_o,
             matched_ip.instr_addr_o,matched_ip.pc_id_o ,matched_ip.pc_if_o ,matched_ip.instr_rdata_i 
-); */
+); 
       if (matched_op.instr_valid_id_o) begin
 
         if (!(matched_ip.instr_rdata_i == matched_op.instr_rdata_id_o)) begin
@@ -87,7 +87,7 @@ join_any
                      
         else 
         begin
-        `uvm_info("FETCH SB", $sformatf("FETCH done correctly "), UVM_HIGH)
+        `uvm_info("FETCH SB", $sformatf("FETCH done correctly "), UVM_LOW)
 
       num_passed++;
 
@@ -173,7 +173,7 @@ join_any
       if ((matched_ip.pc_if_o - matched_ip.pc_id_o == 4)) begin
     
        `uvm_info("FETCH SB", $sformatf(
-                  "ADDRESS_CHECK_NORMAL: ADDERSS of inst fetched correct"), UVM_HIGH)
+                  "ADDRESS_CHECK_NORMAL: ADDERSS of inst fetched correct"), UVM_LOW)
       num_passed++;
 
       end

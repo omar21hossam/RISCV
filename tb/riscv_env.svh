@@ -29,10 +29,10 @@ class riscv_env extends uvm_env;
   function void connect_phase(uvm_phase phase);
     super.connect_phase(phase);
     //connecting the scoreboard and subscriber to the monitor's analysis port
-     m_fetch_agent.agt_ap_ip.connect(m_fetch_scoreboard.sb_export_ip);
-    m_fetch_agent.agt_ap_op.connect(m_fetch_scoreboard.sb_export_op);
-    m_fetch_agent.agt_ap_ip.connect(m_fetch_coverage_collector.cov_export_ip);
-    m_fetch_agent.agt_ap_op.connect(m_fetch_coverage_collector.cov_export_op);
+     fetch_agnt.agt_ap_ip.connect(scoreboard.sb_export_ip);
+    fetch_agnt.agt_ap_op.connect(scoreboard.sb_export_op);
+    fetch_agnt.agt_ap_ip.connect(subscriber.cov_export_ip);
+    fetch_agnt.agt_ap_op.connect(subscriber.cov_export_op);
   endfunction
 
 endclass
