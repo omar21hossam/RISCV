@@ -3,8 +3,8 @@ class riscv_env extends uvm_env;
   `uvm_component_utils(riscv_env)
 
   fetch_agent      fetch_agnt;
-  riscv_scoreboard scoreboard;
-  riscv_subscriber subscriber;
+  fetch_scoreboard scoreboard;
+  fetch_coverage_collector subscriber;
   fetch_config_obj env_config;
 
 
@@ -21,17 +21,18 @@ class riscv_env extends uvm_env;
 
 
     fetch_agnt = fetch_agent::type_id::create("fetch_agnt", this);
-    scoreboard = riscv_scoreboard::type_id::create("scoreboard", this);
-    subscriber = riscv_subscriber::type_id::create("subscriber", this);
+    scoreboard = fetch_scoreboard::type_id::create("scoreboard", this);
+    subscriber = fetch_coverage_collector::type_id::create("subscriber", this);
 
   endfunction
 
   function void connect_phase(uvm_phase phase);
     super.connect_phase(phase);
     //connecting the scoreboard and subscriber to the monitor's analysis port
-    fetch_agnt.agt_ap.connect(scoreboard.sb_export);
-    fetch_agnt.agt_ap.connect(subscriber.cov_export);
-
+     m_fetch_agent.agt_ap_ip.connect(m_fetch_scoreboard.sb_export_ip);
+    m_fetch_agent.agt_ap_op.connect(m_fetch_scoreboard.sb_export_op);
+    m_fetch_agent.agt_ap_ip.connect(m_fetch_coverage_collector.cov_export_ip);
+    m_fetch_agent.agt_ap_op.connect(m_fetch_coverage_collector.cov_export_op);
   endfunction
 
 endclass
