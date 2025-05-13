@@ -165,8 +165,10 @@ class riscv_env extends uvm_env;
     // TLM
     //FETCH
     //-----------------------------------------------------------------------------------
-    m_fetch_agent.agt_ap.connect(m_fetch_scoreboard.sb_export);
-    m_fetch_agent.agt_ap.connect(m_fetch_coverage_collector.cov_export);
+    m_fetch_agent.agt_ap_ip.connect(m_fetch_scoreboard.sb_export_ip);
+    m_fetch_agent.agt_ap_op.connect(m_fetch_scoreboard.sb_export_op);
+    m_fetch_agent.agt_ap_ip.connect(m_fetch_coverage_collector.cov_export_ip);
+    m_fetch_agent.agt_ap_op.connect(m_fetch_coverage_collector.cov_export_op);
     // ALU
     //------------------------------------------
     m_alu_agent.m_monitor.analysis_port.connect(m_alu_scoreboard.sc_analysis_imp);
