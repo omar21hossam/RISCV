@@ -34,7 +34,7 @@ class riscv_sequence_item extends uvm_sequence_item;
   rand bit                     [ 4:0] rs2;
   rand bit                     [ 2:0] funct3;
   rand bit                     [ 6:0] funct7;
-  rand bit signed              [31:0] imm;
+  rand bit               [31:0] imm;
   rand riscv_pkg::instr_type_e        instr_type;
   
   // Temporary instruction memory
@@ -66,8 +66,8 @@ class riscv_sequence_item extends uvm_sequence_item;
       riscv_pkg::I_TYPE := 50,
       riscv_pkg::U_TYPE := 50,
       riscv_pkg::S_TYPE := 50,
-      riscv_pkg::B_TYPE := 0,
-      riscv_pkg::J_TYPE := 0
+      riscv_pkg::B_TYPE := 50,
+      riscv_pkg::J_TYPE := 50
     };
   }
 
@@ -163,7 +163,7 @@ class riscv_sequence_item extends uvm_sequence_item;
   //----------------------------------------------------------------------------------
   constraint j_type_c {
     instr_type == riscv_pkg::J_TYPE ->
-    opcode inside {riscv_pkg::OP_JAL};
+    opcode inside {riscv_pkg::OP_JAL };
   }
 
   //----------------------------------------------------------------------------------

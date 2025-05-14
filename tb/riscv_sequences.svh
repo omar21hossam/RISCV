@@ -196,14 +196,27 @@ class riscv_arith_sequence extends riscv_init_sequence;
       // // Jump Sequence
       // // -------------------------------------------------
       // // Start the arithmetic sequence
-      // start_item(m_seq_item);
-      // if (!m_seq_item.randomize() with {
-      //       m_seq_item.instr_type inside {riscv_pkg::J_TYPE};
-      //     }) begin
-      //   `uvm_fatal(get_name(), "Failed to randomize jump sequence item");
-      // end
-      // // Finish the sequence
-      // finish_item(m_seq_item);
+      start_item(m_seq_item);
+      if (!m_seq_item.randomize() with {
+            m_seq_item.instr_type inside {riscv_pkg::J_TYPE };
+          m_seq_item.rd inside {[1:31]};
+
+          // immediate should be aligned to 4 bytes (LSB 2 bits = 0)
+  //    m_seq_item.imm[1:0] == 2'b00;
+
+      // imm is signed 21-bit immediate for JAL
+  
+          
+          }) begin
+        `uvm_fatal(get_name(), "Failed to randomize jump sequence item");
+      end
+        m_seq_item.instruction= 'h0280006f;
+      // Finish the sequence
+      finish_item(m_seq_item);
+      
+
+
+
     end
   endtask
 

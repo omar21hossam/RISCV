@@ -53,8 +53,8 @@ class fetch_monitor extends uvm_monitor;
           seq_item_ip.instr_addr_o = fetch_intf.instr_addr_o;
           mon_ap_ip.write(seq_item_ip);
 
-/*
-           $display("time %0t:   instr_addr_o %0d ,  pc_id_o %0d ,  pc_if_o %0d ,  instr_rdata_i %0h",  $time,
+
+   /*        $display("time %0t:   instr_addr_o %0d ,  pc_id_o %0d ,  pc_if_o %0d ,  instr_rdata_i %0h",  $time,
             seq_item_ip.instr_addr_o,seq_item_ip.pc_id_o ,seq_item_ip.pc_if_o ,seq_item_ip.instr_rdata_i  
 );  */      
        
