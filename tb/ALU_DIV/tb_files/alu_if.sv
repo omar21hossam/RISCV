@@ -27,69 +27,155 @@ interface alu_if (
     input result_o, comparison_result_o, ready_o;
   endclocking : cb
   //==============================================
-  //Description: internal signals
+  //Description:  sequences
   //==============================================
-  sequence comparison_result_antecedent; //this sequence is used to check the comparison result in case equal operands and non comparison operation
-     (operator_i == (ALU_ADD || ALU_SUB || ALU_XOR || ALU_AND || ALU_SRA || ALU_SRL || ALU_SLL)) && (operand_a_i == operand_b_i);
-  endsequence;
+   sequence  comp_op_code;
+     (operator_i == (ALU_LTS || ALU_LTU || ALU_GES || ALU_GEU || ALU_EQ || ALU_NE || ALU_SLETS || ALU_SLTU));
+   endsequence
+
+   sequence  non_comp_op_code;
+     (operator_i == (ALU_ADD || ALU_SUB || ALU_OR || ALU_XOR || ALU_AND || ALU_SRA || ALU_SRL || ALU_SLL));
+   endsequence
+
+  sequence non_comp_op_code_antecedent; //this sequence is used to check the comparison result in case equal operands and non comparison operation
+      non_comp_op_code and (operand_a_i == operand_b_i);
+  endsequence
+
+  sequence div_rem_antecedent; //this sequence is used to check the div/rem operation
+     (operator_i == (ALU_DIV || ALU_REM || ALU_DIVU || ALU_REMU));
+  endsequence
+
+  sequence stable_inps;
+  ($stable(operator_i) && $stable(operand_a_i) && $stable(operand_b_i));
+  endsequence
   //==============================================
   //Description: Assertions 
   //==============================================
-  //properties:
-  property comp_result_eq_operands;
-    @(posedge core_clk) disable iff(!rst_n) (comparison_result_antecedent) |-> (comparison_result_o == 1);
+  //control properties:
+
+  property enable_i_check_0; //this property is used to check the enable_i signal for all one cycle operations [in all cases is to be 1]
+    @(posedge core_clk) disable iff(!rst_n) (!(operator_i == (ALU_DIV || ALU_REM || ALU_DIVU || ALU_REMU)) && ($changed(operator_i) || $changed(operand_a_i) || $changed(operand_b_i))) |-> (enable_i == 1);
   endproperty
-   property ADD_t;  //this property is used to check the ALU ADD operation timing
-    @(posedge core_clk) (operator_i == ALU_ADD) |-> ($signed(result_o) == $signed(operand_a_i + operand_b_i));
+
+  property enable_i_check_1; //this property is used to check the enable_i signal for all one cycle operations [in all cases is to be falling edge]
+    @(posedge core_clk) disable iff(!rst_n)  ((comp_op_code or non_comp_op_code) and stable_inps) |-> (enable_i == 0);
+  endproperty
+
+  property ready_o_non_comp_check; //this property is used to check ready_o signal for all one cycle operations is asserted
+    @(posedge core_clk) disable iff(!rst_n) (comp_op_code or non_comp_op_code) |-> (ready_o == 1);
+  endproperty
+//!(operator_i == (ALU_DIV || ALU_REM || ALU_DIVU || ALU_REMU)) 
+  property comp_result_eq_operands;  //this property is used to check the comparison result in case equal operands non comparison operation
+    @(posedge core_clk) disable iff(!rst_n) (non_comp_op_code_antecedent) |-> (comparison_result_o == 1);
+  endproperty
+  //==============================================
+  //Timing check properties:
+  property ADD_t;  //this property is used to check the ALU ADD operation timing
+    @(posedge core_clk) disable iff(!rst_n && !enable_i) (operator_i == ALU_ADD) |-> ($signed(result_o) == $signed(operand_a_i + operand_b_i) && (ready_o == 1));
+  endproperty
+
+  property SUB_t;  //this property is used to check the ALU SUB operation timing
+    @(posedge core_clk) disable iff(!rst_n && !enable_i) (operator_i == ALU_SUB) |-> ($signed(result_o) == $signed(operand_a_i - operand_b_i) && (ready_o == 1));
+  endproperty
+
+  property XOR_t;  //this property is used to check the ALU XOR operation timing
+    @(posedge core_clk) disable iff(!rst_n && !enable_i) (operator_i == ALU_XOR) |-> (result_o == (operand_a_i ^ operand_b_i) && (ready_o == 1));
+  endproperty
+
+  property OR_t;  //this property is used to check the ALU OR operation timing
+    @(posedge core_clk) disable iff(!rst_n && !enable_i) (operator_i == ALU_OR) |-> (result_o == (operand_a_i | operand_b_i) && (ready_o == 1));
+  endproperty
+
+  property AND_t;  //this property is used to check the ALU AND operation timing
+     @(posedge core_clk) disable iff(!rst_n && !enable_i) (operator_i == ALU_AND) |-> (result_o == (operand_a_i & operand_b_i) && (ready_o == 1));
+  endproperty
+
+  property SRA_t;  //this property is used to check the ALU SRA operation timing
+     @(posedge core_clk) disable iff(!rst_n && !enable_i) (operator_i == ALU_SRA) |-> (($signed(result_o) == ($signed(operand_a_i) >>> operand_b_i[4:0])) && (ready_o == 1));
+  endproperty
+
+   property SRL_t;  //this property is used to check the ALU SRL operation timing
+     @(posedge core_clk) disable iff(!rst_n && !enable_i) (operator_i == ALU_SRL) |-> ($signed(result_o) == ($signed(operand_a_i >> operand_b_i[4:0])) && (ready_o == 1));
+    endproperty
+
+   property SLL_t;  //this property is used to check the ALU SLL operation timing
+     @(posedge core_clk) disable iff(!rst_n && !enable_i) (operator_i == ALU_SLL) |-> (result_o == (operand_a_i << operand_b_i[4:0]) && (ready_o == 1));
    endproperty
 
-    property SUB_t;  //this property is used to check the ALU SUB operation timing
-     @(posedge core_clk) (operator_i == ALU_SUB) |-> ($signed(result_o) == $signed(operand_a_i - operand_b_i));
+    property LTS_t;  //this property is used to check the ALU LTS operation timing
+     @(posedge core_clk) disable iff(!rst_n && !enable_i) (enable_i && (operator_i == ALU_LTS) &&($signed(operand_a_i) < $signed(operand_b_i))) |-> ((result_o == 32'hffff_ffff) && (comparison_result_o ==1) && (ready_o == 1));
     endproperty
 
-    property XOR_t;  //this property is used to check the ALU XOR operation timing
-     @(posedge core_clk) (operator_i == ALU_XOR) |-> (result_o == (operand_a_i ^ operand_b_i));
+    property LTU_t;  //this property is used to check the ALU LTU operation timing
+     @(posedge core_clk) disable iff(!rst_n && !enable_i) (enable_i && (operator_i == ALU_LTU) &&(operand_a_i < operand_b_i)) |-> ((result_o == 32'hffff_ffff) && (comparison_result_o ==1) && (ready_o == 1));
     endproperty
 
-    property AND_t;  //this property is used to check the ALU ADD operation timing
-     @(posedge core_clk) (operator_i == ALU_AND) |-> (result_o == (operand_a_i & operand_b_i));
+    property GES_t;  //this property is used to check the ALU GES operation timing
+     @(posedge core_clk) disable iff(!rst_n && !enable_i) (enable_i && (operator_i == ALU_GES) &&($signed(operand_a_i) >= $signed(operand_b_i))) |-> ((result_o == 32'hffff_ffff) && (comparison_result_o ==1) && (ready_o == 1));
     endproperty
 
-    property SRA_t;  //this property is used to check the ALU ADD operation timing
-     @(posedge core_clk) (operator_i == ALU_SRA) |-> (result_o == (operand_a_i >>> operand_b_i[4:0]));
+    property GEU_t;  //this property is used to check the ALU GEU operation timing
+     @(posedge core_clk) disable iff(!rst_n && !enable_i) (enable_i && (operator_i == ALU_GEU) &&(operand_a_i >= operand_b_i)) |-> ((result_o == 32'hffff_ffff) && (comparison_result_o ==1) && (ready_o == 1));
     endproperty
 
-    property SRL_t;  //this property is used to check the ALU ADD operation timing
-     @(posedge core_clk) (operator_i == ALU_SRL) |-> (result_o == (operand_a_i >> operand_b_i[4:0]));
+    property EQ_t;  //this property is used to check the ALU EQ operation timing
+     @(posedge core_clk) disable iff(!rst_n && !enable_i) (enable_i && (operator_i == ALU_EQ) &&(operand_a_i == operand_b_i)) |-> ((result_o == 32'hffff_ffff) && (comparison_result_o ==1) && (ready_o == 1));
     endproperty
 
-    property SLL_t;  //this property is used to check the ALU ADD operation timing
-     @(posedge core_clk) (operator_i == ALU_SLL) |-> (result_o == (operand_a_i << operand_b_i[4:0]));
+    property NE_t;  //this property is used to check the ALU NE operation timing
+     @(posedge core_clk) disable iff(!rst_n && !enable_i) (enable_i && (operator_i == ALU_NE) &&(operand_a_i != operand_b_i)) |-> ((result_o == 32'hffff_ffff) && (comparison_result_o ==1) && (ready_o == 1));
     endproperty
 
-    property LTS_t;  //this property is used to check the ALU ADD operation timing
-     @(posedge core_clk) ((operator_i == ALU_LTS) &&($signed(operand_a_i) < $signed(operand_b_i))) |-> ((result_o == 32'hffff_ffff) && (comparison_result_o ==1));
+    property SLTS_t;  //this property is used to check the ALU SLTS operation timing
+     @(posedge core_clk) disable iff(!rst_n && !enable_i) (enable_i && (operator_i == ALU_SLTS) &&($signed(operand_a_i) < $signed(operand_b_i))) |-> ((result_o == 1) && (comparison_result_o ==1) && (ready_o == 1));
     endproperty
 
-    property LTU_t;  //this property is used to check the ALU ADD operation timing
-     @(posedge core_clk) ((operator_i == ALU_ADD) ) |-> (result_o == (operand_a_i + operand_b_i));
+    property SLTU_t;  //this property is used to check the ALU SLTU operation timing
+     @(posedge core_clk) disable iff(!rst_n && !enable_i) (enable_i && (operator_i == ALU_SLTU) &&(operand_a_i < operand_b_i)) |-> ((result_o == 1) && (comparison_result_o ==1) && (ready_o == 1));
     endproperty
+ //======================================================================================
+ //Description: control Assertions 
+  A1_Label:assert property (comp_result_eq_operands);
+  A2_Label:assert property (enable_i_check_0);
+  A3_Label:assert property (enable_i_check_1);
+  A4_Label:assert property (ready_o_non_comp_check);
 
-    // property GES_t;  //this property is used to check the ALU ADD operation timing
-    //  @(posedge core_clk) (operator_i == ALU_ADD) |-> (result_o == (operand_a_i + operand_b_i));
-    // endproperty
+  //==============================================
+  //Timing check Assertions:
+  //Note: no need to cover this properties as it is already covered in the alu coverage collector class
+  A5_Label:assert property (ADD_t);
+  A6_Label:assert property (SUB_t);
+  A7_Label:assert property (XOR_t);
+  A8_Label:assert property (OR_t);
+  A9_Label:assert property (AND_t);
+  A10_Label:assert property (SRA_t)
+  // else begin
+  //   $display("SRA_t property is not valid");
+  //   $display("the value of inp_a_i is %32b", operand_a_i);
+  //   $display("the value of inp_b_i is %32b", operand_b_i);
+  //   $display("the value of result_o is %32b", result_o);
+  //   $display("the value of accuale output %32b",$signed(operand_a_i )>>> operand_b_i[4:0]);
+  //   $display("the value of comparison_result_o is %h", comparison_result_o);
+  //   $display("the value of operator_i is %s", operator_i);
+  //   $stop;
+  // end 
+  A11_Label:assert property (SRL_t);
+  A12_Label:assert property (SLL_t);
+  A13_Label:assert property (LTS_t);
+  A14_Label:assert property (LTU_t);
+  A15_Label:assert property (GES_t);
+  A16_Label:assert property (GEU_t);
+  A17_Label:assert property (EQ_t);
+  A18_Label:assert property (NE_t);
+  A19_Label:assert property (SLTS_t);
+  A20_Label:assert property (SLTU_t);
+  //==============================================
+  //cover properties:
+cover  property (comp_result_eq_operands);
+cover  property (enable_i_check_0);
+cover  property (enable_i_check_1);
+cover  property (ready_o_non_comp_check);
 
-    // property GEU_t;  //this property is used to check the ALU ADD operation timing
-    // @(posedge core_clk) (operator_i == ALU_ADD) |-> (result_o == (operand_a_i + operand_b_i));
-    // endproperty
-
-    // property EQ_t;  //this property is used to check the ALU ADD operation timing
-    // @(posedge core_clk) (operator_i == ALU_ADD) |-> (result_o == (operand_a_i + operand_b_i));
-    // endproperty
-
-    // property NE_t;  //this property is used to check the ALU ADD operation timing
-    // @(posedge core_clk) (operator_i == ALU_ADD) |-> (result_o == (operand_a_i + operand_b_i));
-    // endproperty
 endinterface : alu_if
 
 
