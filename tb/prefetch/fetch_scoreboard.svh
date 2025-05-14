@@ -13,6 +13,8 @@ class fetch_scoreboard extends uvm_scoreboard;
   bit flush_detected = 'b0;
    int num_passed = 0;
   int num_failed = 0;
+  int num_ip=0;
+  int num_op=0;
 
   fetch_seq_item matched_ip;
   fetch_seq_item matched_op;
@@ -59,11 +61,14 @@ fork
   begin
   sb_fifo_ip.get(seq_item_ip);
     ip_queue.push_back(seq_item_ip);
+    num_ip=num_ip+1;
+ 
   end
 
   begin
   sb_fifo_op.get(seq_item_op);  
      op_queue.push_back(seq_item_op);
+        num_op=num_op+1;
   end
 join_any
 
@@ -71,23 +76,40 @@ join_any
         // Pop the oldest IP and OP items (matched by position)
          matched_ip = ip_queue.pop_front();
          matched_op = op_queue.pop_front();
-       $display("sb time %0t: data_id_o %0h , valid_id_o %0d ,  instr_addr_o %0d ,  pc_id_o %0d ,  pc_if_o %0d ,  instr_rdata_i %0h",  $time,matched_op.instr_rdata_id_o,matched_op.instr_valid_id_o,
+ /*      $display("sb time %0t: data_id_o %0h , valid_id_o %0d ,  instr_addr_o %0d ,  pc_id_o %0d ,  pc_if_o %0d ,  instr_rdata_i %0h",  $time,matched_op.instr_rdata_id_o,matched_op.instr_valid_id_o,
             matched_ip.instr_addr_o,matched_ip.pc_id_o ,matched_ip.pc_if_o ,matched_ip.instr_rdata_i 
-); 
+); */
       if (matched_op.instr_valid_id_o) begin
 
         if (!(matched_ip.instr_rdata_i == matched_op.instr_rdata_id_o)) begin
+             matched_ip = ip_queue.pop_front();
+             
+              if (!(matched_ip.instr_rdata_i == matched_op.instr_rdata_id_o)) begin
           `uvm_error("FETCH_SB", $sformatf(
                      "FETCH done wrongly in normal op (no stall or flush),instr_id_o = %0d, instr_i = %0d",
                      matched_op.instr_rdata_id_o,
                      matched_ip.instr_rdata_i
-                     ))  
+
+                     ))
+                   ip_queue.push_front(seq_item_op);
+  
                     num_failed++; 
                      end
-                     
+
+                        else 
+        begin
+        `uvm_info("FETCH SB", $sformatf("FETCH done correctly and flush detected "), UVM_HIGH)
+        flush_detected  = 'b1;
+        branch_expected = 0;
+        jump_expected   = 0;
+        num_op=num_op+1;
+      num_passed++;
+
+      end
+        end
         else 
         begin
-        `uvm_info("FETCH SB", $sformatf("FETCH done correctly "), UVM_LOW)
+        `uvm_info("FETCH SB", $sformatf("FETCH done correctly "), UVM_HIGH)
 
       num_passed++;
 
@@ -127,7 +149,7 @@ join_any
   virtual function void final_phase(uvm_phase phase);
     super.final_phase(phase);  // Important to call super
     `uvm_info("SCOREBOARD", 
-      $sformatf("Final Results: %0d passed, %0d failed", num_passed, num_failed), 
+      $sformatf("Final Results: %0d passed, %0d failed , inputs %0d , outputs %0d", num_passed, num_failed , num_ip , num_op), 
       UVM_LOW)  // Changed from UVM_NONE to UVM_LOW (UVM_NONE is invalid)
   endfunction
 
@@ -173,7 +195,7 @@ join_any
       if ((matched_ip.pc_if_o - matched_ip.pc_id_o == 4)) begin
     
        `uvm_info("FETCH SB", $sformatf(
-                  "ADDRESS_CHECK_NORMAL: ADDERSS of inst fetched correct"), UVM_LOW)
+                  "ADDRESS_CHECK_NORMAL: ADDERSS of inst fetched correct"), UVM_HIGH)
       num_passed++;
 
       end
