@@ -3,5 +3,8 @@
 *.qdb
 *.log
 *.qtl
+*.wlf
+*.ucdb
+*.mpf
+*.mti
 /tb/sim/coverage_report
-tb/sim/riscv.wlf
