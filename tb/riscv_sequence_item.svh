@@ -15,7 +15,7 @@ class riscv_sequence_item extends uvm_sequence_item;
   //==================================================================================
   // Data Members
   //==================================================================================
-  logic                               rst_ni              = 'b1;
+  logic                               rst_ni                       = 'b1;
 
   // Instruction Interface Signals
   //----------------------------------------------------------------------------------
@@ -34,25 +34,25 @@ class riscv_sequence_item extends uvm_sequence_item;
   rand bit                     [ 4:0] rs2;
   rand bit                     [ 2:0] funct3;
   rand bit                     [ 6:0] funct7;
-  rand bit               [31:0] imm;
+  rand bit signed              [31:0] imm;
   rand riscv_pkg::instr_type_e        instr_type;
-  
+
   // Temporary instruction memory
   // ---------------------------------------------------
-  logic [31:0] instr_mem[logic [31:0]];
+  logic                        [31:0] instr_mem[logic     [31:0]];
 
   // Discarded Signals
   // ---------------------------------------------------
-  logic                               pulp_clock_en_i     = 1'b0;
-  logic                               scan_cg_en_i        = 1'b0;
-  logic                        [31:0] boot_addr_i         = 'b0;
-  logic                        [31:0] mtvec_addr_i        = 'b0;
-  logic                        [31:0] dm_halt_addr_i      = 'b0;
-  logic                        [31:0] hart_id_i           = 'b0;
-  logic                        [31:0] dm_exception_addr_i = 'b0;
-  logic                        [31:0] irq_i               = 'b0;
-  logic                               debug_req_i         = 1'b0;
-  logic                               fetch_enable_i      = 1'b1;
+  logic                               pulp_clock_en_i              = 1'b0;
+  logic                               scan_cg_en_i                 = 1'b0;
+  logic                        [31:0] boot_addr_i                  = 'b0;
+  logic                        [31:0] mtvec_addr_i                 = 'b0;
+  logic                        [31:0] dm_halt_addr_i               = 'b0;
+  logic                        [31:0] hart_id_i                    = 'b0;
+  logic                        [31:0] dm_exception_addr_i          = 'b0;
+  logic                        [31:0] irq_i                        = 'b0;
+  logic                               debug_req_i                  = 1'b0;
+  logic                               fetch_enable_i               = 1'b1;
 
 
   //==================================================================================
@@ -60,15 +60,15 @@ class riscv_sequence_item extends uvm_sequence_item;
   //==================================================================================
 
   //----------------------------------------------------------------------------------
+  constraint solve_before_c {
+    solve opcode before funct7, funct3;
+    solve funct7 before funct3;
+  }
+
+  //----------------------------------------------------------------------------------
   constraint valid_type_c {
-    instr_type dist {
-      riscv_pkg::R_TYPE := 50,
-      riscv_pkg::I_TYPE := 50,
-      riscv_pkg::U_TYPE := 50,
-      riscv_pkg::S_TYPE := 50,
-      riscv_pkg::B_TYPE := 50,
-      riscv_pkg::J_TYPE := 50
-    };
+    instr_type inside {riscv_pkg::R_TYPE, riscv_pkg::I_TYPE, riscv_pkg::U_TYPE, riscv_pkg::S_TYPE,
+                       riscv_pkg::B_TYPE, riscv_pkg::J_TYPE};
   }
 
   //----------------------------------------------------------------------------------
@@ -101,6 +101,7 @@ class riscv_sequence_item extends uvm_sequence_item;
       };
     }
   }
+
 
   //----------------------------------------------------------------------------------
   constraint i_type_c {
@@ -163,13 +164,7 @@ class riscv_sequence_item extends uvm_sequence_item;
   //----------------------------------------------------------------------------------
   constraint j_type_c {
     instr_type == riscv_pkg::J_TYPE ->
-    opcode inside {riscv_pkg::OP_JAL };
-  }
-
-  //----------------------------------------------------------------------------------
-  constraint solve_before_c {
-    solve opcode before funct7, funct3;
-    solve funct7 before funct3;
+    opcode inside {riscv_pkg::OP_JAL};
   }
 
   //==================================================================================
@@ -177,12 +172,13 @@ class riscv_sequence_item extends uvm_sequence_item;
   //==================================================================================
   function bit [31:0] pack_instruction();
     unique case (instr_type)
-      riscv_pkg::R_TYPE:  instruction = {funct7, rs2, rs1, funct3, rd, opcode};
-      riscv_pkg::I_TYPE:  instruction = {imm[11:0], rs1, funct3, rd, opcode};
-      riscv_pkg::S_TYPE:  instruction = {imm[11:5], rs2, rs1, funct3, imm[4:0], opcode};
-      riscv_pkg::B_TYPE:  instruction = {imm[12], imm[10:5], rs2, rs1, funct3, imm[4:1], imm[11], opcode};
-      riscv_pkg::U_TYPE:  instruction = {imm[31:12], rd, opcode};
-      riscv_pkg::J_TYPE:  instruction = {imm[20], imm[10:1], imm[11], imm[19:12], rd, opcode};
+      riscv_pkg::R_TYPE: instruction = {funct7, rs2, rs1, funct3, rd, opcode};
+      riscv_pkg::I_TYPE: instruction = {imm[11:0], rs1, funct3, rd, opcode};
+      riscv_pkg::S_TYPE: instruction = {imm[11:5], rs2, rs1, funct3, imm[4:0], opcode};
+      riscv_pkg::B_TYPE:
+      instruction = {imm[12], imm[10:5], rs2, rs1, funct3, imm[4:1], imm[11], opcode};
+      riscv_pkg::U_TYPE: instruction = {imm[31:12], rd, opcode};
+      riscv_pkg::J_TYPE: instruction = {imm[20], imm[10:1], imm[11], imm[19:12], rd, opcode};
       default: instruction = 32'h00000013;  // NOP
     endcase
     return instruction;
@@ -193,6 +189,7 @@ class riscv_sequence_item extends uvm_sequence_item;
   //==================================================================================
   function void post_randomize();
     pack_instruction();
+    // convert2asm();
     // $display("Instruction: %s", convert2asm());
   endfunction
 
@@ -262,12 +259,12 @@ class riscv_sequence_item extends uvm_sequence_item;
       end
       riscv_pkg::S_TYPE: begin
         unique case (funct3)
-          riscv_pkg::SB: return $sformatf("SB x%0d, %0d(x%0d)", rs2, imm[11:0], rs1);
-          riscv_pkg::SH: return $sformatf("SH x%0d, %0d(x%0d)", rs2, imm[11:0], rs1);
-          riscv_pkg::SW: return $sformatf("SW x%0d, %0d(x%0d)", rs2, imm[11:0], rs1);
+          riscv_pkg::SB: return $sformatf("sb x%0d, %0d(x%0d)", rs2, imm[11:0], rs1);
+          riscv_pkg::SH: return $sformatf("sw x%0d, %0d(x%0d)", rs2, imm[11:0], rs1);
+          riscv_pkg::SW: return $sformatf("sw x%0d, %0d(x%0d)", rs2, imm[11:0], rs1);
         endcase
       end
-      riscv_pkg::J_TYPE:  return $sformatf("jal x%0d, %0d", rd, imm[31:12]);
+      riscv_pkg::J_TYPE: return $sformatf("jal x%0d, %0d", rd, imm[31:12]);
       default: return "nop";
     endcase
   endfunction

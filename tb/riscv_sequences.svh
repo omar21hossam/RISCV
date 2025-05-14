@@ -111,113 +111,23 @@ class riscv_arith_sequence extends riscv_init_sequence;
       // ALU Operations Sequence
       // -------------------------------------------------
       start_item(m_seq_item);
-      if (!m_seq_item.randomize() with {
-            m_seq_item.instr_type == riscv_pkg::R_TYPE;
-            m_seq_item.opcode == riscv_pkg::OP_RTYPE;
-            m_seq_item.funct3 inside {
-              riscv_pkg::ADD_SUB,
-              riscv_pkg::SLL,
-              riscv_pkg::SLT,
-              riscv_pkg::SLTU,
-              riscv_pkg::XOR,
-              riscv_pkg::SRL_SRA,
-              riscv_pkg::OR,
-              riscv_pkg::AND
-          };
-            m_seq_item.funct7 inside {riscv_pkg::R_OTHER, riscv_pkg::SUB_SRA};
-          }) begin
+      if (!m_seq_item.randomize()) begin
         `uvm_fatal(get_name(), "Failed to randomize alu sequence item");
       end
       // Finish the sequence
       finish_item(m_seq_item);
-
-      // MUL Sequence
-      // -------------------------------------------------
-      // Start the arithmetic sequence
-      start_item(m_seq_item);
-      if (!m_seq_item.randomize() with {
-            m_seq_item.instr_type == riscv_pkg::R_TYPE;
-            m_seq_item.opcode == riscv_pkg::OP_RTYPE;
-            m_seq_item.funct3 inside {riscv_pkg::MUL, riscv_pkg::MULH, riscv_pkg::MULHSU, riscv_pkg::MULHU};
-            m_seq_item.funct7 == riscv_pkg::M_FUNCT7;
-          }) begin
-        `uvm_fatal(get_name(), "Failed to randomize mul sequence item");
-      end
-      // Finish the sequence
-      finish_item(m_seq_item);
-
-      // DIV Sequence
-      // -------------------------------------------------
-      // Start the arithmetic sequence
-      start_item(m_seq_item);
-      if (!m_seq_item.randomize() with {
-            m_seq_item.instr_type == riscv_pkg::R_TYPE;
-            m_seq_item.opcode == riscv_pkg::OP_RTYPE;
-            m_seq_item.funct3 inside {riscv_pkg::DIV,
-            riscv_pkg::DIVU,
-            riscv_pkg::REM,
-            riscv_pkg::REMU};
-            m_seq_item.funct7 == riscv_pkg::M_FUNCT7;
-          }) begin
-        `uvm_fatal(get_name(), "Failed to randomize div sequence item");
-      end
-      // Finish the sequence
-      finish_item(m_seq_item);
-
-      // Load Sequence
-      // -------------------------------------------------
-      // Start the arithmetic sequence
-      start_item(m_seq_item);
-      if (!m_seq_item.randomize() with {
-            m_seq_item.instr_type inside {riscv_pkg::I_TYPE};
-            m_seq_item.opcode inside {riscv_pkg::OP_LOAD};
-            m_seq_item.funct3 inside {riscv_pkg::LB, riscv_pkg::LH, riscv_pkg::LW, riscv_pkg::LBU, riscv_pkg::LHU};
-          }) begin
-        `uvm_fatal(get_name(), "Failed to randomize load sequence item");
-      end
-      // Finish the sequence
-      finish_item(m_seq_item);
-
-      // Store Sequence
-      // -------------------------------------------------
-      // Start the arithmetic sequence
-      start_item(m_seq_item);
-      if (!m_seq_item.randomize() with {
-            m_seq_item.instr_type inside {riscv_pkg::S_TYPE};
-            m_seq_item.opcode inside {riscv_pkg::OP_STORE};
-            m_seq_item.funct3 inside {riscv_pkg::SB, riscv_pkg::SH, riscv_pkg::SW};
-          }) begin
-        `uvm_fatal(get_name(), "Failed to randomize store sequence item");
-      end
-       // Finish the sequence
-       finish_item(m_seq_item);
-
-
-      // // Jump Sequence
-      // // -------------------------------------------------
-      // // Start the arithmetic sequence
-      start_item(m_seq_item);
-      if (!m_seq_item.randomize() with {
-            m_seq_item.instr_type inside {riscv_pkg::J_TYPE };
-          m_seq_item.rd inside {[1:31]};
-
-          // immediate should be aligned to 4 bytes (LSB 2 bits = 0)
-  //    m_seq_item.imm[1:0] == 2'b00;
-
-      // imm is signed 21-bit immediate for JAL
-  
-          
-          }) begin
-        `uvm_fatal(get_name(), "Failed to randomize jump sequence item");
-      end
-        m_seq_item.instruction= 'h0280006f;
-      // Finish the sequence
-      finish_item(m_seq_item);
-      
-
-
-
     end
+
+    // constraint valid_type_c {
+    //   instr_type dist {
+    //     riscv_pkg::R_TYPE := 50,
+    //     riscv_pkg::I_TYPE := 50,
+    //     riscv_pkg::U_TYPE := 50,
+    //     riscv_pkg::S_TYPE := 50,
+    //     riscv_pkg::B_TYPE := 0,
+    //     riscv_pkg::J_TYPE := 0
+    //   };
+    // }
   endtask
 
 endclass
