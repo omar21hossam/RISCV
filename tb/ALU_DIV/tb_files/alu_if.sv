@@ -29,9 +29,67 @@ interface alu_if (
   //==============================================
   //Description: internal signals
   //==============================================
+  sequence comparison_result_antecedent; //this sequence is used to check the comparison result in case equal operands and non comparison operation
+     (operator_i == (ALU_ADD || ALU_SUB || ALU_XOR || ALU_AND || ALU_SRA || ALU_SRL || ALU_SLL)) && (operand_a_i == operand_b_i);
+  endsequence;
   //==============================================
-  //Description: Assertions and Covergroups
+  //Description: Assertions 
   //==============================================
+  //properties:
+  property comp_result_eq_operands;
+    @(posedge core_clk) disable iff(!rst_n) (comparison_result_antecedent) |-> (comparison_result_o == 1);
+  endproperty
+   property ADD_t;  //this property is used to check the ALU ADD operation timing
+    @(posedge core_clk) (operator_i == ALU_ADD) |-> ($signed(result_o) == $signed(operand_a_i + operand_b_i));
+   endproperty
+
+    property SUB_t;  //this property is used to check the ALU SUB operation timing
+     @(posedge core_clk) (operator_i == ALU_SUB) |-> ($signed(result_o) == $signed(operand_a_i - operand_b_i));
+    endproperty
+
+    property XOR_t;  //this property is used to check the ALU XOR operation timing
+     @(posedge core_clk) (operator_i == ALU_XOR) |-> (result_o == (operand_a_i ^ operand_b_i));
+    endproperty
+
+    property AND_t;  //this property is used to check the ALU ADD operation timing
+     @(posedge core_clk) (operator_i == ALU_AND) |-> (result_o == (operand_a_i & operand_b_i));
+    endproperty
+
+    property SRA_t;  //this property is used to check the ALU ADD operation timing
+     @(posedge core_clk) (operator_i == ALU_SRA) |-> (result_o == (operand_a_i >>> operand_b_i[4:0]));
+    endproperty
+
+    property SRL_t;  //this property is used to check the ALU ADD operation timing
+     @(posedge core_clk) (operator_i == ALU_SRL) |-> (result_o == (operand_a_i >> operand_b_i[4:0]));
+    endproperty
+
+    property SLL_t;  //this property is used to check the ALU ADD operation timing
+     @(posedge core_clk) (operator_i == ALU_SLL) |-> (result_o == (operand_a_i << operand_b_i[4:0]));
+    endproperty
+
+    property LTS_t;  //this property is used to check the ALU ADD operation timing
+     @(posedge core_clk) ((operator_i == ALU_LTS) &&($signed(operand_a_i) < $signed(operand_b_i))) |-> ((result_o == 32'hffff_ffff) && (comparison_result_o ==1));
+    endproperty
+
+    property LTU_t;  //this property is used to check the ALU ADD operation timing
+     @(posedge core_clk) ((operator_i == ALU_ADD) ) |-> (result_o == (operand_a_i + operand_b_i));
+    endproperty
+
+    // property GES_t;  //this property is used to check the ALU ADD operation timing
+    //  @(posedge core_clk) (operator_i == ALU_ADD) |-> (result_o == (operand_a_i + operand_b_i));
+    // endproperty
+
+    // property GEU_t;  //this property is used to check the ALU ADD operation timing
+    // @(posedge core_clk) (operator_i == ALU_ADD) |-> (result_o == (operand_a_i + operand_b_i));
+    // endproperty
+
+    // property EQ_t;  //this property is used to check the ALU ADD operation timing
+    // @(posedge core_clk) (operator_i == ALU_ADD) |-> (result_o == (operand_a_i + operand_b_i));
+    // endproperty
+
+    // property NE_t;  //this property is used to check the ALU ADD operation timing
+    // @(posedge core_clk) (operator_i == ALU_ADD) |-> (result_o == (operand_a_i + operand_b_i));
+    // endproperty
 endinterface : alu_if
 
 
@@ -44,8 +102,6 @@ endinterface : alu_if
 
     ALU_ADD   = 7'b0011000,
     ALU_SUB   = 7'b0011001,
-    ALU_ADDU  = 7'b0011010,
-    ALU_SUBU  = 7'b0011011,
 
     ALU_XOR = 7'b0101111,
     ALU_OR  = 7'b0101110,
@@ -59,21 +115,16 @@ endinterface : alu_if
     // Comparisons
     ALU_LTS = 7'b0000000,
     ALU_LTU = 7'b0000001,
-    ALU_LES = 7'b0000100,
-    ALU_LEU = 7'b0000101,
-    ALU_GTS = 7'b0001000,
-    ALU_GTU = 7'b0001001,
     ALU_GES = 7'b0001010,
     ALU_GEU = 7'b0001011,
     ALU_EQ  = 7'b0001100,
     ALU_NE  = 7'b0001101,
 
     // Set Lower Than operations
-    ALU_SLTS  = 7'b0000010,
+    ALU_SLTS  = 7'b0000010,  //output = 1 and comprision_result_o = 1
     ALU_SLTU  = 7'b0000011,
-    ALU_SLETS = 7'b0000110,
-    ALU_SLETU = 7'b0000111,
 
+   if both operands equals then comprision_result_o = 1
 //**************
 //OSAMA OP-CODES
 //***************

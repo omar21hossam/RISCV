@@ -112,7 +112,7 @@ class riscv_test extends uvm_test;
     super.run_phase(phase);
     phase.raise_objection(this);
     m_vsequence.start(m_env.m_vseqr);
-    phase.phase_done.set_drain_time(this, 1ms);
+    phase.phase_done.set_drain_time(this, 10ns);
     phase.drop_objection(this);
   endtask
 endclass
