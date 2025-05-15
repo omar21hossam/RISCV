@@ -219,7 +219,26 @@ class alu_coverage_collector extends uvm_subscriber #(alu_seq_item);
       bins ALU_GEU_case1     =  binsof(operator.alu_op_code[cv32e40p_pkg::ALU_GEU]) &&
                                       binsof(operand_a.operand_a_negv_values) &&
                                       binsof(operand_b.operand_b_posv_values);
-                                    
+      //===========================================
+      // Check the division corner cases scenarios
+      //===========================================
+      bins DIV_op_case0      = binsof(operator.alu_op_code[cv32e40p_pkg::ALU_DIV]) &&
+                                      binsof(operand_a.operand_a_zero) &&
+                                      binsof(operand_b.operand_b_zero); 
+
+      bins DIVU_op_case0     = binsof(operator.alu_op_code[cv32e40p_pkg::ALU_DIVU]) &&
+                                      binsof(operand_a.operand_a_zero) &&
+                                      binsof(operand_b.operand_b_zero); 
+
+      bins REM_op_case0      = binsof(operator.alu_op_code[cv32e40p_pkg::ALU_REM]) &&
+                                      binsof(operand_a.operand_a_zero) &&
+                                      binsof(operand_b.operand_b_zero); 
+
+      bins REMU_op_case0     = binsof(operator.alu_op_code[cv32e40p_pkg::ALU_REMU]) &&
+                                      binsof(operand_a.operand_a_zero) &&
+                                      binsof(operand_b.operand_b_zero);
+   
+
     }
   
   endgroup:alu_cov_inputs
@@ -231,6 +250,9 @@ class alu_coverage_collector extends uvm_subscriber #(alu_seq_item);
         bins result_o_min = {32'h8000_0000};
         bins result_o_max = {32'h7FFF_FFFF};
         bins result_o_mid_values = {[32'h8000_0001 : 32'h7FFF_FFFE]};
+        // division and remainder corner cases
+        bins result_o_rem_corner = {32'h0000_0000}; //remainder Dividend = -2^(no.bits-1), Divisor = -1
+        bins result_o_div_by_zero = {32'hFFFF_FFFF}; //division by zero
       }
 
       comparison_result_o: coverpoint seq_item.comparison_result_o {
