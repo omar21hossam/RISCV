@@ -108,8 +108,8 @@ module riscv_top_tb ();
   end
 
   initial begin
-    $dumpfile("riscv_top_tb.vcd");
-    $dumpvars(0, riscv_top_tb);
+    // $dumpfile("riscv_top_tb.vcd");
+    $dumpvars(0);
     $display("Starting simulation");
   end
 

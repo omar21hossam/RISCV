@@ -190,6 +190,7 @@ class riscv_corner_alu_sequence extends riscv_init_sequence;
 
     direct_send('h01900193);  // li x3, 25 (some positive number)
     direct_send('hFCF00213);  // li x4, -49 (some negative number)
+    direct_send('h01f00313);  // li x6, 31 (maximum shift amount)
     direct_send('h001082B3);  // add x5, x1, x1
     direct_send('h002102b3);  // add x5, x2, x2
     direct_send('h003082B3);  // add x5, x1, x3
@@ -199,9 +200,13 @@ class riscv_corner_alu_sequence extends riscv_init_sequence;
     direct_send('h403102B3);  // sub x5, x2, x3
     direct_send('h000002B3);  // add x5, x0, x0
     direct_send('h400002B3);  // sub x5, x0, x0
+    direct_send('h401102b3);  // sub x5, x0, x0
     direct_send('h4001D2B3);  // sra x5, x3, x0
     direct_send('h000192B3);  // sll x5, x3, x0
     direct_send('h0001D2B3);  // srl x5, x3, x0
+    direct_send('h4061d2b3);  // sra x5, x3, x6
+    direct_send('h006192b3);  // sll x5, x3, x6
+    direct_send('h0061d2b3);  // srl x5, x3, x6
     direct_send('h41F1D293);  // srai x5, x3, 31
     direct_send('h01F19293);  // slli x5, x3, 31
     direct_send('h01F1D293);  // srli x5, x3, 31

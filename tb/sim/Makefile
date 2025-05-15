@@ -28,6 +28,27 @@ all: compile $(UCDBS) merge coverage
 #  1. Compile
 # ─────────────────────────────────────────────────────────────
 compile:
+	#
+	#
+	#		  _____ _____    _    __  __  __     __         
+	#		 |_   _| ____|  / \  |  \/  | \ \   / /         
+	#		   | | |  _|   / _ \ | |\/| |  \ \ / /          
+	#		   | | | |___ / ___ \| |  | |   \ V /           
+	#		   |_| |_____/_/   \_|_|  |_|    \_/            
+	#		                                                
+	#		  ____ ___   __     _____ ____ ___ ___  _   _   
+	#		 / ___|_ _|  \ \   / |_ _/ ___|_ _/ _ \| \ | |  
+	#		 \___ \| |____\ \ / / | |\___ \| | | | |  \| |  
+	#		  ___) | |_____\ V /  | | ___) | | |_| | |\  |  
+	#		 |____|___|     \_/  |___|____|___\___/|_| \_|  
+	#		                                                
+	#		     _    ____    _    ____  _____ __  ____   __
+	#		    / \  / ___|  / \  |  _ \| ____|  \/  \ \ / /
+	#		   / _ \| |     / _ \ | | | |  _| | |\/| |\ V / 
+	#		  / ___ | |___ / ___ \| |_| | |___| |  | | | |  
+	#		 /_/   \_\____/_/   \_|____/|_____|_|  |_| |_|
+	#
+	#
 	vlib work
 	vlog -sv -f files.f +cover
 
@@ -38,7 +59,8 @@ compile:
 	@echo "===> Running $* ..."
 	vsim -c -wlf $*.wlf -logfile $*.log $(EXTRA_VSIM_OPTS) \
 	     $(TOP) +UVM_TESTNAME=$* \
-	     -do "coverage save -onexit $@; run -all; quit -f"
+	     -do "vcd file $*.vcd; vcd add -r /*; coverage save -onexit $@; run -all; quit -f"
+	vcd2wlf $*.vcd $*.wlf
 	@echo "===> $* finished, UCDB saved as $@"
 
 # ─────────────────────────────────────────────────────────────
@@ -49,7 +71,7 @@ merge: $(UCDBS)
 	vcover merge $(MERGED_UCDB) $(UCDBS)
 
 # ─────────────────────────────────────────────────────────────
-# 4. Generate HTML report
+# 4. Generate HTML report + ASCII art at the end
 # ─────────────────────────────────────────────────────────────
 coverage: merge
 	@echo "===> Generating HTML coverage report (coverage_report/)"
