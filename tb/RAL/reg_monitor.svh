@@ -32,19 +32,19 @@ class reg_monitor extends uvm_monitor;
   // Run phase
   virtual task run_phase(uvm_phase phase);
     super.run_phase(phase);
-    @(posedge reg_intf.ex_ready_0 or posedge reg_intf.regfile_we_wb_o) #1step;
+    @(posedge reg_intf.ex_ready_o or posedge reg_intf.regfile_we_wb_o) #1step;
     // Sample the Ex stage signals
-    seq_item.rst_n = reg_intf.rst_n;
-    seq_item.alu_en_i = reg_intf.alu_en_i;
-    seq_item.mult_en_i = reg_intf.mult_en_i;
+    seq_item.rst_n                  = reg_intf.rst_n;
+    seq_item.alu_en_i               = reg_intf.alu_en_i;
+    seq_item.mult_en_i              = reg_intf.mult_en_i;
     seq_item.regfile_alu_waddr_fw_o = reg_intf.regfile_alu_waddr_fw_o; 
-    seq_item.alu_result = reg_intf.alu_result;
-    seq_item.mult_result = reg_intf.mult_result;
-    seq_item.ex_ready_0 = reg_intf.ex_ready_0;
+    seq_item.alu_result             = reg_intf.alu_result;
+    seq_item.mult_result            = reg_intf.mult_result;
+    seq_item.ex_ready_o             = reg_intf.ex_ready_o;
     // Sample the LSU signals
-    seq_item.regfile_waddr_wb_o = reg_intf.regfile_waddr_wb_o;
-    seq_item.regfile_we_wb_o = reg_intf.regfile_we_wb_o;
-    seq_item.regfile_wdata_wb_o = reg_intf.regfile_wdata_wb_o;    
+    seq_item.regfile_waddr_wb_o     = reg_intf.regfile_waddr_wb_o;
+    seq_item.regfile_we_wb_o        = reg_intf.regfile_we_wb_o;
+    seq_item.regfile_wdata_wb_o     = reg_intf.regfile_wdata_wb_o;    
     // Send the sequence item to the analysis port
     ap.write(seq_item);
   endtask
