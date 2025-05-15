@@ -14,12 +14,16 @@ class reg_scoreboard extends uvm_scoreboard;
   virtual function void build_phase(uvm_phase phase);
     super.build_phase(phase);
     // Create the impelmentation port 
-    sc_a_imp = new(this, "sc_a_imp");
+    sc_a_imp = new("sc_a_imp", this);
+    // Get the RAL model from the config DB
+    if (!uvm_config_db#(ral_model)::get(this, "", "ral_model", m_ral_model)) begin
+      `uvm_fatal(get_full_name(), "Failed to get configuration for RAL model");
+    end
   endfunction
 
 
   function void write (reg_sequence_item reg_seq_item);
-   if(reg_seq_item.ex_ready_0 == 1) begin
+   if(reg_seq_item.ex_ready_o == 1) begin
      ref_o = m_ral_model.regs[reg_seq_item.regfile_alu_waddr_fw_o].get_mirrored_value();
       if(reg_seq_item.alu_en_i)
         data_o = reg_seq_item.alu_result;
@@ -45,4 +49,10 @@ class reg_scoreboard extends uvm_scoreboard;
       end
     end
     endfunction
+
+    function void extract_phase(uvm_phase phase);
+    super.extract_phase(phase);
+    `uvm_info(get_full_name(), $sformatf("Scoreboard: Passed cases: %0d", success_cnt), UVM_NONE);
+    `uvm_info(get_full_name(), $sformatf("Scoreboard: Failed cases: %0d", fail_cnt), UVM_NONE);
+  endfunction
 endclass 
