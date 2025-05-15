@@ -22,6 +22,7 @@ class riscv_test extends uvm_test;
   virtual mul_if         mul_vif;
   virtual alu_if         alu_vif;
   virtual fetch_if       fetch_vif;
+  virtual reg_if         reg_vif;
 
   //==================================================================================
   // Function: Constructor
@@ -101,6 +102,14 @@ class riscv_test extends uvm_test;
       `uvm_fatal(get_name(), "Failed to get configuration for lsu_if");
     end else begin
       uvm_config_db#(virtual lsu_if)::set(this, "m_env", "lsu_intf", lsu_vif);
+    end
+
+    // REGFILE Interface
+    //------------------------------------------
+    if (!uvm_config_db#(virtual reg_if)::get(this, "", "reg_intf", reg_vif)) begin
+      `uvm_fatal(get_name(), "Failed to get configuration for reg_if");
+    end else begin
+      uvm_config_db#(virtual reg_if)::set(this, "m_env", "reg_intf", reg_vif);
     end
 
   endfunction
