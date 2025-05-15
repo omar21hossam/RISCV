@@ -85,12 +85,12 @@ join_any
              matched_ip = ip_queue.pop_front();
              
               if (!(matched_ip.instr_rdata_i == matched_op.instr_rdata_id_o)) begin
-          `uvm_error("FETCH_SB", $sformatf(
+     /*   `uvm_error("FETCH_SB", $sformatf(
                      "FETCH done wrongly in normal op time %0t (no stall or flush),instr_id_o = %0d, instr_i = %0d", $time,
                      matched_op.instr_rdata_id_o,
                      matched_ip.instr_rdata_i
 
-                     ))
+                     ))*/ // 11
                    ip_queue.push_front(seq_item_op);
   
                     num_failed++; 
@@ -98,7 +98,7 @@ join_any
 
                         else 
         begin
-        `uvm_info("FETCH SB", $sformatf("FETCH done correctly and flush detected "), UVM_LOW)
+        `uvm_info("FETCH SB", $sformatf("FETCH done correctly and flush detected "), UVM_HIGH)
         flush_detected  = 'b1;
         branch_expected = 0;
         jump_expected   = 0;
@@ -122,12 +122,12 @@ join_any
           INSTR_JUMP: begin
 
             jump_expected = jump_expected + 1;
-            `uvm_info("FETCH SB", $sformatf("JUMP detected"), UVM_LOW)
+       //     `uvm_info("FETCH SB", $sformatf("JUMP detected"), UVM_LOW)  22
 
           end
           INSTR_BRANCH: begin
             branch_expected = branch_expected + 1;
-            `uvm_info("FETCH SB", $sformatf("BRANCH detected "), UVM_LOW)
+       //     `uvm_info("FETCH SB", $sformatf("BRANCH detected "), UVM_LOW) 33
 
           end
           INSTR_NONE: begin
@@ -184,8 +184,8 @@ join_any
   function check_add(input logic [31:0] add_f, input logic [31:0] add_d);
     if (flush_detected == 'b1) begin
 
-     `uvm_info("FETCH SB", $sformatf("ADDRESS_CHECK_JB:time %0t inst add_f  %0d , inst add_d  %0d ",  $time,
-                                      matched_ip.pc_if_o, matched_ip.pc_id_o), UVM_LOW)
+ //    `uvm_info("FETCH SB", $sformatf("ADDRESS_CHECK_JB:time %0t inst add_f  %0d , inst add_d  %0d ",  $time,  44
+   //                                   matched_ip.pc_if_o, matched_ip.pc_id_o), UVM_LOW)
 
 
 
@@ -202,7 +202,7 @@ join_any
       else if ((matched_ip.pc_id_o != 0) && (matched_ip.pc_if_o != 0)) begin
     
        `uvm_info("FETCH SB", $sformatf(
-                  "ADDRESS_CHECK_NORMAL_after flush: ADDERSS of inst fetched correct time %0t  pc_if: %0d   pc_id: %0d ",$time,matched_ip.pc_if_o, matched_ip.pc_id_o), UVM_LOW)    
+                  "ADDRESS_CHECK_NORMAL_after flush: ADDERSS of inst fetched correct time %0t  pc_if: %0d   pc_id: %0d ",$time,matched_ip.pc_if_o, matched_ip.pc_id_o), UVM_HIGH)    
      
       end
     end
