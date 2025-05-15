@@ -15,6 +15,10 @@ class riscv_env extends uvm_env;
   alu_config               m_alu_config;
   mul_config               m_mul_config;
 
+  // RAL Model
+  //-----------------------------------------------------------------------------------
+  ral_model             m_ral_model;
+
   // Agents
   //-----------------------------------------------------------------------------------
   fetch_agent              m_fetch_agent;
@@ -74,6 +78,14 @@ class riscv_env extends uvm_env;
     m_mul_agent = mul_agent::type_id::create("m_mul_agent", this);
     m_lsu_agent = lsu_agent::type_id::create("m_lsu_agent", this);
     m_reg_agent = reg_agent::type_id::create("m_reg_agent", this);
+
+    // RAL Model
+    //------------------------------------------
+    m_ral_model = ral_model::type_id::create("m_ral_model", this);
+    m_ral_model.build();
+    m_ral_model.reset();
+    m_ral_model.lock_model();
+    m_ral_model.map.set_auto_predict(0);
 
 
     // Coverage Collectors
@@ -167,6 +179,9 @@ class riscv_env extends uvm_env;
     end else begin
       uvm_config_db#(virtual reg_if)::set(this, "m_reg_agent", "reg_intf", reg_vif);
     end
+
+    // send RAL model to every place
+    uvm_config_db#(ral_model)::set(this, "*", "ral_model", m_ral_model);
   endfunction
 
   //==================================================================================
