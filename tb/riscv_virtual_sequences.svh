@@ -8,7 +8,7 @@
 //                                                          |_|                                     //
 //                                                                                                  //
 //////////////////////////////////////////////////////////////////////////////////////////////////////
-class riscv_virtual_base_sequence extends uvm_sequence;
+class riscv_virtual_base_sequence extends uvm_sequence #(riscv_sequence_item);
 
   //==================================================================================
   // Factory Registration
@@ -45,7 +45,7 @@ class riscv_virtual_base_sequence extends uvm_sequence;
   // task: body
   //==================================================================================
   virtual task body();
-    super.body();  //call the base class body
+    
     fork
       //start the sequences
       begin
@@ -66,7 +66,7 @@ endclass
 //                                                            |_|                                     //
 //                                                                                                    //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-class riscv_virtual_rand_sequence extends uvm_sequence;
+class riscv_virtual_rand_sequence extends uvm_sequence #(riscv_sequence_item);
 
   //==================================================================================
   // Factory Registration
@@ -103,7 +103,7 @@ class riscv_virtual_rand_sequence extends uvm_sequence;
   // task: body
   //==================================================================================
   virtual task body();
-    super.body();  //call the base class body
+    
     fork
       //start the sequences
       begin
@@ -124,7 +124,7 @@ endclass
 //                                                                 |_|                                    //
 //                                                                                                        //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class riscv_virtual_direct_sequence extends uvm_sequence;
+class riscv_virtual_direct_sequence extends uvm_sequence #(riscv_sequence_item);
 
   //==================================================================================
   // Factory Registration
@@ -170,7 +170,6 @@ class riscv_virtual_direct_sequence extends uvm_sequence;
   // task: body
   //==================================================================================
   virtual task body();
-    super.body();  //call the base class body
     fork
       //start the sequences
       begin

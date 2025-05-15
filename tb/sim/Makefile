@@ -1,12 +1,12 @@
 # ─────────────────────────────────────────────────────────────
 #  User-tweakable variables
 # ─────────────────────────────────────────────────────────────
-TESTS          := riscv_base_test riscv_rand_test riscv_direct_test
-UCDBS          := $(addsuffix .ucdb,$(TESTS))
-MERGED_UCDB    := riscv_merged.ucdb
-TOP            := work.riscv_top_tb
-VOPTARGS       := +acc
-EXTRA_VSIM_OPTS:= -coverage -assertdebug -voptargs="$(VOPTARGS)"
+DEFAULT_TESTS   := riscv_rand_test riscv_direct_test
+UCDBS           := $(addsuffix .ucdb,$(DEFAULT_TESTS))
+MERGED_UCDB     := riscv_merged.ucdb
+TOP             := work.riscv_top_tb
+VOPTARGS        := +acc
+EXTRA_VSIM_OPTS := -coverage -assertdebug -voptargs="$(VOPTARGS)"
 
 # ─────────────────────────────────────────────────────────────
 #  Phony targets
@@ -14,12 +14,14 @@ EXTRA_VSIM_OPTS:= -coverage -assertdebug -voptargs="$(VOPTARGS)"
 .PHONY: all compile merge coverage clean \
         riscv_base_test riscv_rand_test riscv_direct_test
 
-# Friendly aliases ─ run just one test if you like
-riscv_base_test  : riscv_base_test.ucdb
+# One-off alias (not in 'all'):
+riscv_base_test: riscv_base_test.ucdb
+
+# Friendly aliases
 riscv_rand_test  : riscv_rand_test.ucdb
 riscv_direct_test: riscv_direct_test.ucdb
 
-# Default full flow
+# Default/full-parallel flow
 all: compile $(UCDBS) merge coverage
 
 # ─────────────────────────────────────────────────────────────
@@ -40,7 +42,7 @@ compile:
 	@echo "===> $* finished, UCDB saved as $@"
 
 # ─────────────────────────────────────────────────────────────
-# 3. Merge coverage
+# 3. Merge coverage (only the defaults)
 # ─────────────────────────────────────────────────────────────
 merge: $(UCDBS)
 	@echo "===> Merging UCDB files into $(MERGED_UCDB)"
@@ -54,7 +56,7 @@ coverage: merge
 	vcover report -html -details -annotate -output coverage_report $(MERGED_UCDB)
 
 # ─────────────────────────────────────────────────────────────
-# 5. House-keeping
+# 5. Clean up
 # ─────────────────────────────────────────────────────────────
 clean:
 	rm -rf work *.wlf *.log *.ucdb coverage_report

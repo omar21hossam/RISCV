@@ -46,10 +46,10 @@ class riscv_sequence_item extends uvm_sequence_item;
   logic                               pulp_clock_en_i              = 1'b0;
   logic                               scan_cg_en_i                 = 1'b0;
   logic                        [31:0] boot_addr_i                  = 'b0;
-  logic                        [31:0] mtvec_addr_i                 = 'hf1f1f1f1;
-  logic                        [31:0] dm_halt_addr_i               = 'hf2f2f2f2;
+  logic                        [31:0] mtvec_addr_i                 = 'b0;
+  logic                        [31:0] dm_halt_addr_i               = 'b0;
   logic                        [31:0] hart_id_i                    = 'b0;
-  logic                        [31:0] dm_exception_addr_i          = 'hf3f3f3f3;
+  logic                        [31:0] dm_exception_addr_i          = 'b0;
   logic                        [31:0] irq_i                        = 'b0;
   logic                               debug_req_i                  = 1'b0;
   logic                               fetch_enable_i               = 1'b1;
@@ -172,8 +172,8 @@ class riscv_sequence_item extends uvm_sequence_item;
   }
   //----------------------------------------------------------------------------------
   constraint j_type_c {
-    instr_type == riscv_pkg::J_TYPE ->
-    opcode inside {riscv_pkg::OP_JAL};
+    instr_type == riscv_pkg::J_TYPE -> opcode inside {riscv_pkg::OP_JAL};
+    imm[1:0] == 2'b0;
   }
 
   //==================================================================================
