@@ -61,14 +61,15 @@ class riscv_sequence_item extends uvm_sequence_item;
 
   //----------------------------------------------------------------------------------
   constraint solve_before_c {
+    solve instr_type before opcode, funct7, funct3;
     solve opcode before funct7, funct3;
     solve funct7 before funct3;
   }
 
   //----------------------------------------------------------------------------------
   constraint valid_type_c {
-    instr_type inside {riscv_pkg::R_TYPE, riscv_pkg::I_TYPE, riscv_pkg::U_TYPE, riscv_pkg::S_TYPE,
-                       riscv_pkg::B_TYPE, riscv_pkg::J_TYPE};
+    soft instr_type inside {riscv_pkg::R_TYPE, riscv_pkg::I_TYPE, riscv_pkg::U_TYPE,
+                            riscv_pkg::S_TYPE, riscv_pkg::B_TYPE, riscv_pkg::J_TYPE};
   }
 
   //----------------------------------------------------------------------------------
@@ -265,7 +266,7 @@ class riscv_sequence_item extends uvm_sequence_item;
         endcase
       end
       riscv_pkg::J_TYPE: return $sformatf("jal x%0d, %0d", rd, imm[31:12]);
-      default: return "nop";
+      default: return "ILLEGAL INSTRUCTION";
     endcase
   endfunction
 

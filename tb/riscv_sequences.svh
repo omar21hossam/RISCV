@@ -74,12 +74,12 @@ class riscv_init_sequence extends uvm_sequence #(riscv_sequence_item);
 endclass
 
 
-class riscv_arith_sequence extends riscv_init_sequence;
+class riscv_rand_sequence extends riscv_init_sequence;
 
   //==================================================================================
   // Registeration
   //==================================================================================
-  `uvm_object_utils(riscv_arith_sequence);
+  `uvm_object_utils(riscv_rand_sequence);
 
   //==================================================================================
   // Classes Handles
@@ -89,7 +89,7 @@ class riscv_arith_sequence extends riscv_init_sequence;
   //==================================================================================
   // Function: Constructor
   //==================================================================================
-  function new(string name = "riscv_arith_sequence");
+  function new(string name = "riscv_rand_sequence");
     super.new(name);
   endfunction
 
@@ -108,7 +108,7 @@ class riscv_arith_sequence extends riscv_init_sequence;
     m_seq_item = riscv_sequence_item::type_id::create("m_seq_item");
     repeat (riscv_pkg::SEQUENCES) begin
 
-      // ALU Operations Sequence
+      // Randomize All RV32IM Instructions Sequence
       // -------------------------------------------------
       start_item(m_seq_item);
       if (!m_seq_item.randomize()) begin
@@ -117,18 +117,178 @@ class riscv_arith_sequence extends riscv_init_sequence;
       // Finish the sequence
       finish_item(m_seq_item);
     end
-
-    // constraint valid_type_c {
-    //   instr_type dist {
-    //     riscv_pkg::R_TYPE := 50,
-    //     riscv_pkg::I_TYPE := 50,
-    //     riscv_pkg::U_TYPE := 50,
-    //     riscv_pkg::S_TYPE := 50,
-    //     riscv_pkg::B_TYPE := 0,
-    //     riscv_pkg::J_TYPE := 0
-    //   };
-    // }
   endtask
 
 endclass
 
+class riscv_corner_add_sequence extends riscv_init_sequence;
+
+  //==================================================================================
+  // Registeration
+  //==================================================================================
+  `uvm_object_utils(riscv_corner_add_sequence);
+
+  //==================================================================================
+  // Classes Handles
+  //==================================================================================
+  riscv_sequence_item m_seq_item;
+
+  //==================================================================================
+  // Function: Constructor
+  //==================================================================================
+  function new(string name = "riscv_corner_add_sequence");
+    super.new(name);
+  endfunction
+
+  //==================================================================================
+  // Task: Pre-Body
+  //==================================================================================
+  task pre_body();
+    super.pre_body();
+  endtask
+
+  //==================================================================================
+  // Task: Body
+  //==================================================================================
+  task body();
+    super.body();
+    m_seq_item = riscv_sequence_item::type_id::create("m_seq_item");
+
+    // ALU Corner Cases
+    // -------------------------------
+    // li x1, 0x7fffffff (maximum positive number)
+    direct_send('h800000B7);
+    direct_send('hFFF08093);
+
+    // li x2, 0x80000000 (maximum negative number)
+    direct_send('h80000137);
+    direct_send('h00010113);
+
+    direct_send('h01900193);  // li x3, 25 (some positive number)
+    direct_send('hFCF00213);  // li x4, -49 (some negative number)
+    direct_send('h001082B3);  // add x5, x1, x1
+    direct_send('h003082B3);  // add x5, x1, x3
+    direct_send('h004102B3);  // add x5, x2, x4
+    direct_send('h002082B3);  // add x5, x1, x2
+    direct_send('h404082B3);  // sub x5, x1, x4
+    direct_send('h403102B3);  // sub x5, x2, x3
+    direct_send('h000002B3);  // add x5, x0, x0
+    direct_send('h400002B3);  // sub x5, x0, x0
+    direct_send('h4001D2B3);  // sra x5, x3, x0
+    direct_send('h000192B3);  // sll x5, x3, x0
+    direct_send('h0001D2B3);  // srl x5, x3, x0
+    direct_send('h41F1D293);  // srai x5, x3, 31
+    direct_send('h01F19293);  // slli x5, x3, 31
+    direct_send('h01F1D293);  // srli x5, x3, 31
+    direct_send('h00000263);  // beq x0, x0, 4
+    direct_send('h00001063);  // bne x0, x0, 0
+  endtask
+
+endclass
+
+
+class riscv_corner_mul_sequence extends riscv_init_sequence;
+
+  //==================================================================================
+  // Registeration
+  //==================================================================================
+  `uvm_object_utils(riscv_corner_mul_sequence);
+
+  //==================================================================================
+  // Classes Handles
+  //==================================================================================
+  riscv_sequence_item m_seq_item;
+
+  //==================================================================================
+  // Function: Constructor
+  //==================================================================================
+  function new(string name = "riscv_corner_mul_sequence");
+    super.new(name);
+  endfunction
+
+  //==================================================================================
+  // Task: Pre-Body
+  //==================================================================================
+  task pre_body();
+    super.pre_body();
+  endtask
+
+  //==================================================================================
+  // Task: Body
+  //==================================================================================
+  task body();
+    super.body();
+    m_seq_item = riscv_sequence_item::type_id::create("m_seq_item");
+
+    // MUL Corner Cases
+    // -------------------------------
+    direct_send('h00100093);  //  li x1, 1
+
+    // li x2, 0x7fffffff (maximum positive number)
+    direct_send('h80000137);
+    direct_send('hFFF10113);
+
+    // li x3, 0xaf3a4c (random positive number)
+    direct_send('h00AF41B7);
+    direct_send('hA4C18193);
+
+    direct_send('h020182B3);  //  mul x5, x3, x0
+    direct_send('h021182B3);  //  mul x5, x3, x1
+    direct_send('h022182B3);  //  mul x5, x3, x2
+  endtask
+
+endclass
+
+
+class riscv_corner_div_sequence extends riscv_init_sequence;
+
+  //==================================================================================
+  // Registeration
+  //==================================================================================
+  `uvm_object_utils(riscv_corner_div_sequence);
+
+  //==================================================================================
+  // Classes Handles
+  //==================================================================================
+  riscv_sequence_item m_seq_item;
+
+  //==================================================================================
+  // Function: Constructor
+  //==================================================================================
+  function new(string name = "riscv_corner_div_sequence");
+    super.new(name);
+  endfunction
+
+  //==================================================================================
+  // Task: Pre-Body
+  //==================================================================================
+  task pre_body();
+    super.pre_body();
+  endtask
+
+  //==================================================================================
+  // Task: Body
+  //==================================================================================
+  task body();
+    super.body();
+    m_seq_item = riscv_sequence_item::type_id::create("m_seq_item");
+
+    // DIV Corner Cases
+    // -------------------------------
+    // li x1, 0xf9a28 (random positive number)
+    direct_send('h000FA0B7);
+    direct_send('hA2808093);
+
+    // li x2, 0x80000000 (maximum negative number)
+    direct_send('h80000137);
+    direct_send('h00010113);
+
+    direct_send('h0200C2B3);  // div x5, x1, x0
+    direct_send('h0200E2B3);  // rem x5, x1, x0
+    direct_send('h0200D2B3);  // divu x5, x1, x0
+    direct_send('h0200F2B3);  // remu, x5, x1, x0
+    direct_send('h023142B3);  // div x5, x2, x3
+    direct_send('h023162B3);  // rem x5, x2, x3
+  endtask
+
+endclass

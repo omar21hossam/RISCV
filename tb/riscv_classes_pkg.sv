@@ -64,6 +64,6 @@ package riscv_classes_pkg;
   `include "riscv_main_driver.svh"
   `include "riscv_main_agent.svh"
   `include "riscv_env.svh"
-  `include "riscv_test.svh"
+  `include "riscv_base_test.svh"
 
 endpackage

@@ -1,9 +1,9 @@
 
-class riscv_test extends uvm_test;
+class riscv_base_test extends uvm_test;
   //==================================================================================
   // Registeration
   //==================================================================================
-  `uvm_component_utils(riscv_test)
+  `uvm_component_utils(riscv_base_test)
 
   //==================================================================================
   // Class Handle
@@ -26,7 +26,7 @@ class riscv_test extends uvm_test;
   //==================================================================================
   // Function: Constructor
   //==================================================================================
-  function new(string name = "riscv_test", uvm_component parent = null);
+  function new(string name = "riscv_base_test", uvm_component parent = null);
     super.new(name, parent);
   endfunction
 
