@@ -23,6 +23,7 @@ module riscv_top_tb ();
   alu_if alu_intf (clk);
   lsu_if lsu_intf (clk);
   fetch_if fetch_intf (clk);
+  reg_if reg_intf (clk);
 
   //==================================================================================
   // DUT Instantiation

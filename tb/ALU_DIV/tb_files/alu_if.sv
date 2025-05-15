@@ -148,7 +148,7 @@ interface alu_if (
   A7_Label:assert property (XOR_t);
   A8_Label:assert property (OR_t);
   A9_Label:assert property (AND_t);
-  A10_Label:assert property (SRA_t)
+  A10_Label:assert property (SRA_t);
   // else begin
   //   $display("SRA_t property is not valid");
   //   $display("the value of inp_a_i is %32b", operand_a_i);

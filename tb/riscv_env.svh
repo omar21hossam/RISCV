@@ -21,6 +21,7 @@ class riscv_env extends uvm_env;
   mul_agent                m_mul_agent;
   lsu_agent                m_lsu_agent;
   alu_agent                m_alu_agent;
+  reg_agent                m_reg_agent;
   riscv_main_agent         m_riscv_main_agent;
   // Coverage Collectors
   //-----------------------------------------------------------------------------------
@@ -35,6 +36,7 @@ class riscv_env extends uvm_env;
   alu_scoreboard           m_alu_scoreboard;
   mul_scoreboard           m_mul_scoreboard;
   fetch_scoreboard         m_fetch_scoreboard;
+  reg_scoreboard           m_reg_scoreboard;
   // Virtual Sequencer
   //-----------------------------------------------------------------------------------
   riscv_virtual_sequencer  m_vseqr;
@@ -45,6 +47,7 @@ class riscv_env extends uvm_env;
   virtual lsu_if           lsu_vif;
   virtual alu_if           alu_vif;
   virtual mul_if           mul_vif;
+  virtual reg_if           reg_vif;
   virtual riscv_if         riscv_vif;
   virtual fetch_if         fetch_vif;
 
@@ -70,6 +73,7 @@ class riscv_env extends uvm_env;
     m_alu_agent = alu_agent::type_id::create("m_alu_agent", this);
     m_mul_agent = mul_agent::type_id::create("m_mul_agent", this);
     m_lsu_agent = lsu_agent::type_id::create("m_lsu_agent", this);
+    m_reg_agent = reg_agent::type_id::create("m_reg_agent", this);
 
 
     // Coverage Collectors
@@ -86,6 +90,8 @@ class riscv_env extends uvm_env;
     m_alu_scoreboard = alu_scoreboard::type_id::create("m_alu_scoreboard", this);
     m_mul_scoreboard = mul_scoreboard::type_id::create("m_mul_scoreboard", this);
     m_fetch_scoreboard = fetch_scoreboard::type_id::create("m_fetch_scoreboard", this);
+    m_reg_scoreboard = reg_scoreboard::type_id::create("m_reg_scoreboard", this);
+
 
     // Virtual Sequencer
     //------------------------------------------
@@ -131,7 +137,7 @@ class riscv_env extends uvm_env;
     end else begin
       uvm_config_db#(virtual fetch_if)::set(this, "m_fetch_agent", "fetch_intf", fetch_vif);
     end
-    // ALU Inteface
+    // ALU Interface
     //------------------------------------------
     if (!uvm_config_db#(virtual alu_if)::get(this, "", "alu_intf", alu_vif)) begin
       `uvm_fatal(get_full_name(), "Failed to get configuration for alu_if");
@@ -139,7 +145,7 @@ class riscv_env extends uvm_env;
       uvm_config_db#(virtual alu_if)::set(this, "m_alu_agent", "alu_intf", alu_vif);
     end
 
-    // MUL Inteface
+    // MUL Interface
     //------------------------------------------
     if (!uvm_config_db#(virtual mul_if)::get(this, "", "mul_intf", mul_vif)) begin
       `uvm_fatal("NO_CONFIG", {"Config not found for ", get_full_name(), ".mul_intf"});
@@ -147,12 +153,19 @@ class riscv_env extends uvm_env;
       uvm_config_db#(virtual mul_if)::set(this, "m_mul_agent", "mul_intf", mul_vif);
     end
 
-    // LSU Inteface
+    // LSU Interface
     //------------------------------------------
     if (!uvm_config_db#(virtual lsu_if)::get(this, "", "lsu_intf", lsu_vif)) begin
       `uvm_fatal(get_name(), "Failed to get configuration for lsu_if");
     end else begin
       uvm_config_db#(virtual lsu_if)::set(this, "m_lsu_agent", "lsu_intf", lsu_vif);
+    end
+    // register Interface
+    //------------------------------------------
+    if (!uvm_config_db#(virtual reg_if)::get(this, "", "reg_intf", reg_vif)) begin
+      `uvm_fatal(get_name(), "Failed to get configuration for reg_if");
+    end else begin
+      uvm_config_db#(virtual reg_if)::set(this, "m_reg_agent", "reg_intf", reg_vif);
     end
   endfunction
 
@@ -181,6 +194,11 @@ class riscv_env extends uvm_env;
     //------------------------------------------
     m_lsu_agent.m_monitor.analysis_port.connect(m_lsu_scoreboard.analysis_fifo.analysis_export);
     m_lsu_agent.m_monitor.analysis_port.connect(m_lsu_cov_collector.analysis_export);
+    
+    // REG
+    //------------------------------------------
+    m_reg_agent.m_monitor.ap.connect(m_reg_scoreboard.sc_a_imp);
+
 
     // Virtual Sequencers Connections
     //-----------------------------------------------------------------------------------

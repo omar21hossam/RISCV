@@ -1,4 +1,4 @@
-class register_RAL  extends uvm_reg
+class register_RAL  extends uvm_reg;
   `uvm_object_utils(register_RAL)
 
   // Register fields
