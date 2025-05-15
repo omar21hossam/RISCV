@@ -14,7 +14,7 @@ class reg_sequence_item extends uvm_sequence_item;
    logic [5:0] regfile_alu_waddr_fw_o;
    logic [31:0] alu_result;
    logic [31:0] mult_result;
-   logic ex_ready_0;
+   logic ex_ready_o;
   // LSU interface
    logic [5:0] regfile_waddr_wb_o;
    logic regfile_we_wb_o;
