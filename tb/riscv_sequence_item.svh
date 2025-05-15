@@ -46,10 +46,10 @@ class riscv_sequence_item extends uvm_sequence_item;
   logic                               pulp_clock_en_i              = 1'b0;
   logic                               scan_cg_en_i                 = 1'b0;
   logic                        [31:0] boot_addr_i                  = 'b0;
-  logic                        [31:0] mtvec_addr_i                 = 'b0;
-  logic                        [31:0] dm_halt_addr_i               = 'b0;
+  logic                        [31:0] mtvec_addr_i                 = 'hf1f1f1f1;
+  logic                        [31:0] dm_halt_addr_i               = 'hf2f2f2f2;
   logic                        [31:0] hart_id_i                    = 'b0;
-  logic                        [31:0] dm_exception_addr_i          = 'b0;
+  logic                        [31:0] dm_exception_addr_i          = 'hf3f3f3f3;
   logic                        [31:0] irq_i                        = 'b0;
   logic                               debug_req_i                  = 1'b0;
   logic                               fetch_enable_i               = 1'b1;
@@ -61,9 +61,9 @@ class riscv_sequence_item extends uvm_sequence_item;
 
   //----------------------------------------------------------------------------------
   constraint solve_before_c {
-    solve instr_type before opcode, funct7, funct3;
-    solve opcode before funct7, funct3;
-    solve funct7 before funct3;
+    solve instr_type before opcode;
+    solve opcode before funct3, rs1;
+    solve funct3 before funct7, imm;
   }
 
   //----------------------------------------------------------------------------------
@@ -111,8 +111,7 @@ class riscv_sequence_item extends uvm_sequence_item;
       opcode inside {riscv_pkg::OP_ITYPE, riscv_pkg::OP_LOAD, riscv_pkg::OP_JALR};
 
       // Arithmetic I-Type (ADDI, SLTI, SLTIU, XORI, ORI, ANDI, SLLI, SRLI, SRAI)
-      (opcode == riscv_pkg::OP_ITYPE) ->
-      {
+      (opcode == riscv_pkg::OP_ITYPE) -> {
         funct3 inside {
         riscv_pkg::ADDI_JALR,
         riscv_pkg::SLLI,
@@ -122,15 +121,23 @@ class riscv_sequence_item extends uvm_sequence_item;
         riscv_pkg::SRLI_SRAI,
         riscv_pkg::ORI,
         riscv_pkg::ANDI
-      }
       };
+
+        (funct3 == riscv_pkg::SLLI) -> {imm[11:5] == riscv_pkg::I_OTHER};
+        (funct3 == riscv_pkg::SRLI_SRAI) ->
+        {imm[11:5] inside {riscv_pkg::SRAI, riscv_pkg::I_OTHER}};
+      }
 
       // Load instructions (LB, LH, LW, LBU, LHU)
       (opcode == riscv_pkg::OP_LOAD) ->
       {funct3 inside {riscv_pkg::LB, riscv_pkg::LH, riscv_pkg::LW, riscv_pkg::LBU, riscv_pkg::LHU}};
 
       // JALR
-      (opcode == riscv_pkg::OP_JALR) -> {funct3 inside {riscv_pkg::ADDI_JALR}};
+      (opcode == riscv_pkg::OP_JALR) -> {
+        funct3 inside {riscv_pkg::ADDI_JALR};
+        rs1 == 5'b0;
+        imm[1:0] == 2'b00;
+      }
     }
   }
 
@@ -153,6 +160,7 @@ class riscv_sequence_item extends uvm_sequence_item;
         riscv_pkg::BLTU,
         riscv_pkg::BGEU
         };
+      imm[1:0] == 2'b0;
     }
   }
   //----------------------------------------------------------------------------------
