@@ -7,12 +7,12 @@ class register_RAL  extends uvm_reg;
   // Constructor
   function new(string name = "register_RAL");
     super.new(name, 32, UVM_NO_COVERAGE);
-    field1 = uvm_reg_field::type_id::create("field1", this);
+    field1 = uvm_reg_field::type_id::create("field1");
   endfunction
 
   // Build phase
   function void build();
-    super.build();
+    
     field1.configure(this, 32, 0, "RW", 0, 32'b0, 1, 1, 1);
   endfunction
   endclass
@@ -26,12 +26,12 @@ class register_RAL  extends uvm_reg;
   // Constructor
   function new(string name = "PC_reg");
     super.new(name, 32, UVM_NO_COVERAGE);
-    field1 = uvm_reg_field::type_id::create("field1", this);
+    field1 = uvm_reg_field::type_id::create("field1");
   endfunction
 
   // Build phase
   function void build();
-    super.build();
+    
     field1.configure(this, 32, 0, "RW", 0, 32'b0, 1, 1, 1);
   endfunction
   endclass
