@@ -91,13 +91,13 @@ assign mul_intf.mulh_active_o         = `MUL_PATH.mulh_active_o;
 
 // Register file interface
 // ---------------------------------------------------------------------
-assign regfile_intf.rst_n             = `REGFILE_PATH.rst_n;
-assign regfile_intf.alu_en_i          = `REGFILE_PATH.alu_en_i; 
-assign regfile_intf.mult_en_i         = `REGFILE_PATH.mult_en_i;    
-assign regfile_intf.regfile_alu_waddr_fw_o = `REGFILE_PATH.regfile_alu_waddr_fw_o;
-assign regfile_intf.alu_result       = `REGFILE_PATH.alu_result;    
-assign regfile_intf.mult_result       = `REGFILE_PATH.mult_result;
-assign regfile_intf.ex_ready_0      = `REGFILE_PATH.ex_ready_0;
-assign regfile_intf.regfile_waddr_wb_o = `REGFILE_PATH.regfile_waddr_wb_o;
-assign regfile_intf.regfile_we_wb_o   = `REGFILE_PATH.regfile_we_wb_o;
-assign regfile_intf.regfile_wdata_wb_o = `REGFILE_PATH.regfile_wdata_wb_o;
+assign reg_intf.rst_n                   = `REGFILE_PATH.rst_n;
+assign reg_intf.alu_en_i                = `REGFILE_PATH.alu_en_i; 
+assign reg_intf.mult_en_i               = `REGFILE_PATH.mult_en_i;    
+assign reg_intf.regfile_alu_waddr_fw_o  = `REGFILE_PATH.regfile_alu_waddr_fw_o;
+assign reg_intf.alu_result              = `REGFILE_PATH.alu_result;    
+assign reg_intf.mult_result             = `REGFILE_PATH.mult_result;
+assign reg_intf.ex_ready_o              = `REGFILE_PATH.ex_ready_o;
+assign reg_intf.regfile_waddr_wb_o      = `REGFILE_PATH.regfile_waddr_wb_o;
+assign reg_intf.regfile_we_wb_o         = `REGFILE_PATH.regfile_we_wb_o;
+assign reg_intf.regfile_wdata_wb_o      = `REGFILE_PATH.regfile_wdata_wb_o;
