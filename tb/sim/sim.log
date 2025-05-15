@@ -1,21 +1,19 @@
 # vsim -wlf riscv.wlf -logfile sim.log -c -coverage -assertdebug -voptargs="+acc" work.riscv_top_tb -do "coverage save -onexit  riscv.ucdb; run -all; coverage save riscv.ucdb" 
-# Start time: 19:47:27 on May 11,2025
-# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
-# ** Warning: ../riscv_sequence_item.svh(195): (vopt-2240) Treating stand-alone use of function 'pack_instruction' as an implicit VOID cast.
-# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Start time: 21:19:46 on May 15,2025
+# ** Note: (vsim-8009) Loading existing optimized design _opt2
 # //  Questa Sim-64
-# //  Version 2021.1 win64 Jan 19 2021
+# //  Version 2024.1 win64 Feb  1 2024
 # //
-# //  Copyright 1991-2021 Mentor Graphics Corporation
-# //  All Rights Reserved.
+# // Unpublished work. Copyright 2024 Siemens
 # //
-# //  QuestaSim and its associated documentation contain trade
-# //  secrets and commercial or financial information that are the property of
-# //  Mentor Graphics Corporation and are privileged, confidential,
-# //  and exempt from disclosure under the Freedom of Information Act,
-# //  5 U.S.C. Section 552. Furthermore, this information
-# //  is prohibited from disclosure under the Trade Secrets Act,
-# //  18 U.S.C. Section 1905.
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
 # //
 # Loading sv_std.std
 # Loading work.alu_if(fast)
@@ -77,8 +75,7 @@
 # ** Warning: (vsim-3838) Variable '/riscv_top_tb/alu_intf/enable_i' written by continuous and procedural assignments. 
 # One of the assignments is implicit. See ../ALU_DIV/tb_files/alu_if.sv(10).
 #    Time: 0 ps  Iteration: 0  Instance: /riscv_top_tb File: ../riscv_assign.svh Line: 31
-# Loading O:/Programming/Quartus/uvm-1.1d\win64\uvm_dpi.dll
-# ** Warning: (vsim-8634) Code was not compiled with coverage options.
+# Loading C:/questasim64_2024.1/uvm-1.1d\win64\uvm_dpi.dll
 # coverage save -onexit  riscv.ucdb
 #  run -all
 # ----------------------------------------------------------------
@@ -103,32 +100,42 @@
 # 
 # UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(277) @ 0: reporter [Questa UVM] QUESTA_UVM-1.2.3
 # UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(278) @ 0: reporter [Questa UVM]  questa_uvm::init(+struct)
-# UVM_INFO @ 0: reporter [RNTST] Running test riscv_test...
+# UVM_INFO @ 0: reporter [RNTST] Running test riscv_base_test...
 # Starting simulation
-# UVM_INFO verilog_src/uvm-1.1d/src/base/uvm_objection.svh(1267) @ 5363550000: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
-# UVM_INFO ../mul/mul_scoreboard.svh(122) @ 5363550000: uvm_test_top.m_env.m_mul_scoreboard [uvm_test_top.m_env.m_mul_scoreboard] Scoreboard: Passed cases: 754
-# UVM_INFO ../mul/mul_scoreboard.svh(123) @ 5363550000: uvm_test_top.m_env.m_mul_scoreboard [uvm_test_top.m_env.m_mul_scoreboard] Scoreboard: Failed cases: 0
-# UVM_INFO ../ALU_DIV/tb_files/alu_scoreboard.svh(345) @ 5363550000: uvm_test_top.m_env.m_alu_scoreboard [uvm_test_top.m_env.m_alu_scoreboard] Scoreboard: Passed cases: 4703
-# UVM_INFO ../ALU_DIV/tb_files/alu_scoreboard.svh(346) @ 5363550000: uvm_test_top.m_env.m_alu_scoreboard [uvm_test_top.m_env.m_alu_scoreboard] Scoreboard: Failed cases: 0
-# UVM_INFO ../lsu/lsu_scoreboard.svh(157) @ 5363550000: uvm_test_top.m_env.m_lsu_scoreboard [m_lsu_scoreboard] Success Count: 2000
-# UVM_INFO ../lsu/lsu_scoreboard.svh(158) @ 5363550000: uvm_test_top.m_env.m_lsu_scoreboard [m_lsu_scoreboard] Failure Count: 0
+# UVM_WARNING @ 0: uvm_test_top.m_env.m_vseqr@@m_vsequence_base [uvm_sequence_base] Body definition undefined
+# UVM_INFO verilog_src/uvm-1.1d/src/base/uvm_objection.svh(1267) @ 19050000: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+# UVM_INFO ../mul/mul_scoreboard.svh(118) @ 19050000: uvm_test_top.m_env.m_mul_scoreboard [uvm_test_top.m_env.m_mul_scoreboard] Scoreboard: Passed cases: 0
+# UVM_INFO ../mul/mul_scoreboard.svh(119) @ 19050000: uvm_test_top.m_env.m_mul_scoreboard [uvm_test_top.m_env.m_mul_scoreboard] Scoreboard: Failed cases: 0
+# UVM_INFO ../ALU_DIV/tb_files/alu_scoreboard.svh(345) @ 19050000: uvm_test_top.m_env.m_alu_scoreboard [uvm_test_top.m_env.m_alu_scoreboard] Scoreboard: Passed cases: 61
+# UVM_INFO ../ALU_DIV/tb_files/alu_scoreboard.svh(346) @ 19050000: uvm_test_top.m_env.m_alu_scoreboard [uvm_test_top.m_env.m_alu_scoreboard] Scoreboard: Failed cases: 0
+# UVM_INFO ../lsu/lsu_coverage_collector.svh(167) @ 19050000: uvm_test_top.m_env.m_lsu_cov_collector [lsu_coverage_collector] Coverage Input: 0.00%
+# UVM_INFO ../lsu/lsu_coverage_collector.svh(169) @ 19050000: uvm_test_top.m_env.m_lsu_cov_collector [lsu_coverage_collector] Coverage Output: 0.00%
+# UVM_INFO ../lsu/lsu_scoreboard.svh(157) @ 19050000: uvm_test_top.m_env.m_lsu_scoreboard [m_lsu_scoreboard] Success Count: 0
+# UVM_INFO ../lsu/lsu_scoreboard.svh(158) @ 19050000: uvm_test_top.m_env.m_lsu_scoreboard [m_lsu_scoreboard] Failure Count: 0
+# UVM_INFO ../mul/mul_coverage_collector.svh(116) @ 19050000: uvm_test_top.m_env.m_mul_cov_collector [mul_coverage_collector] Coverage Input: 0.00%
+# UVM_INFO ../mul/mul_coverage_collector.svh(117) @ 19050000: uvm_test_top.m_env.m_mul_cov_collector [mul_coverage_collector] Coverage Output: 0.00%
+# UVM_INFO ../prefetch/fetch_scoreboard.svh(151) @ 19050000: uvm_test_top.m_env.m_fetch_scoreboard [SCOREBOARD] Final Results: 121 passed, 0 failed , inputs 62 , outputs 61
 # 
 # --- UVM Report Summary ---
 # 
 # ** Report counts by severity
-# UVM_INFO :   10
-# UVM_WARNING :    0
+# UVM_INFO :   15
+# UVM_WARNING :    1
 # UVM_ERROR :    0
 # UVM_FATAL :    0
 # ** Report counts by id
 # [Questa UVM]     2
 # [RNTST]     1
+# [SCOREBOARD]     1
 # [TEST_DONE]     1
+# [lsu_coverage_collector]     2
 # [m_lsu_scoreboard]     2
+# [mul_coverage_collector]     2
+# [uvm_sequence_base]     1
 # [uvm_test_top.m_env.m_alu_scoreboard]     2
 # [uvm_test_top.m_env.m_mul_scoreboard]     2
-# ** Note: $finish    : O:/Programming/Quartus/win64/../verilog_src/uvm-1.1d/src/base/uvm_root.svh(430)
-#    Time: 5363550 ns  Iteration: 53  Instance: /riscv_top_tb
+# ** Note: $finish    : C:/questasim64_2024.1/win64/../verilog_src/uvm-1.1d/src/base/uvm_root.svh(430)
+#    Time: 19050 ns  Iteration: 69  Instance: /riscv_top_tb
 # Saving coverage database on exit...
-# End time: 19:47:34 on May 11,2025, Elapsed time: 0:00:07
-# Errors: 0, Warnings: 7
+# End time: 21:19:52 on May 15,2025, Elapsed time: 0:00:06
+# Errors: 0, Warnings: 5
