@@ -103,6 +103,10 @@ module riscv_top_tb ();
     // ---------------------------------------------------------------------
     uvm_config_db#(virtual lsu_if)::set(null, "uvm_test_top", "lsu_intf", lsu_intf);
 
+    // Register file configuration setup
+    // ---------------------------------------------------------------------
+    uvm_config_db#(virtual reg_if)::set(null, "uvm_test_top", "reg_intf", reg_intf);
+
     // Run the testbench with the specified test
     // ---------------------------------------------------------------------
     run_test("riscv_test");
