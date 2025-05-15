@@ -172,7 +172,7 @@ class riscv_env extends uvm_env;
     // ALU
     //------------------------------------------
     m_alu_agent.m_monitor.analysis_port.connect(m_alu_scoreboard.sc_analysis_imp);
-    m_alu_agent.m_monitor.analysis_port.connect(m_alu_cov_collector.alu_mon2cov);
+    m_alu_agent.m_monitor.analysis_port.connect(m_alu_cov_collector.analysis_export);
 
     // MUL
     //------------------------------------------

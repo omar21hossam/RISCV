@@ -191,6 +191,7 @@ class riscv_corner_alu_sequence extends riscv_init_sequence;
     direct_send('h01900193);  // li x3, 25 (some positive number)
     direct_send('hFCF00213);  // li x4, -49 (some negative number)
     direct_send('h001082B3);  // add x5, x1, x1
+    direct_send('h002102b3);  // add x5, x2, x2
     direct_send('h003082B3);  // add x5, x1, x3
     direct_send('h004102B3);  // add x5, x2, x4
     direct_send('h002082B3);  // add x5, x1, x2
