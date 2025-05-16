@@ -28,25 +28,34 @@ class reg_monitor extends uvm_monitor;
     // Create sequence item
     seq_item = reg_sequence_item::type_id::create("seq_item");
   endfunction
-
+  int transaction_cnt;
   // Run phase
   virtual task run_phase(uvm_phase phase);
     super.run_phase(phase);
-    @(posedge reg_intf.ex_ready_o or posedge reg_intf.regfile_we_wb_o) #1step;
-    // Sample the Ex stage signals
-    seq_item.rst_n                  = reg_intf.rst_n;
-    seq_item.alu_en_i               = reg_intf.alu_en_i;
-    seq_item.mult_en_i              = reg_intf.mult_en_i;
-    seq_item.regfile_alu_waddr_fw_o = reg_intf.regfile_alu_waddr_fw_o; 
-    seq_item.alu_result             = reg_intf.alu_result;
-    seq_item.mult_result            = reg_intf.mult_result;
-    seq_item.ex_ready_o             = reg_intf.ex_ready_o;
-    // Sample the LSU signals
-    seq_item.regfile_waddr_wb_o     = reg_intf.regfile_waddr_wb_o;
-    seq_item.regfile_we_wb_o        = reg_intf.regfile_we_wb_o;
-    seq_item.regfile_wdata_wb_o     = reg_intf.regfile_wdata_wb_o;    
-    // Send the sequence item to the analysis port
-    ap.write(seq_item);
+    forever begin      
+    //   @(posedge reg_intf.alu_en_i or posedge reg_intf.mult_en_i or posedge reg_intf.regfile_we_wb_o) #1step;
+    //  @(negegde reg_intf.regfile_alu_we_fw_o or negedge reg_intf.regfile_we_wb_o) #1step;
+     @(posedge reg_intf.ex_valid_o or posedge reg_intf.regfile_we_wb_o) #1step;
+     // Sample the Ex stage signals
+     seq_item.rst_n                  = reg_intf.rst_n;
+     seq_item.alu_en_i               = reg_intf.alu_en_i;
+     seq_item.mult_en_i              = reg_intf.mult_en_i;
+     seq_item.regfile_alu_waddr_fw_o = reg_intf.regfile_alu_waddr_fw_o; 
+     seq_item.ex_valid_o             = reg_intf.ex_valid_o;
+     seq_item.alu_result             = reg_intf.alu_result;
+     seq_item.mult_result            = reg_intf.mult_result;
+     // Sample the LSU signals
+     seq_item.regfile_waddr_wb_o     = reg_intf.regfile_waddr_wb_o;
+     seq_item.regfile_we_wb_o        = reg_intf.regfile_we_wb_o;
+     seq_item.regfile_wdata_wb_o     = reg_intf.regfile_wdata_wb_o;   
+     // Sampling the results 
+     @(negedge reg_intf.ex_valid_o or negedge reg_intf.regfile_we_wb_o) #1step;
+     // Send the sequence item to the analysis port
+     ap.write(seq_item);
+     `uvm_info(get_full_name(), $sformatf("rstn: %0b,alu_en: %0b,mult_en: %0b,regfile_alu_waddr_fw_o: %0h,alu_result: %0h,mult_result: %0h,ex_valid_o: %0b,regfile_waddr_wb_o: %0h,regfile_we_wb_o: %0b,regfile_wdata_wb_o: %0h",
+       seq_item.rst_n, seq_item.alu_en_i, seq_item.mult_en_i, seq_item.regfile_alu_waddr_fw_o, seq_item.alu_result, seq_item.mult_result, seq_item.ex_valid_o,
+       seq_item.regfile_waddr_wb_o, seq_item.regfile_we_wb_o, seq_item.regfile_wdata_wb_o), UVM_NONE);
+    end
   endtask
   endclass
 

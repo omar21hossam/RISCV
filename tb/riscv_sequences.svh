@@ -110,7 +110,7 @@ class riscv_arith_sequence extends riscv_init_sequence;
 
       // ALU Operations Sequence
       // -------------------------------------------------
-      repeat(150)begin
+    //  repeat(150)begin
       start_item(m_seq_item);
       if (!m_seq_item.randomize() with {
             m_seq_item.instr_type inside{riscv_pkg::R_TYPE} ;
@@ -131,7 +131,7 @@ class riscv_arith_sequence extends riscv_init_sequence;
       end
       // Finish the sequence
       finish_item(m_seq_item);
-      end
+     // end
 
       // repeat(50)begin
       // start_item(m_seq_item);

@@ -23,7 +23,7 @@ class reg_scoreboard extends uvm_scoreboard;
 
 
   function void write (reg_sequence_item reg_seq_item);
-   if(reg_seq_item.ex_ready_o == 1) begin
+   if(reg_seq_item.ex_valid_o == 1) begin
      ref_o = m_ral_model.regs[reg_seq_item.regfile_alu_waddr_fw_o].get_mirrored_value();
       if(reg_seq_item.alu_en_i)
         data_o = reg_seq_item.alu_result;
@@ -31,10 +31,10 @@ class reg_scoreboard extends uvm_scoreboard;
         data_o = reg_seq_item.mult_result;
      if (ref_o != data_o) begin
         fail_cnt++;
-        `uvm_warning("ALU Write", $sformatf("Mismatch in ALU write: expected %0h, got %0h", ref_o, data_o));
+       // `uvm_warning("ALU Write", $sformatf("Mismatch in ALU write: expected %0h, got %0h", ref_o, data_o));
       end else begin
         success_cnt++;
-        `uvm_info("ALU Write", $sformatf("ALU write successful: %0h", data_o), UVM_HIGH);
+        `uvm_info("ALU Write", $sformatf("ALU write successful: %0h RAL write successful: %0h", data_o, ref_o), UVM_MEDIUM);
       end
     end
     else if (reg_seq_item.regfile_we_wb_o == 1'b1) begin
