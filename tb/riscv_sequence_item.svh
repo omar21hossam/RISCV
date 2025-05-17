@@ -173,6 +173,7 @@ class riscv_sequence_item extends uvm_sequence_item;
   //----------------------------------------------------------------------------------
   constraint j_type_c {
     instr_type == riscv_pkg::J_TYPE -> opcode inside {riscv_pkg::OP_JAL};
+   
     imm[1:0] == 2'b0;
   }
 

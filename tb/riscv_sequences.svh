@@ -122,6 +122,8 @@ class riscv_rand_sequence extends riscv_init_sequence;
   //==================================================================================
   task body();
     m_seq_item = riscv_sequence_item::type_id::create("m_seq_item");
+
+
     repeat (riscv_pkg::SEQUENCES) begin
 
       // Randomize All RV32IM Instructions Sequence

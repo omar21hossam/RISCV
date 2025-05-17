@@ -8,6 +8,7 @@
 
 // Prefetch interface
 // ---------------------------------------------------------------------
+assign fetch_intf.rst_n               = `IF_PATH.rst_n;
 assign fetch_intf.instr_req_o         = `IF_PATH.instr_req_o;
 assign fetch_intf.instr_addr_o        = `IF_PATH.instr_addr_o;
 assign fetch_intf.instr_valid_id_o    = `IF_PATH.instr_valid_id_o;

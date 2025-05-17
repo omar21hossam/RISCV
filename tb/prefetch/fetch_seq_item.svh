@@ -7,6 +7,7 @@ class fetch_seq_item extends uvm_sequence_item;
     super.new(name);
 
   endfunction
+  logic   rst_n;
   logic   instr_req_o   ;
   logic   [31:0] instr_addr_o   ;
   logic   instr_gnt_i   ;
@@ -24,3 +25,4 @@ class fetch_seq_item extends uvm_sequence_item;
   logic  [31:0] instr_rdata_id_o;
 
 endclass : fetch_seq_item
+
