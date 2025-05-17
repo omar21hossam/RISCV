@@ -8,3 +8,9 @@
 *.mpf
 *.mti
 /tb/sim/coverage_report
+tb/sim/cv32e40p_uvm.cr.mti
+tb/sim/cv32e40p_uvm.mpf
+tb/sim/riscv_direct_test.ucdb
+tb/sim/riscv_merged.ucdb
+tb/sim/riscv_rand_test.ucdb
+tb/sim/wave.do
