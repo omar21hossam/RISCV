@@ -19,6 +19,8 @@ class reg_sequence_item extends uvm_sequence_item;
    logic [5:0] regfile_waddr_wb_o;
    logic regfile_we_wb_o;
    logic [31:0] regfile_wdata_wb_o;
+   // OUTPUT Reference signals
+   logic [31:0] ref_o;
 
   
 
