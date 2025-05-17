@@ -3,7 +3,7 @@ class reg_scoreboard extends uvm_scoreboard;
 
  uvm_analysis_imp #(reg_sequence_item, reg_scoreboard) sc_a_imp;
  ral_model m_ral_model;
- logic [31:0] ref_o,data_o;
+ logic [31:0] data_o;
  int success_cnt,fail_cnt;
   // Constructor
   function new(string name = "reg_scoreboard", uvm_component parent = null);
@@ -20,34 +20,27 @@ class reg_scoreboard extends uvm_scoreboard;
       `uvm_fatal(get_full_name(), "Failed to get configuration for RAL model");
     end
   endfunction
+  
 
 
   function void write (reg_sequence_item reg_seq_item);
-   if(reg_seq_item.ex_valid_o == 1) begin
-     ref_o = m_ral_model.regs[reg_seq_item.regfile_alu_waddr_fw_o].get_mirrored_value();
-      if(reg_seq_item.alu_en_i)
+      if(reg_seq_item.alu_en_i) begin
         data_o = reg_seq_item.alu_result;
-      else if (reg_seq_item.mult_en_i)
+      end
+      else if (reg_seq_item.mult_en_i) begin
         data_o = reg_seq_item.mult_result;
-     if (ref_o != data_o) begin
-        fail_cnt++;
-       // `uvm_warning("ALU Write", $sformatf("Mismatch in ALU write: expected %0h, got %0h", ref_o, data_o));
-      end else begin
-        success_cnt++;
-        `uvm_info("ALU Write", $sformatf("ALU write successful: %0h RAL write successful: %0h", data_o, ref_o), UVM_MEDIUM);
       end
-    end
     else if (reg_seq_item.regfile_we_wb_o == 1'b1) begin
-      ref_o = m_ral_model.regs[reg_seq_item.regfile_waddr_wb_o].get_mirrored_value();
       data_o = reg_seq_item.regfile_wdata_wb_o;
-      if (ref_o != data_o) begin
+    end
+     if (reg_seq_item.ref_o != data_o) begin
         fail_cnt++;
-        `uvm_warning("Regfile Write", $sformatf("Mismatch in Regfile write: expected %0h, got %0h", ref_o, data_o));
+        `uvm_warning("ALU Write", $sformatf("Mismatch in ALU write: in REGFILE %0h, RESULT %0h", reg_seq_item.ref_o, data_o));
       end else begin
         success_cnt++;
-        `uvm_info("Regfile Write", $sformatf("Regfile write successful: %0h", data_o), UVM_HIGH);
+        `uvm_info("ALU Write", $sformatf("ALU write successful: %0h RAL write successful: %0h", data_o, reg_seq_item.ref_o), UVM_MEDIUM);
       end
-    end
+      
     endfunction
 
     function void extract_phase(uvm_phase phase);
