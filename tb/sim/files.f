@@ -36,6 +36,7 @@
 ../mul/mul_interface.sv
 ../riscv_if.sv
 ../prefetch/fetch_if.sv
+../RAL/reg_if.sv
 //===================================================
 //packages
 ../riscv_classes_pkg.sv

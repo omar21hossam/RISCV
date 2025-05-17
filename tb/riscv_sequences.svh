@@ -134,6 +134,80 @@ class riscv_rand_sequence extends riscv_init_sequence;
       end
       // Finish the sequence
       finish_item(m_seq_item);
+
+      // MUL Sequence
+      // -------------------------------------------------
+      // Start the arithmetic sequence
+      start_item(m_seq_item);
+      if (!m_seq_item.randomize() with {
+            m_seq_item.instr_type == riscv_pkg::R_TYPE;
+            m_seq_item.opcode == riscv_pkg::OP_RTYPE;
+            m_seq_item.funct3 inside {riscv_pkg::MUL, riscv_pkg::MULH, riscv_pkg::MULHSU, riscv_pkg::MULHU};
+            m_seq_item.funct7 == riscv_pkg::M_FUNCT7;
+          }) begin
+        `uvm_fatal(get_name(), "Failed to randomize mul sequence item");
+      end
+      // Finish the sequence
+      finish_item(m_seq_item);
+
+      // DIV Sequence
+      // -------------------------------------------------
+      // Start the arithmetic sequence
+      start_item(m_seq_item);
+      if (!m_seq_item.randomize() with {
+            m_seq_item.instr_type == riscv_pkg::R_TYPE;
+            m_seq_item.opcode == riscv_pkg::OP_RTYPE;
+            m_seq_item.funct3 inside {riscv_pkg::DIV,
+            riscv_pkg::DIVU,
+            riscv_pkg::REM,
+            riscv_pkg::REMU};
+            m_seq_item.funct7 == riscv_pkg::M_FUNCT7;
+          }) begin
+        `uvm_fatal(get_name(), "Failed to randomize div sequence item");
+      end
+      // Finish the sequence
+      finish_item(m_seq_item);
+
+      // Load Sequence
+      // -------------------------------------------------
+      // Start the arithmetic sequence
+      start_item(m_seq_item);
+      if (!m_seq_item.randomize() with {
+            m_seq_item.instr_type inside {riscv_pkg::I_TYPE};
+            m_seq_item.opcode inside {riscv_pkg::OP_LOAD};
+            m_seq_item.funct3 inside {riscv_pkg::LB, riscv_pkg::LH, riscv_pkg::LW, riscv_pkg::LBU, riscv_pkg::LHU};
+          }) begin
+        `uvm_fatal(get_name(), "Failed to randomize load sequence item");
+      end
+      // Finish the sequence
+      finish_item(m_seq_item);
+
+      // Store Sequence
+      // -------------------------------------------------
+      // Start the arithmetic sequence
+      start_item(m_seq_item);
+      if (!m_seq_item.randomize() with {
+            m_seq_item.instr_type inside {riscv_pkg::S_TYPE};
+            m_seq_item.opcode inside {riscv_pkg::OP_STORE};
+            m_seq_item.funct3 inside {riscv_pkg::SB, riscv_pkg::SH, riscv_pkg::SW};
+          }) begin
+        `uvm_fatal(get_name(), "Failed to randomize store sequence item");
+      end
+       // Finish the sequence
+       finish_item(m_seq_item);
+
+
+      // // Jump Sequence
+      // // -------------------------------------------------
+      // // Start the arithmetic sequence
+      // start_item(m_seq_item);
+      // if (!m_seq_item.randomize() with {
+      //       m_seq_item.instr_type inside {riscv_pkg::J_TYPE};
+      //     }) begin
+      //   `uvm_fatal(get_name(), "Failed to randomize jump sequence item");
+      // end
+      // // Finish the sequence
+      // finish_item(m_seq_item);
     end
   endtask
 

@@ -5,6 +5,7 @@
 `define LSU_PATH DUT.core_i.load_store_unit_i
 `define ALU_PATH DUT.core_i.ex_stage_i.alu_i
 `define IF_PATH DUT.core_i.if_stage_i
+`define REGFILE_PATH DUT.core_i.ex_stage_i
 
 // Prefetch interface
 // ---------------------------------------------------------------------
@@ -88,3 +89,18 @@ assign mul_intf.result_o              = `MUL_PATH.result_o;
 assign mul_intf.multicycle_o          = `MUL_PATH.multicycle_o;
 assign mul_intf.ready_o               = `MUL_PATH.ready_o;
 assign mul_intf.mulh_active_o         = `MUL_PATH.mulh_active_o;
+
+// Register file interface
+// ---------------------------------------------------------------------
+assign reg_intf.rst_n                   = `REGFILE_PATH.rst_n;
+assign reg_intf.alu_en_i                = `REGFILE_PATH.alu_en_i; 
+assign reg_intf.mult_en_i               = `REGFILE_PATH.mult_en_i;    
+assign reg_intf.regfile_alu_waddr_fw_o  = `REGFILE_PATH.regfile_alu_waddr_fw_o;
+assign reg_intf.regfile_alu_we_fw_o    = `REGFILE_PATH.regfile_alu_we_fw_o;
+assign reg_intf.alu_result              = `REGFILE_PATH.alu_result;    
+assign reg_intf.mult_result             = `REGFILE_PATH.mult_result;
+assign reg_intf.ex_valid_o              = `REGFILE_PATH.ex_valid_o;
+assign reg_intf.regfile_waddr_wb_o      = `REGFILE_PATH.regfile_waddr_wb_o;
+assign reg_intf.data_misaligned_ex_i    = `REGFILE_PATH.data_misaligned_ex_i;
+assign reg_intf.data_rvalid_i           = `REGFILE_PATH.data_rvalid_i;
+assign reg_intf.regfile_wdata_wb_o      = `REGFILE_PATH.regfile_wdata_wb_o;
