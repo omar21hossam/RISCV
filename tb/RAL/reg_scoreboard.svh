@@ -24,21 +24,35 @@ class reg_scoreboard extends uvm_scoreboard;
 
 
   function void write (reg_sequence_item reg_seq_item);
-      if(reg_seq_item.alu_en_i) begin
-        data_o = reg_seq_item.alu_result;
+      
+    if (reg_seq_item.data_rvalid_i == 1'b1) begin
+      data_o = reg_seq_item.regfile_wdata_wb_o;
+      if (reg_seq_item.regfile_waddr_wb_o == 6'h0) begin
+        data_o = 32'h0;
       end
+    end
       else if (reg_seq_item.mult_en_i) begin
         data_o = reg_seq_item.mult_result;
+        if (reg_seq_item.regfile_alu_waddr_fw_o == 6'h0) begin
+          data_o = 32'h0;
+        end
       end
-    else if (reg_seq_item.regfile_we_wb_o == 1'b1) begin
-      data_o = reg_seq_item.regfile_wdata_wb_o;
-    end
+  
+    else if(reg_seq_item.alu_en_i) begin
+        data_o = reg_seq_item.alu_result;
+        if (reg_seq_item.regfile_alu_waddr_fw_o == 6'h0) begin
+          data_o = 32'h0;
+        end
+      end
      if (reg_seq_item.ref_o != data_o) begin
         fail_cnt++;
-        `uvm_warning("ALU Write", $sformatf("Mismatch in ALU write: in REGFILE %0h, RESULT %0h", reg_seq_item.ref_o, data_o));
+        `uvm_warning("REGISTER", $sformatf("Mismatch in REGISTER FILE: in REGFILE %0h, RESULT %0h", reg_seq_item.ref_o, data_o));
+         `uvm_info(get_full_name(), $sformatf("rstn: %0b,alu_en: %0b,mult_en: %0b,regfile_alu_waddr_fw_o: %0h,alu_result: %0h,mult_result: %0h,ex_valid_o: %0b,regfile_waddr_wb_o: %0h,data_rvalid_i: %0b,regfile_wdata_wb_o: %0h",
+       reg_seq_item.rst_n, reg_seq_item.alu_en_i, reg_seq_item.mult_en_i, reg_seq_item.regfile_alu_waddr_fw_o, reg_seq_item.alu_result, reg_seq_item.mult_result, reg_seq_item.ex_valid_o,
+       reg_seq_item.regfile_waddr_wb_o, reg_seq_item.data_rvalid_i, reg_seq_item.regfile_wdata_wb_o), UVM_NONE);
       end else begin
         success_cnt++;
-        `uvm_info("ALU Write", $sformatf("ALU write successful: %0h RAL write successful: %0h", data_o, reg_seq_item.ref_o), UVM_MEDIUM);
+       // `uvm_info("REGISTER", $sformatf("ALU write successful: %0h RAL write successful: %0h", data_o, reg_seq_item.ref_o), UVM_MEDIUM);
       end
       
     endfunction

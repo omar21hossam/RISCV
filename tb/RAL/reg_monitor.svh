@@ -39,24 +39,26 @@ class reg_monitor extends uvm_monitor;
   virtual task run_phase(uvm_phase phase);
     super.run_phase(phase);
     forever begin      
-    //   @(posedge reg_intf.alu_en_i or posedge reg_intf.mult_en_i or posedge reg_intf.regfile_we_wb_o) #1step;
-    //  @(negegde reg_intf.regfile_alu_we_fw_o or negedge reg_intf.regfile_we_wb_o) #1step;
-     @(posedge reg_intf.ex_valid_o or posedge reg_intf.regfile_we_wb_o) #1step;
+     @(posedge reg_intf.ex_valid_o or posedge reg_intf.data_rvalid_i) #1step;
+     // Check if the signals are valid to avoid sampling glitches
+     if ((reg_intf.ex_valid_o && reg_intf.regfile_alu_we_fw_o ) || (reg_intf.data_rvalid_i && !reg_intf.data_misaligned_ex_i)) begin
      // Sample the Ex stage signals
      seq_item.rst_n                  = reg_intf.rst_n;
      seq_item.alu_en_i               = reg_intf.alu_en_i;
      seq_item.mult_en_i              = reg_intf.mult_en_i;
      seq_item.regfile_alu_waddr_fw_o = reg_intf.regfile_alu_waddr_fw_o; 
+     seq_item.regfile_alu_we_fw_o    = reg_intf.regfile_alu_we_fw_o;
      seq_item.ex_valid_o             = reg_intf.ex_valid_o;
-     // Sample the LSU signals
-     seq_item.regfile_waddr_wb_o     = reg_intf.regfile_waddr_wb_o;
-     seq_item.regfile_we_wb_o        = reg_intf.regfile_we_wb_o;
-     @(negedge reg_intf.ex_valid_o or negedge reg_intf.regfile_we_wb_o) #1step;
-     // Sampling the results 
      seq_item.alu_result             = reg_intf.alu_result;
      seq_item.mult_result            = reg_intf.mult_result;
-     seq_item.regfile_wdata_wb_o     = reg_intf.regfile_wdata_wb_o;   
-     if (seq_item.regfile_we_wb_o == 1'b1) begin
+     // Sample the LSU signals
+     seq_item.regfile_waddr_wb_o     = reg_intf.regfile_waddr_wb_o;
+     seq_item.data_rvalid_i          = reg_intf.data_rvalid_i;
+     seq_item.data_misaligned_ex_i   = reg_intf.data_misaligned_ex_i;
+     seq_item.regfile_wdata_wb_o     = reg_intf.regfile_wdata_wb_o;  
+     // Sample the reference signal 
+     @(negedge reg_intf.ex_valid_o or negedge reg_intf.data_rvalid_i) #1step;
+     if (seq_item.data_rvalid_i == 1'b1) begin
       m_ral_model.regs[seq_item.regfile_waddr_wb_o].read(status, seq_item.ref_o, UVM_BACKDOOR);
      end
      else begin
@@ -68,6 +70,7 @@ class reg_monitor extends uvm_monitor;
     //  `uvm_info(get_full_name(), $sformatf("rstn: %0b,alu_en: %0b,mult_en: %0b,regfile_alu_waddr_fw_o: %0h,alu_result: %0h,mult_result: %0h,ex_valid_o: %0b,regfile_waddr_wb_o: %0h,regfile_we_wb_o: %0b,regfile_wdata_wb_o: %0h",
     //    seq_item.rst_n, seq_item.alu_en_i, seq_item.mult_en_i, seq_item.regfile_alu_waddr_fw_o, seq_item.alu_result, seq_item.mult_result, seq_item.ex_valid_o,
     //    seq_item.regfile_waddr_wb_o, seq_item.regfile_we_wb_o, seq_item.regfile_wdata_wb_o), UVM_NONE);
+     end 
     end
   endtask
   endclass
