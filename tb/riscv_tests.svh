@@ -170,7 +170,7 @@ class riscv_rand_test extends riscv_base_test;
     super.run_phase(phase);
     phase.raise_objection(this);
     m_vsequence_rand.start(m_env.m_vseqr);
-    phase.phase_done.set_drain_time(this, 1ms);
+    phase.phase_done.set_drain_time(this, 1us);
     phase.drop_objection(this);
   endtask
 endclass
@@ -220,7 +220,7 @@ class riscv_direct_test extends riscv_base_test;
     super.run_phase(phase);
     phase.raise_objection(this);
     m_vsequence_direct.start(m_env.m_vseqr);
-    phase.phase_done.set_drain_time(this, 1ms);
+    phase.phase_done.set_drain_time(this, 1us);
     phase.drop_objection(this);
   endtask
 endclass
