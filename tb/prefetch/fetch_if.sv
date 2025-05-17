@@ -1,7 +1,7 @@
 interface fetch_if (
 input logic               clk
 );
-
+logic        rst_n;
 logic   instr_req_o;  
 logic   [31:0] instr_addr_o;//The address of the instruction being requested (aligned PC)."op"
 logic   instr_valid_id_o; //Indicates a valid instruction is in the IF/ID pipeline. "op"
@@ -17,5 +17,24 @@ logic   [31:0] jump_target_id_i;  // Jump target address from the Decode stage (
 logic   [31:0] jump_target_ex_i;  // Branch target address from the Execute stage  "ip" conditional
 logic   clear_instr_valid_i;  // clear instruction valid bit in IF/ID pipe (during a flush affects op valid and will make it 0). "ip" 
 logic   pc_set_i; // set the program counter to a new value raise @ first ; and when new brach ; jump came
+
+
+
+  // OBI handshake protocol sequence
+  sequence 
+    
+  obi_handshake; ##[0:$] instr_req_o ##[0:$] instr_gnt_i ##[0:$] instr_rvalid_i; 
+  
+  endsequence
+
+
+  property p_obi_transaction;
+    @(posedge clk) disable iff (!rst_n) instr_req_o |-> obi_handshake;
+  endproperty
+
+  assert property (p_obi_transaction)
+  else $error("OBI transaction at if stage failed!");
+
+
 
 endinterface
