@@ -123,20 +123,6 @@ class riscv_rand_sequence extends riscv_init_sequence;
   task body();
     m_seq_item = riscv_sequence_item::type_id::create("m_seq_item");
 
-    //  direct_send('h0060006f);  // jalr x0, 6
-    //  direct_send('h00930001);  // {addi x1, x0, 5},{c.nop}
-    //  direct_send('h00930001);  // {addi x1, x0, 5},{c.nop}
-    //  direct_send('h00010050);  // {c.nop},{addi x1, x0, 5
-    direct_send('h0060006f);  // jalr x0, 6
-    direct_send('h00000013);  // nop
-    direct_send('h006f0000);  // {jalr x0, 6},{0000}
-    direct_send('h00000020);  // {0000},{jalr x0, 6}
-    direct_send('h00000013);  // nop
-    direct_send('h01260fb3);  // {add x31, x12, x18}
-
-
-
-
 
     repeat (riscv_pkg::SEQUENCES) begin
 
@@ -391,10 +377,14 @@ class riscv_misalign_instr_sequence extends riscv_init_sequence;
 
     // Instruction handled misalignment
     // ---------------------------------------------------
-    direct_send('h0060006f);  // jalr x0, 6
-    direct_send('h00930001);  // {addi x1, x0, 5},{c.nop}
-    direct_send('h00930001);  // {addi x1, x0, 5},{c.nop}
-    direct_send('h00010050);  // {c.nop},{addi x1, x0, 5}
+
+    direct_send('h0060006f);  // jal x0, 6
+    direct_send('h00000013);  // nop
+    direct_send('h006f0000);  // {jal x0, 6},{0000}
+    direct_send('h00000020);  // {0000},{jal x0, 6}
+    direct_send('h00000013);  // nop
+    direct_send('h01260fb3);  // {add x31, x12, x18}
+
 
     // Instruction ignored misalignment
     // ---------------------------------------------------
