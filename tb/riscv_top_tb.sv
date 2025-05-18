@@ -104,7 +104,7 @@ module riscv_top_tb ();
 
     // Run the testbench with the specified test
     // ---------------------------------------------------------------------
-    run_test("riscv_direct_test");
+    run_test("riscv_rand_test");
   end
 
   initial begin

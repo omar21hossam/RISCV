@@ -19,6 +19,8 @@ class fetch_scoreboard extends uvm_scoreboard;
   int num_op_total =0; //as we alwyas count after op change , and finally , op will not change.
   bit misaligned ='b0;
  bit x=0;
+ bit y=0;
+
   logic [31:0] misaligned_inst;
   //**************************************************************************************************
      int MUL_cnt = 0, MULH_cnt = 0, MULHSU_cnt = 0, MULHU_cnt = 0;
@@ -123,7 +125,7 @@ join_any
                 if (misaligned)
                 begin
 
-                x='b1;
+                y='b1;
           
                 misaligned_inst[15:0] = matched_ip.instr_rdata_i[31:16];
                 matched_ip_2 = ip_queue.pop_front();
@@ -241,7 +243,7 @@ virtual function void final_phase(uvm_phase phase);
     `uvm_info("SCOREBOARD", $sformatf("Passed: %0d | Failed: %0d | Completion: %0.1f%%", 
               num_passed, num_failed, (num_passed*100.0)/(num_passed+num_failed)), UVM_LOW)
     `uvm_info("SCOREBOARD", $sformatf("Inputs: %0d | Outputs: %0d | Flushes: %0d | Total Ops: %0d", 
-              num_ip, num_op+x, num_flush, num_op_total+x), UVM_LOW)
+              num_ip, num_op+x+y, num_flush, num_op_total+x+y), UVM_LOW)
 
     // Print instruction type breakdown
     `uvm_info("SCOREBOARD", $sformatf("\n=== INSTRUCTION TYPE COUNTS ==="), UVM_LOW)

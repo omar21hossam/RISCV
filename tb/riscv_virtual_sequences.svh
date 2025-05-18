@@ -176,8 +176,8 @@ class riscv_virtual_direct_sequence extends uvm_sequence #(riscv_sequence_item);
         m_alu_sequence.start(m_instr_seqr);
         m_mul_sequence.start(m_instr_seqr);
         m_div_sequence.start(m_instr_seqr);
-        m_data_hazard_sequence.start(m_instr_seqr);
-        m_misalign_instr_sequence.start(m_instr_seqr);
+         m_data_hazard_sequence.start(m_instr_seqr);
+         m_misalign_instr_sequence.start(m_instr_seqr);
       end
       m_lsu_sequence.start(m_data_seqr);
     join_any

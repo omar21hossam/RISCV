@@ -185,11 +185,19 @@ bins alu_corner_cases[] = (
   task run_phase(uvm_phase phase);
     super.run_phase(phase);
     forever begin
-  cov_fifo_op.get(seq_item_op);
-  cov_fifo_ip.get(seq_item_ip);
-        op_instruction_cg.sample();
-        tese_cases_scenarios.sample();
-        ///direct sequences cover groups.
+      fork
+        begin
+           cov_fifo_op.get(seq_item_op);
+             op_instruction_cg.sample();
+          end
+          begin
+            cov_fifo_ip.get(seq_item_ip);
+                    tese_cases_scenarios.sample();
+          end
+          
+            
+          join_any
+
     end
   endtask
 
