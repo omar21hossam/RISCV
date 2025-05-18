@@ -306,9 +306,12 @@ class alu_coverage_collector extends uvm_subscriber #(alu_seq_item);
   //==================================================================================
   function void report_phase(uvm_phase phase);
     super.report_phase(phase);
-    `uvm_info(get_type_name(), $sformatf("Coverage Input: %0.2f%%", alu_cov_inputs.get_coverage()),
+    `uvm_info("ALU", $sformatf("\n\nALU Coverage Summary:\n%s", `DASH_LINE),
+    UVM_MEDIUM);
+    `uvm_info("ALU", $sformatf("Coverage Input: %0.2f%%", alu_cov_inputs.get_coverage()),
               UVM_MEDIUM)
-    `uvm_info(get_type_name(), $sformatf("Coverage Output: %0.2f%%", alu_cov_outputs.get_coverage()
+    `uvm_info("ALU", $sformatf("Coverage Output: %0.2f%%", alu_cov_outputs.get_coverage()
               ), UVM_MEDIUM)
+    `uvm_info("ALU", $sformatf("\n%s", `DASH_LINE), UVM_MEDIUM);
   endfunction
 endclass

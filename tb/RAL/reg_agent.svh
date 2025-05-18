@@ -1,18 +1,30 @@
 class reg_agent extends uvm_agent;
+  //==================================================================================
+  // Registeration
+  //==================================================================================
   `uvm_component_utils(reg_agent)
 
+  //==================================================================================
   // Interface
+  //==================================================================================
   virtual reg_if reg_intf;
 
-  // Monitor
+  //==================================================================================
+  // Classes Handles
+  //==================================================================================
+
   reg_monitor m_monitor;
 
-  // Constructor
+  //==================================================================================
+  // Function: Constructor
+  //==================================================================================
   function new(string name = "reg_agent", uvm_component parent = null);
     super.new(name, parent);
   endfunction
 
-  // Build phase
+  //==================================================================================
+  // Function: Build Phase
+  //==================================================================================
   virtual function void build_phase(uvm_phase phase);
     super.build_phase(phase);
     // Create the monitor
@@ -23,6 +35,4 @@ class reg_agent extends uvm_agent;
     end
     uvm_config_db#(virtual reg_if)::set(this, "m_monitor", "reg_intf", reg_intf);
   endfunction
-
-
 endclass

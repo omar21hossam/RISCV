@@ -154,8 +154,11 @@ class lsu_scoreboard extends uvm_scoreboard;
   //==================================================================================
   function void report_phase(uvm_phase phase);
     super.report_phase(phase);
-    `uvm_info(get_name(), $sformatf("Success Count: %0d", success_count), UVM_NONE);
-    `uvm_info(get_name(), $sformatf("Failure Count: %0d", failure_count), UVM_NONE);
+    `uvm_info("LSU", $sformatf("\n\nLSU Scoreboard Summary:\n%s", `DASH_LINE),
+              UVM_NONE);
+    `uvm_info("LSU", $sformatf("Success Count: %0d", success_count), UVM_NONE);
+    `uvm_info("LSU", $sformatf("Failure Count: %0d", failure_count), UVM_NONE);
+    `uvm_info("LSU", $sformatf("\n%s", `DASH_LINE), UVM_NONE);
   endfunction
 
   //==================================================================================

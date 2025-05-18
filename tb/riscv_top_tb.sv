@@ -109,13 +109,6 @@ module riscv_top_tb ();
 
     // Run the testbench with the specified test
     // ---------------------------------------------------------------------
-    run_test("riscv_rand_test");
+    run_test("riscv_base_test");
   end
-
-  initial begin
-    // $dumpfile("riscv_top_tb.vcd");
-    $dumpvars(0);
-    $display("Starting simulation");
-  end
-
 endmodule

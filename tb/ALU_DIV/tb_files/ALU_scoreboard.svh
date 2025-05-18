@@ -59,45 +59,45 @@ class alu_scoreboard extends uvm_scoreboard;
       case (trans.operator_i)
         riscv_pkg::ALU_ADD: begin
           trans_model.result_o = trans.operand_a_i + trans.operand_b_i;
-          trans_model.ready_o = 1'b1;
-          trans_model.op_type = 1;
+          trans_model.ready_o  = 1'b1;
+          trans_model.op_type  = 1;
         end
         riscv_pkg::ALU_SUB: begin
           trans_model.result_o = trans.operand_a_i - trans.operand_b_i;
-          trans_model.ready_o = 1'b1;
-          trans_model.op_type = 1;
+          trans_model.ready_o  = 1'b1;
+          trans_model.op_type  = 1;
         end
         riscv_pkg::ALU_ADDU: begin
           trans_model.result_o = trans.operand_a_i + trans.operand_b_i;
-          trans_model.ready_o = 1'b1;
+          trans_model.ready_o  = 1'b1;
         end
         riscv_pkg::ALU_SUBU: begin
           trans_model.result_o = trans.operand_a_i - trans.operand_b_i;
-          trans_model.ready_o = 1'b1;
+          trans_model.ready_o  = 1'b1;
         end
         riscv_pkg::ALU_XOR: begin
           trans_model.result_o = trans.operand_a_i ^ trans.operand_b_i;
-          trans_model.ready_o = 1'b1;
+          trans_model.ready_o  = 1'b1;
         end
         riscv_pkg::ALU_OR: begin
           trans_model.result_o = trans.operand_a_i | trans.operand_b_i;
-          trans_model.ready_o = 1'b1;
+          trans_model.ready_o  = 1'b1;
         end
         riscv_pkg::ALU_AND: begin
           trans_model.result_o = trans.operand_a_i & trans.operand_b_i;
-          trans_model.ready_o = 1'b1;
+          trans_model.ready_o  = 1'b1;
         end
         riscv_pkg::ALU_SRA: begin
           trans_model.result_o = $signed(trans.operand_a_i) >>> trans.operand_b_i[4:0];
-          trans_model.ready_o = 1'b1;
+          trans_model.ready_o  = 1'b1;
         end
         riscv_pkg::ALU_SRL: begin
           trans_model.result_o = trans.operand_a_i >> trans.operand_b_i[4:0];
-          trans_model.ready_o = 1'b1;
+          trans_model.ready_o  = 1'b1;
         end
         riscv_pkg::ALU_SLL: begin
           trans_model.result_o = trans.operand_a_i << trans.operand_b_i[4:0];
-          trans_model.ready_o = 1'b1;
+          trans_model.ready_o  = 1'b1;
         end
         riscv_pkg::ALU_LTS: begin
           if ($signed(trans.operand_a_i) < $signed(trans.operand_b_i)) begin
@@ -260,35 +260,27 @@ class alu_scoreboard extends uvm_scoreboard;
           end
         end
         riscv_pkg::ALU_DIVU: begin
-          if (trans.operand_a_i == 0)
-            trans_model.result_o = 'hFFFFFFFF;
-          else
-            trans_model.result_o = trans.operand_b_i / trans.operand_a_i;
+          if (trans.operand_a_i == 0) trans_model.result_o = 'hFFFFFFFF;
+          else trans_model.result_o = trans.operand_b_i / trans.operand_a_i;
           trans_model.ready_o = 1'b1;
         end
         riscv_pkg::ALU_DIV: begin
-          if (trans.operand_a_i == 0)
-            trans_model.result_o = -'sd1;
+          if (trans.operand_a_i == 0) trans_model.result_o = -'sd1;
           else if (trans.operand_a_i == -'sd1 && trans.operand_b_i == 'h80000000)
             trans_model.result_o = 'h80000000;
-          else
-            trans_model.result_o = $signed(trans.operand_b_i) / $signed(trans.operand_a_i);
+          else trans_model.result_o = $signed(trans.operand_b_i) / $signed(trans.operand_a_i);
           trans_model.ready_o = 1'b1;
         end
         riscv_pkg::ALU_REMU: begin
-          if (trans.operand_a_i == 0)
-            trans_model.result_o = trans.operand_b_i;
-          else
-            trans_model.result_o = trans.operand_b_i % trans.operand_a_i;
+          if (trans.operand_a_i == 0) trans_model.result_o = trans.operand_b_i;
+          else trans_model.result_o = trans.operand_b_i % trans.operand_a_i;
           trans_model.ready_o = 1'b1;
         end
         riscv_pkg::ALU_REM: begin
-          if (trans.operand_a_i == 0)
-            trans_model.result_o = trans.operand_b_i;
+          if (trans.operand_a_i == 0) trans_model.result_o = trans.operand_b_i;
           else if (trans.operand_a_i == -'sd1 && trans.operand_b_i == 'h80000000)
             trans_model.result_o = 0;
-          else
-            trans_model.result_o = $signed(trans.operand_b_i) % $signed(trans.operand_a_i);
+          else trans_model.result_o = $signed(trans.operand_b_i) % $signed(trans.operand_a_i);
           trans_model.ready_o = 1'b1;
         end
         default: begin
@@ -342,7 +334,9 @@ class alu_scoreboard extends uvm_scoreboard;
 
   function void report_phase(uvm_phase phase);
     super.report_phase(phase);
-    `uvm_info(get_full_name(), $sformatf("Scoreboard: Passed cases: %0d", success), UVM_NONE);
-    `uvm_info(get_full_name(), $sformatf("Scoreboard: Failed cases: %0d", failed), UVM_NONE);
+    `uvm_info("ALU", $sformatf("\n\nALU Scoreboard Summary:\n%s", `DASH_LINE), UVM_NONE);
+    `uvm_info("ALU", $sformatf("Scoreboard: Passed cases: %0d", success), UVM_NONE);
+    `uvm_info("ALU", $sformatf("Scoreboard: Failed cases: %0d", failed), UVM_NONE);
+    `uvm_info("ALU", $sformatf("\n%s", `DASH_LINE), UVM_NONE);
   endfunction
 endclass

@@ -113,10 +113,12 @@ class mul_scoreboard extends uvm_scoreboard;
     mul_ref_model(t);
   endfunction
 
-  function void extract_phase(uvm_phase phase);
-    super.extract_phase(phase);
-    `uvm_info(get_full_name(), $sformatf("Scoreboard: Passed cases: %0d", passed_cases), UVM_NONE);
-    `uvm_info(get_full_name(), $sformatf("Scoreboard: Failed cases: %0d", failed_cases), UVM_NONE);
+  function void report_phase(uvm_phase phase);
+    super.report_phase(phase);
+    `uvm_info("MUL", $sformatf("\n\nMUL Scoreboard Summary:\n%s", `DASH_LINE), UVM_NONE);
+    `uvm_info("MUL", $sformatf("Scoreboard: Passed cases: %0d", passed_cases), UVM_NONE);
+    `uvm_info("MUL", $sformatf("Scoreboard: Failed cases: %0d", failed_cases), UVM_NONE);
+    `uvm_info("MUL", $sformatf("\n%s", `DASH_LINE), UVM_NONE);
   endfunction
 
 endclass
