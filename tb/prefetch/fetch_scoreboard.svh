@@ -91,7 +91,6 @@ fork
     sb_fifo_ip.get(seq_item_ip);
     ip_queue.push_back(seq_item_ip);
     num_ip=num_ip+1;
- 
   end
 
   begin
@@ -104,13 +103,12 @@ join_any
 
   if  ((ip_queue.size() > 0) && (op_queue.size() > 0))  
     begin
+     
+
         // Pop the oldest IP and OP items (matched by position)
          matched_ip = ip_queue.pop_front();
          matched_op = op_queue.pop_front();
-//---------------------------------------------------------------------------------         
-//       $display("sb time %0t: data_id_o %0h , valid_id_o %0d ,  instr_addr_o %0d ,  pc_id_o %0d ,  pc_if_o %0d ,  instr_rdata_i %0h",  $time,matched_op.instr_rdata_id_o,matched_op.instr_valid_id_o,
-//          matched_ip.instr_addr_o,matched_ip.pc_id_o ,matched_ip.pc_if_o ,matched_ip.instr_rdata_i 
-// ); 
+ 
 //----------------------------------------------------------------------------------
       if (matched_op.instr_valid_id_o) 
          begin
@@ -185,6 +183,7 @@ join_any
         info = classify_instruction(matched_op.instr_rdata_id_o);
         check_add(matched_ip.pc_if_o, matched_ip.pc_id_o);
         instruction_types (matched_op.instr_rdata_id_o);
+        
         case (info.instr_type)
           INSTR_JUMP: begin
                       jump_expected = jump_expected + 1;
@@ -225,28 +224,17 @@ join_any
     end
            end
   endtask
+  virtual function void extract_phase(uvm_phase phase);
+    super.extract_phase(phase);
 
-
-/*
-  virtual function void final_phase(uvm_phase phase);
-    super.final_phase(phase);  
-    `uvm_info("SCOREBOARD", 
-      $sformatf("Final Results: %0d passed, %0d failed , inputs %0d , outputs %0d , flush %0d op_total %0d", 
-      num_passed, num_failed , num_ip , num_op+1, num_flush,num_op_total+1), UVM_LOW)  
-  endfunction */
-
-virtual function void final_phase(uvm_phase phase);
-    super.final_phase(phase);
-    
-    // Print summary statistics
-    `uvm_info("SCOREBOARD", $sformatf("\n\n=== TEST SUMMARY ==="), UVM_LOW)
-    `uvm_info("SCOREBOARD", $sformatf("Passed: %0d | Failed: %0d | Completion: %0.1f%%", 
+ `uvm_info("SCOREBOARD", $sformatf("\n\n====================== TEST SUMMARY ======================\n"), UVM_LOW)
+    `uvm_info("SCOREBOARD", $sformatf("\nPassed: %0d | Failed: %0d | Completion: %0.1f%%", 
               num_passed, num_failed, (num_passed*100.0)/(num_passed+num_failed)), UVM_LOW)
-    `uvm_info("SCOREBOARD", $sformatf("Inputs: %0d | Outputs: %0d | Flushes: %0d | Total Ops: %0d", 
+    `uvm_info("SCOREBOARD", $sformatf("\nInputs: %0d | Outputs: %0d | Flushes: %0d | Total Ops: %0d", 
               num_ip, num_op+x+y, num_flush, num_op_total+x+y), UVM_LOW)
 
     // Print instruction type breakdown
-    `uvm_info("SCOREBOARD", $sformatf("\n=== INSTRUCTION TYPE COUNTS ==="), UVM_LOW)
+    `uvm_info("SCOREBOARD", $sformatf("\n================== INSTRUCTION TYPE COUNTS ==================\n"), UVM_LOW)
     `uvm_info("SCOREBOARD", $sformatf("R-Type: %0d (%0.1f%%)", R_TYPE_cnt, (R_TYPE_cnt*100.0)/num_op_total), UVM_LOW)
     `uvm_info("SCOREBOARD", $sformatf("I-Type: %0d (%0.1f%%)", I_TYPE_cnt, (I_TYPE_cnt*100.0)/num_op_total), UVM_LOW)
     `uvm_info("SCOREBOARD", $sformatf("S-Type: %0d (%0.1f%%)", S_TYPE_cnt, (S_TYPE_cnt*100.0)/num_op_total), UVM_LOW)
@@ -255,10 +243,10 @@ virtual function void final_phase(uvm_phase phase);
     `uvm_info("SCOREBOARD", $sformatf("J-Type: %0d (%0.1f%%)", J_TYPE_cnt, (J_TYPE_cnt*100.0)/num_op_total), UVM_LOW)
 
     // Print detailed function code counts
-    `uvm_info("SCOREBOARD", $sformatf("\n=== DETAILED INSTRUCTION COUNTS ==="), UVM_LOW)
+    `uvm_info("SCOREBOARD", $sformatf("\n================= DETAILED INSTRUCTION COUNTS =================\n"), UVM_LOW)
     
     // R-Type Instructions
-    `uvm_info("SCOREBOARD", $sformatf("\nR-Type Instructions:"), UVM_LOW)
+    `uvm_info("SCOREBOARD", $sformatf("\nR-Type Instructions:\n---------------------------\n"), UVM_LOW)
     `uvm_info("SCOREBOARD", $sformatf("  ADD: %0d | SUB: %0d", ADD_cnt, SUB_cnt), UVM_LOW)
     `uvm_info("SCOREBOARD", $sformatf("  SLL: %0d | SRL: %0d | SRA: %0d", SLL_cnt, SRL_cnt, SRA_cnt), UVM_LOW)
     `uvm_info("SCOREBOARD", $sformatf("  SLT: %0d | SLTU: %0d", SLT_cnt, SLTU_cnt), UVM_LOW)
@@ -269,7 +257,7 @@ virtual function void final_phase(uvm_phase phase);
               DIV_cnt, DIVU_cnt, REM_cnt, REMU_cnt), UVM_LOW)
 
     // I-Type Instructions
-    `uvm_info("SCOREBOARD", $sformatf("\nI-Type Instructions:"), UVM_LOW)
+    `uvm_info("SCOREBOARD", $sformatf("\nI-Type Instructions:\n---------------------------\n"), UVM_LOW)
     `uvm_info("SCOREBOARD", $sformatf("  ADDI: %0d | SLLI: %0d", ADDI_cnt, SLLI_cnt), UVM_LOW)
     `uvm_info("SCOREBOARD", $sformatf("  SLTI: %0d | SLTIU: %0d", SLTI_cnt, SLTIU_cnt), UVM_LOW)
     `uvm_info("SCOREBOARD", $sformatf("  XORI: %0d | ORI: %0d | ANDI: %0d", XORI_cnt, ORI_cnt, ANDI_cnt), UVM_LOW)
@@ -279,24 +267,20 @@ virtual function void final_phase(uvm_phase phase);
               LB_cnt, LH_cnt, LW_cnt, LBU_cnt, LHU_cnt), UVM_LOW)
 
     // S-Type Instructions
-    `uvm_info("SCOREBOARD", $sformatf("\nS-Type Instructions:"), UVM_LOW)
+    `uvm_info("SCOREBOARD", $sformatf("\nS-Type Instructions:\n---------------------------\n"), UVM_LOW)
     `uvm_info("SCOREBOARD", $sformatf("  SB: %0d | SH: %0d | SW: %0d", SB_cnt, SH_cnt, SW_cnt), UVM_LOW)
 
     // B-Type Instructions
-    `uvm_info("SCOREBOARD", $sformatf("\nB-Type Instructions:"), UVM_LOW)
+    `uvm_info("SCOREBOARD", $sformatf("\nB-Type Instructions:\n---------------------------\n"), UVM_LOW)
     `uvm_info("SCOREBOARD", $sformatf("  BEQ: %0d | BNE: %0d", BEQ_cnt, BNE_cnt), UVM_LOW)
     `uvm_info("SCOREBOARD", $sformatf("  BLT: %0d | BGE: %0d", BLT_cnt, BGE_cnt), UVM_LOW)
     `uvm_info("SCOREBOARD", $sformatf("  BLTU: %0d | BGEU: %0d", BLTU_cnt, BGEU_cnt), UVM_LOW)
 
     // U-Type and J-Type Instructions
-    `uvm_info("SCOREBOARD", $sformatf("\nU/J-Type Instructions:"), UVM_LOW)
+    `uvm_info("SCOREBOARD", $sformatf("\nU/J-Type Instructions:\n---------------------------\n"), UVM_LOW)
     `uvm_info("SCOREBOARD", $sformatf("  LUI: %0d | AUIPC: %0d", LUI_cnt, AUIPC_cnt), UVM_LOW)
     `uvm_info("SCOREBOARD", $sformatf("  JAL: %0d", JAL_cnt), UVM_LOW)
-
-endfunction
-
-
-
+    endfunction
 
 //***************************************************************************
   function instr_info_t classify_instruction(input logic [31:0] instruction);  // 32-bit instruction
