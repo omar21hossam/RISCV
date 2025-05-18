@@ -1,6 +1,6 @@
 package riscv_pkg;
   parameter int CLK_FREQ = 100;
-  parameter int SEQUENCES = 10;
+  parameter int SEQUENCES = 10000;
   parameter int MEM_LATENCY = 5;
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////

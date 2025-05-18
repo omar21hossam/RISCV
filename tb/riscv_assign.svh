@@ -6,6 +6,7 @@
 `define ALU_PATH DUT.core_i.ex_stage_i.alu_i
 `define IF_PATH DUT.core_i.if_stage_i
 `define REGFILE_PATH DUT.core_i.ex_stage_i
+`define CONTROLLER_PATH DUT.core_i.id_stage_i.controller_i
 
 // Prefetch interface
 // ---------------------------------------------------------------------
@@ -101,6 +102,10 @@ assign reg_intf.alu_result             = `REGFILE_PATH.alu_result;
 assign reg_intf.mult_result            = `REGFILE_PATH.mult_result;
 assign reg_intf.ex_valid_o             = `REGFILE_PATH.ex_valid_o;
 assign reg_intf.regfile_waddr_wb_o     = `REGFILE_PATH.regfile_waddr_wb_o;
+assign reg_intf.regfile_we_wb_power_o  = `REGFILE_PATH.regfile_we_wb_power_o;
 assign reg_intf.data_misaligned_ex_i   = `REGFILE_PATH.data_misaligned_ex_i;
 assign reg_intf.data_rvalid_i          = `REGFILE_PATH.data_rvalid_i;
-assign reg_intf.regfile_wdata_wb_o     = `REGFILE_PATH.regfile_wdata_wb_o;
+assign reg_intf.lsu_rdata_i            = `REGFILE_PATH.regfile_wdata_wb_o;
+assign reg_intf.alu_filter_valid       = `REGFILE_PATH.ex_valid_o && `REGFILE_PATH.regfile_alu_we_fw_o;
+assign reg_intf.lsu_filter_valid       = `REGFILE_PATH.data_rvalid_i && !`REGFILE_PATH.data_misaligned_ex_i && `REGFILE_PATH.regfile_we_wb_power_o;
+assign reg_intf.jump_done              = `CONTROLLER_PATH.jump_done;

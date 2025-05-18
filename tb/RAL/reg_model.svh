@@ -1,9 +1,9 @@
-class register_RAL  extends uvm_reg;
+class register_RAL extends uvm_reg;
   `uvm_object_utils(register_RAL)
 
   // Register fields
   uvm_reg_field field1;
-  
+
   // Constructor
   function new(string name = "register_RAL");
     super.new(name, 32, UVM_NO_COVERAGE);
@@ -12,12 +12,11 @@ class register_RAL  extends uvm_reg;
 
   // Build phase
   function void build();
-    
     field1.configure(this, 32, 0, "RW", 0, 32'b0, 1, 1, 1);
   endfunction
-  endclass
+endclass
 
-  class PC_reg extends uvm_reg;
+class PC_reg extends uvm_reg;
   `uvm_object_utils(PC_reg)
 
   // Register fields
@@ -31,7 +30,6 @@ class register_RAL  extends uvm_reg;
 
   // Build phase
   function void build();
-    
     field1.configure(this, 32, 0, "RW", 0, 32'b0, 1, 1, 1);
   endfunction
-  endclass
+endclass

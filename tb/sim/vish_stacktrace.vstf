@@ -81,3 +81,51 @@ Exception c0000005 has occurred at address 1400ce3c6. Traceback:
 StackWalk failed 0
 # End of Stack Trace
 
+# Current time Sun May 18 02:18:35 2025
+# Program = vish
+# Id = "2024.1"
+# Version = "2024.02"
+# Date = "Feb  1 2024"
+# Platform = win64
+
+Exception c0000005 has occurred at address 73783635. Traceback:
+# 0    0x73783635: 'Tk_UpdatePointer + 0x7ad5'
+# 1    0x73785160: 'Tk_GetSelection + 0x160'
+# 2    0x73707969: 'TkClipInit + 0xac9'
+# 3    0x73898bfc: 'TclNRRunCallbacks + 0x5c'
+# 4    0x7fff4c11f384: 'Itcl_EvalMemberCode + 0x384'
+# 5    0x7fff4c12035d: 'Itcl_ExecMethod + 0x20d'
+# 6    0x7fff4c1271b5: 'Itcl_EvalArgs + 0x1a5'
+# 7    0x7fff4c122baa: 'Itcl_HandleInstance + 0x29a'
+# 8    0x73898bfc: 'TclNRRunCallbacks + 0x5c'
+# 9    0x7fff4c11f384: 'Itcl_EvalMemberCode + 0x384'
+# 10   0x7fff4c12035d: 'Itcl_ExecMethod + 0x20d'
+# 11   0x7fff4c1271b5: 'Itcl_EvalArgs + 0x1a5'
+# 12   0x7fff4c122baa: 'Itcl_HandleInstance + 0x29a'
+# 13   0x73898bfc: 'TclNRRunCallbacks + 0x5c'
+# 14   0x7389a501: 'Tcl_EvalEx + 0xb01'
+# 15   0x73899a28: 'Tcl_EvalEx + 0x28'
+# 16   0x736d4aba: 'Tk_BindEvent + 0x91a'
+# 17   0x7370c4d1: 'TkBindEventProc + 0x291'
+# 18   0x7371cd84: 'Tk_HandleEvent + 0x2f4'
+# 19   0x736d1a7e: 'TkStringToKeysym + 0x2bde'
+# 20   0x736d2948: 'TkStringToKeysym + 0x3aa8'
+# 21   0x73898bfc: 'TclNRRunCallbacks + 0x5c'
+# 22   0x7389a501: 'Tcl_EvalEx + 0xb01'
+# 23   0x73899a28: 'Tcl_EvalEx + 0x28'
+# 24   0x736d4aba: 'Tk_BindEvent + 0x91a'
+# 25   0x7370c4d1: 'TkBindEventProc + 0x291'
+# 26   0x7371cd84: 'Tk_HandleEvent + 0x2f4'
+# 27   0x7371ba4a: 'TkDeleteThreadExitHandler + 0x31a'
+# 28   0x7395098c: 'Tcl_ServiceEvent + 0xec'
+# 29   0x73950e04: 'Tcl_DoOneEvent + 0x184'
+# 30   0x7371b655: 'Tk_MainLoop + 0x25'
+# 31   0x7375d972: 'Tk_MainEx + 0x932'
+# 32   0x1401cfcf2: 'Mtirpc_Init + 0x24a32'
+# 33   0x1401d2f01: 'Mtirpc_Init + 0x27c41'
+# 34   0x14098e7b0: 'Tclsqlite3_Init + 0x1e210'
+# 35   0x7fff8d95e8d7: 'BaseThreadInitThunk + 0x17'
+# 36   0x7fff8f6bc5dc: 'RtlUserThreadStart + 0x2c'
+StackWalk failed 0
+# End of Stack Trace
+

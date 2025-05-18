@@ -1,5 +1,4 @@
-interface reg_if
-(
+interface reg_if (
     input bit clk
 );
   logic rst_n;
@@ -11,10 +10,17 @@ interface reg_if
   logic [31:0] alu_result;
   logic [31:0] mult_result;
   logic ex_valid_o;
+  logic alu_filter_valid;
+
   // LSU interface signals
   logic [5:0] regfile_waddr_wb_o;
+  logic regfile_we_wb_power_o;
   logic data_misaligned_ex_i;
   logic data_rvalid_i;
-  logic [31:0] regfile_wdata_wb_o;
+  logic [31:0] lsu_rdata_i;
+  logic lsu_filter_valid;
+
+  // Jump signals
+  logic jump_done;
 
 endinterface
