@@ -194,6 +194,7 @@ class riscv_corner_alu_sequence extends riscv_init_sequence;
     direct_send('hFCF00213);  // li x4, -49 (some negative number)
     direct_send('h01f00313);  // li x6, 31 (maximum shift amount)
     direct_send('h001082B3);  // add x5, x1, x1
+    direct_send('h001382b3);  // add x5, x7, x1
     direct_send('h002102b3);  // add x5, x2, x2
     direct_send('h003082B3);  // add x5, x1, x3
     direct_send('h004102B3);  // add x5, x2, x4
@@ -271,9 +272,30 @@ class riscv_corner_mul_sequence extends riscv_init_sequence;
     direct_send('h00AF41B7);
     direct_send('hA4C18193);
 
+    // li x4, -1
+    direct_send('hFFF00213);
+
     direct_send('h020182B3);  //  mul x5, x3, x0
     direct_send('h021182B3);  //  mul x5, x3, x1
     direct_send('h022182B3);  //  mul x5, x3, x2
+    direct_send('h023182B3);  //  mul x5, x3, x3
+    
+    direct_send('h024202B3);  //  mul x5, x4, x4
+    direct_send('h020202b3);  //  mul x5, x4, x0
+    direct_send('h024002b3);  //  mul x5, x0, x4
+    direct_send('h020002b3);  //  mul x5, x0, x0
+
+    direct_send('h020012b3);  //  mulh x5, x0, x0
+    direct_send('h024012b3);  //  mulh x5, x0, x4
+    direct_send('h024212b3);  //  mulh x5, x4, x4
+
+    direct_send('h020032b3);  //  mulhu x5, x0, x0
+    direct_send('h024032b3);  //  mulhu x5, x0, x4
+    direct_send('h024232b3);  //  mulhu x5, x4, x4
+
+    direct_send('h020022b3);  //  mulhsu x5, x0, x0
+    direct_send('h024022b3);  //  mulhsu x5, x0, x4
+    direct_send('h024222b3);  //  mulhsu x5, x4, x4
   endtask
 
 endclass

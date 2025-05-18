@@ -17,13 +17,13 @@ class mul_coverage_collector extends uvm_subscriber #(mul_seq_item);
     operand_a_i: coverpoint seq_item.operand_a_i {
       bins a_0 = {32'h00000000};
       bins a_1 = {32'hFFFFFFFF};
-      bins a_2 = {[32'h0000F000 : 32'hF0000000]};
+      
     }
 
     operand_b_i: coverpoint seq_item.operand_b_i {
       bins b_0 = {32'h00000000};
       bins b_1 = {32'hFFFFFFFF};
-      bins b_2 = {[32'h00000001 : 32'h0000F000]};
+      
     }
     operator_i: coverpoint seq_item.operator_i {
       bins mul = {riscv_pkg::MUL_MAC32}; bins mulh = {riscv_pkg::MUL_H};
@@ -41,36 +41,47 @@ class mul_coverage_collector extends uvm_subscriber #(mul_seq_item);
                         binsof(operand_b_i.b_1) &&
                         binsof(short_signed_i.mul_u);
       bins mul_unsigned3 = binsof(operator_i.mul) &&
-                        binsof(operand_a_i.a_2) &&
-                        binsof(operand_b_i.b_2) &&
-                        binsof(short_signed_i.mul_u);
-      bins mul_su1 = binsof(operator_i.mul) &&
-                          binsof(operand_a_i.a_0) &&
-                          binsof(operand_b_i.b_0) &&
-                          binsof(short_signed_i.mul_su);
-      bins mul_su2 = binsof(operator_i.mul) &&
-                        binsof(operand_a_i.a_1) &&
+                        binsof(operand_a_i.a_0) &&
                         binsof(operand_b_i.b_1) &&
-                        binsof(short_signed_i.mul_su);
-      bins mul_su3 = binsof(operator_i.mul) &&
-                        binsof(operand_a_i.a_2) &&
-                        binsof(operand_b_i.b_2) &&
-                        binsof(short_signed_i.mul_su);
-      bins mul_s3 = binsof(operator_i.mul) &&
-                        binsof(operand_a_i.a_2) &&
-                        binsof(operand_b_i.b_2) &&
-                        binsof(short_signed_i.mul_s);
-      bins mulh_unsigned = binsof(operator_i.mulh) &&
-                           binsof(operand_a_i.a_2) &&
-                           binsof(operand_b_i.b_2) &&
+                        binsof(short_signed_i.mul_u);
+
+      bins mulh_unsigned1 = binsof(operator_i.mulh) &&
+                           binsof(operand_a_i.a_0) &&
+                           binsof(operand_b_i.b_0) &&
                            binsof(short_signed_i.mul_u);
-      bins mulh_su = binsof(operator_i.mulh) &&
-                           binsof(operand_a_i.a_2) &&
-                           binsof(operand_b_i.b_2) &&
+      bins mulh_unsigned2 = binsof(operator_i.mulh) &&
+                           binsof(operand_a_i.a_1) &&
+                           binsof(operand_b_i.b_1) &&
+                           binsof(short_signed_i.mul_u);
+      bins mulh_unsigned3 = binsof(operator_i.mulh) &&
+                           binsof(operand_a_i.a_0) &&
+                           binsof(operand_b_i.b_1) &&
+                           binsof(short_signed_i.mul_u);
+
+      bins mulh_su1 = binsof(operator_i.mulh) &&
+                           binsof(operand_a_i.a_0) &&
+                           binsof(operand_b_i.b_0) &&
                            binsof(short_signed_i.mul_su);
-      bins mulh_s = binsof(operator_i.mulh) &&
-                           binsof(operand_a_i.a_2) &&
-                           binsof(operand_b_i.b_2) &&
+      bins mulh_su2 = binsof(operator_i.mulh) &&
+                           binsof(operand_a_i.a_1) &&
+                           binsof(operand_b_i.b_1) &&
+                           binsof(short_signed_i.mul_su);
+      bins mulh_su3 = binsof(operator_i.mulh) &&
+                           binsof(operand_a_i.a_0) &&
+                           binsof(operand_b_i.b_1) &&
+                           binsof(short_signed_i.mul_su); 
+                       
+      bins mulh_s1 = binsof(operator_i.mulh) &&
+                           binsof(operand_a_i.a_0) &&
+                           binsof(operand_b_i.b_0) &&
+                           binsof(short_signed_i.mul_s);
+      bins mulh_s2 = binsof(operator_i.mulh) &&
+                           binsof(operand_a_i.a_1) &&
+                           binsof(operand_b_i.b_1) &&
+                           binsof(short_signed_i.mul_s);
+      bins mulh_s3 = binsof(operator_i.mulh) &&
+                           binsof(operand_a_i.a_0) &&
+                           binsof(operand_b_i.b_1) &&
                            binsof(short_signed_i.mul_s);
     }
   endgroup

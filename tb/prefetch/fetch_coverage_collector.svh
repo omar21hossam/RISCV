@@ -119,8 +119,37 @@ class fetch_coverage_collector extends uvm_component;
 );
 
       bins mul_corner_cases[] = (
-    'h00100093 => 'h80000137 =>  'hFFF10113 => 'h00AF41B7 =>   'hA4C18193  =>   'h020182B3 => 'h021182B3   => 'h022182B3 
-                  
+    'h00100093 =>
+
+    'h80000137 =>
+    'hFFF10113 =>
+
+    'h00AF41B7 => 
+    'hA4C18193 => 
+
+    'hFFF00213 => 
+
+    'h020182B3 =>
+    'h021182B3 =>
+    'h022182B3 =>
+    'h023182B3 =>
+
+    'h024202B3 =>
+    'h020202b3 =>
+    'h024002b3 =>
+    'h020002b3 =>
+
+    'h020012b3 =>
+    'h024012b3 =>
+    'h024212b3 =>
+
+    'h020032b3 =>
+    'h024032b3 =>
+    'h024232b3 =>
+
+    'h020022b3 =>
+    'h024022b3 =>
+    'h024222b3 
 );
 
 
@@ -133,6 +162,7 @@ class fetch_coverage_collector extends uvm_component;
       'hFCF00213 =>
       'h01f00313 =>
       'h001082B3 => 
+      'h001382b3 => 
       'h002102b3 =>
       'h003082B3 =>  
       'h004102B3 => 

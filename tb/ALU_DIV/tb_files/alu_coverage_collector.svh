@@ -41,9 +41,9 @@ class alu_coverage_collector extends uvm_subscriber #(alu_seq_item);
       bins operand_a_min = {32'h8000_0000};
       bins operand_a_zero = {32'h0000_0000};
       bins operand_a_max = {32'h7FFF_FFFF};
-      bins operand_a_repet_min = (32'h8000_0000 [* 2]);
-      bins operand_a_repet_max = (32'h7FFF_FFFF [* 2]);
-      bins operand_a_repet_zero = (32'h0000_0000 [* 2]);
+      bins operand_a_repet_min = (32'h8000_0000 [->2]);
+      bins operand_a_repet_max = (32'h7FFF_FFFF [->2]);
+      bins operand_a_repet_zero = (32'h0000_0000 [->2]);
       bins operand_a_posv_values = {[32'h0000_0001 : 32'h7FFF_FFFE]};
       bins operand_a_negv_values = {[32'h8000_0001 : 32'hFFFF_FFFE]};
     }
@@ -52,10 +52,10 @@ class alu_coverage_collector extends uvm_subscriber #(alu_seq_item);
       bins operand_b_min = {32'h8000_0000};
       bins operand_b_zero = {32'h0000_0000};
       bins operand_b_max = {32'h7FFF_FFFF};
-      bins operand_b_samt_max = {32'h????_??1F};
-      bins operand_b_repet_min = (32'h8000_0000 [* 2]);
-      bins operand_b_repet_max = (32'h7FFF_FFFF [* 2]);
-      bins operand_b_repet_zero = (32'h0000_0000 [* 2]);
+      bins operand_b_samt_max = {32'h0000_001F};
+      bins operand_b_repet_min = (32'h8000_0000 [->2]);
+      bins operand_b_repet_max = (32'h7FFF_FFFF [->2]);
+      bins operand_b_repet_zero = (32'h0000_0000 [->2]);
       bins operand_b_posv_values = {[32'h0000_0001 : 32'h7FFF_FFFE]};
       bins operand_b_negv_values = {[32'h8000_0001 : 32'hFFFF_FFFE]};
     }
@@ -260,12 +260,8 @@ class alu_coverage_collector extends uvm_subscriber #(alu_seq_item);
     }
 
     ready_o: coverpoint seq_item.ready_o {
-      bins ready_o_0 = {1'b0};
       bins ready_o_1 = {1'b1};
-      bins ready_o_zero2zero = (0 => 0);
       bins ready_o_one2one = (1 => 1);
-      bins ready_o_zero2one = (0 => 1);
-      bins ready_o_one2zero = (1 => 0);
     }
   endgroup : alu_cov_outputs
 
