@@ -180,7 +180,7 @@ class riscv_sequence_item extends uvm_sequence_item;
   //==================================================================================
   // function: pack_instruction
   //==================================================================================
-  function bit [31:0] pack_instruction();
+  function void pack_instruction();
     unique case (instr_type)
       riscv_pkg::R_TYPE: instruction = {funct7, rs2, rs1, funct3, rd, opcode};
       riscv_pkg::I_TYPE: instruction = {imm[11:0], rs1, funct3, rd, opcode};
@@ -191,7 +191,6 @@ class riscv_sequence_item extends uvm_sequence_item;
       riscv_pkg::J_TYPE: instruction = {imm[20], imm[10:1], imm[11], imm[19:12], rd, opcode};
       default: instruction = 32'h00000013;  // NOP
     endcase
-    return instruction;
   endfunction
 
   //==================================================================================

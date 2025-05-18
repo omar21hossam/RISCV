@@ -114,7 +114,7 @@
 # UVM_INFO ../lsu/lsu_scoreboard.svh(158) @ 19050000: uvm_test_top.m_env.m_lsu_scoreboard [m_lsu_scoreboard] Failure Count: 0
 # UVM_INFO ../mul/mul_coverage_collector.svh(116) @ 19050000: uvm_test_top.m_env.m_mul_cov_collector [mul_coverage_collector] Coverage Input: 0.00%
 # UVM_INFO ../mul/mul_coverage_collector.svh(117) @ 19050000: uvm_test_top.m_env.m_mul_cov_collector [mul_coverage_collector] Coverage Output: 0.00%
-# UVM_INFO ../prefetch/fetch_scoreboard.svh(151) @ 19050000: uvm_test_top.m_env.m_fetch_scoreboard [SCOREBOARD] Final Results: 121 passed, 0 failed , inputs 62 , outputs 61
+# UVM_INFO ../prefetch/fetch_scoreboard.svh(151) @ 19050000: uvm_test_top.m_env.m_fetch_scoreboard [FETCH] Final Results: 121 passed, 0 failed , inputs 62 , outputs 61
 # 
 # --- UVM Report Summary ---
 # 
@@ -126,7 +126,7 @@
 # ** Report counts by id
 # [Questa UVM]     2
 # [RNTST]     1
-# [SCOREBOARD]     1
+# [FETCH]     1
 # [TEST_DONE]     1
 # [lsu_coverage_collector]     2
 # [m_lsu_scoreboard]     2

@@ -100,7 +100,6 @@ class lsu_coverage_collector #(
       bins sw_misalign = binsof(c_memory_operations.store) &&
                           binsof(c_access_sizes.word) &&
                           binsof(c_misaligned_access.misaligned);
-
     }
   endgroup
 

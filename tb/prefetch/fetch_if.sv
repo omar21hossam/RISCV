@@ -1,32 +1,76 @@
 interface fetch_if (
-input logic               clk
+    input logic clk
 );
-logic        rst_n;
-logic   instr_req_o;  
-logic   [31:0] instr_addr_o;//The address of the instruction being requested (aligned PC)."op"
-logic   instr_valid_id_o; //Indicates a valid instruction is in the IF/ID pipeline. "op"
-logic   [31:0] instr_rdata_id_o ;//The instruction data latched into the IF/ID pipeline (after decompression)."op"
-logic   [31:0] pc_if_o  ; //Current program counter in the IF stage. "op"
-logic   [31:0] pc_id_o  ;//PC value latched into the IF/ID pipeline register (sent to Decode stage). "op"
-logic   is_fetch_failed_o; //Indicates a fetch failure (not supported in CV32E40P; typically 0). "op"
-logic   req_i; //Request to fetch an instruction (driven by the core’s control unit). "ip"
-logic   instr_gnt_i  ; //"ip"
-logic   instr_rvalid_i ; //"ip"
-logic   [31:0] instr_rdata_i  ; //"ip"
-logic   [31:0] jump_target_id_i;  // Jump target address from the Decode stage (used for PC_JUMP) "ip" unconditional
-logic   [31:0] jump_target_ex_i;  // Branch target address from the Execute stage  "ip" conditional
-logic   clear_instr_valid_i;  // clear instruction valid bit in IF/ID pipe (during a flush affects op valid and will make it 0). "ip" 
-logic   pc_set_i; // set the program counter to a new value raise @ first ; and when new brach ; jump came
+  logic rst_n;
+  logic instr_req_o;
+  logic [31:0] instr_addr_o;  //The address of the instruction being requested (aligned PC)."op"
+  logic instr_valid_id_o;  //Indicates a valid instruction is in the IF/ID pipeline. "op"
+  logic   [31:0] instr_rdata_id_o ;//The instruction data latched into the IF/ID pipeline (after decompression)."op"
+  logic [31:0] pc_if_o;  //Current program counter in the IF stage. "op"
+  logic   [31:0] pc_id_o  ;//PC value latched into the IF/ID pipeline register (sent to Decode stage). "op"
+  logic   is_fetch_failed_o; //Indicates a fetch failure (not supported in CV32E40P; typically 0). "op"
+  logic req_i;  //Request to fetch an instruction (driven by the core’s control unit). "ip"
+  logic instr_gnt_i;  //"ip"
+  logic instr_rvalid_i;  //"ip"
+  logic [31:0] instr_rdata_i;  //"ip"
+  logic   [31:0] jump_target_id_i;  // Jump target address from the Decode stage (used for PC_JUMP) "ip" unconditional
+  logic [31:0] jump_target_ex_i;  // Branch target address from the Execute stage  "ip" conditional
+  logic   clear_instr_valid_i;  // clear instruction valid bit in IF/ID pipe (during a flush affects op valid and will make it 0). "ip" 
+  logic   pc_set_i; // set the program counter to a new value raise @ first ; and when new brach ; jump came
 
 
-
+  //===============================================================================
   // OBI handshake protocol sequence
-  sequence 
-    
-  obi_handshake; ##[0:$] instr_req_o ##[0:$] instr_gnt_i ##[0:$] instr_rvalid_i; 
-  
+  //===============================================================================
+  sequence obi_handshake;
+    ##[0:$] instr_req_o ##[0:$] instr_gnt_i ##[0:$] instr_rvalid_i;
   endsequence
 
+  //===============================================================================
+  // Instructions that modify the register file sequence
+  //===============================================================================
+  sequence rd_modified_instruction;
+    $past(
+        (
+          (instr_rdata_id_o[6:0] == riscv_pkg::OP_RTYPE) ||
+          (instr_rdata_id_o[6:0] == riscv_pkg::OP_STORE) ||
+          (instr_rdata_id_o[6:0] == riscv_pkg::OP_LUI) ||
+          (instr_rdata_id_o[6:0] == riscv_pkg::OP_AUIPC) ||
+          (instr_rdata_id_o[6:0] == riscv_pkg::OP_JAL) ||
+          (instr_rdata_id_o[6:0] == riscv_pkg::OP_JALR) ||
+          (instr_rdata_id_o[6:0] == riscv_pkg::OP_LOAD)) &&
+            instr_valid_id_o
+    );
+  endsequence
+
+  //===============================================================================
+  // Insturctions that read from the register file sequence
+  //===============================================================================
+  sequence rs_read_instruction;
+    ((instr_rdata_id_o[6:0] == riscv_pkg::OP_RTYPE) or
+    (instr_rdata_id_o[6:0] == riscv_pkg::OP_ITYPE) or
+    (instr_rdata_id_o[6:0] == riscv_pkg::OP_BRANCH) or
+    (instr_rdata_id_o[6:0] == riscv_pkg::OP_STORE)) and instr_valid_id_o;
+  endsequence
+
+  //===============================================================================
+  // The same register is used in the instruction that modifies the register file
+  // and the instruction that reads from the register file sequence
+  //===============================================================================
+  sequence same_register;
+    ($past(
+        instr_rdata_id_o[11:7]
+    ) == instr_rdata_id_o[19:15]) or($past(
+        instr_rdata_id_o[11:7]
+    ) == instr_rdata_id_o[24:20]);
+  endsequence
+
+  //===============================================================================
+  // Cover property to check for RAW hazards
+  //===============================================================================
+  property p_raw_hazard;
+    @(posedge clk) disable iff (!rst_n) (rs_read_instruction and rd_modified_instruction and same_register);
+  endproperty
 
   property p_obi_transaction;
     @(posedge clk) disable iff (!rst_n) instr_req_o |-> obi_handshake;
@@ -35,6 +79,6 @@ logic   pc_set_i; // set the program counter to a new value raise @ first ; and 
   assert property (p_obi_transaction)
   else $error("OBI transaction at if stage failed!");
 
-
+  cover property (p_raw_hazard);
 
 endinterface
