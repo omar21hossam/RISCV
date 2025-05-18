@@ -1,4 +1,8 @@
 package riscv_classes_pkg;
+  `define DASH_LINE "---------------------------------------------------------------------------------"
+  `define EQ_LINE "=================================================================================="
+  `define SHORT_EQ_LINE "========================================="
+  `define SHORT_AST_LINE "****************************************"
   //==================================================================================
   // UVM inclusion
   //==================================================================================
@@ -50,7 +54,16 @@ package riscv_classes_pkg;
   `include "prefetch/fetch_agent.svh"
   `include "prefetch/fetch_scoreboard.svh"
   `include "prefetch/fetch_coverage_collector.svh"
- 
+
+  //==================================================================================
+  // Register classes inclusion     
+  //==================================================================================
+  `include "RAL/reg_model.svh"
+  `include "RAL/ral_model.svh"
+  `include "RAL/reg_sequence_item.svh"
+  `include "RAL/reg_monitor.svh"
+  `include "RAL/reg_agent.svh"
+  `include "RAL/reg_scoreboard.svh"
 
   //==================================================================================
   // RISCV TOP classes inclusion

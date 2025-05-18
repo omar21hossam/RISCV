@@ -30,6 +30,7 @@ class riscv_base_test extends uvm_test;
   virtual mul_if              mul_vif;
   virtual alu_if              alu_vif;
   virtual fetch_if            fetch_vif;
+  virtual reg_if              reg_vif;
 
   //==================================================================================
   // Function: Constructor
@@ -111,6 +112,14 @@ class riscv_base_test extends uvm_test;
       uvm_config_db#(virtual lsu_if)::set(this, "m_env", "lsu_intf", lsu_vif);
     end
 
+    // REGFILE Interface
+    //------------------------------------------
+    if (!uvm_config_db#(virtual reg_if)::get(this, "", "reg_intf", reg_vif)) begin
+      `uvm_fatal(get_name(), "Failed to get configuration for reg_if");
+    end else begin
+      uvm_config_db#(virtual reg_if)::set(this, "m_env", "reg_intf", reg_vif);
+    end
+
   endfunction
 
   //==================================================================================
@@ -118,6 +127,7 @@ class riscv_base_test extends uvm_test;
   //==================================================================================
   task run_phase(uvm_phase phase);
     super.run_phase(phase);
+    `uvm_info("TEST", $sformatf("\n\n%s %s %s\n\n", `SHORT_EQ_LINE, get_type_name(), `SHORT_EQ_LINE), UVM_MEDIUM);
     phase.raise_objection(this);
     m_vsequence_base.start(m_env.m_vseqr);
     phase.phase_done.set_drain_time(this, 1us);

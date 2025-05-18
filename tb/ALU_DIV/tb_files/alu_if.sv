@@ -274,8 +274,10 @@ endinterface : alu_if
 
     // Set Lower Than operations
     ALU_SLTS  = 7'b0000010,  //output = 1 and comprision_result_o = 1
+    ALU_SLTS  = 7'b0000010,  //output = 1 and comprision_result_o = 1
     ALU_SLTU  = 7'b0000011,
 
+   if both operands equals then comprision_result_o = 1
    if both operands equals then comprision_result_o = 1
 //**************
 //OSAMA OP-CODES

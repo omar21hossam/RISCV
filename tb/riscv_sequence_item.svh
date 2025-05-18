@@ -150,8 +150,8 @@ class riscv_sequence_item extends uvm_sequence_item;
 
   //----------------------------------------------------------------------------------
   constraint b_type_c {
-    instr_type == riscv_pkg::B_TYPE -> {
-      opcode inside {riscv_pkg::OP_BRANCH};
+   instr_type == riscv_pkg::B_TYPE -> {
+      opcode == riscv_pkg::OP_BRANCH;
       funct3 inside {
         riscv_pkg::BEQ,
         riscv_pkg::BNE,

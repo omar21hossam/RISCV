@@ -45,7 +45,7 @@ class riscv_virtual_base_sequence extends uvm_sequence #(riscv_sequence_item);
   // task: body
   //==================================================================================
   virtual task body();
-    
+
     fork
       //start the sequences
       begin
@@ -103,7 +103,7 @@ class riscv_virtual_rand_sequence extends uvm_sequence #(riscv_sequence_item);
   // task: body
   //==================================================================================
   virtual task body();
-    
+
     fork
       //start the sequences
       begin

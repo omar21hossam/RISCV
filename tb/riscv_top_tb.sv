@@ -23,6 +23,7 @@ module riscv_top_tb ();
   alu_if alu_intf (clk);
   lsu_if lsu_intf (clk);
   fetch_if fetch_intf (clk);
+  reg_if reg_intf (clk);
 
   //==================================================================================
   // DUT Instantiation
@@ -102,15 +103,12 @@ module riscv_top_tb ();
     // ---------------------------------------------------------------------
     uvm_config_db#(virtual lsu_if)::set(null, "uvm_test_top", "lsu_intf", lsu_intf);
 
+    // Register file configuration setup
+    // ---------------------------------------------------------------------
+    uvm_config_db#(virtual reg_if)::set(null, "uvm_test_top", "reg_intf", reg_intf);
+
     // Run the testbench with the specified test
     // ---------------------------------------------------------------------
     run_test("riscv_base_test");
   end
-
-  initial begin
-    // $dumpfile("riscv_top_tb.vcd");
-    $dumpvars(0);
-    $display("Starting simulation");
-  end
-
 endmodule

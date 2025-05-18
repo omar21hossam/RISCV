@@ -1,18 +1,14 @@
 ; vsim modelsim.ini file
 [Version]
-INIVersion = "2024.1"
+INIVersion = "2021.1"
 
-; Unpublished work. Copyright 2024 Siemens
+; Copyright 1991-2021 Mentor Graphics Corporation
 ;
-; This material contains trade secrets or otherwise confidential information 
-; owned by Siemens Industry Software Inc. or its affiliates (collectively, 
-; "SISW"), or its licensors. Access to and use of this information is strictly
-; limited as set forth in the Customer's applicable agreements with SISW.
+; All Rights Reserved.
 ;
-; This material may not be copied, distributed, or otherwise disclosed outside 
-; of the Customer's facilities without the express written permission of SISW,
-; and may not be used in any way not expressly authorized by SISW.
-;
+; THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION WHICH IS THE PROPERTY OF 
+; MENTOR GRAPHICS CORPORATION OR ITS LICENSORS AND IS SUBJECT TO LICENSE TERMS.
+;   
 
 [Library]
 std = $MODEL_TECH/../std
@@ -60,11 +56,11 @@ mtiRnm = $MODEL_TECH/../rnm
 mtiOvm = $MODEL_TECH/../ovm-2.1.2
 mtiUvm = $MODEL_TECH/../uvm-1.1d
 mtiUPF = $MODEL_TECH/../upf_lib
-flcov_ce_lib = $MODEL_TECH/../flcov_ce_lib
 mtiPA  = $MODEL_TECH/../pa_lib
 floatfixlib = $MODEL_TECH/../floatfixlib
 mc2_lib = $MODEL_TECH/../mc2_lib
 flps_lib = $MODEL_TECH/../flps_lib
+osvvm = $MODEL_TECH/../osvvm
 
 ; added mapping for ADMS
 mgc_ams = $MODEL_TECH/../mgc_ams
@@ -74,7 +70,6 @@ ieee_env = $MODEL_TECH/../ieee_env
 ;verilog_psl_checkers = $MODEL_TECH/../verilog_psl_checkers // Source files only for this release
 ;mvc_lib = $MODEL_TECH/../mvc_lib
 infact = $MODEL_TECH/../infact
-vh_flcov_lib = $MODEL_TECH/../vh_flcov_lib
 vhdlopt_lib = $MODEL_TECH/../vhdlopt_lib
 vh_ux01v_lib = $MODEL_TECH/../vh_ux01v_lib
 
@@ -483,13 +478,6 @@ Explicit = 1
 ; Add '-' to disable specific statistics. Default is [time,cmd,msg].
 ; Stats = time,cmd,msg
 
-; Check vlog plusargs.  Default is 0 (off).
-; The command line equivalent is -check_plusargs <number>.
-; 0 = Don't check plusargs (this is the default)
-; 1 = Warning on unrecognized plusarg
-; 2 = Error and exit on unrecognized plusarg
-; CheckPlusargs = 1
-
 ; Set the threshold for automatically identifying sparse Verilog memories.
 ; A memory with total size in bytes equal to or more than the sparse memory
 ; threshold gets marked as sparse automatically, unless specified otherwise
@@ -720,7 +708,7 @@ LibrarySearchPath = mtiAvm mtiRnm mtiOvm mtiUvm mtiUPF infact
 
 ; Controls SystemVerilog Language Extensions.  These options enable
 ; some non-LRM compliant behavior.
-; SvExtensions = [+|-]<extension>[,[+|-]<extension>]*
+; SvExtensions = [+|-]<extension>[,[+|-]<extension>*]
 
 ; Generate symbols debugging database in only some special cases to save on
 ; the number of files in the library. For other design-units, this database is
@@ -762,6 +750,9 @@ LibrarySearchPath = mtiAvm mtiRnm mtiOvm mtiUvm mtiUPF infact
 ; Enable use of SC_MS include files and library.  Default is off.
 ; UseScMs = 1
 
+; Use SystemC-2.2 instead of the default SystemC-2.3. Default is off.
+; Sc22Mode = 1
+
 ; Enable compiler statistics. Specify one or more arguments: 
 ;                   [all,none,time,cmd,msg,perf,verbose,list,kb]
 ; Add '-' to disable specific statistics. Default is [time,cmd,msg].
@@ -775,13 +766,6 @@ LibrarySearchPath = mtiAvm mtiRnm mtiOvm mtiUvm mtiUPF infact
 ; UseUvmc = 1
 
 [vopt]
-; Check vopt plusargs.  Default is 0 (off).
-; The command line equivalent is -check_plusargs <number>.
-; 0 = Don't check plusargs (this is the default)
-; 1 = Warning on unrecognized plusarg
-; 2 = Error and exit on unrecognized plusarg
-; CheckPlusargs = 1
-
 ; Turn on code coverage in vopt.  Default is off. 
 ; Coverage = sbceft
 
@@ -872,7 +856,7 @@ LibrarySearchPath = mtiAvm mtiRnm mtiOvm mtiUvm mtiUPF infact
 
 ; Controls SystemVerilog Language Extensions.  These options enable
 ; some non-LRM compliant behavior.
-; SvExtensions = [+|-]<extension>[,[+|-]<extension>]*
+; SvExtensions = [+|-]<extension>[,[+|-]<extension>*]
 
 ; Load the specified shared objects with the RTLD_GLOBAL flag.
 ; This gives global visibility to all symbols in the shared objects,
@@ -918,7 +902,7 @@ Resolution = ns
 UserTimeUnit = default
 
 ; Default run length
-RunLength = 100 ns
+RunLength = 100
 
 ; Maximum iterations that can be run without advancing simulation time
 IterationLimit = 10000000
@@ -1573,10 +1557,9 @@ OnFinish = ask
 ;AssertionThreadLimit = -1
 
 ; Action to be taken once the assertion thread limit is reached. Default 
-; is kill. It can have a value of off,kill or killon. In case of kill, all the existing
+; is kill. It can have a value of off or kill. In case of kill, all the existing
 ; threads are terminated and no new attempts are started. In case of off, the 
-; existing attempts keep on evaluating but no new attempts are started. In case of killon, 
-; all the existing threads are terminated but new attempts are started. This 
+; existing attempts keep on evaluating but no new attempts are started. This 
 ; variable applies to only assert directives.
 ;AssertionThreadLimitAction = kill
 
@@ -1587,10 +1570,9 @@ OnFinish = ask
 ;CoverThreadLimit = -1
 
 ; Action to be taken once the cover thread limit is reached. Default 
-; is kill. It can have a value of off, kill or killon. In case of kill, all the existing
+; is kill. It can have a value of off or kill. In case of kill, all the existing
 ; threads are terminated and no new attempts are started. In case of off, the 
-; existing attempts keep on evaluating but no new attempts are started. In case of killon, 
-; all the existing threads are terminated but new attempts are started. This 
+; existing attempts keep on evaluating but no new attempts are started. This 
 ; variable applies to only cover directives.
 ;CoverThreadLimitAction = kill
 
@@ -1859,8 +1841,7 @@ OnFinish = ask
 ; CoverWeight = 2
 
 ; Check vsim plusargs.  Default is 0 (off).
-; The command line equivalent is -check_plusargs <number>.
-; 0 = Don't check plusargs (this is the default)
+; 0 = Don't check plusargs
 ; 1 = Warning on unrecognized plusarg
 ; 2 = Error and exit on unrecognized plusarg
 ; CheckPlusargs = 1
@@ -1917,17 +1898,10 @@ OnFinish = ask
 
 ; Specify the maximum size that a random dynamic array or queue may be resized
 ; to by the solver. If the solver attempts to resize a dynamic array or queue
-; to a size greater than the specified limit, an error will be issued and
-; randomize() will fail. The default value is 65535. A value of 0 disables the
-; resize check (i.e. no error will be issued regardless of size).
-; SolveArrayResizeMax = 65535
-
-; Specify the maximum size that a random dynamic array or queue may be resized
-; to by the solver without a warning. If the solver attempts to resize a dynamic
-; array or queue to a size greater than the specified limit, a warning will be
-; issued. The default value is 65535. A value of 0 disables the resize check
-; (i.e. no warning will be issued regardless of size).
-; SolveArrayResizeWarn = 65535
+; to a size greater than the specified limit, the solver will abort with an error.
+; The default value is 10000. The maximum value is 10000000. A value of 0 is
+; equivalent to specifying the maximum value.
+; SolveArrayResizeMax = 10000
 
 ; Specify error message severity when randomize() and randomize(null) failures
 ; are detected.
@@ -1961,16 +1935,16 @@ OnFinish = ask
 ; 0 = No error  1 = Warning  2 = Error  3 = Failure  4 = Fatal
 ; NOTE: This variable can be overridden with the vsim "-solvebeforeerrorseverity"
 ; command line switch.
-; The default is 2 (error).
-; SolveBeforeErrorSeverity = 2
+; The default is 3 (failure).
+; SolveBeforeErrorSeverity = 3
 
 ; Error message severity for suppressible errors that are related to
 ; solve engine capacity limits
 ; 0 = No error  1 = Warning  2 = Error  3 = Failure  4 = Fatal
 ; NOTE: This variable can be overridden with the vsim "-solveengineerrorseverity"
 ; command line switch.
-; The default is 2 (error).
-; SolveEngineErrorSeverity = 2
+; The default is 3 (failure).
+; SolveEngineErrorSeverity = 3
 
 ; Enable/disable constraint conflicts on randomize() failure
 ; Valid values:
@@ -2001,21 +1975,22 @@ OnFinish = ask
 ; SolveFailTestcase = 
 
 ; Specify solver timeout threshold (in seconds). randomize() will fail if the
-; CPU time required to evaluate the call exceeds the specified timeout.
-; The default value is 1000. A value of 0 will disable timeout failures. 
-; SolveTimeout = 1000
+; CPU time required to evaluate any randset exceeds the specified timeout.
+; The default value is 500. A value of 0 will disable timeout failures. 
+; SolveTimeout = 500
 
 ; Specify the alternative behavior during solver replay. Must be used when combined with -solvereplay switch.
-; Valid <opt> settings:
+; SolveReplayOpt=[+|-]<opt>[,[+|-]<opt>]*"
+' Valid <opt> settings:
 ;    validate : toggle the checking of value changes of non-random variables involved in randomize(). (default is off)"
-; SolveReplayOpt=[+|-]<option>[,[+|-]<option>]*
+; SolveReplayOpt=validate
 
-; Switch to specify options that control the behavior of the solver profiler.
+; Switch to specify options that control the behavior of the solver profiler..
 ; Valid options are:
-;   cputime  - use CPU time instead of elapsed time (wall time) to measure performance data (default is off)
-;   randsets - enable detailed profiling of randsets (default is off)
-;   testgen  - generate randset testcases (only when 'randsets' option is enabled, default is off)
-; SolverFProf = [+|-]<option>[,[+|-]<option>]*
+;   cputime     - use CPU time instead of elapsed time (wall time) to measure performance data (default is off)
+;   randsets    - enable detailed profiling of randsets (default is off)
+;   testgen     - generate testcases for profiled randsets (only when randsets option is enabled) (default is off)
+; SolverFProf = [+|-]<option>[,[+|-]<option>*]
 
 ; Specify the maximum size of the solution graph generated by the BDD solver.
 ; This value can be used to force the BDD solver to abort the evaluation of a
@@ -2035,6 +2010,9 @@ OnFinish = ask
 ; option is used to get the same random sequences during simulation as
 ; as a prior release. Only prior releases with the same major version
 ; as the current release are allowed.
+; NOTE: Only those random sequence changes due to solver optimizations are
+; reverted by this variable. Random sequence changes due to solver bugfixes
+; cannot be un-done.
 ; NOTE: This variable can be overridden with the vsim "-solverev" command
 ; line switch.
 ; Default value set to "" (no compatibility).
@@ -2076,29 +2054,39 @@ MvcHome = $QUESTA_MVC_HOME
 ; Suppress file type registration.  
 ; SuppressFileTypeReg = 1
 
-; Controls SystemVerilog Language Extensions.  These options enable
-; some non-LRM compliant behavior.
-; SvExtensions = [+|-]<extension>[,[+|-]<extension>]*
+; Enable/disable non-LRM compliant SystemVerilog language extensions.
+; Valid extensions are:
+;   altdpiheader - Alternative style function signature generated in DPI header",
+;   cfce         - generate an error if $cast fails as a function
+;   cfmt         - C like formatting for specifiers with '#' prefix ('%#x', '%#h')
+;   dfsp         - sets default format specifier as %p, if no format specifier is given for unpacked array in $display and related systasks
+;   expdfmt      - enable format string extensions for $display/$sformatf
+;   extscan      - support values greater than 32 bit for string builtin methods (atohex, atobin, atooct, atoi)
+;   fmtcap       - prints capital hex digits with %X/%H in display calls
+;   iddp         - ignore DPI disable protocol check
+;   lfmt         - zero-pad data if '0' prefixes width in format specifier (e.g. "%04h")
+;   noexptc      - ignore DPI export type name overloading check
+;   realrand     - support randomize() with real variables and constraints (Default)
+; SvExtensions = [+|-]<extension>[,[+|-]<extension>*]
 
 ; Enable/disable non-LRM compliant SystemVerilog constrained-random language extensions.
 ; Valid extensions are:
 ;   arraymode    - consider rand_mode of unpacked array field independently from its elements
 ;   deepcheck    - allow randomize(null) to recursively consider constraints from member rand class handles (Default)
-;   dynext       - enhanced evaluation for constraints involving random dynamic arrays that are resized during randomize()
 ;   funcback     - enable function backtracking (ACT only)
+;   genmodseedfix - enable LRM-compliant seeding of module/interface instances under for-generate blocks (Default)
+;   impvecindex  - inject constraints on random indices of 2-state vectors
 ;   nodist       - interpret 'dist' constraint as 'inside' (ACT only)
 ;   noorder      - ignore solve/before ordering constraints (ACT only)
-;   oobidx       - allow out-of-bounds value for an indexed-expression with random indices if indexed-expression yields a 2-state packed type
-;   prerandfirst - execute all pre_randomize() functions before evaluating any constraints (Default)
+;   pathseed     - enable unique seeding of module instances based on hierarchical path name
+;   prerandfirst - execute all pre_randomize() functions before evaluating any constraints
 ;   promotedist  - promote priority of 'dist' constraint if LHS has no solve/before
 ;   purecheck    - suppress pre_randomize() and post_randomize() calls for randomize(null) 
-;   randcext     - allow 'randc' and other 'rand' variables to be solved in the same randset (Default)
 ;   randindex    - allow random index in constraint (Default)
 ;   randstruct   - consider all fields of unpacked structs as 'rand'
 ;   skew         - skew randomize results (ACT only)
-;   srandom      - interpret $srandom(seed) system task calls as equivalent process::self().srandom(seed) calls (Default)
 ;   strictstab   - strict random stability
-; SvRandExtensions = [+|-]<extension>[,[+|-]<extension>]*
+; SvRandExtensions = [+|-]<extension>[,[+|-]<extension>*]
 
 ; Controls the formatting of '%p' and '%P' conversion specification, used in $display
 ; and similar system tasks.
@@ -2233,85 +2221,7 @@ suppress = 8780 ;an explanation can be had by running: verror 8780
 Project_Version = 6
 Project_DefaultLib = work
 Project_SortMethod = unused
-Project_Files_Count = 39
-Project_File_0 = D:/Si-Vision Academy/final-project/code/rtl/package/cv32e40p_apu_core_pkg.sv
-Project_File_P_0 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 cover_fsm 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1746879810 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 27 cover_expr 0 dont_compile 0 cover_stmt 0
-Project_File_1 = D:/Si-Vision Academy/final-project/code/tb/riscv_if.sv
-Project_File_P_1 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1746962701 cover_fsm 0 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 37 cover_expr 0 dont_compile 0 cover_stmt 0
-Project_File_2 = D:/Si-Vision Academy/final-project/code/tb/riscv_classes_pkg.sv
-Project_File_P_2 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 vlog_noload 0 folder {Top Level} last_compile 1747513860 cover_fsm 0 cover_branch 0 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 30 cover_expr 0 dont_compile 0 cover_stmt 0
-Project_File_3 = D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_sim_clock_gate.sv
-Project_File_P_3 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 last_compile 1746879810 cover_fsm 0 cover_branch 0 vlog_noload 0 folder {Top Level} vlog_enable0In 0 cover_excludedefault 0 vlog_disableopt 0 cover_covercells 0 cover_optlevel 3 vlog_hazard 0 vlog_showsource 0 voptflow 1 ood 0 vlog_0InOptions {} toggle - vlog_options {} compile_to work vlog_upper 0 cover_noshort 0 compile_order 24 dont_compile 0 cover_expr 0 cover_stmt 0
-Project_File_4 = D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_popcnt.sv
-Project_File_P_4 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 last_compile 1746879810 cover_fsm 0 cover_branch 0 vlog_noload 0 folder {Top Level} vlog_enable0In 0 cover_excludedefault 0 vlog_disableopt 0 cover_covercells 0 cover_optlevel 3 vlog_hazard 0 vlog_showsource 0 voptflow 1 ood 0 vlog_0InOptions {} toggle - vlog_options {} compile_to work vlog_upper 0 cover_noshort 0 compile_order 19 dont_compile 0 cover_expr 0 cover_stmt 0
-Project_File_5 = D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_controller.sv
-Project_File_P_5 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1746879810 cover_fsm 0 vlog_enable0In 0 cover_excludedefault 0 vlog_disableopt 0 cover_covercells 0 cover_optlevel 3 vlog_hazard 0 vlog_showsource 0 voptflow 1 ood 0 vlog_0InOptions {} toggle - vlog_options {} compile_to work vlog_upper 0 cover_noshort 0 compile_order 5 dont_compile 0 cover_expr 0 cover_stmt 0
-Project_File_6 = D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_fifo.sv
-Project_File_P_6 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 last_compile 1746879810 cover_fsm 0 cover_branch 0 vlog_noload 0 folder {Top Level} vlog_enable0In 0 cover_excludedefault 0 vlog_disableopt 0 cover_covercells 0 cover_optlevel 3 vlog_hazard 0 vlog_showsource 0 voptflow 1 ood 0 vlog_0InOptions {} toggle - vlog_options {} compile_to work vlog_upper 0 cover_noshort 0 compile_order 11 dont_compile 0 cover_expr 0 cover_stmt 0
-Project_File_7 = D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_apu_disp.sv
-Project_File_P_7 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 last_compile 1746879810 cover_fsm 0 cover_branch 0 vlog_noload 0 folder {Top Level} vlog_enable0In 0 cover_excludedefault 0 vlog_disableopt 0 cover_covercells 0 cover_optlevel 3 vlog_hazard 0 vlog_showsource 0 voptflow 1 ood 0 vlog_0InOptions {} toggle - vlog_options {} compile_to work vlog_upper 0 cover_noshort 0 compile_order 3 dont_compile 0 cover_expr 0 cover_stmt 0
-Project_File_8 = D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_cs_registers.sv
-Project_File_P_8 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1746879810 cover_fsm 0 vlog_enable0In 0 cover_excludedefault 0 vlog_disableopt 0 cover_covercells 0 cover_optlevel 3 vlog_hazard 0 vlog_showsource 0 voptflow 1 ood 0 vlog_0InOptions {} toggle - vlog_options {} compile_to work vlog_upper 0 cover_noshort 0 compile_order 7 dont_compile 0 cover_expr 0 cover_stmt 0
-Project_File_9 = D:/Si-Vision Academy/final-project/code/tb/riscv_pkg.sv
-Project_File_P_9 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 last_compile 1747514467 cover_fsm 0 cover_branch 0 vlog_noload 0 folder {Top Level} vlog_enable0In 0 cover_excludedefault 0 vlog_disableopt 0 cover_covercells 0 cover_optlevel 3 vlog_hazard 0 vlog_showsource 0 voptflow 1 ood 0 vlog_0InOptions {} toggle - vlog_options {} compile_to work vlog_upper 0 cover_noshort 0 compile_order 31 dont_compile 0 cover_expr 0 cover_stmt 0
-Project_File_10 = D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_int_controller.sv
-Project_File_P_10 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1746879810 cover_fsm 0 vlog_enable0In 0 cover_excludedefault 0 vlog_disableopt 0 cover_covercells 0 cover_optlevel 3 vlog_hazard 0 vlog_showsource 0 voptflow 1 ood 0 vlog_0InOptions {} toggle - vlog_options {} compile_to work vlog_upper 0 cover_noshort 0 compile_order 15 dont_compile 0 cover_expr 0 cover_stmt 0
-Project_File_11 = D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_decoder.sv
-Project_File_P_11 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1746879810 cover_fsm 0 vlog_enable0In 0 cover_excludedefault 0 vlog_disableopt 0 cover_covercells 0 cover_optlevel 3 vlog_hazard 0 vlog_showsource 0 voptflow 1 ood 0 vlog_0InOptions {} toggle - vlog_options {} compile_to work vlog_upper 0 cover_noshort 0 compile_order 8 dont_compile 0 cover_expr 0 cover_stmt 0
-Project_File_12 = D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_register_file_latch.sv
-Project_File_P_12 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 last_compile 1746879810 cover_fsm 0 cover_branch 0 vlog_noload 0 folder {Top Level} vlog_enable0In 0 cover_excludedefault 0 vlog_disableopt 0 cover_covercells 0 cover_optlevel 3 vlog_hazard 0 vlog_showsource 0 voptflow 1 ood 0 vlog_0InOptions {} toggle - vlog_options {} compile_to work vlog_upper 0 cover_noshort 0 compile_order 23 dont_compile 0 cover_expr 0 cover_stmt 0
-Project_File_13 = D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_register_file_ff.sv
-Project_File_P_13 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 last_compile 1746879810 cover_fsm 0 cover_branch 0 vlog_noload 0 folder {Top Level} vlog_enable0In 0 cover_excludedefault 0 vlog_disableopt 0 cover_covercells 0 cover_optlevel 3 vlog_hazard 0 vlog_showsource 0 voptflow 1 ood 0 vlog_0InOptions {} toggle - vlog_options {} compile_to work vlog_upper 0 cover_noshort 0 compile_order 22 dont_compile 0 cover_expr 0 cover_stmt 0
-Project_File_14 = D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_sleep_unit.sv
-Project_File_P_14 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1746879810 cover_fsm 0 vlog_enable0In 0 cover_excludedefault 0 vlog_disableopt 0 cover_covercells 0 cover_optlevel 3 vlog_hazard 0 vlog_showsource 0 voptflow 1 ood 0 vlog_0InOptions {} toggle - vlog_options {} compile_to work vlog_upper 0 cover_noshort 0 compile_order 25 dont_compile 0 cover_expr 0 cover_stmt 0
-Project_File_15 = D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_id_stage.sv
-Project_File_P_15 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1746879810 cover_fsm 0 vlog_enable0In 0 cover_excludedefault 0 vlog_disableopt 0 cover_covercells 0 cover_optlevel 3 vlog_hazard 0 vlog_showsource 0 voptflow 1 ood 0 vlog_0InOptions {} toggle - vlog_options {} compile_to work vlog_upper 0 cover_noshort 0 compile_order 13 dont_compile 0 cover_expr 0 cover_stmt 0
-Project_File_16 = D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_ex_stage.sv
-Project_File_P_16 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1747527308 cover_fsm 0 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 9 cover_expr 0 dont_compile 0 cover_stmt 0
-Project_File_17 = D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_core.sv
-Project_File_P_17 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1746879810 cover_fsm 0 vlog_enable0In 0 cover_excludedefault 0 vlog_disableopt 0 cover_covercells 0 cover_optlevel 3 vlog_hazard 0 vlog_showsource 0 voptflow 1 ood 0 vlog_0InOptions {} toggle - vlog_options {} compile_to work vlog_upper 0 cover_noshort 0 compile_order 6 dont_compile 0 cover_expr 0 cover_stmt 0
-Project_File_18 = D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_prefetch_buffer.sv
-Project_File_P_18 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 last_compile 1746879810 cover_fsm 0 cover_branch 0 vlog_noload 0 folder {Top Level} vlog_enable0In 0 cover_excludedefault 0 vlog_disableopt 0 cover_covercells 0 cover_optlevel 3 vlog_hazard 0 vlog_showsource 0 voptflow 1 ood 0 vlog_0InOptions {} toggle - vlog_options {} compile_to work vlog_upper 0 cover_noshort 0 compile_order 20 dont_compile 0 cover_expr 0 cover_stmt 0
-Project_File_19 = D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_obi_interface.sv
-Project_File_P_19 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 last_compile 1746879810 cover_fsm 0 cover_branch 0 vlog_noload 0 folder {Top Level} vlog_enable0In 0 cover_excludedefault 0 vlog_disableopt 0 cover_covercells 0 cover_optlevel 3 vlog_hazard 0 vlog_showsource 0 voptflow 1 ood 0 vlog_0InOptions {} toggle - vlog_options {} compile_to work vlog_upper 0 cover_noshort 0 compile_order 18 dont_compile 0 cover_expr 0 cover_stmt 0
-Project_File_20 = D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_mult.sv
-Project_File_P_20 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1746879810 cover_fsm 0 vlog_enable0In 0 cover_excludedefault 0 vlog_disableopt 0 cover_covercells 0 cover_optlevel 3 vlog_hazard 0 vlog_showsource 0 voptflow 1 ood 0 vlog_0InOptions {} toggle - vlog_options {} compile_to work vlog_upper 0 cover_noshort 0 compile_order 17 dont_compile 0 cover_expr 0 cover_stmt 0
-Project_File_21 = D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_if_stage.sv
-Project_File_P_21 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 last_compile 1746879810 cover_fsm 0 cover_branch 0 vlog_noload 0 folder {Top Level} vlog_enable0In 0 cover_excludedefault 0 vlog_disableopt 0 cover_covercells 0 cover_optlevel 3 vlog_hazard 0 vlog_showsource 0 voptflow 1 ood 0 vlog_0InOptions {} toggle - vlog_options {} compile_to work vlog_upper 0 cover_noshort 0 compile_order 14 dont_compile 0 cover_expr 0 cover_stmt 0
-Project_File_22 = D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_aligner.sv
-Project_File_P_22 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 cover_fsm 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1746879810 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 0 cover_expr 0 dont_compile 0 cover_stmt 0
-Project_File_23 = D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_alu.sv
-Project_File_P_23 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1746879810 cover_fsm 0 vlog_enable0In 0 cover_excludedefault 0 vlog_disableopt 0 cover_covercells 0 cover_optlevel 3 vlog_hazard 0 vlog_showsource 0 voptflow 1 ood 0 vlog_0InOptions {} toggle - vlog_options {} compile_to work vlog_upper 0 cover_noshort 0 compile_order 1 dont_compile 0 cover_expr 0 cover_stmt 0
-Project_File_24 = D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_compressed_decoder.sv
-Project_File_P_24 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1746879810 cover_fsm 0 vlog_enable0In 0 cover_excludedefault 0 vlog_disableopt 0 cover_covercells 0 cover_optlevel 3 vlog_hazard 0 vlog_showsource 0 voptflow 1 ood 0 vlog_0InOptions {} toggle - vlog_options {} compile_to work vlog_upper 0 cover_noshort 0 compile_order 4 dont_compile 0 cover_expr 0 cover_stmt 0
-Project_File_25 = D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_top.sv
-Project_File_P_25 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1746879810 cover_fsm 0 vlog_enable0In 0 cover_excludedefault 0 vlog_disableopt 0 cover_covercells 0 cover_optlevel 3 vlog_hazard 0 vlog_showsource 0 voptflow 1 ood 0 vlog_0InOptions {} toggle - vlog_options {} compile_to work vlog_upper 0 cover_noshort 0 compile_order 26 dont_compile 0 cover_expr 0 cover_stmt 0
-Project_File_26 = D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_load_store_unit.sv
-Project_File_P_26 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 last_compile 1746879810 cover_fsm 0 cover_branch 0 vlog_noload 0 folder {Top Level} vlog_enable0In 0 cover_excludedefault 0 vlog_disableopt 0 cover_covercells 0 cover_optlevel 3 vlog_hazard 0 vlog_showsource 0 voptflow 1 ood 0 vlog_0InOptions {} toggle - vlog_options {} compile_to work vlog_upper 0 cover_noshort 0 compile_order 16 dont_compile 0 cover_expr 0 cover_stmt 0
-Project_File_27 = D:/Si-Vision Academy/final-project/code/tb/lsu/lsu_if.sv
-Project_File_P_27 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1746966207 cover_fsm 0 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 33 cover_expr 0 dont_compile 0 cover_stmt 0
-Project_File_28 = D:/Si-Vision Academy/final-project/code/tb/riscv_top_tb.sv
-Project_File_P_28 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 folder {Top Level} last_compile 1747515078 cover_fsm 0 cover_branch 0 vlog_noload 0 vlog_enable0In 0 cover_excludedefault 0 vlog_disableopt 0 cover_covercells 0 cover_optlevel 3 vlog_hazard 0 vlog_showsource 0 voptflow 1 ood 0 vlog_0InOptions {} toggle - vlog_options {} compile_to work vlog_upper 0 cover_noshort 0 compile_order 32 dont_compile 0 cover_expr 0 cover_stmt 0
-Project_File_29 = D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_prefetch_controller.sv
-Project_File_P_29 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 folder {Top Level} last_compile 1746879810 cover_fsm 0 cover_branch 0 vlog_noload 0 vlog_enable0In 0 cover_excludedefault 0 vlog_disableopt 0 cover_covercells 0 cover_optlevel 3 vlog_hazard 0 vlog_showsource 0 voptflow 1 ood 0 vlog_0InOptions {} toggle - vlog_options {} compile_to work vlog_upper 0 cover_noshort 0 compile_order 21 dont_compile 0 cover_expr 0 cover_stmt 0
-Project_File_30 = D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_alu_div.sv
-Project_File_P_30 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 folder {Top Level} last_compile 1746879810 cover_fsm 0 cover_branch 0 vlog_noload 0 vlog_enable0In 0 cover_excludedefault 0 vlog_disableopt 0 cover_covercells 0 cover_optlevel 3 vlog_hazard 0 vlog_showsource 0 voptflow 1 ood 0 vlog_0InOptions {} toggle - vlog_options {} compile_to work vlog_upper 0 cover_noshort 0 compile_order 2 dont_compile 0 cover_expr 0 cover_stmt 0
-Project_File_31 = D:/Si-Vision Academy/final-project/code/rtl/package/cv32e40p_pkg.sv
-Project_File_P_31 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 cover_fsm 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1746879810 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 29 cover_expr 0 dont_compile 0 cover_stmt 0
-Project_File_32 = D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_ff_one.sv
-Project_File_P_32 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 last_compile 1746879810 cover_fsm 0 cover_branch 0 vlog_noload 0 folder {Top Level} vlog_enable0In 0 cover_excludedefault 0 vlog_disableopt 0 cover_covercells 0 cover_optlevel 3 vlog_hazard 0 vlog_showsource 0 voptflow 1 ood 0 vlog_0InOptions {} toggle - vlog_options {} compile_to work vlog_upper 0 cover_noshort 0 compile_order 10 dont_compile 0 cover_expr 0 cover_stmt 0
-Project_File_33 = D:/Si-Vision Academy/final-project/code/tb/prefetch/fetch_if.sv
-Project_File_P_33 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 vlog_noload 0 folder {Top Level} last_compile 1747481343 cover_fsm 0 cover_branch 0 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 36 cover_expr 0 dont_compile 0 cover_stmt 0
-Project_File_34 = D:/Si-Vision Academy/final-project/code/rtl/package/cv32e40p_fpu_pkg.sv
-Project_File_P_34 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 cover_fsm 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1746879810 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 28 cover_expr 0 dont_compile 0 cover_stmt 0
-Project_File_35 = D:/Si-Vision Academy/final-project/code/tb/RAL/reg_if.sv
-Project_File_P_35 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 vlog_noload 0 folder {Top Level} last_compile 1747543901 cover_fsm 0 cover_branch 0 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 38 cover_expr 0 dont_compile 0 cover_stmt 0
-Project_File_36 = D:/Si-Vision Academy/final-project/code/tb/ALU_DIV/tb_files/alu_if.sv
-Project_File_P_36 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 folder {Top Level} last_compile 1747512489 cover_fsm 0 cover_branch 0 vlog_noload 0 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 35 cover_expr 0 dont_compile 0 cover_stmt 0
-Project_File_37 = D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_hwloop_regs.sv
-Project_File_P_37 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 last_compile 1746879810 cover_fsm 0 cover_branch 0 vlog_noload 0 folder {Top Level} vlog_enable0In 0 cover_excludedefault 0 vlog_disableopt 0 cover_covercells 0 cover_optlevel 3 vlog_hazard 0 vlog_showsource 0 voptflow 1 ood 0 vlog_0InOptions {} toggle - vlog_options {} compile_to work vlog_upper 0 cover_noshort 0 compile_order 12 dont_compile 0 cover_expr 0 cover_stmt 0
-Project_File_38 = D:/Si-Vision Academy/final-project/code/tb/mul/mul_interface.sv
-Project_File_P_38 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 last_compile 1747436029 cover_fsm 0 cover_branch 0 vlog_noload 0 folder {Top Level} vlog_enable0In 0 cover_excludedefault 0 vlog_disableopt 0 cover_covercells 0 cover_optlevel 3 vlog_hazard 0 vlog_showsource 0 voptflow 1 ood 0 vlog_0InOptions {} toggle - vlog_options {} compile_to work vlog_upper 0 cover_noshort 0 compile_order 34 dont_compile 0 cover_expr 0 cover_stmt 0
+Project_Files_Count = 0
 Project_Sim_Count = 0
 Project_Folder_Count = 0
 Echo_Compile_Output = 0
@@ -2359,5 +2269,5 @@ DEBUGDATABASE_DoubleClick = Edit
 DEBUGDATABASE_CustomDoubleClick = 
 DEBUGARCHIVE_DoubleClick = Edit
 DEBUGARCHIVE_CustomDoubleClick = 
-Project_Major_Version = 2024
+Project_Major_Version = 2021
 Project_Minor_Version = 1
