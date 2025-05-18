@@ -11,6 +11,8 @@ interface reg_if (
   logic [31:0] mult_result;
   logic ex_valid_o;
   logic alu_filter_valid;
+  cv32e40p_pkg::mul_opcode_e mult_operator_i;
+  cv32e40p_pkg::alu_opcode_e alu_operator_i;
 
   // LSU interface signals
   logic [5:0] regfile_waddr_wb_o;

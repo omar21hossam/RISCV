@@ -214,7 +214,10 @@ class riscv_env extends uvm_env;
     
     // REG
     //------------------------------------------
-    m_reg_agent.m_monitor.ap.connect(m_reg_scoreboard.sc_a_imp);
+    m_reg_agent.m_monitor.alu_ap.connect(m_reg_scoreboard.sc_alu_a_imp);
+    m_reg_agent.m_monitor.mul_ap.connect(m_reg_scoreboard.sc_mul_a_imp);
+    m_reg_agent.m_monitor.lsu_ap.connect(m_reg_scoreboard.sc_lsu_a_imp);
+    m_reg_agent.m_monitor.jump_ap.connect(m_reg_scoreboard.sc_jump_a_imp);
 
 
     // Virtual Sequencers Connections

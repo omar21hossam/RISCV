@@ -117,6 +117,18 @@ QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
 Top level modules:
 	cv32e40p_register_file
 
+} {} {}} {D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_ex_stage.sv} {2 {vlog -work work -vopt -sv -stats=none {D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_ex_stage.sv}
+QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
+-- Compiling module cv32e40p_ex_stage
+-- Importing package cv32e40p_pkg
+-- Importing package cv32e40p_apu_core_pkg
+** Warning: D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_ex_stage.sv(95): (vlog-13314) Defaulting port 'apu_operands_i' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+** Warning: D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_ex_stage.sv(99): (vlog-13314) Defaulting port 'apu_read_regs_i' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+** Warning: D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_ex_stage.sv(103): (vlog-13314) Defaulting port 'apu_write_regs_i' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+
+Top level modules:
+	cv32e40p_ex_stage
+
 } {} {}} {D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_id_stage.sv} {1 {vlog -work work -vopt -sv -stats=none {D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_id_stage.sv}
 QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
 -- Compiling module cv32e40p_id_stage
@@ -270,13 +282,6 @@ Top level modules:
 } {} {}} {D:/Si-Vision Academy/final-project/code/rtl/package/cv32e40p_fpu_pkg.sv} {1 {vlog -work work -vopt -sv -stats=none {D:/Si-Vision Academy/final-project/code/rtl/package/cv32e40p_fpu_pkg.sv}
 QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
 -- Compiling package cv32e40p_fpu_pkg
-
-Top level modules:
-	--none--
-
-} {} {}} {D:/Si-Vision Academy/final-project/code/tb/RAL/reg_if.sv} {1 {vlog -work work -vopt -sv -stats=none {D:/Si-Vision Academy/final-project/code/tb/RAL/reg_if.sv}
-QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
--- Compiling interface reg_if
 
 Top level modules:
 	--none--

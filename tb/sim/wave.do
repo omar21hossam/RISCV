@@ -20,6 +20,8 @@ add wave -noupdate -color {Orange Red} -radix unsigned /riscv_top_tb/DUT/core_i/
 add wave -noupdate /riscv_top_tb/DUT/core_i/ex_stage_i/regfile_alu_wdata_fw_o
 add wave -noupdate /riscv_top_tb/DUT/core_i/ex_stage_i/alu_operator_i
 add wave -noupdate -color Sienna -radix hexadecimal /riscv_top_tb/DUT/core_i/ex_stage_i/alu_result
+add wave -noupdate {/riscv_top_tb/DUT/core_i/id_stage_i/register_file_i/mem[4]}
+add wave -noupdate {/riscv_top_tb/DUT/core_i/id_stage_i/register_file_i/mem[8]}
 add wave -noupdate /riscv_top_tb/DUT/core_i/ex_stage_i/mult_operator_i
 add wave -noupdate /riscv_top_tb/DUT/core_i/ex_stage_i/mult_en_i
 add wave -noupdate /riscv_top_tb/DUT/core_i/ex_stage_i/mult_result
@@ -43,9 +45,11 @@ add wave -noupdate -radix unsigned /riscv_top_tb/fetch_intf/pc_id_o
 add wave -noupdate /riscv_top_tb/DUT/core_i/ex_stage_i/branch_in_ex_i
 add wave -noupdate /riscv_top_tb/DUT/core_i/ex_stage_i/jump_target_o
 add wave -noupdate /riscv_top_tb/DUT/core_i/id_stage_i/controller_i/branch_taken_ex_i
+add wave -noupdate /riscv_top_tb/DUT/core_i/id_stage_i/pc_set_o
+add wave -noupdate /riscv_top_tb/DUT/core_i/id_stage_i/jump_target_o
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 7} {64950001 ps} 1} {{Cursor 8} {99280350 ps} 0}
-quietly wave cursor active 2
+WaveRestoreCursors {{Cursor 7} {625350001 ps} 1}
+quietly wave cursor active 1
 configure wave -namecolwidth 187
 configure wave -valuecolwidth 100
 configure wave -justifyvalue left
@@ -60,4 +64,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {95076347 ps} {102309883 ps}
+WaveRestoreZoom {523026848 ps} {985973152 ps}
