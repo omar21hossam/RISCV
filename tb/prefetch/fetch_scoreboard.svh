@@ -18,8 +18,7 @@ class fetch_scoreboard extends uvm_scoreboard;
   int num_flush =0;
   int num_op_total =0; //as we alwyas count after op change , and finally , op will not change.
   bit misaligned ='b0;
- bit x=0;
- bit y=0;
+  bit y=0;
 
   logic [31:0] misaligned_inst;
   //**************************************************************************************************
@@ -168,7 +167,7 @@ join_any
                 num_op_total=num_op_total+1;
                 num_flush = num_flush+1;
                 num_passed++;
-          x='b1;
+        
                 end
             end
             else 
@@ -231,7 +230,7 @@ join_any
     `uvm_info("SCOREBOARD", $sformatf("\nPassed: %0d | Failed: %0d | Completion: %0.1f%%", 
               num_passed, num_failed, (num_passed*100.0)/(num_passed+num_failed)), UVM_LOW)
     `uvm_info("SCOREBOARD", $sformatf("\nInputs: %0d | Outputs: %0d | Flushes: %0d | Total Ops: %0d", 
-              num_ip, num_op+x+y, num_flush, num_op_total+x+y), UVM_LOW)
+              num_ip, num_op+y, num_flush, num_op_total+y), UVM_LOW)
 
     // Print instruction type breakdown
     `uvm_info("SCOREBOARD", $sformatf("\n================== INSTRUCTION TYPE COUNTS ==================\n"), UVM_LOW)
