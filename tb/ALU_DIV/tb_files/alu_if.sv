@@ -68,6 +68,11 @@ interface alu_if (
   property comp_result_eq_operands;  //this property is used to check the comparison result in case equal operands non comparison operation
     @(posedge core_clk) disable iff(!rst_n) (non_comp_op_code_antecedent) |-> (comparison_result_o == 1);
   endproperty
+
+  property div_rem_ex_busy; //this property is used to check the control signals goes low (ex stage is busy) until the div or rem is done
+    @(posedge core_clk) disable iff(!rst_n && !enable_i)  $changed(operator_i) |-> (operator_i == (ALU_DIV | ALU_REM | ALU_DIVU | ALU_REMU)) |-> $fell (ex_ready_i) && $fell(ready_o);
+  endproperty
+
   //==============================================
   //Timing check properties:
   property ADD_t;  //this property is used to check the ALU ADD operation timing
@@ -133,12 +138,17 @@ interface alu_if (
     property SLTU_t;  //this property is used to check the ALU SLTU operation timing
      @(posedge core_clk) disable iff(!rst_n && !enable_i) (enable_i && (operator_i == ALU_SLTU) &&(operand_a_i < operand_b_i)) |-> ((result_o == 1) && (comparison_result_o ==1) && (ready_o == 1));
     endproperty
+
+    property div_rem_multi_cycle;  //this property is used to check the ALU DIV/REM operation timing of multi cycle
+     @(posedge core_clk) disable iff(!rst_n && !enable_i) (ready_o) |=> (operator_i == (ALU_DIV | ALU_REM | ALU_DIVU | ALU_REMU)) |-> $fell(ready_o) |-> ##[3:35] !ready_o;
+    endproperty
  //======================================================================================
  //Description: control Assertions 
-  A1_Label:assert property (comp_result_eq_operands);
-  A2_Label:assert property (enable_i_check_0);
-  A3_Label:assert property (enable_i_check_1);
-  A4_Label:assert property (ready_o_non_comp_check);
+  A0_Label:assert property (comp_result_eq_operands);
+  A1_Label:assert property (enable_i_check_0);
+  A2_Label:assert property (enable_i_check_1);
+  A3_Label:assert property (ready_o_non_comp_check);
+  A4_Label:assert property (div_rem_ex_busy);
 
   //==============================================
   //Timing check Assertions:
@@ -148,7 +158,7 @@ interface alu_if (
   A7_Label:assert property (XOR_t);
   A8_Label:assert property (OR_t);
   A9_Label:assert property (AND_t);
-  A10_Label:assert property (SRA_t)
+  A10_Label:assert property (SRA_t);
   // else begin
   //   $display("SRA_t property is not valid");
   //   $display("the value of inp_a_i is %32b", operand_a_i);
@@ -169,13 +179,15 @@ interface alu_if (
   A18_Label:assert property (NE_t);
   A19_Label:assert property (SLTS_t);
   A20_Label:assert property (SLTU_t);
+  A21_Label:assert property (div_rem_multi_cycle);
   //==============================================
   //cover properties:
 cover  property (comp_result_eq_operands);
 cover  property (enable_i_check_0);
 cover  property (enable_i_check_1);
 cover  property (ready_o_non_comp_check);
-
+cover  property (div_rem_ex_busy);
+cover  property (div_rem_multi_cycle);
 endinterface : alu_if
 
 

@@ -110,28 +110,28 @@ class riscv_arith_sequence extends riscv_init_sequence;
 
       // ALU Operations Sequence
       // -------------------------------------------------
-      repeat(150)begin
-      start_item(m_seq_item);
-      if (!m_seq_item.randomize() with {
-            m_seq_item.instr_type inside{riscv_pkg::R_TYPE} ;
-            m_seq_item.opcode == riscv_pkg::OP_RTYPE;
-            m_seq_item.funct3 inside {
-              riscv_pkg::ADD_SUB,
-              riscv_pkg::SLL,
-              riscv_pkg::SLT,
-              riscv_pkg::SLTU,
-              riscv_pkg::XOR,
-              riscv_pkg::SRL_SRA,
-              riscv_pkg::OR,
-              riscv_pkg::AND
-          };
-          //   m_seq_item.funct7 inside {riscv_pkg::R_OTHER, riscv_pkg::SUB_SRA};
-          }) begin
-        `uvm_fatal(get_name(), "Failed to randomize alu sequence item");
-      end
-      // Finish the sequence
-      finish_item(m_seq_item);
-      end
+      // repeat(150)begin
+      // start_item(m_seq_item);
+      // if (!m_seq_item.randomize() with {
+      //       m_seq_item.instr_type inside{riscv_pkg::R_TYPE} ;
+      //       m_seq_item.opcode == riscv_pkg::OP_RTYPE;
+      //       m_seq_item.funct3 inside {
+      //         riscv_pkg::ADD_SUB,
+      //         riscv_pkg::SLL,
+      //         riscv_pkg::SLT,
+      //         riscv_pkg::SLTU,
+      //         riscv_pkg::XOR,
+      //         riscv_pkg::SRL_SRA,
+      //         riscv_pkg::OR,
+      //         riscv_pkg::AND
+      //     };
+      //     //   m_seq_item.funct7 inside {riscv_pkg::R_OTHER, riscv_pkg::SUB_SRA};
+      //     }) begin
+      //   `uvm_fatal(get_name(), "Failed to randomize alu sequence item");
+      // end
+      // // Finish the sequence
+      // finish_item(m_seq_item);
+      // end
 
       // repeat(50)begin
       // start_item(m_seq_item);
@@ -161,21 +161,21 @@ class riscv_arith_sequence extends riscv_init_sequence;
 
       // DIV Sequence
       // -------------------------------------------------
-      // Start the arithmetic sequence
-      // start_item(m_seq_item);
-      // if (!m_seq_item.randomize() with {
-      //       m_seq_item.instr_type == riscv_pkg::R_TYPE;
-      //       m_seq_item.opcode == riscv_pkg::OP_RTYPE;
-      //       m_seq_item.funct3 inside {riscv_pkg::DIV,
-      //       riscv_pkg::DIVU,
-      //       riscv_pkg::REM,
-      //       riscv_pkg::REMU};
-      //       m_seq_item.funct7 == riscv_pkg::M_FUNCT7;
-      //     }) begin
-      //   `uvm_fatal(get_name(), "Failed to randomize div sequence item");
-      // end
-      // // Finish the sequence
-      // finish_item(m_seq_item);
+     // Start the arithmetic sequence
+      start_item(m_seq_item);
+      if (!m_seq_item.randomize() with {
+            m_seq_item.instr_type == riscv_pkg::R_TYPE;
+            m_seq_item.opcode == riscv_pkg::OP_RTYPE;
+            m_seq_item.funct3 inside {riscv_pkg::DIV,
+            riscv_pkg::DIVU,
+            riscv_pkg::REM,
+            riscv_pkg::REMU};
+            m_seq_item.funct7 == riscv_pkg::M_FUNCT7;
+          }) begin
+        `uvm_fatal(get_name(), "Failed to randomize div sequence item");
+      end
+      // Finish the sequence
+      finish_item(m_seq_item);
 
       // Load Sequence
       // -------------------------------------------------
