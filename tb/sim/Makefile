@@ -7,6 +7,8 @@ MERGED_UCDB     := riscv_merged.ucdb
 TOP             := work.riscv_top_tb
 VOPTARGS        := +acc
 EXTRA_VSIM_OPTS := -coverage -assertdebug -voptargs="$(VOPTARGS)"
+SEED 						?= $(shell date +%s)
+
 
 # ─────────────────────────────────────────────────────────────
 #  Phony targets
@@ -56,12 +58,13 @@ compile:
 #  2. Simulate each test (pattern rule)
 # ─────────────────────────────────────────────────────────────
 %.ucdb: compile
-	@echo "===> Running $* ..."
+	@echo "===> Running $* with seed $(SEED) ..."
 	vsim -c -wlf $*.wlf -logfile $*.log $(EXTRA_VSIM_OPTS) \
-	     $(TOP) +UVM_TESTNAME=$* \
+	     $(TOP) +UVM_TESTNAME=$* +sv_seed=$(SEED) \
 	     -do "vcd file $*.vcd; vcd add -r /*; coverage save -onexit $@; run -all; quit -f"
 	vcd2wlf $*.vcd $*.wlf
 	@echo "===> $* finished, UCDB saved as $@"
+
 
 # ─────────────────────────────────────────────────────────────
 # 3. Merge coverage (only the defaults)

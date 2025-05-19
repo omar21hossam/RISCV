@@ -112,8 +112,8 @@ class reg_monitor extends uvm_monitor;
           end  // If the ALU filter is not valid, we need to read the register file early
           else if (!reg_intf.alu_filter_valid) begin
             #1step;
-            m_ral_model.gpr[seq_item_alu.regfile_alu_waddr_fw_o].read(status, seq_item_alu.actual_gpr,
-                                                                      UVM_BACKDOOR);
+            m_ral_model.gpr[seq_item_alu.regfile_alu_waddr_fw_o].read(
+                status, seq_item_alu.actual_gpr, UVM_BACKDOOR);
             alu_ap.write(seq_item_alu);
             disable forever_loop;
           end
@@ -147,21 +147,15 @@ class reg_monitor extends uvm_monitor;
         // ---------------------------------------------------------------------------------------
         begin
           // Detect a MUL operation
-          @(posedge reg_intf.mult_en_i) #1step;
-
-          // In case of multicycle multiplication, we will sample after the alu_filter_valid is asserted
-          if (reg_intf.mult_operator_i == cv32e40p_pkg::MUL_H) begin
-            @(posedge reg_intf.alu_filter_valid) #1step;
-          end
-          #1step;
+          @(posedge reg_intf.alu_filter_valid iff reg_intf.mult_en_i) #1step;
 
           // Sample the MUL sequence item
           // --------------------------------------------
           sample (seq_item_mul);
 
-          // Wait for the mult_en_i to be deasserted
+          // Wait for the alu_filter_valid to be deasserted
           // --------------------------------------------
-          @(negedge reg_intf.mult_en_i) #1step;
+          @(posedge reg_intf.clk) #1step;
 
           // Read the Register File content
           // --------------------------------------------
@@ -219,8 +213,8 @@ class reg_monitor extends uvm_monitor;
             // So that, the data is written to the register file
             // --------------------------------------------
             @(posedge reg_intf.clk) #1step;
-            m_ral_model.gpr[seq_item_jump.regfile_alu_waddr_fw_o].read(status, seq_item_jump.actual_gpr,
-                                                                       UVM_BACKDOOR);
+            m_ral_model.gpr[seq_item_jump.regfile_alu_waddr_fw_o].read(
+                status, seq_item_jump.actual_gpr, UVM_BACKDOOR);
 
             // Send the sequence item to the analysis port
             // --------------------------------------------
