@@ -21,7 +21,6 @@ class reg_scoreboard extends uvm_scoreboard;
   // Data Members
   //==================================================================================
   static int success_cnt, fail_cnt;
-  int alu_op, mul_op, lsu_op, jump_op;
 
   //==================================================================================
   // TLM
@@ -70,7 +69,6 @@ class reg_scoreboard extends uvm_scoreboard;
       expected_gpr = 32'h0;
     end
     compare(reg_seq_item, expected_gpr, "ALU");
-    alu_op++;
   endfunction
 
   //==================================================================================
@@ -83,7 +81,6 @@ class reg_scoreboard extends uvm_scoreboard;
       expected_gpr = 32'h0;
     end
     compare(reg_seq_item, expected_gpr, "MUL");
-    mul_op++;
   endfunction
 
   //==================================================================================
@@ -97,7 +94,6 @@ class reg_scoreboard extends uvm_scoreboard;
     end
 
     compare(reg_seq_item, expected_gpr, "LSU");
-    lsu_op++;
   endfunction
 
   //==================================================================================
@@ -110,7 +106,6 @@ class reg_scoreboard extends uvm_scoreboard;
       expected_gpr = 32'h0;
     end
     compare(reg_seq_item, expected_gpr, "JUMP");
-    jump_op++;
   endfunction
 
   //==================================================================================
@@ -122,7 +117,7 @@ class reg_scoreboard extends uvm_scoreboard;
     if (my_seq.actual_gpr != expected_gpr) begin
       fail_cnt++;
       my_seq.print();
-      `uvm_error(block, $sformatf(
+      `uvm_fatal(block, $sformatf(
                  "Mismatch in REGISTER FILE: in REGFILE 0x%8h, RESULT 0x%8h",
                  my_seq.actual_gpr,
                  expected_gpr
@@ -141,10 +136,6 @@ class reg_scoreboard extends uvm_scoreboard;
               UVM_NONE);
     `uvm_info("REGISTER_FILE", $sformatf("Passed cases: %0d", success_cnt), UVM_NONE);
     `uvm_info("REGISTER_FILE", $sformatf("Failed cases: %0d", fail_cnt), UVM_NONE);
-    `uvm_info("REGISTER_FILE", $sformatf("alu operations: %0d", alu_op), UVM_NONE);
-    `uvm_info("REGISTER_FILE", $sformatf("mul operations: %0d", mul_op), UVM_NONE);
-    `uvm_info("REGISTER_FILE", $sformatf("lsu operations: %0d", lsu_op), UVM_NONE);
-    `uvm_info("REGISTER_FILE", $sformatf("jump operations: %0d", jump_op), UVM_NONE);
     `uvm_info("REGISTER_FILE", $sformatf("\n%s", `DASH_LINE), UVM_NONE);
 
   endfunction
