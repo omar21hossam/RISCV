@@ -84,7 +84,7 @@ class reg_monitor extends uvm_monitor;
           @(posedge reg_intf.alu_filter_valid iff reg_intf.alu_en_i) #1step;
 
           // Handling multiple ALU operations
-          while (reg_intf.alu_filter_valid && reg_intf.alu_en_i) begin
+          while (reg_intf.alu_filter_valid) begin
 
             // Sample the ALU sequence item
             // --------------------------------------------
@@ -93,10 +93,22 @@ class reg_monitor extends uvm_monitor;
             // Wait for the ALU filter to be deasserted
             // Or wait for another ALU operation
             // --------------------------------------------
-            @(negedge reg_intf.alu_filter_valid or reg_intf.alu_operator_i or reg_intf.alu_result)
+            @(negedge reg_intf.alu_filter_valid or
+            negedge reg_intf.alu_en_i or
+            reg_intf.alu_operator_i or
+            reg_intf.alu_result)
             #1step;
-
-            if (reg_intf.alu_operator_i != seq_item_alu.alu_operator_i) begin
+            if (!reg_intf.alu_en_i && reg_intf.alu_filter_valid) begin
+              // Read the Register File content
+              // --------------------------------------------
+              m_ral_model.gpr[seq_item_alu.regfile_alu_waddr_fw_o].read(
+                  status, seq_item_alu.actual_gpr, UVM_BACKDOOR);
+              seq_item_alu.second_sample = $time;
+              // Send the sequence item to the analysis port
+              // --------------------------------------------
+              alu_ap.write(seq_item_alu);
+              break;
+            end else if (reg_intf.alu_operator_i != seq_item_alu.alu_operator_i) begin
               // Read the Register File content
               // --------------------------------------------
               m_ral_model.gpr[seq_item_alu.regfile_alu_waddr_fw_o].read(
