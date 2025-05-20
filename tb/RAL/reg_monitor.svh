@@ -116,6 +116,7 @@ class reg_monitor extends uvm_monitor;
                 #1step;
                 m_ral_model.gpr[seq_item_alu.regfile_alu_waddr_fw_o].read(
                     status, seq_item_alu.actual_gpr, UVM_BACKDOOR);
+                seq_item_alu.second_sample_time = $time;
                 alu_ap.write(seq_item_alu);
                 disable alu_div_fork;
               end
@@ -139,7 +140,7 @@ class reg_monitor extends uvm_monitor;
               // --------------------------------------------
               m_ral_model.gpr[seq_item_alu.regfile_alu_waddr_fw_o].read(
                   status, seq_item_alu.actual_gpr, UVM_BACKDOOR);
-
+              seq_item_alu.second_sample_time = $time;
               // Send the sequence item to the analysis port
               // --------------------------------------------
               alu_ap.write(seq_item_alu);
@@ -151,25 +152,26 @@ class reg_monitor extends uvm_monitor;
         // ---------------------------------------------------------------------------------------
         begin
 
-              // Detect a MUL operation
-              @(posedge reg_intf.alu_filter_valid iff reg_intf.mult_en_i) #1step;
+          // Detect a MUL operation
+          @(posedge reg_intf.alu_filter_valid iff reg_intf.mult_en_i) #1step;
 
-              // Sample the MUL sequence item
-              // --------------------------------------------
-              sample (seq_item_mul);
+          // Sample the MUL sequence item
+          // --------------------------------------------
+          sample (seq_item_mul);
 
-              // Wait for the alu_filter_valid to be deasserted
-              // --------------------------------------------
-              @(posedge reg_intf.clk) #1step;
+          // Wait for the alu_filter_valid to be deasserted
+          // --------------------------------------------
+          @(posedge reg_intf.clk) #1step;
 
-              // Read the Register File content
-              // --------------------------------------------
-              m_ral_model.gpr[seq_item_mul.regfile_alu_waddr_fw_o].read(
-                  status, seq_item_mul.actual_gpr, UVM_BACKDOOR);
+          // Read the Register File content
+          // --------------------------------------------
+          m_ral_model.gpr[seq_item_mul.regfile_alu_waddr_fw_o].read(status, seq_item_mul.actual_gpr,
+                                                                    UVM_BACKDOOR);
+          seq_item_mul.second_sample_time = $time;
 
-              // Send the sequence item to the analysis port
-              // --------------------------------------------
-              mul_ap.write(seq_item_mul);
+          // Send the sequence item to the analysis port
+          // --------------------------------------------
+          mul_ap.write(seq_item_mul);
         end
 
         // LSU
@@ -191,6 +193,7 @@ class reg_monitor extends uvm_monitor;
           // --------------------------------------------
           m_ral_model.gpr[seq_item_lsu.regfile_waddr_wb_o].read(status, seq_item_lsu.actual_gpr,
                                                                 UVM_BACKDOOR);
+          seq_item_lsu.second_sample_time = $time;
 
           // Send the sequence item to the analysis port
           // --------------------------------------------
@@ -220,6 +223,7 @@ class reg_monitor extends uvm_monitor;
             @(posedge reg_intf.clk) #1step;
             m_ral_model.gpr[seq_item_jump.regfile_alu_waddr_fw_o].read(
                 status, seq_item_jump.actual_gpr, UVM_BACKDOOR);
+            seq_item_jump.second_sample_time = $time;
 
             // Send the sequence item to the analysis port
             // --------------------------------------------
@@ -250,5 +254,7 @@ class reg_monitor extends uvm_monitor;
     seq_item.data_rvalid_i          = reg_intf.lsu_filter_valid;
     seq_item.data_misaligned_ex_i   = reg_intf.data_misaligned_ex_i;
     seq_item.lsu_rdata_i            = reg_intf.lsu_rdata_i;
+    // Timestamping
+    seq_item.first_sample_time      = $time;
   endfunction
 endclass

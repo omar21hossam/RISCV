@@ -42,4 +42,9 @@ class reg_sequence_item extends uvm_sequence_item;
   // ---------------------------------
   logic                      [31:0] actual_gpr;
 
+  // Timestamp Signals
+  // ---------------------------------
+  time                              first_sample_time;
+  time                              second_sample_time;
+
 endclass
