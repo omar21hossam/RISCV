@@ -93,15 +93,19 @@ interface lsu_if (
   //==================================================================================
   // Assertions
   //==================================================================================
-  lsu_obi_transaction:  assert property (p_obi_transaction)
+  lsu_obi_transaction :
+  assert property (p_obi_transaction)
   else $error("OBI transaction failed!");
 
-  lsu_word_misaligned:  assert property (p_word_misaligned)
+  lsu_word_misaligned :
+  assert property (p_word_misaligned)
   else $error("Word misalignment failed!");
 
-  lsu_halfword_misaligned:  assert property (p_halfword_misaligned)
+  lsu_halfword_misaligned :
+  assert property (p_halfword_misaligned)
   else $error("Halfword misalignment failed!");
 
+  lsu_misaligned_transaction :
   assert property (p_misaligned_transaction)
   else $error("Misalignment flags failed!");
 
