@@ -83,82 +83,46 @@ class reg_monitor extends uvm_monitor;
           // Detect an ALU operation
           @(posedge reg_intf.alu_filter_valid iff reg_intf.alu_en_i) #1step;
 
-          // Sample the ALU sequence item
-          // --------------------------------------------
-          sample (seq_item_alu);
+          // 
+          // 
+          while (reg_intf.alu_filter_valid) begin
 
-          // Read the Register File content
-          // --------------------------------------------
-          @(negedge reg_intf.clk or
-            negedge reg_intf.alu_filter_valid or
-            reg_intf.alu_operator_i);
-          #1step;
+            // Sample the ALU sequence item
+            // --------------------------------------------
+            sample (seq_item_alu);
 
-          // In case of a jump, we need to disable the forever loop
-          // Also, In case of a change in the ALU operator, we need to disable the forever loop
-          // if (reg_intf.jump_done) begin
-          //   @(posedge reg_intf.clk) #1step;
-          //   m_ral_model.gpr[seq_item_alu.regfile_alu_waddr_fw_o].read(
-          //       status, seq_item_alu.actual_gpr, UVM_BACKDOOR);
-          //   `uvm_fatal(get_full_name(), "Jump detected");
-          //   seq_item_alu.second_sample = $time;
-          //   alu_ap.write(seq_item_alu);
-          //   continue;
-          // end
-          // else 
-          if (reg_intf.alu_operator_i != seq_item_alu.alu_operator_i) begin
-            #1step;
-            m_ral_model.gpr[seq_item_alu.regfile_alu_waddr_fw_o].read(
-                status, seq_item_alu.actual_gpr, UVM_BACKDOOR);
-            seq_item_alu.second_sample = $time;
-            alu_ap.write(seq_item_alu);
-            continue;
+            // Wait for the ALU filter to be deasserted
+            // Or wait for another ALU operation
+            // --------------------------------------------
+            @(negedge reg_intf.alu_filter_valid or reg_intf.alu_operator_i) #1step;
+
+            if (reg_intf.alu_operator_i != seq_item_alu.alu_operator_i) begin
+              // Read the Register File content
+              // --------------------------------------------
+              m_ral_model.gpr[seq_item_alu.regfile_alu_waddr_fw_o].read(
+                  status, seq_item_alu.actual_gpr, UVM_BACKDOOR);
+              seq_item_alu.second_sample = $time;
+
+              // Send the sequence item to the analysis port
+              // --------------------------------------------
+              alu_ap.write(seq_item_alu);
+
+              // Sample the ALU sequence item
+              // --------------------------------------------
+              sample (seq_item_alu);
+              #1step;
+            end else begin
+
+              // Read the Register File content
+              // --------------------------------------------
+              m_ral_model.gpr[seq_item_alu.regfile_alu_waddr_fw_o].read(
+                  status, seq_item_alu.actual_gpr, UVM_BACKDOOR);
+              seq_item_alu.second_sample = $time;
+              // Send the sequence item to the analysis port
+              // --------------------------------------------
+              alu_ap.write(seq_item_alu);
+            end
           end
-          // If the ALU filter is valid, we need to check if the ALU result is different from the sampled one
-          else if (
-            reg_intf.alu_filter_valid &&
-            (reg_intf.regfile_alu_waddr_fw_o == seq_item_alu.regfile_alu_waddr_fw_o) &&
-            (seq_item_alu.alu_result != reg_intf.alu_result)
-          )
-          begin
-            #1step;
-            seq_item_alu.alu_result = reg_intf.alu_result;
-          end  // If the ALU filter is not valid, we need to read the register file early
-          else if (!reg_intf.alu_filter_valid) begin
-            #1step;
-            m_ral_model.gpr[seq_item_alu.regfile_alu_waddr_fw_o].read(
-                status, seq_item_alu.actual_gpr, UVM_BACKDOOR);
-            seq_item_alu.second_sample = $time;
-            alu_ap.write(seq_item_alu);
-            continue;
-          end
-
-          // Wait for the ALU filter to be deasserted
-          // --------------------------------------------
-          @(
-            negedge reg_intf.alu_filter_valid
-            or reg_intf.alu_operator_i
-          )
-          #1step;
-
-          // In case of a change in the ALU operator, we need to disable the forever loop
-          if (reg_intf.alu_operator_i != seq_item_alu.alu_operator_i) begin
-            #1step;
-            m_ral_model.gpr[seq_item_alu.regfile_alu_waddr_fw_o].read(
-                status, seq_item_alu.actual_gpr, UVM_BACKDOOR);
-            seq_item_alu.second_sample = $time;
-            alu_ap.write(seq_item_alu);
-            continue;
-          end
-
-          // Read the Register File content
-          // --------------------------------------------
-          m_ral_model.gpr[seq_item_alu.regfile_alu_waddr_fw_o].read(status, seq_item_alu.actual_gpr,
-                                                                    UVM_BACKDOOR);
-          seq_item_alu.second_sample = $time;
-          // Send the sequence item to the analysis port
-          // --------------------------------------------
-          alu_ap.write(seq_item_alu);
         end
       end
 
@@ -261,6 +225,7 @@ class reg_monitor extends uvm_monitor;
     seq_item.alu_en_i               = reg_intf.alu_en_i;
     seq_item.alu_operator_i         = reg_intf.alu_operator_i;
     seq_item.mult_en_i              = reg_intf.mult_en_i;
+    seq_item.mult_operator_i        = reg_intf.mult_operator_i;
     seq_item.regfile_alu_waddr_fw_o = reg_intf.regfile_alu_waddr_fw_o;
     seq_item.regfile_alu_we_fw_o    = reg_intf.regfile_alu_we_fw_o;
     seq_item.ex_valid_o             = reg_intf.ex_valid_o;

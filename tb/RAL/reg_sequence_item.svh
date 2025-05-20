@@ -17,36 +17,36 @@ class reg_sequence_item extends uvm_sequence_item;
   //==================================================================================
   // Input signals
   // ---------------------------------
-  logic                              rst_n;
+  logic                             rst_n;
 
   // Ex stage interface
   // ---------------------------------
-  logic                              alu_en_i;
-  logic                              mult_en_i;
-  logic                       [ 5:0] regfile_alu_waddr_fw_o;
-  logic                              regfile_alu_we_fw_o;
-  logic                       [31:0] alu_result;
-  logic                       [31:0] mult_result;
-  cv32e40p_pkg::alu_opcode_e         alu_operator_i;
+  logic                             alu_en_i;
+  logic                             mult_en_i;
+  logic                      [ 5:0] regfile_alu_waddr_fw_o;
+  logic                             regfile_alu_we_fw_o;
+  logic                      [31:0] alu_result;
+  logic                      [31:0] mult_result;
+  cv32e40p_pkg::alu_opcode_e        alu_operator_i;
   cv32e40p_pkg::mul_opcode_e        mult_operator_i;
-  logic                              ex_valid_o;
+  logic                             ex_valid_o;
 
   // LSU interface
   // ---------------------------------
-  logic                       [ 5:0] regfile_waddr_wb_o;
-  logic                              regfile_we_wb_power_o;
-  logic                              data_misaligned_ex_i;
-  logic                              data_rvalid_i;
-  logic                       [31:0] lsu_rdata_i;
+  logic                      [ 5:0] regfile_waddr_wb_o;
+  logic                             regfile_we_wb_power_o;
+  logic                             data_misaligned_ex_i;
+  logic                             data_rvalid_i;
+  logic                      [31:0] lsu_rdata_i;
 
   // Reference signals
   // ---------------------------------
-  logic                       [31:0] actual_gpr;
+  logic                      [31:0] actual_gpr;
 
   // Timestamp Signals
   // ---------------------------------
-  time                               first_sample;
-  time                               second_sample;
+  time                              first_sample;
+  time                              second_sample;
 
   //==================================================================================
   // Function: Do Print
@@ -59,14 +59,14 @@ class reg_sequence_item extends uvm_sequence_item;
     printer.print_field("mult_en_i", mult_en_i, $bits(mult_en_i), UVM_BIN);
     printer.print_string("mult_operator_i", mult_operator_i.name());
     printer.print_field("regfile_alu_waddr_fw_o", regfile_alu_waddr_fw_o, $bits(
-                        regfile_alu_waddr_fw_o), UVM_HEX);
+                        regfile_alu_waddr_fw_o), UVM_DEC);
     printer.print_field("regfile_alu_we_fw_o", regfile_alu_we_fw_o, $bits(regfile_alu_we_fw_o),
                         UVM_BIN);
     printer.print_field("alu_result", alu_result, $bits(alu_result), UVM_HEX);
     printer.print_field("mult_result", mult_result, $bits(mult_result), UVM_HEX);
     printer.print_field("ex_valid_o", ex_valid_o, $bits(ex_valid_o), UVM_BIN);
     printer.print_field("regfile_waddr_wb_o", regfile_waddr_wb_o, $bits(regfile_waddr_wb_o),
-                        UVM_HEX);
+                        UVM_DEC);
 
     // Operation Signals
     printer.print_field("regfile_we_wb_power_o", regfile_we_wb_power_o, $bits(regfile_we_wb_power_o
