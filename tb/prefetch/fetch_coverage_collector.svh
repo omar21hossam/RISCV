@@ -115,7 +115,7 @@ class fetch_coverage_collector extends uvm_component;
 
       bins div_corner_cases[] = (
     'h000FA0B7 => 'hA2808093 =>  'h80000137 => 'h00010113 =>   'h0200C2B3  =>   'h0200E2B3 => 'h0200D2B3   => 'h0200F2B3 =>
-     'h023142B3   =>    'h023162B3               
+     'h023142B3   =>    'h023162B3   => 'h020042b3 =>  'h020052b3          
 );
 
       bins mul_corner_cases[] = (
@@ -172,6 +172,7 @@ class fetch_coverage_collector extends uvm_component;
       'h000002B3 =>   
       'h400002B3 =>  
       'h401102b3 =>
+      'h402082b3 =>
       'h4001D2B3 =>  
       'h000192B3 =>  
       'h0001D2B3 =>

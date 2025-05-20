@@ -204,6 +204,7 @@ class riscv_corner_alu_sequence extends riscv_init_sequence;
     direct_send('h000002B3);  // add x5, x0, x0
     direct_send('h400002B3);  // sub x5, x0, x0
     direct_send('h401102b3);  // sub x5, x0, x0
+    direct_send('h402082b3);  // sub x5, x1, x2
     direct_send('h4001D2B3);  // sra x5, x3, x0
     direct_send('h000192B3);  // sll x5, x3, x0
     direct_send('h0001D2B3);  // srl x5, x3, x0
@@ -357,6 +358,8 @@ class riscv_corner_div_sequence extends riscv_init_sequence;
     direct_send('h0200F2B3);  // remu, x5, x1, x0
     direct_send('h023142B3);  // div x5, x2, x3
     direct_send('h023162B3);  // rem x5, x2, x3
+    direct_send('h020042b3);  // div x5, x0, x0
+    direct_send('h020052b3);  // divu x5, x0, x0
   endtask
 
 endclass

@@ -80,91 +80,96 @@ class reg_monitor extends uvm_monitor;
         // ALU and DIV
         // ---------------------------------------------------------------------------------------
         begin
-          // Detect an ALU operation
-          @(posedge reg_intf.alu_filter_valid iff reg_intf.alu_en_i) #1step;
+          fork : alu_div_fork
+            begin
+              // Detect an ALU operation
+              @(posedge reg_intf.alu_filter_valid iff reg_intf.alu_en_i) #1step;
 
-          // Sample the ALU sequence item
-          // --------------------------------------------
-          sample (seq_item_alu);
+              // Sample the ALU sequence item
+              // --------------------------------------------
+              sample (seq_item_alu);
 
-          // Read the Register File content
-          // --------------------------------------------
-          @(negedge reg_intf.clk or
+              // Read the Register File content
+              // --------------------------------------------
+              @(negedge reg_intf.clk or
             negedge reg_intf.alu_filter_valid or
             posedge reg_intf.jump_done or
             reg_intf.alu_operator_i);
-          #1step;
+              #1step;
 
-          // In case of a jump, we need to disable the forever loop
-          // Also, In case of a change in the ALU operator, we need to disable the forever loop
-          if (reg_intf.jump_done || (reg_intf.alu_operator_i != seq_item_alu.alu_operator_i)) begin
-            disable forever_loop;
-          end
+              // In case of a jump, we need to disable the forever loop
+              // Also, In case of a change in the ALU operator, we need to disable the forever loop
+              if (reg_intf.jump_done || (reg_intf.alu_operator_i != seq_item_alu.alu_operator_i)) begin
+                disable alu_div_fork;
+              end
           // If the ALU filter is valid, we need to check if the ALU result is different from the sampled one
-          else if (
+              else if (
             reg_intf.alu_filter_valid &&
             (reg_intf.regfile_alu_waddr_fw_o == seq_item_alu.regfile_alu_waddr_fw_o) &&
             (seq_item_alu.alu_result != reg_intf.alu_result)
           )
           begin
-            #1step;
-            seq_item_alu.alu_result = reg_intf.alu_result;
-          end  // If the ALU filter is not valid, we need to read the register file early
+                #1step;
+                seq_item_alu.alu_result = reg_intf.alu_result;
+              end  // If the ALU filter is not valid, we need to read the register file early
           else if (!reg_intf.alu_filter_valid) begin
-            #1step;
-            m_ral_model.gpr[seq_item_alu.regfile_alu_waddr_fw_o].read(
-                status, seq_item_alu.actual_gpr, UVM_BACKDOOR);
-            alu_ap.write(seq_item_alu);
-            disable forever_loop;
-          end
+                #1step;
+                m_ral_model.gpr[seq_item_alu.regfile_alu_waddr_fw_o].read(
+                    status, seq_item_alu.actual_gpr, UVM_BACKDOOR);
+                alu_ap.write(seq_item_alu);
+                disable alu_div_fork;
+              end
 
-          // Wait for the ALU filter to be deasserted
-          // --------------------------------------------
-          @(
+              // Wait for the ALU filter to be deasserted
+              // --------------------------------------------
+              @(
             negedge reg_intf.alu_filter_valid
             or posedge reg_intf.jump_done
             or reg_intf.alu_operator_i
           )
-          #1step;
+              #1step;
 
-          // In case of a jump, we need to disable the forever loop
-          // Also, In case of a change in the ALU operator, we need to disable the forever loop
-          if (reg_intf.jump_done || (reg_intf.alu_operator_i != seq_item_alu.alu_operator_i)) begin
-            disable forever_loop;
-          end
+              // In case of a jump, we need to disable the forever loop
+              // Also, In case of a change in the ALU operator, we need to disable the forever loop
+              if (reg_intf.jump_done || (reg_intf.alu_operator_i != seq_item_alu.alu_operator_i)) begin
+                disable alu_div_fork;
+              end
 
-          // Read the Register File content
-          // --------------------------------------------
-          m_ral_model.gpr[seq_item_alu.regfile_alu_waddr_fw_o].read(status, seq_item_alu.actual_gpr,
-                                                                    UVM_BACKDOOR);
+              // Read the Register File content
+              // --------------------------------------------
+              m_ral_model.gpr[seq_item_alu.regfile_alu_waddr_fw_o].read(
+                  status, seq_item_alu.actual_gpr, UVM_BACKDOOR);
 
-          // Send the sequence item to the analysis port
-          // --------------------------------------------
-          alu_ap.write(seq_item_alu);
+              // Send the sequence item to the analysis port
+              // --------------------------------------------
+              alu_ap.write(seq_item_alu);
+            end
+          join
         end
 
         // MUL
         // ---------------------------------------------------------------------------------------
         begin
-          // Detect a MUL operation
-          @(posedge reg_intf.alu_filter_valid iff reg_intf.mult_en_i) #1step;
 
-          // Sample the MUL sequence item
-          // --------------------------------------------
-          sample (seq_item_mul);
+              // Detect a MUL operation
+              @(posedge reg_intf.alu_filter_valid iff reg_intf.mult_en_i) #1step;
 
-          // Wait for the alu_filter_valid to be deasserted
-          // --------------------------------------------
-          @(posedge reg_intf.clk) #1step;
+              // Sample the MUL sequence item
+              // --------------------------------------------
+              sample (seq_item_mul);
 
-          // Read the Register File content
-          // --------------------------------------------
-          m_ral_model.gpr[seq_item_mul.regfile_alu_waddr_fw_o].read(status, seq_item_mul.actual_gpr,
-                                                                    UVM_BACKDOOR);
+              // Wait for the alu_filter_valid to be deasserted
+              // --------------------------------------------
+              @(posedge reg_intf.clk) #1step;
 
-          // Send the sequence item to the analysis port
-          // --------------------------------------------
-          mul_ap.write(seq_item_mul);
+              // Read the Register File content
+              // --------------------------------------------
+              m_ral_model.gpr[seq_item_mul.regfile_alu_waddr_fw_o].read(
+                  status, seq_item_mul.actual_gpr, UVM_BACKDOOR);
+
+              // Send the sequence item to the analysis port
+              // --------------------------------------------
+              mul_ap.write(seq_item_mul);
         end
 
         // LSU
