@@ -93,7 +93,10 @@ class reg_monitor extends uvm_monitor;
             // Wait for the ALU filter to be deasserted
             // Or wait for another ALU operation
             // --------------------------------------------
-            @(negedge reg_intf.alu_filter_valid or reg_intf.alu_operator_i or reg_intf.alu_result)
+            @(negedge reg_intf.alu_filter_valid or
+            negedge reg_intf.alu_en_i or
+            reg_intf.alu_operator_i or
+            reg_intf.alu_result)
             #1step;
             if (!reg_intf.alu_en_i && reg_intf.alu_filter_valid) begin
               continue;
