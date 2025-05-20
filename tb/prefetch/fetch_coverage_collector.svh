@@ -247,12 +247,12 @@ class fetch_coverage_collector extends uvm_component;
   function void report_phase(uvm_phase phase);
     super.report_phase(phase);
     `uvm_info("FETCH", $sformatf("\n\nInstruction Fetch Coverage Summary:\n%s", `DASH_LINE),
-              UVM_MEDIUM);
+              UVM_LOW);
     `uvm_info("FETCH", $sformatf("Covered Instructions: %0.2f%%", op_instruction_cg.get_coverage()),
-              UVM_MEDIUM)
+              UVM_LOW)
     `uvm_info("FETCH", $sformatf("Covered Test Cases: %0.2f%%", tese_cases_scenarios.get_coverage()
-              ), UVM_MEDIUM)
-    `uvm_info("FETCH", $sformatf("\n%s", `DASH_LINE), UVM_MEDIUM);
+              ), UVM_LOW)
+    `uvm_info("FETCH", $sformatf("\n%s", `DASH_LINE), UVM_LOW);
   endfunction
 
 endclass

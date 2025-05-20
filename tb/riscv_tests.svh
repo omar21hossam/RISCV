@@ -127,7 +127,7 @@ class riscv_base_test extends uvm_test;
   //==================================================================================
   task run_phase(uvm_phase phase);
     super.run_phase(phase);
-    `uvm_info("TEST", $sformatf("\n\n%s %s %s\n\n", `SHORT_EQ_LINE, get_type_name(), `SHORT_EQ_LINE), UVM_MEDIUM);
+    `uvm_info("TEST", $sformatf("\n\n%s %s %s\n\n", `SHORT_EQ_LINE, get_type_name(), `SHORT_EQ_LINE), UVM_LOW);
     phase.raise_objection(this);
     m_vsequence_base.start(m_env.m_vseqr);
     phase.phase_done.set_drain_time(this, 1us);

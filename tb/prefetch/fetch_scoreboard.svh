@@ -227,7 +227,7 @@ class fetch_scoreboard extends uvm_scoreboard;
               num_flush,
               num_op_total + x + y
               ), UVM_LOW)
-    `uvm_info("FETCH", $sformatf("\n%s", `DASH_LINE), UVM_MEDIUM);
+    `uvm_info("FETCH", $sformatf("\n%s", `DASH_LINE), UVM_LOW);
 
 
     // Print instruction type breakdown
@@ -245,7 +245,7 @@ class fetch_scoreboard extends uvm_scoreboard;
               "U-Type: %0d (%0.1f%%)", U_TYPE_cnt, (U_TYPE_cnt * 100.0) / num_op_total), UVM_LOW)
     `uvm_info("FETCH", $sformatf(
               "J-Type: %0d (%0.1f%%)", J_TYPE_cnt, (J_TYPE_cnt * 100.0) / num_op_total), UVM_LOW)
-    `uvm_info("FETCH", $sformatf("\n%s", `DASH_LINE), UVM_MEDIUM);
+    `uvm_info("FETCH", $sformatf("\n%s", `DASH_LINE), UVM_LOW);
 
 
     // Print detailed function code counts
@@ -270,7 +270,7 @@ class fetch_scoreboard extends uvm_scoreboard;
     `uvm_info("FETCH", $sformatf(
               "  DIV: %0d | DIVU: %0d | REM: %0d | REMU: %0d", DIV_cnt, DIVU_cnt, REM_cnt, REMU_cnt
               ), UVM_LOW)
-    `uvm_info("FETCH", $sformatf("\n%s", `DASH_LINE), UVM_MEDIUM);
+    `uvm_info("FETCH", $sformatf("\n%s", `DASH_LINE), UVM_LOW);
 
 
     // I-Type Instructions
@@ -289,14 +289,14 @@ class fetch_scoreboard extends uvm_scoreboard;
               LBU_cnt,
               LHU_cnt
               ), UVM_LOW)
-    `uvm_info("FETCH", $sformatf("\n%s", `DASH_LINE), UVM_MEDIUM);
+    `uvm_info("FETCH", $sformatf("\n%s", `DASH_LINE), UVM_LOW);
 
 
     // S-Type Instructions
     `uvm_info("FETCH", $sformatf("\n\nS-Type Instructions:\n%s", `DASH_LINE), UVM_LOW)
     `uvm_info("FETCH", $sformatf("  SB: %0d | SH: %0d | SW: %0d", SB_cnt, SH_cnt, SW_cnt),
               UVM_LOW)
-    `uvm_info("FETCH", $sformatf("\n%s", `DASH_LINE), UVM_MEDIUM);
+    `uvm_info("FETCH", $sformatf("\n%s", `DASH_LINE), UVM_LOW);
 
 
     // B-Type Instructions
@@ -304,13 +304,13 @@ class fetch_scoreboard extends uvm_scoreboard;
     `uvm_info("FETCH", $sformatf("  BEQ: %0d | BNE: %0d", BEQ_cnt, BNE_cnt), UVM_LOW)
     `uvm_info("FETCH", $sformatf("  BLT: %0d | BGE: %0d", BLT_cnt, BGE_cnt), UVM_LOW)
     `uvm_info("FETCH", $sformatf("  BLTU: %0d | BGEU: %0d", BLTU_cnt, BGEU_cnt), UVM_LOW)
-    `uvm_info("FETCH", $sformatf("\n%s", `DASH_LINE), UVM_MEDIUM);
+    `uvm_info("FETCH", $sformatf("\n%s", `DASH_LINE), UVM_LOW);
 
     // U-Type and J-Type Instructions
     `uvm_info("FETCH", $sformatf("\n\nU/J-Type Instructions:\n%s", `DASH_LINE), UVM_LOW)
     `uvm_info("FETCH", $sformatf("  LUI: %0d | AUIPC: %0d", LUI_cnt, AUIPC_cnt), UVM_LOW)
     `uvm_info("FETCH", $sformatf("  JAL: %0d", JAL_cnt), UVM_LOW)
-    `uvm_info("FETCH", $sformatf("\n%s", `DASH_LINE), UVM_MEDIUM);
+    `uvm_info("FETCH", $sformatf("\n%s", `DASH_LINE), UVM_LOW);
   endfunction
 
   //***************************************************************************

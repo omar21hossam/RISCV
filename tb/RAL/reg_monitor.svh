@@ -158,7 +158,8 @@ class reg_monitor extends uvm_monitor;
       begin
         forever begin : mul_forever
           // Detect a MUL operation
-          @(posedge reg_intf.alu_filter_valid iff reg_intf.mult_en_i) #1step;
+          @(posedge (reg_intf.alu_filter_valid && reg_intf.mult_en_i)) #1step;
+          if (!reg_intf.alu_filter_valid) continue;
 
           // Sample the MUL sequence item
           // --------------------------------------------
