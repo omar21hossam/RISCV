@@ -120,9 +120,10 @@ class lsu_sequence_item extends uvm_sequence_item;
     printer.print_field("data_misaligned_o", data_misaligned_o, $bits(data_misaligned_o), UVM_BIN);
 
     // Operation Signals
-    printer.print_field("data_we_ex_i", data_we_ex_i, $bits(data_we_o), UVM_BIN);
-    printer.print_field("data_type_ex_i", data_type_ex_i, $bits(data_we_o), UVM_BIN);
-    printer.print_field("data_sign_ext_ex_i", data_sign_ext_ex_i, $bits(data_we_o), UVM_BIN);
+    printer.print_field("data_we_ex_i", data_we_ex_i, $bits(data_we_ex_i), UVM_BIN);
+    printer.print_field("data_type_ex_i", data_type_ex_i, $bits(data_type_ex_i), UVM_BIN);
+    printer.print_field("data_sign_ext_ex_i", data_sign_ext_ex_i, $bits(data_sign_ext_ex_i),
+                        UVM_BIN);
     printer.print_field("data_we_o", data_we_o, $bits(data_we_o), UVM_BIN);
     printer.print_field("data_be_o", data_be_o, $bits(data_be_o), UVM_BIN);
 

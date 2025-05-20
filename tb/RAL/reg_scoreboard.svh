@@ -116,8 +116,8 @@ class reg_scoreboard extends uvm_scoreboard;
                         string block);
     if (my_seq.actual_gpr != expected_gpr) begin
       fail_cnt++;
-      `uvm_info(block, format_debug_info(my_seq), UVM_NONE);
-      `uvm_error("REGISTER_FILE", $sformatf(
+      my_seq.print();
+      `uvm_fatal(block, $sformatf(
                  "Mismatch in REGISTER FILE: in REGFILE 0x%8h, RESULT 0x%8h",
                  my_seq.actual_gpr,
                  expected_gpr
@@ -127,27 +127,6 @@ class reg_scoreboard extends uvm_scoreboard;
     end
   endfunction
 
-  //==================================================================================
-  // Function: Format Debug Info
-  //==================================================================================
-  function string format_debug_info(input reg_sequence_item my_seq);
-    return $sformatf(
-        "\nrstn: %0b,\nalu_en: %0b,\nmult_en: %0b,\nregfile_alu_waddr_fw_o: %0d,\nalu_result: 0x%8h,\nmult_result: 0x%8h,\nex_valid_o: %0b,\nregfile_waddr_wb_o: %0d,\ndata_rvalid_i: %0b,\nlsu_rdata_i: 0x%8h, \nfirst_sample_time: %0t,\nsecond_sample_time: %0t",
-        my_seq.rst_n,
-        my_seq.alu_en_i,
-        my_seq.mult_en_i,
-        my_seq.regfile_alu_waddr_fw_o,
-        my_seq.alu_result,
-        my_seq.mult_result,
-        my_seq.ex_valid_o,
-        my_seq.regfile_waddr_wb_o,
-        my_seq.data_rvalid_i,
-        my_seq.lsu_rdata_i,
-        my_seq.first_sample_time,
-        my_seq.second_sample_time
-    );
-
-  endfunction
   //==================================================================================
   // Function: Report Phase
   //==================================================================================

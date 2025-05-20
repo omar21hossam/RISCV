@@ -163,12 +163,12 @@ class lsu_coverage_collector #(
   //==================================================================================
   function void report_phase(uvm_phase phase);
     super.report_phase(phase);
-    `uvm_info("LSU", $sformatf("\n\nLSU Coverage Summary:\n%s", `DASH_LINE), UVM_MEDIUM);
+    `uvm_info("LSU", $sformatf("\n\nLSU Coverage Summary:\n%s", `DASH_LINE), UVM_LOW);
     `uvm_info("LSU", $sformatf("Coverage Input: %0.2f%%", cov_inputs.get_coverage()),
-              UVM_MEDIUM)
+              UVM_LOW)
     `uvm_info("LSU", $sformatf("Coverage Output: %0.2f%%", cov_outputs.get_coverage()),
-              UVM_MEDIUM)
-    `uvm_info("LSU", $sformatf("\n%s", `DASH_LINE), UVM_MEDIUM);
+              UVM_LOW)
+    `uvm_info("LSU", $sformatf("\n%s", `DASH_LINE), UVM_LOW);
   endfunction
 
 endclass

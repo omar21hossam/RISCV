@@ -48,7 +48,7 @@ add wave -noupdate /riscv_top_tb/DUT/core_i/id_stage_i/controller_i/branch_taken
 add wave -noupdate /riscv_top_tb/DUT/core_i/id_stage_i/pc_set_o
 add wave -noupdate /riscv_top_tb/DUT/core_i/id_stage_i/jump_target_o
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 7} {625350001 ps} 1}
+WaveRestoreCursors {First {489000001 ps} 1} {Second {489250001 ps} 1}
 quietly wave cursor active 1
 configure wave -namecolwidth 187
 configure wave -valuecolwidth 100
@@ -64,4 +64,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {523026848 ps} {985973152 ps}
+WaveRestoreZoom {49451013 ps} {512397317 ps}

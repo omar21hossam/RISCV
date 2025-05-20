@@ -312,11 +312,11 @@ class alu_scoreboard extends uvm_scoreboard;
           `uvm_info(
               get_type_name(), $sformatf(
               "ALU Scoreboard: Comparison model result: %s", seq_item_model_q[0].convert2string()),
-              UVM_MEDIUM);
+              UVM_LOW);
           `uvm_info(get_type_name(), $sformatf(
                     "ALU Scoreboard: Comparison mon_out result: %s",
                     seq_item_mon_out_q[0].convert2string()
-                    ), UVM_MEDIUM);
+                    ), UVM_LOW);
 
           // seq_item_mon_out_q[0].print();
           `uvm_error(get_type_name(), $sformatf(

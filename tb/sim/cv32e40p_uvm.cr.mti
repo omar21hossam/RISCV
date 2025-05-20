@@ -5,6 +5,17 @@ QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
 Top level modules:
 	--none--
 
+} {} {}} {D:/Si-Vision Academy/final-project/code/tb/riscv_classes_pkg.sv} {1 {vlog -work work -vopt -sv -stats=none {D:/Si-Vision Academy/final-project/code/tb/riscv_classes_pkg.sv}
+QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
+-- Compiling package riscv_classes_pkg
+-- Importing package mtiUvm.uvm_pkg (uvm-1.1d Built-in)
+** Note: (vlog-2286) D:/Si-Vision Academy/final-project/code/tb/riscv_classes_pkg.sv(10): Using implicit +incdir+C:/questasim64_2024.1/uvm-1.1d/../verilog_src/uvm-1.1d/src from import uvm_pkg
+-- Importing package riscv_pkg
+-- Importing package cv32e40p_pkg
+
+Top level modules:
+	--none--
+
 } {} {}} {D:/Si-Vision Academy/final-project/code/tb/riscv_if.sv} {1 {vlog -work work -vopt -sv -stats=none {D:/Si-Vision Academy/final-project/code/tb/riscv_if.sv}
 QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
 -- Compiling interface riscv_if
@@ -210,13 +221,16 @@ QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
 Top level modules:
 	cv32e40p_top
 
-} {} {}} {D:/Si-Vision Academy/final-project/code/tb/lsu/lsu_if.sv} {1 {vlog -work work -vopt -sv -stats=none {D:/Si-Vision Academy/final-project/code/tb/lsu/lsu_if.sv}
+} {} {}} {D:/Si-Vision Academy/final-project/code/tb/riscv_top_tb.sv} {1 {vlog -work work -vopt -sv -stats=none {D:/Si-Vision Academy/final-project/code/tb/riscv_top_tb.sv}
 QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
--- Compiling interface lsu_if
+-- Compiling module riscv_top_tb
+-- Importing package mtiUvm.uvm_pkg (uvm-1.1d Built-in)
+-- Importing package riscv_classes_pkg
 -- Importing package riscv_pkg
+-- Importing package cv32e40p_pkg
 
 Top level modules:
-	--none--
+	riscv_top_tb
 
 } {} {}} {D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_alu_div.sv} {1 {vlog -work work -vopt -sv -stats=none {D:/Si-Vision Academy/final-project/code/rtl/cv32e40p_alu_div.sv}
 QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
@@ -247,9 +261,25 @@ QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
 Top level modules:
 	--none--
 
+} {} {}} {D:/Si-Vision Academy/final-project/code/tb/prefetch/fetch_if.sv} {1 {vlog -work work -vopt -sv -stats=none {D:/Si-Vision Academy/final-project/code/tb/prefetch/fetch_if.sv}
+QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
+-- Compiling interface fetch_if
+-- Importing package riscv_pkg
+
+Top level modules:
+	--none--
+
 } {} {}} {D:/Si-Vision Academy/final-project/code/rtl/package/cv32e40p_fpu_pkg.sv} {1 {vlog -work work -vopt -sv -stats=none {D:/Si-Vision Academy/final-project/code/rtl/package/cv32e40p_fpu_pkg.sv}
 QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
 -- Compiling package cv32e40p_fpu_pkg
+
+Top level modules:
+	--none--
+
+} {} {}} {D:/Si-Vision Academy/final-project/code/tb/RAL/reg_if.sv} {1 {vlog -work work -vopt -sv -stats=none {D:/Si-Vision Academy/final-project/code/tb/RAL/reg_if.sv}
+QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
+-- Compiling interface reg_if
+-- Importing package cv32e40p_pkg
 
 Top level modules:
 	--none--
