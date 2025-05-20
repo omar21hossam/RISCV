@@ -122,7 +122,7 @@ class reg_scoreboard extends uvm_scoreboard;
     if (my_seq.actual_gpr != expected_gpr) begin
       fail_cnt++;
       my_seq.print();
-      `uvm_fatal(block, $sformatf(
+      `uvm_error(block, $sformatf(
                  "Mismatch in REGISTER FILE: in REGFILE 0x%8h, RESULT 0x%8h",
                  my_seq.actual_gpr,
                  expected_gpr
