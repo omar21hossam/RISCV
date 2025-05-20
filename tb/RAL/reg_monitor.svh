@@ -95,8 +95,9 @@ class reg_monitor extends uvm_monitor;
             // --------------------------------------------
             @(negedge reg_intf.alu_filter_valid or reg_intf.alu_operator_i or reg_intf.alu_result)
             #1step;
-
-            if (reg_intf.alu_operator_i != seq_item_alu.alu_operator_i) begin
+            if (!reg_intf.alu_en_i && reg_intf.alu_filter_valid) begin
+              continue;
+            end else if (reg_intf.alu_operator_i != seq_item_alu.alu_operator_i) begin
               // Read the Register File content
               // --------------------------------------------
               m_ral_model.gpr[seq_item_alu.regfile_alu_waddr_fw_o].read(
