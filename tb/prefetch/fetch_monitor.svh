@@ -8,8 +8,9 @@ class fetch_monitor extends uvm_monitor;
 
   uvm_analysis_port #(fetch_seq_item) mon_ap_ip;
   uvm_analysis_port #(fetch_seq_item) mon_ap_op;
-
+  
   logic [31:0] inst_op = 'b0;
+  logic         inst_v_prev=0;
   ////////////////////////////////////////////////////////////////////////////////////
 
   function new(string name = "fetch_monitor", uvm_component parent = null);
@@ -53,24 +54,33 @@ class fetch_monitor extends uvm_monitor;
           seq_item_ip.instr_addr_o = fetch_intf.instr_addr_o;
           mon_ap_ip.write(seq_item_ip);
 
-/*
-           $display("time %0t:   instr_addr_o %0d ,  pc_id_o %0d ,  pc_if_o %0d ,  instr_rdata_i %0h",  $time,
-            seq_item_ip.instr_addr_o,seq_item_ip.pc_id_o ,seq_item_ip.pc_if_o ,seq_item_ip.instr_rdata_i  
-);       
-       */
+
         end
+
           if ( !(fetch_intf.instr_rdata_id_o == inst_op )) begin
 
 
             seq_item_op.instr_rdata_id_o = fetch_intf.instr_rdata_id_o;
             seq_item_op.instr_valid_id_o = fetch_intf.instr_valid_id_o;
-inst_op= fetch_intf.instr_rdata_id_o;
+            inst_op= fetch_intf.instr_rdata_id_o;
+      
              mon_ap_op.write(seq_item_op);
-/*
+       
 
-       $display("time %0t: data_id_o %0h , valid_id_o %0d ",  $time,seq_item_op.instr_rdata_id_o,seq_item_op.instr_valid_id_o,
-); */
+
           end
+            else if ((fetch_intf.instr_rdata_id_o == inst_op ) &&(inst_v_prev==0) && (fetch_intf.instr_valid_id_o==1)  ) begin
+  
+                                                          
+            seq_item_op.instr_rdata_id_o = fetch_intf.instr_rdata_id_o;
+            seq_item_op.instr_valid_id_o = fetch_intf.instr_valid_id_o;                                                        
+                                                          
+                                         mon_ap_op.write(seq_item_op);                 
+                                                          
+                                                          end
+                                        inst_v_prev= fetch_intf.instr_valid_id_o;
+  
+
           end
         end
       
