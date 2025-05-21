@@ -18,7 +18,6 @@ class fetch_scoreboard extends uvm_scoreboard;
   int num_flush = 0;
   int num_op_total = 0;  //as we alwyas count after op change , and finally , op will not change.
   bit misaligned = 'b0;
-  bit x = 0;
   bit y = 0;
 
   logic [31:0] misaligned_inst;
@@ -101,7 +100,8 @@ class fetch_scoreboard extends uvm_scoreboard;
         end
       join_any
 
-      if ((ip_queue.size() > 0) && (op_queue.size() > 0)) begin
+      if ((ip_queue.size() > 0) && (op_queue.size() > 0)) 
+      begin
 
 
         // Pop the oldest IP and OP items (matched by position)
@@ -109,39 +109,46 @@ class fetch_scoreboard extends uvm_scoreboard;
         matched_op = op_queue.pop_front();
 
         //----------------------------------------------------------------------------------
-        if (matched_op.instr_valid_id_o) begin
+        if (matched_op.instr_valid_id_o) 
+        begin
 
-          if (!(matched_ip.instr_rdata_i == matched_op.instr_rdata_id_o)) begin
+          if (!(matched_ip.instr_rdata_i == matched_op.instr_rdata_id_o)) 
+          begin
             matched_ip = ip_queue.pop_front();
 
-            if (!(matched_ip.instr_rdata_i == matched_op.instr_rdata_id_o)) begin
+            if (!(matched_ip.instr_rdata_i == matched_op.instr_rdata_id_o)) 
+            begin
 
-              if (misaligned) begin
-                x = 'b1;
+              if (misaligned) 
+              begin
+              
                 y = 'b1;
 
                 misaligned_inst[15:0] = matched_ip.instr_rdata_i[31:16];
                 matched_ip_2 = ip_queue.pop_front();
                 misaligned_inst[31:16] = matched_ip_2.instr_rdata_i[15:0];
-                if ((misaligned_inst == matched_op.instr_rdata_id_o)) begin
+                if ((misaligned_inst == matched_op.instr_rdata_id_o)) 
+                begin
 
                   `uvm_info("FETCH", $sformatf("Misalignment done correctly "), UVM_HIGH)
                   misaligned = 'b0;
                   num_passed++;
                   num_op = num_op + 1;
                   num_op_total = num_op_total + 1;
-                end else begin
+                end 
+                else begin
                   `uvm_error("FETCH_SB", $sformatf(
                              "FETCH Misaligned done wrongly op time %0t", $time,))
                   ip_queue.push_front(matched_ip);
                   ip_queue.push_front(matched_ip_2);
                 end
 
-              end else begin
+              end 
+              else 
+              begin
 
                 `uvm_error("FETCH_SB", $sformatf(
-                           "FETCH done wrongly in normal op time %0t (no stall or flush),instr_id_o = %0h, instr_i = %0h",
-                           $time,
+                           "FETCH done wrongly in normal op time %0t (no stall or flush),instr_id_o = %0h, instr_i = %0h", $time,
                            matched_op.instr_rdata_id_o,
                            matched_ip.instr_rdata_i
 
@@ -150,7 +157,9 @@ class fetch_scoreboard extends uvm_scoreboard;
 
                 num_failed++;
               end
-            end else begin
+            end 
+            else 
+            begin
               `uvm_info("FETCH", $sformatf("FETCH done correctly and flush detected "), UVM_HIGH)
               flush_detected = 'b1;
               branch_expected = 0;
@@ -159,11 +168,14 @@ class fetch_scoreboard extends uvm_scoreboard;
               num_flush = num_flush + 1;
               num_passed++;
             end
-          end else begin
+          end 
+          else 
+          begin
             `uvm_info("FETCH", $sformatf("FETCH done correctly "), UVM_HIGH)
 
             num_passed++;
 
+        
           end
 
 
@@ -199,7 +211,9 @@ class fetch_scoreboard extends uvm_scoreboard;
             end
 
           endcase
-        end else begin
+        end 
+        else
+         begin
           flush_detected  = 'b1;
           branch_expected = 0;
           jump_expected   = 0;
@@ -223,9 +237,9 @@ class fetch_scoreboard extends uvm_scoreboard;
     `uvm_info("FETCH", $sformatf(
               "\nInputs: %0d | Outputs: %0d | Flushes: %0d | Total Ops: %0d",
               num_ip,
-              num_op + x + y,
+              num_op  + y,
               num_flush,
-              num_op_total + x + y
+              num_op_total  + y
               ), UVM_LOW)
     `uvm_info("FETCH", $sformatf("\n%s", `DASH_LINE), UVM_LOW);
 
