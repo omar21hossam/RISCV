@@ -1,1 +1,1 @@
-[riscv_cv32e40p_team5_tb_arch.drawio.pdf](https://github.com/user-attachments/files/20400762/riscv_cv32e40p_team5_tb_arch.drawio.pdf)
+![image](https://github.com/user-attachments/assets/55f75887-1cc5-4f35-a0f9-86f1e6591629)
